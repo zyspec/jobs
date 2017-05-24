@@ -220,7 +220,7 @@ if (!empty($_POST['submit'])) {
         if ($xoopsModuleConfig['jobs_admin_mail'] = 1) {
 
             $jsubject    = $xoopsConfig['sitename'] . " Job Reply ";
-            $xoopsMailer =& xoops_getMailer();
+            $xoopsMailer = xoops_getMailer();
             $xoopsMailer->useMail();
             $xoopsMailer->setToEmails($xoopsConfig['adminmail']);
             $xoopsMailer->setFromEmail($xoopsConfig['adminmail']);

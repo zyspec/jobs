@@ -11,7 +11,7 @@ include_once (XOOPS_ROOT_PATH . "/modules/$mydirname/include/resume_functions.ph
 include_once XOOPS_ROOT_PATH . "/modules/$mydirname/class/restree.php";
 include_once XOOPS_ROOT_PATH . "/class/xoopsformloader.php";
 
-$myts =& MyTextSanitizer::getInstance();
+$myts = MyTextSanitizer::getInstance();
 
 $module_id = $xoopsModule->getVar('mid');
 

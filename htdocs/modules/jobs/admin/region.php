@@ -8,7 +8,7 @@ $mydirname = basename(dirname(dirname(__FILE__)));
 include_once (XOOPS_ROOT_PATH . "/modules/$mydirname/include/functions.php");
 include_once XOOPS_ROOT_PATH . "/class/xoopsformloader.php";
 
-$myts =& MyTextSanitizer::getInstance();
+$myts = MyTextSanitizer::getInstance();
 #  function Index
 #####################################################
 function Region()

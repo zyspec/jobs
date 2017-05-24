@@ -8,7 +8,7 @@ include 'header.php';
 
 $mydirname = basename(dirname(__FILE__));
 $main_lang = '_' . strtoupper($mydirname);
-$myts      =& MyTextSanitizer::getInstance();
+$myts      = MyTextSanitizer::getInstance();
 $module_id = $xoopsModule->getVar('mid');
 
 if (is_object($xoopsUser)) {

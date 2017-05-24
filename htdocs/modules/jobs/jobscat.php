@@ -14,7 +14,7 @@ require_once(XOOPS_ROOT_PATH . "/modules/$mydirname/include/gtickets.php");
 global $xoopsModule;
 $pathIcon16 = $xoopsModule->getInfo('icons16');
 
-$myts      =& MyTextSanitizer::getInstance();
+$myts      = MyTextSanitizer::getInstance();
 $module_id = $xoopsModule->getVar('mid');
 if (is_object($xoopsUser)) {
     $groups = $xoopsUser->getGroups();

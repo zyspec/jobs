@@ -12,7 +12,7 @@ include_once '../../../include/cp_header.php';
 $mydirname = basename(dirname(dirname(__FILE__)));
 include_once (XOOPS_ROOT_PATH . "/modules/$mydirname/include/resume_functions.php");
 include_once XOOPS_ROOT_PATH . "/class/xoopsformloader.php";
-$myts      =& MyTextSanitizer::getInstance();
+$myts      = MyTextSanitizer::getInstance();
 $module_id = $xoopsModule->getVar('mid');
 
 if (!empty($_POST['submit'])) {

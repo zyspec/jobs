@@ -11,7 +11,7 @@ require_once(XOOPS_ROOT_PATH . "/modules/$mydirname/include/gtickets.php");
 include_once (XOOPS_ROOT_PATH . "/modules/$mydirname/include/resume_functions.php");
 include_once XOOPS_ROOT_PATH . "/modules/$mydirname/class/restree.php";
 
-$myts =& MyTextSanitizer::getInstance();
+$myts = MyTextSanitizer::getInstance();
 
 $module_id = $xoopsModule->getVar('mid');
 if (is_object($xoopsUser)) {

@@ -26,7 +26,7 @@
 //  ------------------------------------------------------------------------ //
 include 'admin_header.php';
 $mydirname = basename(dirname(dirname(__FILE__)));
-$myts      =& MyTextSanitizer::getInstance(); // MyTextSanitizer object
+$myts      = MyTextSanitizer::getInstance(); // MyTextSanitizer object
 
 include_once (XOOPS_ROOT_PATH . "/modules/$mydirname/include/functions.php");
 

@@ -8,7 +8,7 @@ include 'header.php';
 
 $mydirname = basename(dirname(__FILE__));
 include(XOOPS_ROOT_PATH . "/modules/$mydirname/include/resume_functions.php");
-$myts                         =& MyTextSanitizer::getInstance(); // MyTextSanitizer object
+$myts                         = MyTextSanitizer::getInstance(); // MyTextSanitizer object
 $xoopsOption['template_main'] = 'jobs_view_created.html';
 include XOOPS_ROOT_PATH . "/header.php";
 

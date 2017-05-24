@@ -24,7 +24,7 @@ $restree = new JobTree($xoopsDB->prefix("jobs_res_categories"), "cid", "pid");
 global $mytree, $restree, $xoopsDB, $xoopsModuleConfig, $mydirname;
 
 include 'admin_header.php';
-$myts =& MyTextSanitizer::getInstance();
+$myts = MyTextSanitizer::getInstance();
 xoops_cp_header();
 //    loadModuleAdminMenu(1, "");
 $index_admin = new ModuleAdmin();

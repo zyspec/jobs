@@ -9,7 +9,7 @@
 $mydirname = basename(dirname(__FILE__));
 include 'header.php';
 require_once(XOOPS_ROOT_PATH . "/modules/$mydirname/include/gtickets.php");
-$myts =& MyTextSanitizer::getInstance(); // MyTextSanitizer object
+$myts = MyTextSanitizer::getInstance(); // MyTextSanitizer object
 include_once XOOPS_ROOT_PATH . "/modules/$mydirname/class/jobtree.php";
 //include_once XOOPS_ROOT_PATH . "/class/module.errorhandler.php";
 include_once(XOOPS_ROOT_PATH . "/modules/$mydirname/include/resume_functions.php");

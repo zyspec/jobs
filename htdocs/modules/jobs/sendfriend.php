@@ -152,7 +152,7 @@ function MailJob($lid = 0, $yname, $ymail, $fname, $fmail)
     $tags['NO_REPLY']           = _JOBS_NOREPLY;
     $subject                    = _JOBS_SUBJET . "" . $xoopsConfig['sitename'] . "";
 
-    $xoopsMailer =& xoops_getMailer();
+    $xoopsMailer = xoops_getMailer();
     $xoopsMailer->useMail();
     $xoopsMailer->setTemplateDir(XOOPS_ROOT_PATH . "/modules/$mydirname/language/english/mail_template/");
     $xoopsMailer->setTemplate("jobs_send_friend.tpl");
@@ -293,7 +293,7 @@ function MailResume($lid = 0, $yname, $ymail, $fname, $fmail)
     $tags['NO_REPLY']           = _JOBS_NOREPLY;
     $subject                    = _JOBS_RES_SUBJET . "" . $xoopsConfig['sitename'] . "";
 
-    $xoopsMailer =& xoops_getMailer();
+    $xoopsMailer = xoops_getMailer();
     $xoopsMailer->useMail();
     $xoopsMailer->setTemplateDir(XOOPS_ROOT_PATH . "/modules/$mydirname/language/english/mail_template/");
     $xoopsMailer->setTemplate("jobs_send_resume.tpl");

@@ -16,7 +16,7 @@ $mydirname = basename(dirname(dirname(__FILE__)));
 require_once(XOOPS_ROOT_PATH . "/modules/$mydirname/include/gtickets.php");
 include_once (XOOPS_ROOT_PATH . "/modules/$mydirname/include/functions.php");
 include_once(XOOPS_ROOT_PATH . "/modules/$mydirname/class/jobtree.php");
-$myts =& MyTextSanitizer::getInstance();
+$myts = MyTextSanitizer::getInstance();
 #  function NewCat
 #####################################################
 function NewCat($cat)

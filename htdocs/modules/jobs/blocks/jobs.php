@@ -21,7 +21,7 @@ function jobs_show($options)
     global $xoopsDB, $blockdirname, $block_lang;
 
     $block = array();
-    $myts  =& MyTextSanitizer::getInstance();
+    $myts  = MyTextSanitizer::getInstance();
 
     $blockdirname = basename(dirname(dirname(__FILE__)));
     $block_lang   = '_MB_' . strtoupper($blockdirname);

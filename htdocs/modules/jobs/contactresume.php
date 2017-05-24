@@ -115,7 +115,7 @@ if (isset($_POST['submit'])) {
 
             $message .= "\n" . $_SERVER['REMOTE_ADDR'] . "\n";
             $adsubject   = $xoopsConfig['sitename'] . " Job Reply ";
-            $xoopsMailer =& xoops_getMailer();
+            $xoopsMailer = xoops_getMailer();
             $xoopsMailer->useMail();
             $xoopsMailer->setToEmails($xoopsConfig['adminmail']);
             $xoopsMailer->setFromEmail($xoopsConfig['adminmail']);

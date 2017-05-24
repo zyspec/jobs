@@ -9,7 +9,7 @@
 include 'header.php';
 $mydirname = basename(dirname(__FILE__));
 require_once(XOOPS_ROOT_PATH . "/modules/$mydirname/include/gtickets.php");
-$myts      =& MyTextSanitizer::getInstance();
+$myts      = MyTextSanitizer::getInstance();
 $module_id = $xoopsModule->getVar('mid');
 
 if (is_object($xoopsUser)) {

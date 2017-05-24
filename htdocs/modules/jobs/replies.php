@@ -14,7 +14,7 @@ if (empty($xoopsUser)) {
 
 $mydirname = basename(dirname(__FILE__));
 include(XOOPS_ROOT_PATH . "/modules/$mydirname/include/functions.php");
-$myts =& MyTextSanitizer::getInstance(); // MyTextSanitizer object
+$myts = MyTextSanitizer::getInstance(); // MyTextSanitizer object
 include_once XOOPS_ROOT_PATH . "/modules/$mydirname/class/jobtree.php";
 $mytree                       = new JobTree($xoopsDB->prefix("jobs_categories"), "cid", "pid");
 $lid                          = isset($_GET['lid']) ? intval($_GET['lid']) : 0;

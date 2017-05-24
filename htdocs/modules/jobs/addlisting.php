@@ -26,7 +26,7 @@
 //  ------------------------------------------------------------------------ //
 include 'header.php';
 $mydirname = basename(dirname(__FILE__));
-$myts      =& MyTextSanitizer::getInstance(); // MyTextSanitizer object
+$myts      = MyTextSanitizer::getInstance(); // MyTextSanitizer object
 require_once(XOOPS_ROOT_PATH . "/modules/$mydirname/include/gtickets.php");
 include_once XOOPS_ROOT_PATH . "/modules/$mydirname/class/jobtree.php";
 include_once (XOOPS_ROOT_PATH . "/modules/$mydirname/include/functions.php");

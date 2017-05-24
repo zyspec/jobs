@@ -26,7 +26,7 @@
 //  ------------------------------------------------------------------------ //
 include 'header.php';
 $mydirname = basename(dirname(__FILE__));
-$myts      =& MyTextSanitizer::getInstance(); // MyTextSanitizer object
+$myts      = MyTextSanitizer::getInstance(); // MyTextSanitizer object
 include_once XOOPS_ROOT_PATH . "/class/module.errorhandler.php";
 include XOOPS_ROOT_PATH . "/modules/$mydirname/include/functions.php";
 include_once XOOPS_ROOT_PATH . "/class/xoopsformloader.php";
