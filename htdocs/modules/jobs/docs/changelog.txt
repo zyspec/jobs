@@ -1,41 +1,75 @@
+<h5>4.4 RC 4       [NOT RELEASED]</h5>
+<hr>
+- moved all images, CSS, and JS files to /assets (mamba)
+- renamed .html Smarty templates to .tpl (mamba)
+- XOOPS 2.5.9, PHP 7 (mamba)
+- Converted to XOOPS 2.5.8 Admin GUI (Mamba)
+- removed @version (mamba)
+- PSR-2 code cosmetics (mamba)
+- addNavigation(basename(__FILE__))  (mamba)
+- dirname(__FILE__) to __DIR__ (mamba)
+- replaced < br /> with < br > (mamba)
+- Unnecessary double quotes (mamba)
+- reference mismatch (mamba)
+- Hardening to type safe (mamba)
+- update Help (mamba)
+- changed _handler to Handler (mamba)
+- removed '/' from void HTML elements (&lt;br&gt;, &lt;img&gt;, etc) (mamba)
+- HTML 5: removed 'selected' and 'checked' (mamba)
+- updated file headers for consistency (mamba)
+- renamed several $indexAdmin with $adminObject for consistency (mamba)
+- Updates for PayPal changes (zyspec)
+- added Contributing.md (mamba)
+- started conversion to XMF (mamba)
+    - updated addInfoBoxLine entries (mamba)
+    - displayNavigation(basename(__FILE__))  (mamba)
+    - changed to ->displayButton('left') (mamba)
 
----------------------------------------
-4.4 RC1  2013-06-19
----------------------------------------
+
+<h5>4.4 RC3  [2014-02-19]</h5>
+<hr>
+
+- redesigned Type Management - added tables (mamba)
+- small source code changes related to PSR-2 (mamba)
+- added folder/file checker
+
+
+<h5>4.4 RC1  [2013-06-19]</h5>
+<hr>
 
 - fixed all reported errors from BETA2  (jlm69)
 
----------------------------------------
-4.4 Beta 2  2012-10-10
----------------------------------------
+
+<h5>4.4 Beta 2  [2012-10-10]</h5>
+<hr>
 
 - added folder check and stats (Mamba)
 
----------------------------------------
-4.4 Beta 1  2012-10-07
----------------------------------------
+
+<h5>4.4 Beta 1  [2012-10-07]</h5>
+<hr>
 
 - Converted to XOOPS 2.5.5 Admin GUI (Mamba)
 
----------------------------------------
-4.3 RC2  2010-05-23
----------------------------------------
+
+<h5>4.3 RC2  [2010-05-23]</h5>
+<hr>
 
 1. Now works with Xoops version 2.3.3b (some files need to be changed)
 2. I fixed a lot of errors from RC1
 
 Added search by state or region and category.
 
----------------------------------------
-3.0 RC3  2010-04-19
----------------------------------------
+
+<h5>3.0 RC3  [2010-04-19]</h5>
+<hr>
 
 
-Things new for Version 3.0
-
+<h5>Things new for Version 3.0</h5>
+<hr>
 
 1. Fixed the report about possible SQL injection, put addslashes() in the URL's,
-and mysql_real_escape_string() in the database calls.
+and mysqli_real_escape_string() in the database calls.
 
 2. Admin can choose to use companies or not. Some just want to use it for one company.
 

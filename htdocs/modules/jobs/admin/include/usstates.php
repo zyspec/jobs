@@ -1,40 +1,31 @@
 <?php
-// $Id$ Adds 50 states plus DC to region table 4.3
-//  ------------------------------------------------------------------------ //
-//                XOOPS - PHP Content Management System                      //
-//                    Copyright (c) 2000 XOOPS.org                           //
-//                       <http://www.xoops.org/>                             //
-//  ------------------------------------------------------------------------ //
-//  This program is free software; you can redistribute it and/or modify     //
-//  it under the terms of the GNU General Public License as published by     //
-//  the Free Software Foundation; either version 2 of the License, or        //
-//  (at your option) any later version.                                      //
-//                                                                           //
-//  You may not change or alter any portion of this comment or credits       //
-//  of supporting developers from this source code or any supporting         //
-//  source code which is considered copyrighted (c) material of the          //
-//  original comment or credit authors.                                      //
-//                                                                           //
-//  This program is distributed in the hope that it will be useful,          //
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of           //
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the            //
-//  GNU General Public License for more details.                             //
-//                                                                           //
-//  You should have received a copy of the GNU General Public License        //
-//  along with this program; if not, write to the Free Software              //
-//  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
-//  ------------------------------------------------------------------------ //
+/**
+ * Jobs for XOOPS
+ *
+ * You may not change or alter any portion of this comment or credits
+ * of supporting developers from this source code or any supporting source code
+ * which is considered copyrighted (c) material of the original comment or credit authors.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ * @copyright   {@link https://xoops.org/ XOOPS Project}
+ * @license     {@link http://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
+ * @package     jobs
+ * @author      John Mordo
+ * @author      XOOPS Development Team
+ */
 
-include_once '../../../../include/cp_header.php';
+
+require_once dirname(dirname(dirname(dirname(__DIR__)))) . '/include/cp_header.php';
 xoops_cp_header();
-$mydirname = $xoopsModule->getVar('dirname');
-include_once XOOPS_ROOT_PATH . '/modules/' . $mydirname . '/include/functions.php';
+$moduleDirName = $xoopsModule->getVar('dirname');
+require_once XOOPS_ROOT_PATH . '/modules/' . $moduleDirName . '/include/functions.php';
 
 if (is_object($xoopsUser) && $xoopsUser->isAdmin($xoopsModule->mid())) {
     $errors = 0;
 
-    $sql = sprintf(
-        "INSERT INTO " . $xoopsDB->prefix("jobs_region") . " (rid, pid, name, abbrev) VALUES
+    $sql = sprintf('INSERT INTO ' . $xoopsDB->prefix('jobs_region') . " (rid, pid, name, abbrev) VALUES
 ('1', '0', '---UNITED STATES---', 'US'),
 ('2', '1', 'Alabama', 'AL'),
 ('3',' 1', 'Alaska', 'AK'),
@@ -86,22 +77,17 @@ if (is_object($xoopsUser) && $xoopsUser->isAdmin($xoopsModule->mid())) {
 ('49', '1', 'Washington', 'WA'),
 ('50', '1', 'West Virginia', 'WV'),
 ('51', '1', 'Wisconsin', 'WI'),
-('52', '1', 'Wyoming', 'WY')"
-    );
+('52', '1', 'Wyoming', 'WY')");
 
     if (!$xoopsDB->queryF($sql)) {
-        $errors = mysql_error();
-        redirect_header(
-            "../region.php", 3, _AM_JOBS_UPDATEFAILED . "
-    " . _AM_JOBS_ERROR . "$errors"
-        );
-        exit();
+        $errors = $GLOBALS['xoopsDB']->error();
+        redirect_header('../region.php', 3, _AM_JOBS_UPDATEFAILED . '
+    ' . _AM_JOBS_ERROR . "$errors");
     } else {
-        redirect_header("../region.php", 3, _AM_JOBS_US_ADDED);
-        exit();
+        redirect_header('../region.php', 3, _AM_JOBS_US_ADDED);
     }
 } else {
-    redirect_header("../../index.php", 3, _NO_PERM);
+    redirect_header('../../index.php', 3, _NO_PERM);
 }
 
 xoops_cp_footer();
