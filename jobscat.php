@@ -107,7 +107,7 @@ if (is_array($categories) && count($categories) > 0) {
     redirect_header(XOOPS_URL . '/index.php', 3, _NOPERM);
 }
 
-$arrow      = '<img src="' . XOOPS_URL . "/modules/$moduleDirName/assets/images/arrow.gif\" alt=\"&raquo;\" />";
+$arrow      = '<img src="' . XOOPS_URL . "/modules/$moduleDirName/assets/images/arrow.gif\" alt=\"&raquo;\">";
 $pathstring = "<a href='index.php'>" . $moduleDirName . '</a>';
 $pathstring .= $mytree->getNicePathFromId($cid, 'title', 'jobscat.php?');
 $xoopsTpl->assign('module_name', $xoopsModule->getVar('name'));
@@ -273,7 +273,7 @@ if ($trows == 0) { // the zero option added
         $date      = ($useroffset * 3600) + $date;
         $startdate = (time() - (86400 * $xoopsModuleConfig['jobs_countday']));
         if ($startdate < $date) {
-            $newitem       = '<img src="' . XOOPS_URL . "/modules/$moduleDirName/assets/images/newred.gif\" />";
+            $newitem       = '<img src="' . XOOPS_URL . "/modules/$moduleDirName/assets/images/newred.gif\">";
             $a_item['new'] = $newitem;
         }
         $date = formatTimestamp($date, 's');
@@ -304,7 +304,7 @@ if ($trows == 0) { // the zero option added
         $a_item['town'] = $town;
 
         if ($photo) {
-            $a_item['photo'] = "<a href=\"javascript:CLA('display-image.php?lid=" . addslashes($lid) . "')\"><img src=\"assets/images/photo.gif\" border=0 width=15 height=11 alt='" . _JOBS_IMGPISP . "' /></a>";
+            $a_item['photo'] = "<a href=\"javascript:CLA('display-image.php?lid=" . addslashes($lid) . "')\"><img src=\"assets/images/photo.gif\" border=0 width=15 height=11 alt='" . _JOBS_IMGPISP . "'></a>";
         }
         $a_item['views']   = $vu;
         $a_item['premium'] = $premium;

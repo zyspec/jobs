@@ -83,43 +83,43 @@
                     (<a href="resumecat.php?cid=<{$cid}>&orderby=titleA"><img title="<{$lang_titleatoz}>"
                                                                               style="<{$imgstyle}>" src=
                                                                               <{if $sort_active == 'titleA'}>"assets/images/up_active.gif""
-                        /><{else}>"images/up.gif"
-                        /><{/if}></a><a href="resumecat.php?cid=<{$cid}>&orderby=titleD"><img
+                       ><{else}>"images/up.gif"
+                       ><{/if}></a><a href="resumecat.php?cid=<{$cid}>&orderby=titleD"><img
                                 title="<{$lang_titleztoa}>" style="<{$imgstyle}>" src=
-                        <{if $sort_active == 'titleD'}>"images/down_active.gif"" /><{else}>"images/down.gif"
-                        /><{/if}></a>)<{$lang_exp}>
+                        <{if $sort_active == 'titleD'}>"images/down_active.gif""><{else}>"images/down.gif"
+                       ><{/if}></a>)<{$lang_exp}>
                     (<a href="resumecat.php?cid=<{$cid}>&orderby=expA"><img title="<{$lang_expltoh}>"
                                                                             style="<{$imgstyle}>" src=
                                                                             <{if $sort_active == 'expA'}>"images/up_active.gif""
-                        /><{else}>"images/up.gif"
-                        /><{/if}></a><a href="resumecat.php?cid=<{$cid}>&orderby=expD"><img title="<{$lang_exphtol}>"
+                       ><{else}>"images/up.gif"
+                       ><{/if}></a><a href="resumecat.php?cid=<{$cid}>&orderby=expD"><img title="<{$lang_exphtol}>"
                                                                                             style="<{$imgstyle}>" src=
                                                                                             <{if $sort_active == 'expD'}>"images/down_active.gif""
-                        /><{else}>"images/down.gif" /><{/if}></a>)<{$lang_date}>
+                       ><{else}>"images/down.gif"><{/if}></a>)<{$lang_date}>
                     (<a href="resumecat.php?cid=<{$cid}>&orderby=dateA"><img title="<{$lang_dateold}>"
                                                                              style="<{$imgstyle}>" src=
                                                                              <{if $sort_active == 'dateA' || $show_active == 'dateA'}>"images/up_active.gif""
-                        /><{else}>"images/up.gif"
-                        /><{/if}></a><a href="resumecat.php?cid=<{$cid}>&orderby=dateD"><img title="<{$lang_datenew}>"
+                       ><{else}>"images/up.gif"
+                       ><{/if}></a><a href="resumecat.php?cid=<{$cid}>&orderby=dateD"><img title="<{$lang_datenew}>"
                                                                                              style="<{$imgstyle}>" src=
                                                                                              <{if $sort_active == 'dateD' || $show_active == 'dateD'}>"images/down_active.gif""
-                        /><{else}>"images/down.gif" /><{/if}></a>)<{$lang_local}>
+                       ><{else}>"images/down.gif"><{/if}></a>)<{$lang_local}>
                     (<a href="resumecat.php?cid=<{$cid}>&orderby=townA"><img title="<{$lang_localatoz}>"
                                                                              style="<{$imgstyle}>" src=
                                                                              <{if $sort_active == 'townA' || $show_active == 'townA'}>"images/up_active.gif""
-                        /><{else}>"images/up.gif"
-                        /><{/if}></a><a href="resumecat.php?cid=<{$cid}>&orderby=townD"><img title="<{$lang_localztoa}>"
+                       ><{else}>"images/up.gif"
+                       ><{/if}></a><a href="resumecat.php?cid=<{$cid}>&orderby=townD"><img title="<{$lang_localztoa}>"
                                                                                              style="<{$imgstyle}>" src=
                                                                                              <{if $sort_active == 'town' || $show_active == 'townD'}>"images/down_active.gif""
-                        /><{else}>"images/down.gif" /><{/if}></a>)<{$lang_popularity}>
+                       ><{else}>"images/down.gif"><{/if}></a>)<{$lang_popularity}>
                     (<a href="resumecat.php?cid=<{$cid}>&orderby=viewA"><img title="<{$lang_popularityleast}>"
                                                                              style="<{$imgstyle}>" src=
                                                                              <{if $sort_active == 'viewA'}>"images/up_active.gif""
-                        /><{else}>"images/up.gif"
-                        /><{/if}></a><a href="resumecat.php?cid=<{$cid}>&orderby=viewD"><img
+                       ><{else}>"images/up.gif"
+                       ><{/if}></a><a href="resumecat.php?cid=<{$cid}>&orderby=viewD"><img
                                 title="<{$lang_popularitymost}>" style="<{$imgstyle}>" src=
-                        <{if $sort_active == 'viewD'}>"images/down_active.gif"" /><{else}>"images/down.gif"
-                        /><{/if}></a>)
+                        <{if $sort_active == 'viewD'}>"images/down_active.gif""><{else}>"images/down.gif"
+                       ><{/if}></a>)
                     <br><b><{$lang_cursortedby}></b>
                     <hr
                     / width="97%">
@@ -155,33 +155,33 @@
             <a href="resumecat.php?cid=<{$cid}>&orderby=titleA">
                 <img title="<{$lang_titleatoz}>" style="<{$imgstyle}>" src=
                 <{if $sort_active == 'titleA' || $show_active == 'titleA'}>"assets/images/up_active.gif""
-                /><{else}>"assets/images/up.gif" /><{/if}></a>
+               ><{else}>"assets/images/up.gif"><{/if}></a>
             <a href="resumecat.php?cid=<{$cid}>&orderby=titleD">
                 <img title="<{$lang_titleztoa}>" style="<{$imgstyle}>" src=
                 <{if $sort_active == 'titleD' || $show_active == 'titleD'}>"assets/images/down_active.gif""
-                /><{else}>"assets/images/down.gif" /><{/if}></a></td>
+               ><{else}>"assets/images/down.gif"><{/if}></a></td>
 
         <td class="head" width="20%" align="center">
             <{$last_res_head_exp}><br>
             <a href="resumecat.php?cid=<{$cid}>&orderby=expA">
                 <img title="<{$lang_expltoh}>" style="<{$imgstyle}>" src=
                 <{if $sort_active == 'expA' || $show_active == 'expA'}>"assets/images/up_active.gif""
-                /><{else}>"assets/images/up.gif" /><{/if}></a>
+               ><{else}>"assets/images/up.gif"><{/if}></a>
             <a href="resumecat.php?cid=<{$cid}>&orderby=expD">
                 <img title="<{$lang_exphtol}>" style="<{$imgstyle}>" src=
                 <{if $sort_active == 'expD' || $show_active == 'expD'}>"assets/images/down_active.gif""
-                /><{else}>"assets/images/down.gif" /><{/if}></a></td>
+               ><{else}>"assets/images/down.gif"><{/if}></a></td>
 
         <td class="head" width="20%" align="center">
             <{$last_res_head_date}><br>
             <a href="resumecat.php?cid=<{$cid}>&orderby=dateA">
                 <img title="<{$lang_dateold}>" style="<{$imgstyle}>" src=
                 <{if $sort_active == 'dateA' || $show_active == 'dateA'}>"assets/images/up_active.gif""
-                /><{else}>"assets/images/up.gif" /><{/if}></a>
+               ><{else}>"assets/images/up.gif"><{/if}></a>
             <a href="resumecat.php?cid=<{$cid}>&orderby=dateD">
                 <img title="<{$lang_datenew}>" style="<{$imgstyle}>" src=
                 <{if $sort_active == 'dateD' || $show_active == 'dateD'}>"assets/images/down_active.gif""
-                /><{else}>"assets/images/down.gif" /><{/if}></a></td>
+               ><{else}>"assets/images/down.gif"><{/if}></a></td>
 
 
         <td class="head" width="20%" align="center">
@@ -189,22 +189,22 @@
             <a href="resumecat.php?cid=<{$cid}>&orderby=townA">
                 <img title="<{$lang_localatoz}>" style="<{$imgstyle}>" src=
                 <{if $sort_active == 'townA' || $show_active == 'townA'}>"assets/images/up_active.gif""
-                /><{else}>"assets/images/up.gif" /><{/if}></a>
+               ><{else}>"assets/images/up.gif"><{/if}></a>
             <a href="resumecat.php?cid=<{$cid}>&orderby=townD">
                 <img title="<{$lang_localztoa}>" style="<{$imgstyle}>" src=
                 <{if $sort_active == 'townD' || $show_active == 'townD'}>"assets/images/down_active.gif""
-                /><{else}>"assets/images/down.gif" /><{/if}></a></td>
+               ><{else}>"assets/images/down.gif"><{/if}></a></td>
 
         <td class="head" width="15%" align="center">
             <{$last_res_head_views}><br>
             <a href="resumecat.php?cid=<{$cid}>&orderby=viewA">
                 <img title="<{$lang_popularityleast}>" style="<{$imgstyle}>" src=
                 <{if $sort_active == 'viewA' || $show_active == 'viewA'}>"assets/images/up_active.gif""
-                /><{else}>"assets/images/up.gif" /><{/if}></a>
+               ><{else}>"assets/images/up.gif"><{/if}></a>
             <a href="resumecat.php?cid=<{$cid}>&orderby=viewD">
                 <img title="<{$lang_popularitymost}>" style="<{$imgstyle}>" src=
                 <{if $sort_active == 'viewD' || $show_active == 'viewD'}>"assets/images/down_active.gif""
-                /><{else}>"assets/images/down.gif" /><{/if}></a>
+               ><{else}>"assets/images/down.gif"><{/if}></a>
         </td>
     </tr>
 

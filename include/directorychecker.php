@@ -1,27 +1,23 @@
 <?php
-/*
- You may not change or alter any portion of this comment or credits
- of supporting developers from this source code or any supporting source code
- which is considered copyrighted (c) material of the original comment or credit authors.
-
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- */
 /**
- * WF-Downloads module
+ * Jobs for XOOPS
  *
- * @copyright       The XOOPS Project http://sourceforge.net/projects/xoops/
- * @license         GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
- * @package         wfdownload
- * @since           3.23
- * @author          Xoops Development Team
- * @version         svn:$id$
+ * You may not change or alter any portion of this comment or credits
+ * of supporting developers from this source code or any supporting source code
+ * which is considered copyrighted (c) material of the original comment or credit authors.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ * @copyright   {@link https://xoops.org/ XOOPS Project}
+ * @license     {@link http://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
+ * @package     jobs
+ * @author      XOOPS Development Team
  */
 
-//defined("XOOPS_ROOT_PATH") or die("XOOPS root path not defined");
+//// defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
-require_once dirname(dirname(dirname(dirname(__FILE__)))) . '/include/cp_header.php';
+require_once __DIR__ . '/../../../include/cp_header.php';
 
 /**
  * Class DirectoryChecker
@@ -51,30 +47,34 @@ class DirectoryChecker
             return false;
         }
         if (!@is_dir($path)) {
-            $path_status
-                =
-                "<img src='" . $pathIcon16 . "/0.png'   >" . $path . ' ( ' . $languageConstants[1] . ' ) ' . "<a href="
-                . $_SERVER['PHP_SELF'] . "?op=createdir&amp;path=$path&amp;redirect=$redirectFile&amp;languageConstants=$myWords1>"
-                . $languageConstants[2] . '</a>';
+            $path_status = "<img src='" . $pathIcon16 . "/0.png'   >" . $path . ' ( ' . $languageConstants[1] . ' ) ' . '<a href=' . $_SERVER['PHP_SELF'] . "?op=createdir&amp;path=$path&amp;redirect=$redirectFile&amp;languageConstants=$myWords1>" . $languageConstants[2] . '</a>';
         } elseif (@is_writable($path)) {
             $path_status = "<img src='" . $pathIcon16 . "/1.png'   >" . $path . ' ( ' . $languageConstants[0] . ' ) ';
-            $currentMode = (substr(decoct(fileperms($path)), 2));
+            $currentMode = substr(decoct(fileperms($path)), 2);
             if ($currentMode != decoct($mode)) {
-                $path_status = "<img src='" . $pathIcon16 . "/0.png'   >" . $path . sprintf(
-                        $languageConstants[3],
-                        decoct($mode),
-                        $currentMode
-                    ) . "<a href=" . $_SERVER['PHP_SELF'] . "?op=setperm&amp;mode=$mode&amp;path=$path&amp;redirect=$redirectFile&amp;languageConstants=$myWords2> "
-                    . $languageConstants[4] . '</a>';
+                $path_status = "<img src='"
+                               . $pathIcon16
+                               . "/0.png'   >"
+                               . $path
+                               . sprintf($languageConstants[3], decoct($mode), $currentMode)
+                               . '<a href='
+                               . $_SERVER['PHP_SELF']
+                               . "?op=setperm&amp;mode=$mode&amp;path=$path&amp;redirect=$redirectFile&amp;languageConstants=$myWords2> "
+                               . $languageConstants[4]
+                               . '</a>';
             }
         } else {
-            $currentMode = (substr(decoct(fileperms($path)), 2));
-            $path_status = "<img src='" . $pathIcon16 . "/0.png'   >" . $path . sprintf(
-                    $languageConstants[3],
-                    decoct($mode),
-                    $currentMode
-                ) . "<a href=" . $_SERVER['PHP_SELF'] . "?op=setperm&amp;mode=$mode&amp;path=$path&amp;redirect=$redirectFile&amp;languageConstants=$myWords2> "
-                . $languageConstants[4] . '</a>';
+            $currentMode = substr(decoct(fileperms($path)), 2);
+            $path_status = "<img src='"
+                           . $pathIcon16
+                           . "/0.png'   >"
+                           . $path
+                           . sprintf($languageConstants[3], decoct($mode), $currentMode)
+                           . '<a href='
+                           . $_SERVER['PHP_SELF']
+                           . "?op=setperm&amp;mode=$mode&amp;path=$path&amp;redirect=$redirectFile&amp;languageConstants=$myWords2> "
+                           . $languageConstants[4]
+                           . '</a>';
         }
 
         return $path_status;
@@ -88,9 +88,10 @@ class DirectoryChecker
      */
     public static function createDirectory($target, $mode = 0777)
     {
-        $target = str_replace("..", "", $target);
+        $target = str_replace('..', '', $target);
+
         // http://www.php.net/manual/en/function.mkdir.php
-        return is_dir($target) or (self::createDirectory(dirname($target), $mode) and mkdir($target, $mode));
+        return is_dir($target) || (self::createDirectory(dirname($target), $mode) and mkdir($target, $mode));
     }
 
     /**
@@ -101,16 +102,16 @@ class DirectoryChecker
      */
     public static function setDirectoryPermissions($target, $mode = 0777)
     {
-        $target = str_replace("..", "", $target);
+        $target = str_replace('..', '', $target);
 
-        return @chmod($target, (int) $mode);
+        return @chmod($target, (int)$mode);
     }
 }
 
-$op = (isset($_GET['op'])) ? $_GET['op'] : "";
+$op = isset($_GET['op']) ? $_GET['op'] : '';
 
 switch ($op) {
-    case "createdir":
+    case 'createdir':
         $languageConstants = array();
         if (isset($_GET['path'])) {
             $path = $_GET['path'];
@@ -122,11 +123,11 @@ switch ($op) {
             $languageConstants = json_decode($_GET['languageConstants']);
         }
         $result = DirectoryChecker::createDirectory($path);
-        $msg    = ($result) ? $languageConstants[0] : $languageConstants[1];
+        $msg    = $result ? $languageConstants[0] : $languageConstants[1];
         redirect_header($redirect, 2, $msg . ': ' . $path);
-        exit();
+
         break;
-    case "setperm":
+    case 'setperm':
         $languageConstants = array();
         if (isset($_GET['path'])) {
             $path = $_GET['path'];
@@ -141,8 +142,8 @@ switch ($op) {
             $languageConstants = json_decode($_GET['languageConstants']);
         }
         $result = DirectoryChecker::setDirectoryPermissions($path, $mode);
-        $msg    = ($result) ? $languageConstants[0] : $languageConstants[1];
+        $msg    = $result ? $languageConstants[0] : $languageConstants[1];
         redirect_header($redirect, 2, $msg . ': ' . $path);
-        exit();
+
         break;
 }

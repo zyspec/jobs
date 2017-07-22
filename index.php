@@ -182,7 +182,7 @@ while ($myrow = $xoopsDB->fetchArray($result)) {
 
     if ($myrow['img'] && $myrow['img'] !== 'http://') {
         $cat_img = $myts->htmlSpecialChars($myrow['img']);
-        $img     = '<a href="jobscat.php?cid=' . $myrow['cid'] . "\"><img src='" . XOOPS_URL . "/modules/$moduleDirName/assets/images/cat/" . $cat_img . "' align='middle' alt='' /></a>";
+        $img     = '<a href="jobscat.php?cid=' . $myrow['cid'] . "\"><img src='" . XOOPS_URL . "/modules/$moduleDirName/assets/images/cat/" . $cat_img . "' align='middle' alt=''></a>";
     } else {
         $img = '';
     }
@@ -343,7 +343,7 @@ if ($xoopsModuleConfig['jobs_new_jobs'] == '1') {
             }
 
             if ($photo) {
-                $a_item['photo'] = "<a href=\"javascript:CLA('display-image.php?lid=" . addslashes($lid) . "')\"><img src=\"assets/images/photo.gif\" border=0 width=15 height=11 alt='" . _JOBS_IMGPISP . "' /></a>";
+                $a_item['photo'] = "<a href=\"javascript:CLA('display-image.php?lid=" . addslashes($lid) . "')\"><img src=\"assets/images/photo.gif\" border=0 width=15 height=11 alt='" . _JOBS_IMGPISP . "'></a>";
             }
             $a_item['views'] = $vu;
             ++$rank;

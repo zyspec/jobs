@@ -1,29 +1,38 @@
 <?php
-//  -----------------------------------------------------------------------  //
-//                           Jobs for Xoops 2.4.x                            //
-//                             By John Mordo                                 //
-//                                                                           //
-//                                                                           //
-//                                                                           //
-//                                                                           //
-// ------------------------------------------------------------------------- //
-include 'header.php';
+/**
+ * Jobs for XOOPS
+ *
+ * You may not change or alter any portion of this comment or credits
+ * of supporting developers from this source code or any supporting source code
+ * which is considered copyrighted (c) material of the original comment or credit authors.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ * @copyright   {@link https://xoops.org/ XOOPS Project}
+ * @license     {@link http://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
+ * @package     jobs
+ * @author      John Mordo aka jlm69 (www.jlmzone.com )
+ * @author      XOOPS Development Team
+ */
 
-$mydirname = basename(dirname(__FILE__));
-require_once(XOOPS_ROOT_PATH . "/modules/$mydirname/include/gtickets.php");
-include(XOOPS_ROOT_PATH . "/modules/$mydirname/include/functions.php");
-include(XOOPS_ROOT_PATH . "/modules/$mydirname/include/resume_functions.php");
+include __DIR__ . '/header.php';
 
+$moduleDirName = basename(__DIR__);
+require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/gtickets.php";
+include XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/functions.php";
+include XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/resume_functions.php";
+
+/**
+ * @param int $lid
+ */
 function Jprint($lid = 0)
 {
-    global $xoopsConfig, $xoopsUser, $xoopsDB, $xoopsModuleConfig, $useroffset, $myts, $xoopsLogger, $mydirname;
+    global $xoopsConfig, $xoopsUser, $xoopsDB, $xoopsModuleConfig, $useroffset, $myts, $xoopsLogger, $moduleDirName;
 
     $currenttheme = $xoopsConfig['theme_set'];
 
-    $result = $xoopsDB->query(
-        "select lid, title, type, company, desctext, requirements, tel, price, typeprice, contactinfo, date, email, submitter, town, state, photo FROM "
-            . $xoopsDB->prefix("jobs_listing") . " where lid=" . mysql_real_escape_string($lid) . ""
-    );
+    $result = $xoopsDB->query('SELECT lid, title, type, company, desctext, requirements, tel, price, typeprice, contactinfo, date, email, submitter, town, state, photo FROM ' . $xoopsDB->prefix('jobs_listing') . ' WHERE lid=' . $xoopsDB->escape($lid) . '');
     list($lid, $title, $type, $company, $desctext, $requirements, $tel, $price, $typeprice, $contactinfo, $date, $email, $submitter, $town, $state, $photo) = $xoopsDB->fetchRow($result);
 
     $title        = $myts->htmlSpecialChars($title);
@@ -39,9 +48,9 @@ function Jprint($lid = 0)
     $town         = $myts->htmlSpecialChars($town);
     $state        = $myts->htmlSpecialChars($state);
 
-    echo "
+    echo '
     <html>
-    <head><title>" . $xoopsConfig['sitename'] . "</title>
+    <head><title>' . $xoopsConfig['sitename'] . "</title>
     <link rel=\"StyleSheet\" href=\"../../themes/" . $currenttheme . "/style/style.css\" type=\"text/css\">
     </head>
     <body bgcolor=\"#FFFFFF\" text=\"#000000\">
@@ -49,7 +58,7 @@ function Jprint($lid = 0)
     <table border=0 width=640 cellpadding=0 cellspacing=1 bgcolor=\"#000000\"><tr><td>
     <table border=0 width=100% cellpadding=8 cellspacing=1 bgcolor=\"#FFFFFF\"><tr><td>";
 
-    $useroffset = "";
+    $useroffset = '';
     if ($xoopsUser) {
         $timezone = $xoopsUser->timezone();
         if (isset($timezone)) {
@@ -60,61 +69,61 @@ function Jprint($lid = 0)
     }
     $date  = ($useroffset * 3600) + $date;
     $date2 = $date + ($xoopsModuleConfig['jobs_days'] * 86400);
-    $date  = formatTimestamp($date, "s");
-    $date2 = formatTimestamp($date2, "s");
+    $date  = formatTimestamp($date, 's');
+    $date2 = formatTimestamp($date2, 's');
 
-    echo "<table width=100% border=0><tr>
-    <td>" . _JOBS_LISTING_NUMBER . " ( $lid ) <br />" . _JOBS_SUBMITTED_BY . " $submitter " . _JOBS_FOR . "
-    $company<br /><br />";
+    echo '<table width=100% border=0><tr>
+    <td>' . _JOBS_LISTING_NUMBER . " ( $lid ) <br>" . _JOBS_SUBMITTED_BY . " $submitter " . _JOBS_FOR . "
+    $company<br><br>";
 
     if ($photo) {
         echo "<tr><td><left><img src=\"logo_images/$photo\" border=0></center>";
     }
-    echo "</td>
-    </tr><br /><br />";
+    echo '</td>
+    </tr><br><br>';
     echo "<tr><td><b>$title :</b> <I>$type</I> ";
-    echo "</td>
-    </tr><br />
+    echo '</td>
+    </tr><br>
     <tr>
-    <td><b>" . _JOBS_DESC . "</b><br /><br /><div style=\"text-align:justify;\">$desctext</div><P>";
-    echo "</td>
+    <td><b>' . _JOBS_DESC . "</b><br><br><div style=\"text-align:justify;\">$desctext</div><P>";
+    echo '</td>
     </tr>
     <tr>
-    <td><br /><br /><b>" . _JOBS_REQUIRE . "</b><br /><br /><div style=\"text-align:justify;\">$requirements</div><P>";
+    <td><br><br><b>' . _JOBS_REQUIRE . "</b><br><br><div style=\"text-align:justify;\">$requirements</div><P>";
 
     if ($price == 1) {
-        echo "<br /><b>" . _JOBS_PRICE2 . "</b> " . $xoopsModuleConfig['jobs_money'] . " $price - $typeprice<br />";
+        echo '<br><b>' . _JOBS_PRICE2 . '</b> ' . $xoopsModuleConfig['jobs_money'] . " $price - $typeprice<br>";
     }
     if ($town) {
-        echo "<br /><b>" . _JOBS_TOWN . "</b> $town<br />";
+        echo '<br><b>' . _JOBS_TOWN . "</b> $town<br>";
     }
-    echo "</td>
-    </tr><br /><br />
+    echo '</td>
+    </tr><br><br>
     <tr>
-    <td><b>" . _JOBS_CONTACTINFO . "</b><br /><br /><div style=\"text-align:justify;\">$contactinfo</div><p>";
-    echo "<br /><br />" . _JOBS_DATE2 . " $date " . _JOBS_DISPO . " $date2<br /><br />";
-    echo "</td>
+    <td><b>' . _JOBS_CONTACTINFO . "</b><br><br><div style=\"text-align:justify;\">$contactinfo</div><p>";
+    echo '<br><br>' . _JOBS_DATE2 . " $date " . _JOBS_DISPO . " $date2<br><br>";
+    echo '</td>
     </tr>
-    </table>";
-    echo "<br /><br /></td></tr></table></td></tr></table>
-    <br /><br /><center>
-    " . _JOBS_EXTRANN . " <b>" . $xoopsConfig['sitename'] . "</b><br />
-    <a href=\"" . XOOPS_URL . "/modules/$mydirname/\">" . XOOPS_URL . "/modules/$mydirname/</a>
+    </table>';
+    echo '<br><br></td></tr></table></td></tr></table>
+    <br><br><center>
+    ' . _JOBS_EXTRANN . ' <b>' . $xoopsConfig['sitename'] . "</b><br>
+    <a href=\"" . XOOPS_URL . "/modules/$moduleDirName/\">" . XOOPS_URL . "/modules/$moduleDirName/</a>
     </td></tr></table>
     </body>
     </html>";
 }
 
+/**
+ * @param int $lid
+ */
 function Rprint($lid = 0)
 {
-    global $xoopsConfig, $xoopsUser, $xoopsDB, $xoopsModuleConfig, $useroffset, $myts, $xoopsLogger, $mydirname;
+    global $xoopsConfig, $xoopsUser, $xoopsDB, $xoopsModuleConfig, $useroffset, $myts, $xoopsLogger, $moduleDirName;
 
     $currenttheme = $xoopsConfig['theme_set'];
 
-    $result = $xoopsDB->query(
-        "select lid, name, title, exp, private, tel, salary, typeprice, date, email, submitter, town, state FROM "
-            . $xoopsDB->prefix("jobs_resume") . " where lid=" . mysql_real_escape_string($lid) . ""
-    );
+    $result = $xoopsDB->query('SELECT lid, name, title, exp, private, tel, salary, typeprice, date, email, submitter, town, state FROM ' . $xoopsDB->prefix('jobs_resume') . ' WHERE lid=' . $xoopsDB->escape($lid) . '');
     list($lid, $name, $title, $exp, $private, $tel, $salary, $typeprice, $date, $email, $submitter, $town, $state) = $xoopsDB->fetchRow($result);
 
     $name      = $myts->htmlSpecialChars($name);
@@ -128,9 +137,9 @@ function Rprint($lid = 0)
     $town      = $myts->htmlSpecialChars($town);
     $state     = $myts->htmlSpecialChars($state);
 
-    echo "
+    echo '
     <html>
-    <head><title>" . $xoopsConfig['sitename'] . "</title>
+    <head><title>' . $xoopsConfig['sitename'] . "</title>
     <link rel=\"StyleSheet\" href=\"../../themes/" . $currenttheme . "/style/style.css\" type=\"text/css\">
     </head>
     <body bgcolor=\"#FFFFFF\" text=\"#000000\">
@@ -138,7 +147,7 @@ function Rprint($lid = 0)
     <table border=0 width=640 cellpadding=0 cellspacing=1 bgcolor=\"#000000\"><tr><td>
     <table border=0 width=100% cellpadding=8 cellspacing=1 bgcolor=\"#FFFFFF\"><tr><td>";
 
-    $useroffset = "";
+    $useroffset = '';
     if ($xoopsUser) {
         $timezone = $xoopsUser->timezone();
         if (isset($timezone)) {
@@ -149,37 +158,36 @@ function Rprint($lid = 0)
     }
     $date  = ($useroffset * 3600) + $date;
     $date2 = $date + ($xoopsModuleConfig['jobs_res_days'] * 86400);
-    $date  = formatTimestamp($date, "s");
-    $date2 = formatTimestamp($date2, "s");
+    $date  = formatTimestamp($date, 's');
+    $date2 = formatTimestamp($date2, 's');
 
-    echo "<table width=100% border=0><tr>
-    <td>" . _JOBS_LISTING_NUMBER . " ( $lid ) <br />" . _JOBS_SUBMITTED_BY . " $submitter <br /><br />";
-    echo "</td>
-    </tr><br /><br />";
+    echo '<table width=100% border=0><tr>
+    <td>' . _JOBS_LISTING_NUMBER . " ( $lid ) <br>" . _JOBS_SUBMITTED_BY . " $submitter <br><br>";
+    echo '</td>
+    </tr><br><br>';
     echo "<tr><td><b>$name :</b> <i>$title</i> ";
-    echo "</td>
-    </tr><tr><td><br />";
+    echo '</td>
+    </tr><tr><td><br>';
     if ($salary == 1) {
-        echo "<br /><b>" . _JOBS_PRICE2 . "</b> " . $xoopsModuleConfig['jobs_money'] . " $salary - $typeprice<br />";
+        echo '<br><b>' . _JOBS_PRICE2 . '</b> ' . $xoopsModuleConfig['jobs_money'] . " $salary - $typeprice<br>";
     }
     if ($town) {
-        echo "<br /><b>" . _JOBS_TOWN . "</b> $town";
+        echo '<br><b>' . _JOBS_TOWN . "</b> $town";
         if ($state) {
-
             $state_name = jobs_getStateNameFromId($state);
 
-            echo ", " . $state_name . "<br />";
+            echo ', ' . $state_name . '<br>';
         }
     }
-    echo "<br /><br />" . _JOBS_DATE2 . " $date " . _JOBS_DISPO . " $date2<br /><br />";
-    echo "</td>
+    echo '<br><br>' . _JOBS_DATE2 . " $date " . _JOBS_DISPO . " $date2<br><br>";
+    echo '</td>
     </tr>
-    </table>";
+    </table>';
 
-    echo "<br /><br /></td></tr></table></td></tr></table>
-    <br /><br /><center>
-    " . _JOBS_EXTRANN . " <b>" . $xoopsConfig['sitename'] . "</b><br />
-    <a href=\"" . XOOPS_URL . "/modules/$mydirname/\">" . XOOPS_URL . "/modules/$mydirname/</a>
+    echo '<br><br></td></tr></table></td></tr></table>
+    <br><br><center>
+    ' . _JOBS_EXTRANN . ' <b>' . $xoopsConfig['sitename'] . "</b><br>
+    <a href=\"" . XOOPS_URL . "/modules/$moduleDirName/\">" . XOOPS_URL . "/modules/$moduleDirName/</a>
     </td></tr></table>
     </body>
     </html>";
@@ -188,9 +196,9 @@ function Rprint($lid = 0)
 ##############################################################
 
 if (!isset($_POST['lid']) && isset($_GET['lid'])) {
-    $lid = intval($_GET['lid']);
+    $lid = (int)$_GET['lid'];
 } else {
-    $lid = intval($_POST['lid']);
+    $lid = (int)$_POST['lid'];
 }
 
 $op = '';
@@ -202,15 +210,15 @@ if (!empty($_GET['op'])) {
 
 switch ($op) {
 
-case "Jprint":
-    Jprint($lid);
-    break;
+    case 'Jprint':
+        Jprint($lid);
+        break;
 
-case "Rprint":
-    Rprint($lid);
-    break;
+    case 'Rprint':
+        Rprint($lid);
+        break;
 
-default:
-    redirect_header("index.php", 3, "" . _RETURNGLO . "");
-    break;
+    default:
+        redirect_header('index.php', 3, '' . _RETURNGLO . '');
+        break;
 }

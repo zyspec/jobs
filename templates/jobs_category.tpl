@@ -106,12 +106,12 @@
                     (<a href="jobscat.php?cid=<{$cid}>&orderby=titleA"><img title="<{$lang_titleatoz}>"
                                                                             style="<{$imgstyle}>" src=
                                                                             <{if $sort_active == 'titleA'}>"assets/images/up_active.gif""
-                        /><{else}>"assets/images/up.gif"
-                        /><{/if}></a><a href="jobscat.php?cid=<{$cid}>&orderby=titleD"><img title="<{$lang_titleztoa}>"
+                       ><{else}>"assets/images/up.gif"
+                       ><{/if}></a><a href="jobscat.php?cid=<{$cid}>&orderby=titleD"><img title="<{$lang_titleztoa}>"
                                                                                             style="<{$imgstyle}>" src=
                                                                                             <{if $sort_active == 'titleD'}>"assets/images/down_active.gif""
-                        /><{else}>"assets/images/down.gif"
-                        /><{/if}></a>)
+                       ><{else}>"assets/images/down.gif"
+                       ><{/if}></a>)
 
                     <{if $show_company}>
                         <{$lang_company}>
@@ -119,11 +119,11 @@
                         <a href="jobscat.php?cid=<{$cid}>&orderby=companyA"><img title="<{$lang_companyatoz}>"
                                                                                  style="<{$imgstyle}>" src=
                                                                                  <{if $sort_active == 'companyA'}>"assets/images/up_active.gif""
-                            /><{else}>"assets/images/up.gif" /><{/if}></a>
+                           ><{else}>"assets/images/up.gif"><{/if}></a>
                         <a href="jobscat.php?cid=<{$cid}>&orderby=companyD"><img title="<{$lang_companyztoa}>"
                                                                                  style="<{$imgstyle}>" src=
                                                                                  <{if $sort_active == 'companyD'}>"assets/images/down_active.gif""
-                            /><{else}>"assets/images/down.gif" /><{/if}></a>
+                           ><{else}>"assets/images/down.gif"><{/if}></a>
                         )
                     <{/if}>
 
@@ -131,11 +131,11 @@
                     (<a href="jobscat.php?cid=<{$cid}>&orderby=dateA"><img title="<{$lang_dateold}>"
                                                                            style="<{$imgstyle}>" src=
                                                                            <{if $sort_active == 'dateA' || $show_active == 'dateA'}>"assets/images/up_active.gif""
-                        /><{else}>"assets/images/up.gif"
-                        /><{/if}></a><a href="jobscat.php?cid=<{$cid}>&orderby=dateD"><img title="<{$lang_datenew}>"
+                       ><{else}>"assets/images/up.gif"
+                       ><{/if}></a><a href="jobscat.php?cid=<{$cid}>&orderby=dateD"><img title="<{$lang_datenew}>"
                                                                                            style="<{$imgstyle}>" src=
                                                                                            <{if $sort_active == 'dateD' || $show_active == 'dateD'}>"assets/images/down_active.gif""
-                        /><{else}>"assets/images/down.gif" /><{/if}></a>)
+                       ><{else}>"assets/images/down.gif"><{/if}></a>)
 
                     <{if $use_state}>
 
@@ -144,12 +144,12 @@
                         <a href="jobscat.php?cid=<{$cid}>&orderby=stateA"><img title="<{$lang_stateatoz}>"
                                                                                style="<{$imgstyle}>" src=
                                                                                <{if $sort_active == 'stateA' || $show_active == 'stateA'}>"assets/images/up_active.gif""
-                            /><{else}>"assets/images/up.gif"
-                            /><{/if}></a>
+                           ><{else}>"assets/images/up.gif"
+                           ><{/if}></a>
                         <a href="jobscat.php?cid=<{$cid}>&orderby=stateD"><img title="<{$lang_stateztoa}>"
                                                                                style="<{$imgstyle}>" src=
                                                                                <{if $sort_active == 'stateD' || $show_active == 'stateD'}>"assets/images/down_active.gif""
-                            /><{else}>"assets/images/down.gif" /><{/if}></a>
+                           ><{else}>"assets/images/down.gif"><{/if}></a>
                         )
 
                     <{else}>
@@ -158,24 +158,24 @@
                         <a href="jobscat.php?cid=<{$cid}>&orderby=townA"><img title="<{$lang_localatoz}>"
                                                                               style="<{$imgstyle}>" src=
                                                                               <{if $sort_active == 'townA' || $show_active == 'townA'}>"assets/images/up_active.gif""
-                            /><{else}>"assets/images/up.gif"
-                            /><{/if}></a>
+                           ><{else}>"assets/images/up.gif"
+                           ><{/if}></a>
                         <a href="jobscat.php?cid=<{$cid}>&orderby=townD"><img title="<{$lang_localztoa}>"
                                                                               style="<{$imgstyle}>" src=
                                                                               <{if $sort_active == 'townD' || $show_active == 'townD'}>"assets/images/down_active.gif""
-                            /><{else}>"assets/images/down.gif" /><{/if}></a>
+                           ><{else}>"assets/images/down.gif"><{/if}></a>
                         )
                     <{/if}>
                     <{$lang_popularity}>
                     (<a href="jobscat.php?cid=<{$cid}>&orderby=viewA"><img title="<{$lang_popularityleast}>"
                                                                            style="<{$imgstyle}>" src=
                                                                            <{if $sort_active == 'viewA'}>"assets/images/up_active.gif""
-                        /><{else}>"assets/images/up.gif"
-                        /><{/if}></a><a href="jobscat.php?cid=<{$cid}>&orderby=viewD"><img
+                       ><{else}>"assets/images/up.gif"
+                       ><{/if}></a><a href="jobscat.php?cid=<{$cid}>&orderby=viewD"><img
                                 title="<{$lang_popularitymost}>" style="<{$imgstyle}>" src=
-                        <{if $sort_active == 'viewD'}>"assets/images/down_active.gif"" /><{else}>
+                        <{if $sort_active == 'viewD'}>"assets/images/down_active.gif""><{else}>
                         "assets/images/down.gif"
-                        /><{/if}></a>)
+                       ><{/if}></a>)
                     <br><b><{$lang_cursortedby}></b>
                     <hr
                     / width="97%">
@@ -207,68 +207,68 @@
                             <a href="jobscat.php?cid=<{$cid}>&orderby=titleA">
                                 <img title="<{$lang_titleatoz}>" style="<{$imgstyle}>" src=
                                 <{if $sort_active == 'titleA' || $show_active == 'titleA'}>"assets/images/up_active.gif""
-                                /><{else}>"assets/images/up.gif" /><{/if}></a>
+                               ><{else}>"assets/images/up.gif"><{/if}></a>
                             <a href="jobscat.php?cid=<{$cid}>&orderby=titleD">
                                 <img title="<{$lang_titleztoa}>" style="<{$imgstyle}>" src=
                                 <{if $sort_active == 'titleD' || $show_active == 'titleD'}>"assets/images/down_active.gif""
-                                /><{else}>"assets/images/down.gif" /><{/if}></a></td>
+                               ><{else}>"assets/images/down.gif"><{/if}></a></td>
                         <{if $show_company}>
                             <td class="head" width="20%" align="center">
                                 <{$last_head_company}><br>
                                 <a href="jobscat.php?cid=<{$cid}>&orderby=companyA">
                                     <img title="<{$lang_companyatoz}>" style="<{$imgstyle}>" src=
                                     <{if $sort_active == 'companyA' || $show_active ==
-                                    'companyA'}>"assets/images/up_active.gif"" /><{else}>"assets/images/up.gif"
-                                    /><{/if}></a>
+                                    'companyA'}>"assets/images/up_active.gif""><{else}>"assets/images/up.gif"
+                                   ><{/if}></a>
                                 <a href="jobscat.php?cid=<{$cid}>&orderby=companyD">
                                     <img title="<{$lang_companyztoa}>" style="<{$imgstyle}>" src=
                                     <{if $sort_active == 'companyD' || $show_active ==
-                                    'companyD'}>"assets/images/down_active.gif"" /><{else}>"assets/images/down.gif"
-                                    /><{/if}></a></td>
+                                    'companyD'}>"assets/images/down_active.gif""><{else}>"assets/images/down.gif"
+                                   ><{/if}></a></td>
                         <{/if}>
                         <td class="head" width="20%" align="center">
                             <{$last_head_date}><br>
                             <a href="jobscat.php?cid=<{$cid}>&orderby=dateA">
                                 <img title="<{$lang_dateold}>" style="<{$imgstyle}>" src=
                                 <{if $sort_active == 'dateA' || $show_active == 'dateA'}>"assets/images/up_active.gif""
-                                /><{else}>"assets/images/up.gif" /><{/if}></a>
+                               ><{else}>"assets/images/up.gif"><{/if}></a>
                             <a href="jobscat.php?cid=<{$cid}>&orderby=dateD">
                                 <img title="<{$lang_datenew}>" style="<{$imgstyle}>" src=
                                 <{if $sort_active == 'dateD' || $show_active == 'dateD'}>"assets/images/down_active.gif""
-                                /><{else}>"assets/images/down.gif" /><{/if}></a></td>
+                               ><{else}>"assets/images/down.gif"><{/if}></a></td>
                         <{if $use_state}>
                             <td class="head" width="20%" align="center">
                                 <{$last_head_state}><br>
                                 <a href="jobscat.php?cid=<{$cid}>&orderby=stateA">
                                     <img title="<{$lang_localatoz}>" style="<{$imgstyle}>" src=
                                     <{if $sort_active == 'stateA' || $show_active == 'stateA'}>"assets/images/up_active.gif""
-                                    /><{else}>"assets/images/up.gif" /><{/if}></a>
+                                   ><{else}>"assets/images/up.gif"><{/if}></a>
                                 <a href="jobscat.php?cid=<{$cid}>&orderby=stateD">
                                     <img title="<{$lang_localztoa}>" style="<{$imgstyle}>" src=
                                     <{if $sort_active == 'stateD' || $show_active == 'stateD'}>"assets/images/down_active.gif""
-                                    /><{else}>"assets/images/down.gif" /><{/if}></a></td>
+                                   ><{else}>"assets/images/down.gif"><{/if}></a></td>
                         <{else}>
                             <td class="head" width="20%" align="center">
                                 <{$last_head_local}><br>
                                 <a href="jobscat.php?cid=<{$cid}>&orderby=townA">
                                     <img title="<{$lang_localatoz}>" style="<{$imgstyle}>" src=
                                     <{if $sort_active == 'townA' || $show_active == 'townA'}>"assets/images/up_active.gif""
-                                    /><{else}>"assets/images/up.gif" /><{/if}></a>
+                                   ><{else}>"assets/images/up.gif"><{/if}></a>
                                 <a href="jobscat.php?cid=<{$cid}>&orderby=townD">
                                     <img title="<{$lang_localztoa}>" style="<{$imgstyle}>" src=
                                     <{if $sort_active == 'townD' || $show_active == 'townD'}>"assets/images/down_active.gif""
-                                    /><{else}>"assets/images/down.gif" /><{/if}></a></td>
+                                   ><{else}>"assets/images/down.gif"><{/if}></a></td>
                         <{/if}>
                         <td class="head" width="15%" align="center">
                             <{$last_head_views}><br>
                             <a href="jobscat.php?cid=<{$cid}>&orderby=viewA">
                                 <img title="<{$lang_popularityleast}>" style="<{$imgstyle}>" src=
                                 <{if $sort_active == 'viewA' || $show_active == 'viewA'}>"assets/images/up_active.gif""
-                                /><{else}>"assets/images/up.gif" /><{/if}></a>
+                               ><{else}>"assets/images/up.gif"><{/if}></a>
                             <a href="jobscat.php?cid=<{$cid}>&orderby=viewD">
                                 <img title="<{$lang_popularitymost}>" style="<{$imgstyle}>" src=
                                 <{if $sort_active == 'viewD' || $show_active == 'viewD'}>"assets/images/down_active.gif""
-                                /><{else}>"assets/images/down.gif" /><{/if}></a>
+                               ><{else}>"assets/images/down.gif"><{/if}></a>
                         </td>
                     </tr>
                 <{/if}>

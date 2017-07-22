@@ -1,83 +1,78 @@
 <?php
-// $Id: jlm_pictures.php,v 1.3 2007/08/26 15:53:07 marcellobrandao Exp $
-//  ------------------------------------------------------------------------ //
-//                XOOPS - PHP Content Management System                      //
-//                    Copyright (c) 2000 XOOPS.org                           //
-//                       <http://www.xoops.org/>                             //
-//  ------------------------------------------------------------------------ //
-//  This program is free software; you can redistribute it and/or modify     //
-//  it under the terms of the GNU General Public License as published by     //
-//  the Free Software Foundation; either version 2 of the License, or        //
-//  (at your option) any later version.                                      //
-//                                                                           //
-//  You may not change or alter any portion of this comment or credits       //
-//  of supporting developers from this source code or any supporting         //
-//  source code which is considered copyrighted (c) material of the          //
-//  original comment or credit authors.                                      //
-//                                                                           //
-//  This program is distributed in the hope that it will be useful,          //
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of           //
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the            //
-//  GNU General Public License for more details.                             //
-//                                                                           //
-//  You should have received a copy of the GNU General Public License        //
-//  along with this program; if not, write to the Free Software              //
-//  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
-//  ------------------------------------------------------------------------ //
+/**
+ * Jobs for XOOPS
+ *
+ * You may not change or alter any portion of this comment or credits
+ * of supporting developers from this source code or any supporting source code
+ * which is considered copyrighted (c) material of the original comment or credit authors.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ * @copyright   {@link https://xoops.org/ XOOPS Project}
+ * @license     {@link http://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
+ * @package     jobs
+ * @author      John Mordo aka jlm69 (www.jlmzone.com )
+ * @author      XOOPS Development Team
+ */
 
 /**
  * Protection against inclusion outside the site
  */
-if (!defined("XOOPS_ROOT_PATH")) {
-    die("XOOPS root path not defined");
-}
-$mydirname = basename(dirname(dirname(__FILE__)));
-$main_lang = '_' . strtoupper($mydirname);
+// defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
+$moduleDirName = basename(dirname(__DIR__));
+$main_lang     = '_' . strtoupper($moduleDirName);
 /**
  * Includes of form objects and uploader
  */
-include_once XOOPS_ROOT_PATH . "/class/uploader.php";
-include_once XOOPS_ROOT_PATH . "/kernel/object.php";
-include_once XOOPS_ROOT_PATH . "/class/xoopsformloader.php";
-include_once XOOPS_ROOT_PATH . "/modules/$mydirname/include/functions.php";
+require_once XOOPS_ROOT_PATH . '/class/uploader.php';
+require_once XOOPS_ROOT_PATH . '/kernel/object.php';
+require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
+require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/functions.php";
 
 /**
  * jlm_pictures class.
  * $this class is responsible for providing data access mechanisms to the data source
  * of XOOPS user class objects.
  */
-
 class jlm_pictures extends XoopsObject
 {
-    var $db;
+    public $db;
 
-// constructor
-    function jlm_pictures($id = NULL, $lid = NULL)
+    // constructor
+
+    /**
+     * @param null $id
+     * @param null $lid
+     */
+    public function __construct($id = null, $lid = null)
     {
-        $this->db =& XoopsDatabaseFactory::getDatabaseConnection();
-        $this->initVar("cod_img", XOBJ_DTYPE_INT, NULL, FALSE, 10);
-        $this->initVar("title", XOBJ_DTYPE_TXTBOX, NULL, FALSE);
-        $this->initVar("date_added", XOBJ_DTYPE_TXTBOX, NULL, FALSE);
-        $this->initVar("date_modified", XOBJ_DTYPE_TXTBOX, NULL, FALSE);
-        $this->initVar("lid", XOBJ_DTYPE_INT, NULL, FALSE, 10);
-        $this->initVar("uid_owner", XOBJ_DTYPE_TXTBOX, NULL, FALSE);
-        $this->initVar("url", XOBJ_DTYPE_TXTBOX, NULL, FALSE);
+        $this->db = XoopsDatabaseFactory::getDatabaseConnection();
+        $this->initVar('cod_img', XOBJ_DTYPE_INT, null, false, 10);
+        $this->initVar('title', XOBJ_DTYPE_TXTBOX, null, false);
+        $this->initVar('date_added', XOBJ_DTYPE_TXTBOX, null, false);
+        $this->initVar('date_modified', XOBJ_DTYPE_TXTBOX, null, false);
+        $this->initVar('lid', XOBJ_DTYPE_INT, null, false, 10);
+        $this->initVar('uid_owner', XOBJ_DTYPE_TXTBOX, null, false);
+        $this->initVar('url', XOBJ_DTYPE_TXTBOX, null, false);
         if (!empty($lid)) {
             if (is_array($lid)) {
                 $this->assignVars($lid);
             } else {
-                $this->load(intval($lid));
+                $this->load((int)$lid);
             }
         } else {
             $this->setNew();
         }
-
     }
 
-    function load($id)
+    /**
+     * @param $id
+     */
+    public function load($id)
     {
-        global $mydirname;
-        $sql   = 'SELECT * FROM ' . $this->db->prefix("jobs_pictures") . ' WHERE cod_img=' . $id . '';
+        global $moduleDirName;
+        $sql   = 'SELECT * FROM ' . $this->db->prefix('jobs_pictures') . ' WHERE cod_img=' . $id . '';
         $myrow = $this->db->fetchArray($this->db->query($sql));
         $this->assignVars($myrow);
         if (!$myrow) {
@@ -85,33 +80,48 @@ class jlm_pictures extends XoopsObject
         }
     }
 
-    function getAll_pictures(
-        $criteria = array(), $asobject = FALSE, $sort = "cod_img", $order = "ASC", $limit = 0, $start = 0
+    /**
+     * @param array  $criteria
+     * @param bool   $asobject
+     * @param string $sort
+     * @param string $order
+     * @param int    $limit
+     * @param int    $start
+     *
+     * @return array
+     */
+    public function getAll_pictures(
+        $criteria = array(),
+        $asobject = false,
+        $sort = 'cod_img',
+        $order = 'ASC',
+        $limit = 0,
+        $start = 0
     ) {
-        global $mydirname;
-        $db          =& XoopsDatabaseFactory::getDatabaseConnection();
+        global $moduleDirName;
+        $db          = XoopsDatabaseFactory::getDatabaseConnection();
         $ret         = array();
-        $where_query = "";
+        $where_query = '';
         if (is_array($criteria) && count($criteria) > 0) {
-            $where_query = " WHERE";
+            $where_query = ' WHERE';
             foreach ($criteria as $c) {
                 $where_query .= " $c AND";
             }
             $where_query = substr($where_query, 0, -4);
         } elseif (!is_array($criteria) && $criteria) {
-            $where_query = " WHERE " . $criteria;
+            $where_query = ' WHERE ' . $criteria;
         }
         if (!$asobject) {
-            $sql    = "SELECT cod_img FROM " . $db->prefix("jobs_pictures") . "$where_query ORDER BY $sort $order";
+            $sql    = 'SELECT cod_img FROM ' . $db->prefix('jobs_pictures') . "$where_query ORDER BY $sort $order";
             $result = $db->query($sql, $limit, $start);
             while ($myrow = $db->fetchArray($result)) {
                 $ret[] = $myrow['jlm_pictures_id'];
             }
         } else {
-            $sql    = "SELECT * FROM " . $db->prefix("jobs_pictures") . "$where_query ORDER BY $sort $order";
+            $sql    = 'SELECT * FROM ' . $db->prefix('jobs_pictures') . "$where_query ORDER BY $sort $order";
             $result = $db->query($sql, $limit, $start);
             while ($myrow = $db->fetchArray($result)) {
-                $ret[] = new jlm_pictures ($myrow);
+                $ret[] = new jlm_pictures($myrow);
             }
         }
 
@@ -122,20 +132,22 @@ class jlm_pictures extends XoopsObject
 // -------------------------------------------------------------------------
 // ------------------jlm_pictures user handler class -------------------
 // -------------------------------------------------------------------------
+
 /**
  * jlm_pictureshandler class.
  * This class provides simple mechanism for jlm_pictures object and generate forms for inclusion etc
  */
-
 class Xoopsjlm_picturesHandler extends XoopsObjectHandler
 {
     /**
      * create a new jlm_pictures
      *
-     * @param  bool   $isNew flag the new objects as "new"?
-     * @return object jlm_pictures
+     * @param bool $isNew flag the new objects as "new"?
+     *
+     * @return \XoopsObject jlm_pictures
      */
-    function &create($isNew = TRUE) {
+    public function create($isNew = true)
+    {
         $jlm_pictures = new jlm_pictures();
         if ($isNew) {
             $jlm_pictures->setNew();
@@ -149,17 +161,18 @@ class Xoopsjlm_picturesHandler extends XoopsObjectHandler
     /**
      * retrieve a jlm_pictures
      *
-     * @param  int   $id of the jlm_pictures
-     * @return mixed reference to the {@link jlm_pictures} object, FALSE if failed
+     * @param int $id of the jlm_pictures
+     * @param     $lid
+     *
+     * @return mixed reference to the {@link jlm_pictures} object, false if failed
      */
-    function &get($id, $lid) {
+    public function &get($id, $lid)
+    {
+        global $moduleDirName;
 
-        global $mydirname;
-
-        $sql
-            = 'SELECT * FROM ' . $this->db->prefix("jobs_pictures") . ' WHERE cod_img=' . $id . ' and lid=' . $lid . '';
+        $sql = 'SELECT * FROM ' . $this->db->prefix('jobs_pictures') . ' WHERE cod_img=' . $id . ' AND lid=' . $lid . '';
         if (!$result = $this->db->query($sql)) {
-            return FALSE;
+            return false;
         }
         $numrows = $this->db->getRowsNum($result);
         if ($numrows == 1) {
@@ -169,27 +182,28 @@ class Xoopsjlm_picturesHandler extends XoopsObjectHandler
             return $jlm_pictures;
         }
 
-        return FALSE;
+        return false;
     }
 
     /**
      * insert a new jlm_pictures in the database
      *
-     * @param  object $jlm_pictures reference to the {@link jlm_pictures} object
-     * @param  bool   $force
-     * @return bool   FALSE if failed, TRUE if already present and unchanged or successful
+     * @param XoopsObject $jlm_pictures        reference to the {@link jlm_pictures}
+     *                                         object
+     * @param bool        $force
+     * @return bool false if failed, true if already present and unchanged or successful
      */
-    function insert(&$jlm_pictures, $force = FALSE)
+    public function insert(XoopsObject $jlm_pictures, $force = false)
     {
-        global $xoopsConfig, $lid, $mydirname;
+        global $xoopsConfig, $lid, $moduleDirName;
         if (get_class($jlm_pictures) != 'jlm_pictures') {
-            return FALSE;
+            return false;
         }
         if (!$jlm_pictures->isDirty()) {
-            return TRUE;
+            return true;
         }
         if (!$jlm_pictures->cleanVars()) {
-            return FALSE;
+            return false;
         }
         foreach ($jlm_pictures->cleanVars as $k => $v) {
             ${$k} = $v;
@@ -199,27 +213,23 @@ class Xoopsjlm_picturesHandler extends XoopsObjectHandler
             // ajout/modification d'un jlm_pictures
             $jlm_pictures = new jlm_pictures();
 
-            $format = "INSERT INTO %s (cod_img, title, date_added, date_modified, lid, uid_owner, url)";
-            $format .= "VALUES (%u, %s, %s, %s, %s, %s, %s)";
-            $sql   = sprintf(
-                $format, $this->db->prefix("jobs_pictures"), $cod_img, $this->db->quoteString($title), $now, $now, $this->db->quoteString($lid), $this->db->quoteString($uid_owner), $this->db->quoteString($url)
-            );
-            $force = TRUE;
+            $format = 'INSERT INTO "%s" (cod_img, title, date_added, date_modified, lid, uid_owner, url)';
+            $format .= 'VALUES (%u, %s, %s, %s, %s, %s, %s)';
+            $sql    = sprintf($format, $this->db->prefix('jobs_pictures'), $cod_img, $this->db->quoteString($title), $now, $now, $this->db->quoteString($lid), $this->db->quoteString($uid_owner), $this->db->quoteString($url));
+            $force  = true;
         } else {
-            $format = "UPDATE %s SET ";
-            $format .= "cod_img=%u, title=%s, date_added=%s, date_modified=%s, lid=%s, uid_owner=%s, url=%s";
-            $format .= " WHERE cod_img = %u";
-            $sql = sprintf(
-                $format, $this->db->prefix("jobs_pictures"), $cod_img, $this->db->quoteString($title), $now, $now, $this->db->quoteString($lid), $this->db->quoteString($uid_owner), $this->db->quoteString($url), $cod_img
-            );
+            $format = 'UPDATE "%s" SET ';
+            $format .= 'cod_img=%u, title=%s, date_added=%s, date_modified=%s, lid=%s, uid_owner=%s, url=%s';
+            $format .= ' WHERE cod_img = %u';
+            $sql    = sprintf($format, $this->db->prefix('jobs_pictures'), $cod_img, $this->db->quoteString($title), $now, $now, $this->db->quoteString($lid), $this->db->quoteString($uid_owner), $this->db->quoteString($url), $cod_img);
         }
-        if (FALSE != $force) {
+        if (false != $force) {
             $result = $this->db->queryF($sql);
         } else {
             $result = $this->db->query($sql);
         }
         if (!$result) {
-            return FALSE;
+            return false;
         }
         if (empty($cod_img)) {
             $cod_img = $this->db->getInsertId();
@@ -227,50 +237,52 @@ class Xoopsjlm_picturesHandler extends XoopsObjectHandler
         $jlm_pictures->assignVar('cod_img', $cod_img);
         $jlm_pictures->assignVar('url', $url);
 
-        return TRUE;
+        return true;
     }
 
     /**
      * delete a jlm_pictures from the database
      *
-     * @param  object $jlm_pictures reference to the jlm_pictures to delete
-     * @param  bool   $force
-     * @return bool   FALSE if failed.
+     * @param XoopsObject $jlm_pictures reference to the jlm_pictures to delete
+     * @param bool        $force
+     *
+     * @return bool false if failed.
      */
-    function delete(&$jlm_pictures, $force = FALSE)
+    public function delete(XoopsObject $jlm_pictures, $force = false)
     {
-        global $mydirname;
+        global $moduleDirName;
 
         if (get_class($jlm_pictures) != 'jlm_pictures') {
-            return FALSE;
+            return false;
         }
-        $sql = sprintf("DELETE FROM %s WHERE cod_img = %u", $this->db->prefix("jobs_pictures"), $jlm_pictures->getVar('cod_img'));
-        if (FALSE != $force) {
+        $sql = sprintf('DELETE FROM %s WHERE cod_img = %u', $this->db->prefix('jobs_pictures'), $jlm_pictures->getVar('cod_img'));
+        if (false != $force) {
             $result = $this->db->queryF($sql);
         } else {
             $result = $this->db->query($sql);
         }
         if (!$result) {
-            return FALSE;
+            return false;
         }
 
-        return TRUE;
+        return true;
     }
 
     /**
      * retrieve jlm_pictures from the database
      *
-     * @param  object $criteria  {@link CriteriaElement} conditions to be met
-     * @param  bool   $id_as_key use the UID as key for the array?
-     * @return array  array of {@link jlm_pictures} objects
+     * @param CriteriaElement $criteria  {@link CriteriaElement} conditions to be met
+     * @param bool            $id_as_key use the UID as key for the array?
+     *
+     * @return array array of {@link jlm_pictures} objects
      */
-    function &getObjects($criteria = NULL, $id_as_key = FALSE) {
-
-        global $mydirname;
+    public function &getObjects(CriteriaElement $criteria = null, $id_as_key = false)
+    {
+        global $moduleDirName;
 
         $ret   = array();
         $limit = $start = 0;
-        $sql   = 'SELECT * FROM ' . $this->db->prefix("jobs_pictures");
+        $sql   = 'SELECT * FROM ' . $this->db->prefix('jobs_pictures');
         if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
             $sql .= ' ' . $criteria->renderWhere();
             if ($criteria->getSort() != '') {
@@ -287,9 +299,9 @@ class Xoopsjlm_picturesHandler extends XoopsObjectHandler
             $jlm_pictures = new jlm_pictures();
             $jlm_pictures->assignVars($myrow);
             if (!$id_as_key) {
-                $ret[] =& $jlm_pictures;
+                $ret[] = $jlm_pictures;
             } else {
-                $ret[$myrow['cod_img']] =& $jlm_pictures;
+                $ret[$myrow['cod_img']] = $jlm_pictures;
             }
             unset($jlm_pictures);
         }
@@ -300,14 +312,15 @@ class Xoopsjlm_picturesHandler extends XoopsObjectHandler
     /**
      * count jlm_pictures matching a condition
      *
-     * @param  object $criteria {@link CriteriaElement} to match
-     * @return int    count of jlm_pictures
+     * @param CriteriaElement $criteria {@link CriteriaElement} to match
+     *
+     * @return int count of jlm_pictures
      */
-    function getCount($criteria = NULL)
+    public function getCount(CriteriaElement $criteria = null)
     {
-        global $mydirname;
+        global $moduleDirName;
 
-        $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix("jobs_pictures");
+        $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('jobs_pictures');
         if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
             $sql .= ' ' . $criteria->renderWhere();
         }
@@ -323,51 +336,54 @@ class Xoopsjlm_picturesHandler extends XoopsObjectHandler
     /**
      * delete jlm_pictures matching a set of conditions
      *
-     * @param  object $criteria {@link CriteriaElement}
-     * @return bool   FALSE if deletion failed
+     * @param CriteriaElement $criteria {@link CriteriaElement}
+     *
+     * @return bool false if deletion failed
      */
-    function deleteAll($criteria = NULL)
+    public function deleteAll(CriteriaElement $criteria = null)
     {
-        global $mydirname;
-        $sql = 'DELETE FROM ' . $this->db->prefix("jobs_pictures");
+        global $moduleDirName;
+        $sql = 'DELETE FROM ' . $this->db->prefix('jobs_pictures');
         if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
             $sql .= ' ' . $criteria->renderWhere();
         }
         if (!$result = $this->db->query($sql)) {
-            return FALSE;
+            return false;
         }
 
-        return TRUE;
+        return true;
     }
 
     /**
      * Render a form to send pictures
      *
-     * @param  int    $maxbytes the maximum size of a picture
-     * @param  object $xoopsTpl the one in which the form will be rendered
-     * @return bool   TRUE
+     * @param        $uid
+     * @param        $lid
+     * @param int    $maxbytes the maximum size of a picture
+     * @param Smarty $xoopsTpl the one in which the form will be rendered
+     *
+     * @return bool true
      *
      * obs: Some functions wont work on php 4 so edit lines down under acording to your version
      */
-    function renderFormSubmit($uid, $lid, $maxbytes, $xoopsTpl)
+    public function renderFormSubmit($uid, $lid, $maxbytes, $xoopsTpl)
     {
-        global $mydirname, $main_lang, $xoopsUser;
-        $form       = new XoopsThemeForm(_JOBS_SUBMIT_PIC_TITLE, "form_picture",
-            "add_photo.php?lid=$lid&uid=" . $xoopsUser->getVar('uid') . "", "post", TRUE);
-        $field_url  = new XoopsFormFile(_JOBS_SELECT_PHOTO, "sel_photo", 2000000);
-        $field_desc = new XoopsFormText(_JOBS_CAPTION, "caption", 35, 55);
+        global $moduleDirName, $main_lang, $xoopsUser;
+        $form       = new XoopsThemeForm(_JOBS_SUBMIT_PIC_TITLE, 'form_picture', "add_photo.php?lid=$lid&uid=" . $xoopsUser->getVar('uid') . '', 'post', true);
+        $field_url  = new XoopsFormFile(_JOBS_SELECT_PHOTO, 'sel_photo', 2000000);
+        $field_desc = new XoopsFormText(_JOBS_CAPTION, 'caption', 35, 55);
         $form->setExtra('enctype="multipart/form-data"');
-        $button_send   = new XoopsFormButton("", "submit_button", _JOBS_UPLOADPICTURE, "submit");
+        $button_send   = new XoopsFormButton('', 'submit_button', _JOBS_UPLOADPICTURE, 'submit');
         $field_warning = new XoopsFormLabel(sprintf(_JOBS_YOUCANUPLOAD, $maxbytes / 1024));
-        $field_lid     = new XoopsFormHidden("lid", $lid);
-        $field_uid     = new XoopsFormHidden("uid", $uid);
+        $field_lid     = new XoopsFormHidden('lid', $lid);
+        $field_uid     = new XoopsFormHidden('uid', $uid);
         /**
          * Check if using Xoops or XoopsCube (by jlm69)
          */
 
-        $xCube = FALSE;
-        if (preg_match("/^XOOPS Cube/", XOOPS_VERSION)) { // XOOPS Cube 2.1x
-            $xCube = TRUE;
+        $xCube = false;
+        if (preg_match('/^XOOPS Cube/', XOOPS_VERSION)) { // XOOPS Cube 2.1x
+            $xCube = true;
         }
 
         /**
@@ -382,41 +398,42 @@ class Xoopsjlm_picturesHandler extends XoopsObjectHandler
             $field_token = $GLOBALS['xoopsSecurity']->getTokenHTML();
         }
         $form->addElement($field_warning);
-        $form->addElement($field_url, TRUE);
-        $form->addElement($field_desc, TRUE);
-        $form->addElement($field_lid, TRUE);
-        $form->addElement($field_uid, TRUE);
-        $form->addElement($field_token, TRUE);
+        $form->addElement($field_url, true);
+        $form->addElement($field_desc, true);
+        $form->addElement($field_lid, true);
+        $form->addElement($field_uid, true);
+        $form->addElement($field_token, true);
         $form->addElement($button_send);
-        if ((str_replace('.', '', PHP_VERSION)) > 499) {
+        if (str_replace('.', '', PHP_VERSION) > 499) {
             $form->assign($xoopsTpl);
         } else {
             $form->display();
         }
 
-        return TRUE;
+        return true;
     }
 
     /**
      * Render a form to edit the description of the pictures
      *
-     * @param  string $caption  The description of the picture
-     * @param  int    $cod_img  the id of the image in database
-     * @param  text   $filename the url to the thumb of the image so it can be displayed
-     * @return bool   TRUE
+     * @param string $caption  The description of the picture
+     * @param int    $cod_img  the id of the image in database
+     * @param text   $filename the url to the thumb of the image so it can be displayed
+     *
+     * @return bool true
      */
-    function renderFormEdit($caption, $cod_img, $filename)
+    public function renderFormEdit($caption, $cod_img, $filename)
     {
-        global $mydirname, $main_lang;
+        global $moduleDirName, $main_lang;
 
-        $form       = new XoopsThemeForm(_JOBS_EDIT_CAPTION, "form_picture", "editdesc.php", "post", TRUE);
-        $field_desc = new XoopsFormText($caption, "caption", 35, 55);
+        $form       = new XoopsThemeForm(_JOBS_EDIT_CAPTION, 'form_picture', 'editdesc.php', 'post', true);
+        $field_desc = new XoopsFormText($caption, 'caption', 35, 55);
         $form->setExtra('enctype="multipart/form-data"');
-        $button_send   = new XoopsFormButton(_JOBS_EDIT, "submit_button", "Submit", "submit");
+        $button_send   = new XoopsFormButton(_JOBS_EDIT, 'submit_button', 'Submit', 'submit');
         $field_warning = new XoopsFormLabel("<img src='" . $filename . "' alt='sssss'>");
-        $field_cod_img = new XoopsFormHidden("cod_img", $cod_img);
-        $field_lid     = new XoopsFormHidden("lid", $lid);
-        $field_marker  = new XoopsFormHidden("marker", 1);
+        $field_cod_img = new XoopsFormHidden('cod_img', $cod_img);
+        $field_lid     = new XoopsFormHidden('lid', $lid);
+        $field_marker  = new XoopsFormHidden('marker', 1);
 
         /**
          * Check if using Xoops or XoopsCube (by jlm69)
@@ -425,10 +442,10 @@ class Xoopsjlm_picturesHandler extends XoopsObjectHandler
          * This could change if Xoops adds a Directory called preload
          */
 
-        $xCube   = FALSE;
-        $preload = XOOPS_ROOT_PATH . "/preload";
+        $xCube   = false;
+        $preload = XOOPS_ROOT_PATH . '/preload';
         if (is_dir($preload)) {
-            $xCube = TRUE;
+            $xCube = true;
         }
 
         /**
@@ -437,7 +454,7 @@ class Xoopsjlm_picturesHandler extends XoopsObjectHandler
          * If your site is Xoops it uses xoopsSecurity for the token.
          */
 
-        if ($xCube = TRUE) {
+        if ($xCube = true) {
             $GLOBALS['xoopsGTicket']->addTicketXoopsFormElement($form, __LINE__, 1800, 'token');
         } else {
             $GLOBALS['xoopsSecurity']->getTokenHTML();
@@ -450,25 +467,33 @@ class Xoopsjlm_picturesHandler extends XoopsObjectHandler
         $form->addElement($button_send);
         $form->display();
 
-        return TRUE;
+        return true;
     }
 
     /**
      * Upload the file and Save into database
      *
-     * @param  text $title         A litle description of the file
-     * @param  text $path_upload   The path to where the file should be uploaded
-     * @param  int  $thumbwidth    the width in pixels that the thumbnail will have
-     * @param  int  $thumbheight   the height in pixels that the thumbnail will have
-     * @param  int  $pictwidth     the width in pixels that the pic will have
-     * @param  int  $pictheight    the height in pixels that the pic will have
-     * @param  int  $maxfilebytes  the maximum size a file can have to be uploaded in bytes
-     * @param  int  $maxfilewidth  the maximum width in pixels that a pic can have
-     * @param  int  $maxfileheight the maximum height in pixels that a pic can have
-     * @return bool FALSE if upload fails or database fails
+     * @param text $title         A litle description of the file
+     * @param text $path_upload   The path to where the file should be uploaded
+     * @param int  $thumbwidth    the width in pixels that the thumbnail will have
+     * @param int  $thumbheight   the height in pixels that the thumbnail will have
+     * @param int  $pictwidth     the width in pixels that the pic will have
+     * @param int  $pictheight    the height in pixels that the pic will have
+     * @param int  $maxfilebytes  the maximum size a file can have to be uploaded in bytes
+     * @param int  $maxfilewidth  the maximum width in pixels that a pic can have
+     * @param int  $maxfileheight the maximum height in pixels that a pic can have
+     *
+     * @return bool false if upload fails or database fails
      */
-    function receivePicture(
-        $title, $path_upload, $thumbwidth, $thumbheight, $pictwidth, $pictheight, $maxfilebytes, $maxfilewidth,
+    public function receivePicture(
+        $title,
+        $path_upload,
+        $thumbwidth,
+        $thumbheight,
+        $pictwidth,
+        $pictheight,
+        $maxfilebytes,
+        $maxfilewidth,
         $maxfileheight
     ) {
         global $xoopsUser, $xoopsDB, $_POST, $_FILES, $lid;
@@ -490,91 +515,81 @@ class Xoopsjlm_picturesHandler extends XoopsObjectHandler
             //now let s upload the file
             if (!$uploader->upload()) {
                 // if there are errors lets return them
-                echo
-                    "<div style=\"color:#FF0000; background-color:#FFEAF4; border-color:#FF0000; border-width:thick; border-style:solid; text-align:center\"><p>"
-                        . $uploader->getErrors() . "</p></div>";
+                echo '<div style="color:#FF0000; background-color:#FFEAF4; border-color:#FF0000; border-width:thick; border-style:solid; text-align:center;"><p>' . $uploader->getErrors() . '</p></div>';
 
-                return FALSE;
+                return false;
             } else {
                 // now let s create a new object picture and set its variables
                 $picture = $this->create();
                 $url     = $uploader->getSavedFileName();
-                $picture->setVar("url", $url);
-                $picture->setVar("title", $title);
+                $picture->setVar('url', $url);
+                $picture->setVar('title', $title);
                 $uid = $xoopsUser->getVar('uid');
                 $lid = $lid;
-                $picture->setVar("lid", $lid);
-                $picture->setVar("uid_owner", $uid);
+                $picture->setVar('lid', $lid);
+                $picture->setVar('uid_owner', $uid);
                 $this->insert($picture);
                 $saved_destination = $uploader->getSavedDestination();
                 $this->resizeImage($saved_destination, $thumbwidth, $thumbheight, $pictwidth, $pictheight, $path_upload);
+                //            function resizeImage($img, $thumbwidth, $thumbheight, $pictwidth, $pictheight, $path_upload)
+                //            Parameter '$saved_destination' type is not compatible with declaration
             }
         } else {
-            echo
-                "<div style=\"color:#FF0000; background-color:#FFEAF4; border-color:#FF0000; border-width:thick; border-style:solid; text-align:center\"><p>"
-                    . $uploader->getErrors() . "</p></div>";
+            echo '<div style="color:#FF0000; background-color:#FFEAF4; border-color:#FF0000; border-width:thick; border-style:solid; text-align:center;"><p>' . $uploader->getErrors() . '</p></div>';
 
-            return FALSE;
+            return false;
         }
 
-        return TRUE;
+        return true;
     }
 
     /**
      * Resize a picture and save it to $path_upload
      *
-     * @param  text    $img         the path to the file
-     * @param  text    $path_upload The path to where the files should be saved after resizing
-     * @param  int     $thumbwidth  the width in pixels that the thumbnail will have
-     * @param  int     $thumbheight the height in pixels that the thumbnail will have
-     * @param  int     $pictwidth   the width in pixels that the pic will have
-     * @param  int     $pictheight  the height in pixels that the pic will have
+     * @param text $img         the path to the file
+     * @param text $path_upload The path to where the files should be saved after resizing
+     * @param int  $thumbwidth  the width in pixels that the thumbnail will have
+     * @param int  $thumbheight the height in pixels that the thumbnail will have
+     * @param int  $pictwidth   the width in pixels that the pic will have
+     * @param int  $pictheight  the height in pixels that the pic will have
+     *
      * @return nothing
      */
-    function resizeImage($img, $thumbwidth, $thumbheight, $pictwidth, $pictheight, $path_upload)
+    public function resizeImage($img, $thumbwidth, $thumbheight, $pictwidth, $pictheight, $path_upload)
     {
         $img2   = $img;
         $path   = pathinfo($img);
         $img    = imagecreatefromjpeg($img);
-        $xratio = $thumbwidth / (imagesx($img));
-        $yratio = $thumbheight / (imagesy($img));
+        $xratio = $thumbwidth / imagesx($img);
+        $yratio = $thumbheight / imagesy($img);
         if ($xratio < 1 || $yratio < 1) {
             if ($xratio < $yratio) {
                 $resized = imagecreatetruecolor($thumbwidth, floor(imagesy($img) * $xratio));
             } else {
                 $resized = imagecreatetruecolor(floor(imagesx($img) * $yratio), $thumbheight);
             }
-            imagecopyresampled(
-                $resized, $img, 0, 0, 0, 0, imagesx($resized) + 1, imagesy($resized) + 1, imagesx($img), imagesy($img)
-            );
-            imagejpeg($resized, $path_upload . "/thumbs/thumb_" . $path["basename"]);
+            imagecopyresampled($resized, $img, 0, 0, 0, 0, imagesx($resized) + 1, imagesy($resized) + 1, imagesx($img), imagesy($img));
+            imagejpeg($resized, $path_upload . '/thumbs/thumb_' . $path['basename']);
             imagedestroy($resized);
         } else {
-            imagejpeg($img, $path_upload . "/thumbs/thumb_" . $path["basename"]);
+            imagejpeg($img, $path_upload . '/thumbs/thumb_' . $path['basename']);
         }
         imagedestroy($img);
         $path2   = pathinfo($img2);
         $img2    = imagecreatefromjpeg($img2);
-        $xratio2 = $pictwidth / (imagesx($img2));
-        $yratio2 = $pictheight / (imagesy($img2));
+        $xratio2 = $pictwidth / imagesx($img2);
+        $yratio2 = $pictheight / imagesy($img2);
         if ($xratio2 < 1 || $yratio2 < 1) {
             if ($xratio2 < $yratio2) {
-                $resized2 = imagecreatetruecolor(
-                    $pictwidth, floor(
-                        imagesy($img2) * $xratio2
-                    )
-                );
+                $resized2 = imagecreatetruecolor($pictwidth, floor(imagesy($img2) * $xratio2));
             } else {
                 $resized2 = imagecreatetruecolor(floor(imagesx($img2) * $yratio2), $pictheight);
             }
-            imagecopyresampled(
-                $resized2, $img2, 0, 0, 0, 0, imagesx($resized2) + 1,
-                imagesy($resized2) + 1, imagesx($img2), imagesy($img2)
-            );
-            imagejpeg($resized2, $path_upload . "/midsize/resized_" . $path2["basename"]);
+            imagecopyresampled($resized2, $img2, 0, 0, 0, 0, imagesx($resized2) + 1, imagesy($resized2) + 1, imagesx($img2), imagesy($img2));
+            imagejpeg($resized2, $path_upload . '/midsize/resized_' . $path2['basename']);
             imagedestroy($resized2);
         } else {
-            imagejpeg($img2, $path_upload . "/midsize/resized_" . $path2["basename"]);
+            imagejpeg($img2, $path_upload . '/midsize/resized_' . $path2['basename']);
         }
         imagedestroy($img2);
     }

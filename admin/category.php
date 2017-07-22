@@ -124,7 +124,7 @@ function ModCat($cat)
     echo "<form action=\"category.php\" method=\"post\" name=\"imcat\">";
     echo $GLOBALS['xoopsSecurity']->getTokenHTML();
     echo "<table border=\"0\"><tr>
-    <td>" . _AM_JOBS_CATNAME . "   </td><td><input type=\"text\" name=\"title\" value=\"$title\" size=\"30\" maxlength=\"50\" />&nbsp; " . _AM_JOBS_IN . ' &nbsp;';
+    <td>" . _AM_JOBS_CATNAME . "   </td><td><input type=\"text\" name=\"title\" value=\"$title\" size=\"30\" maxlength=\"50\">&nbsp; " . _AM_JOBS_IN . ' &nbsp;';
     $mytree->makeMyCatBox('title', 'title', $pid, 1);
     echo '</td></tr><tr>
     <td>' . _AM_JOBS_IMGCAT . "  </td><td><select name=\"img\" onChange=\"showimage()\">";
@@ -335,7 +335,7 @@ function ModResCat($cat)
     echo "<form action=\"category.php\" method=\"post\" name=\"imcat\">";
     echo $GLOBALS['xoopsSecurity']->getTokenHTML();
 
-    echo "<td>" . _AM_JOBS_CATNAME . "   </td><td><input type=\"text\" name=\"title\" value=\"$title\" size=\"30\" maxlength=\"50\" />&nbsp; " . _AM_JOBS_IN . ' &nbsp;';
+    echo "<td>" . _AM_JOBS_CATNAME . "   </td><td><input type=\"text\" name=\"title\" value=\"$title\" size=\"30\" maxlength=\"50\">&nbsp; " . _AM_JOBS_IN . ' &nbsp;';
     $mytree->makeMyCatBox('title', 'title', $pid, 1);
     echo '</td></tr>
     <tr>

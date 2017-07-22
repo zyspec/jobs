@@ -1,36 +1,47 @@
 <?php
+
+/**
+ * Class GD
+ */
 class GD
 {
-    var $image;
-    var $width;
-    var $height;
+    public $image;
+    public $width;
+    public $height;
 
-    function GD($location)
+    /**
+     * @param $location
+     */
+    public function __construct($location)
     {
-        $imageinfo = @getimagesize($location) or exit('Unknown picture');
+        $imageinfo = @getimagesize($location) || exit('Unknown picture');
 
         $this->width  = $imageinfo['0'];
         $this->height = $imageinfo['1'];
 
         switch ($imageinfo['2']) {
-        case '1':
-            $this->image = imagecreatefromgif($location);
-            break;
+            case '1':
+                $this->image = imagecreatefromgif($location);
+                break;
 
-        case '2':
-            $this->image = imagecreatefromjpeg($location);
-            break;
+            case '2':
+                $this->image = imagecreatefromjpeg($location);
+                break;
 
-        case '3':
-            $this->image = imagecreatefrompng($location);
-            break;
+            case '3':
+                $this->image = imagecreatefrompng($location);
+                break;
 
-        default:
-            exit('Unknown file format');
+            default:
+                exit('Unknown file format');
         }
     }
 
-    function resize($sizex, $sizey)
+    /**
+     * @param $sizex
+     * @param $sizey
+     */
+    public function resize($sizex, $sizey)
     {
         $org = round($this->width / $this->height, 2);
         $new = round($sizex / $sizey, 2);
@@ -51,11 +62,16 @@ class GD
         $this->height = $sizey;
     }
 
-    function make_color($color)
+    /**
+     * @param $color
+     *
+     * @return array
+     */
+    public function make_color($color)
     {
         $rgb = array();
 
-        if (is_array($color) AND count($color) == '3') {
+        if (is_array($color) and count($color) == '3') {
             $rgb['r'] = $color['0'];
             $rgb['g'] = $color['1'];
             $rgb['b'] = $color['2'];
@@ -68,8 +84,7 @@ class GD
         }
 
         foreach (array('r', 'g', 'b') as $value) {
-            if (!array_key_exists($value, $rgb) OR $rgb[$value] < 0 OR $rgb[$value] > 255 OR !is_numeric($rgb[$value])
-            ) {
+            if (!array_key_exists($value, $rgb) || $rgb[$value] < 0 or $rgb[$value] > 255 or !is_numeric($rgb[$value])) {
                 exit('Wrong color');
             }
         }
@@ -77,7 +92,11 @@ class GD
         return $rgb;
     }
 
-    function add_border($width, $color)
+    /**
+     * @param $width
+     * @param $color
+     */
+    public function add_border($width, $color)
     {
         $rgb      = $this->make_color($color);
         $allocate = imagecolorallocate($this->image, $rgb['r'], $rgb['g'], $rgb['b']);
@@ -91,18 +110,23 @@ class GD
         $new_image = imagecreatetruecolor($sizex, $sizey);
 
         imagefill($new_image, 0, 0, $allocate);
-        imagecopyresampled(
-            $new_image, $this->image, $width, $width, 0, 0, $this->width, $this->height, $this->width, $this->height
-        );
+        imagecopyresampled($new_image, $this->image, $width, $width, 0, 0, $this->width, $this->height, $this->width, $this->height);
 
         $this->image  = $new_image;
         $this->width  = $sizex;
         $this->height = $sizey;
     }
 
-    function add_text($text, $font, $color, $x, $y)
+    /**
+     * @param $text
+     * @param $font
+     * @param $color
+     * @param $x
+     * @param $y
+     */
+    public function add_text($text, $font, $color, $x, $y)
     {
-        if ($font < 1 OR $font > 5) {
+        if ($font < 1 or $font > 5) {
             exit('Wrong font');
         }
 
@@ -114,7 +138,15 @@ class GD
         //Dokoncaj
     }
 
-    function add_ttf_text($text, $size, $color, $x, $y, $font = './tahoma.ttf')
+    /**
+     * @param        $text
+     * @param        $size
+     * @param        $color
+     * @param        $x
+     * @param        $y
+     * @param string $font
+     */
+    public function add_ttf_text($text, $size, $color, $x, $y, $font = './tahoma.ttf')
     {
         if (!is_file($font)) {
             exit('Unknown font');
@@ -125,7 +157,11 @@ class GD
         imagettftext($this->image, $size, 0, $x, $y, $allocate, $font, $text);
     }
 
-    function save($location, $quality = '80')
+    /**
+     * @param        $location
+     * @param string $quality
+     */
+    public function save($location, $quality = '80')
     {
         imagejpeg($this->image, $location, $quality);
         imagedestroy($this->image);

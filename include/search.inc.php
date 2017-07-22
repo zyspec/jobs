@@ -1,12 +1,21 @@
 <?php
-//  -----------------------------------------------------------------------  //
-//                           Jobs for Xoops 2.4.x                            //
-//                  By John Mordo from the myAds 2.04 Module                 //
-//                    All Original credits left below this                   //
-//                                                                           //
-//                                                                           //
-//                                                                           //
-//                                                                           //
+/**
+ * Jobs for XOOPS
+ *
+ * You may not change or alter any portion of this comment or credits
+ * of supporting developers from this source code or any supporting source code
+ * which is considered copyrighted (c) material of the original comment or credit authors.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ * @copyright   {@link https://xoops.org/ XOOPS Project}
+ * @license     {@link http://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
+ * @package     jobs
+ * @author      John Mordo aka jlm69 (www.jlmzone.com )
+ * @author      XOOPS Development Team
+ */
+
 // ------------------------------------------------------------------------- //
 //               E-Xoops: Content Management for the Masses                  //
 //                       < http://www.e-xoops.com >                          //
@@ -16,19 +25,19 @@
 // Licence Type   : GPL                                                      //
 // ------------------------------------------------------------------------- //
 
-$mydirname = basename(dirname(dirname(__FILE__)));
+$moduleDirName = basename(dirname(__DIR__));
 
-require_once(XOOPS_ROOT_PATH . "/modules/$mydirname/include/gtickets.php");
-include_once(XOOPS_ROOT_PATH . "/modules/$mydirname/include/functions.php");
-include_once(XOOPS_ROOT_PATH . "/modules/$mydirname/include/resume_functions.php");
-$is_resume = !isset($_REQUEST['is_resume']) ? NULL : $_REQUEST['is_resume'];
+require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/gtickets.php";
+require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/functions.php";
+require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/resume_functions.php";
+$is_resume = !isset($_REQUEST['is_resume']) ? null : $_REQUEST['is_resume'];
 
 if (!empty($_GET['by_state'])) {
     $by_state = $_GET['by_state'];
 } elseif (!empty($_POST['by_state'])) {
     $by_state = $_POST['by_state'];
 } else {
-    $by_state = "";
+    $by_state = '';
 }
 
 if (!empty($_GET['by_cat'])) {
@@ -36,30 +45,36 @@ if (!empty($_GET['by_cat'])) {
 } elseif (!empty($_POST['by_cat'])) {
     $by_cat = $_POST['by_cat'];
 } else {
-    $by_cat = "";
+    $by_cat = '';
 }
 
+/**
+ * @param $queryarray
+ * @param $andor
+ * @param $limit
+ * @param $offset
+ * @param $userid
+ *
+ * @return array
+ */
 function jobs_search($queryarray, $andor, $limit, $offset, $userid)
 {
     global $xoopsDB, $xoopsUser, $is_resume, $by_state, $by_cat, $state_name;
 
     if ($is_resume != 1) {
-
-        $cat_perms  = "";
-        $categories = jobs_MygetItemIds("jobs_view");
+        $cat_perms  = '';
+        $categories = jobs_MygetItemIds('jobs_view');
         if (is_array($categories) && count($categories) > 0) {
             $cat_perms = ' AND cid IN (' . implode(',', $categories) . ') ';
         }
 
-        $sql =
-            "SELECT  lid,cid,title,type,company,desctext,requirements,tel,price,contactinfo,town,state,usid,valid,date FROM "
-                . $xoopsDB->prefix("jobs_listing") . " WHERE valid='1'  AND date<=" . time() . "$cat_perms";
+        $sql = 'SELECT  lid,cid,title,type,company,desctext,requirements,tel,price,contactinfo,town,state,usid,valid,date FROM ' . $xoopsDB->prefix('jobs_listing') . " WHERE valid='1'  AND date<=" . time() . "$cat_perms";
 
         if ($userid != 0) {
-            $sql .= " AND usid=" . $userid . " ";
+            $sql .= ' AND usid=' . $userid . ' ';
         }
 
-        if (($by_state != "") && ($by_cat != "")) {
+        if (($by_state != '') && ($by_cat != '')) {
 
             // because count() returns 1 even if a supplied variable
             // is not an array, we must check if $querryarray is really an array
@@ -69,10 +84,9 @@ function jobs_search($queryarray, $andor, $limit, $offset, $userid)
                     $sql .= " $andor ";
                     $sql .= "(cid LIKE '$by_cat' AND state LIKE '$by_state')";
                 }
-                $sql .= ") ";
+                $sql .= ') ';
             }
-
-        } elseif ($by_state != "") {
+        } elseif ($by_state != '') {
 
             // because count() returns 1 even if a supplied variable
             // is not an array, we must check if $querryarray is really an array
@@ -82,10 +96,9 @@ function jobs_search($queryarray, $andor, $limit, $offset, $userid)
                     $sql .= " $andor ";
                     $sql .= "(state LIKE '$by_state')";
                 }
-                $sql .= ") ";
+                $sql .= ') ';
             }
-
-        } elseif ($by_cat != "") {
+        } elseif ($by_cat != '') {
 
             // because count() returns 1 even if a supplied variable
             // is not an array, we must check if $querryarray is really an array
@@ -95,9 +108,8 @@ function jobs_search($queryarray, $andor, $limit, $offset, $userid)
                     $sql .= " $andor ";
                     $sql .= "(cid LIKE '$by_cat')";
                 }
-                $sql .= ") ";
+                $sql .= ') ';
             }
-
         } else {
 
             // because count() returns 1 even if a supplied variable
@@ -108,19 +120,18 @@ function jobs_search($queryarray, $andor, $limit, $offset, $userid)
                     $sql .= " $andor ";
                     $sql .= "(title LIKE '%$queryarray[i]%' OR type LIKE '%$queryarray[i]%' OR company LIKE '%$queryarray[i]%' OR desctext LIKE '%$queryarray[i]%' OR requirements LIKE '%$queryarray[i]%' OR tel LIKE '%$queryarray[i]%' OR price LIKE '%$queryarray[i]%' OR contactinfo LIKE '%$queryarray[i]%' OR town LIKE '%$queryarray[i]%' OR state LIKE '%$queryarray[i]%')";
                 }
-                $sql .= ") ";
+                $sql .= ') ';
             }
         }
-        $sql .= "ORDER BY date DESC";
+        $sql    .= 'ORDER BY date DESC';
         $result = $xoopsDB->query($sql, $limit, $offset);
         $ret    = array();
         $i      = 0;
         while ($myrow = $xoopsDB->fetchArray($result)) {
-
             $statename = jobs_getStateNameFromId($myrow['state']);
 
-            $ret[$i]['image']   = "images/cat/default.gif";
-            $ret[$i]['link']    = "viewjobs.php?lid=" . $myrow['lid'] . "";
+            $ret[$i]['image']   = 'assets/images/cat/default.gif';
+            $ret[$i]['link']    = 'viewjobs.php?lid=' . $myrow['lid'] . '';
             $ret[$i]['title']   = $myrow['title'];
             $ret[$i]['company'] = $myrow['company'];
             $ret[$i]['type']    = $myrow['type'];
@@ -130,24 +141,20 @@ function jobs_search($queryarray, $andor, $limit, $offset, $userid)
             $ret[$i]['uid']     = $myrow['usid'];
             ++$i;
         }
-
     } else {
-
-        $rescat_perms  = "";
-        $rescategories = resume_MygetItemIds("resume_view");
+        $rescat_perms  = '';
+        $rescategories = resume_MygetItemIds('resume_view');
         if (is_array($rescategories) && count($rescategories) > 0) {
             $rescat_perms = ' AND cid IN (' . implode(',', $rescategories) . ') ';
         }
 
-        $sql =
-            "SELECT lid, cid, name, title, exp, expire, private, salary, typeprice, date, usid, town, state, valid FROM "
-                . $xoopsDB->prefix("jobs_resume") . " WHERE valid='1' and date<=" . time() . " $rescat_perms";
+        $sql = 'SELECT lid, cid, name, title, exp, expire, private, salary, typeprice, date, usid, town, state, valid FROM ' . $xoopsDB->prefix('jobs_resume') . " WHERE valid='1' and date<=" . time() . " $rescat_perms";
 
         if ($userid != 0) {
-            $sql .= " AND usid=" . $userid . " ";
+            $sql .= ' AND usid=' . $userid . ' ';
         }
 
-        if (($by_state != "") && ($by_cat != "")) {
+        if (($by_state != '') && ($by_cat != '')) {
 
             // because count() returns 1 even if a supplied variable
             // is not an array, we must check if $querryarray is really an array
@@ -157,10 +164,9 @@ function jobs_search($queryarray, $andor, $limit, $offset, $userid)
                     $sql .= " $andor ";
                     $sql .= "(cid LIKE '$by_cat' AND state LIKE '$by_state')";
                 }
-                $sql .= ") ";
+                $sql .= ') ';
             }
-
-        } elseif ($by_state != "") {
+        } elseif ($by_state != '') {
 
             // because count() returns 1 even if a supplied variable
             // is not an array, we must check if $querryarray is really an array
@@ -170,10 +176,9 @@ function jobs_search($queryarray, $andor, $limit, $offset, $userid)
                     $sql .= " $andor ";
                     $sql .= "(state LIKE '$by_state')";
                 }
-                $sql .= ") ";
+                $sql .= ') ';
             }
-
-        } elseif ($by_cat != "") {
+        } elseif ($by_cat != '') {
 
             // because count() returns 1 even if a supplied variable
             // is not an array, we must check if $querryarray is really an array
@@ -183,9 +188,8 @@ function jobs_search($queryarray, $andor, $limit, $offset, $userid)
                     $sql .= " $andor ";
                     $sql .= "(cid LIKE '$by_cat')";
                 }
-                $sql .= ") ";
+                $sql .= ') ';
             }
-
         } else {
 
             // because count() returns 1 even if a supplied variable
@@ -196,19 +200,18 @@ function jobs_search($queryarray, $andor, $limit, $offset, $userid)
                     $sql .= " $andor ";
                     $sql .= "(title LIKE '%$queryarray[i]%' OR town LIKE '%$queryarray[i]%' OR state LIKE '%$queryarray[i]%')";
                 }
-                $sql .= ") ";
+                $sql .= ') ';
             }
         }
-        $sql .= "ORDER BY date DESC";
+        $sql    .= 'ORDER BY date DESC';
         $result = $xoopsDB->query($sql, $limit, $offset);
         $ret    = array();
         $i      = 0;
         while ($myrow = $xoopsDB->fetchArray($result)) {
-
             $statename = resume_getStateNameFromId($myrow['state']);
 
-            $ret[$i]['image'] = "images/cat/default.gif";
-            $ret[$i]['link']  = "viewresume.php?lid=" . $myrow['lid'] . "";
+            $ret[$i]['image'] = 'assets/images/cat/default.gif';
+            $ret[$i]['link']  = 'viewresume.php?lid=' . $myrow['lid'] . '';
             $ret[$i]['title'] = $myrow['title'];
             $ret[$i]['town']  = $myrow['town'];
             $ret[$i]['state'] = $statename;
@@ -219,5 +222,4 @@ function jobs_search($queryarray, $andor, $limit, $offset, $userid)
     }
 
     return $ret;
-
 }

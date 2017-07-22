@@ -16,7 +16,6 @@
  * @author      XOOPS Development Team
  */
 
-
 $moduleDirName = basename(dirname(__DIR__));
 $main_lang     = '_' . strtoupper($moduleDirName);
 
@@ -44,8 +43,8 @@ if (preg_match('/^XOOPS Cube/', XOOPS_VERSION)) { // XOOPS Cube 2.1x
 // If your site is XoopsCube it uses $xoopsGTicket for the token.
 
 if ($xCube) {
-    if (!$xoopsGTicket->check(true, 'token')) {
-        redirect_header($_SERVER['HTTP_REFERER'], 3, $xoopsGTicket->getErrors());
+    if (!$GLOBALS['xoopsSecurity']->check(true, $_REQUEST['token'])) {
+        redirect_header($_SERVER['HTTP_REFERER'], 3, $GLOBALS['xoopsSecurity']->getErrors());
     }
 } else {
     // Verify TOKEN for Xoops

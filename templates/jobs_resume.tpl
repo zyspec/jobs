@@ -43,6 +43,7 @@
                 <tr>
                     <td>
                         <form action="viewresume.php?lid=<{$id}>&unlock=<{$unlocked}>" method="post" name="unlock">
+                            <{securityToken}><{*//mb*}>
                             <table>
                                 <input type="hidden" name="lid" value="$lid"/>
                                 <{$access}><input type="text" name="unlock" size="10"/>
