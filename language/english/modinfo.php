@@ -280,7 +280,7 @@ define('_MI_JOBS_NBRESLISTING', 'Number of resume listings per page in the admin
 // 4.4RC3
 //Help
 define('_MI_JOBS_DIRNAME', basename(dirname(dirname(__DIR__))));
-define('_MI_JOBS_HELP_HEADER', __DIR__ . '/help/helpheader.html');
+define('_MI_JOBS_HELP_HEADER', __DIR__ . '/help/helpheader.tpl');
 define('_MI_JOBS_BACK_2_ADMIN', 'Back to Administration of ');
 define('_MI_JOBS_OVERVIEW', 'Overview');
 
