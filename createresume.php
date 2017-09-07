@@ -18,7 +18,7 @@
 
 $moduleDirName = basename(__DIR__);
 include __DIR__ . '/header.php';
-require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/gtickets.php";
+//require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/gtickets.php";
 $myts = MyTextSanitizer::getInstance(); // MyTextSanitizer object
 require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/class/jobtree.php";
 //require_once XOOPS_ROOT_PATH . "/class/module.errorhandler.php";
@@ -62,7 +62,7 @@ if (!empty($_POST['submit'])) {
     // Check if Title exist
 
     //    if ($_POST["resume"] == "") {
-    //        $erh->show("1001");
+    //        $eh->show("1001");
     //    }
 
     $notify      = !empty($_POST['notify']) ? 1 : 0;

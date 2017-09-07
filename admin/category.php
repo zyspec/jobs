@@ -29,7 +29,7 @@
 require_once __DIR__ . '/../../../include/cp_header.php';
 $moduleDirName = basename(dirname(__DIR__));
 
-require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/gtickets.php";
+//require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/gtickets.php";
 require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/functions.php";
 require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/class/jobtree.php";
 $myts = MyTextSanitizer::getInstance();

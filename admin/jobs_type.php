@@ -155,7 +155,7 @@ switch ($op) {
                 echo $obj->getHtmlErrors();
             }
         } else {
-            xoops_confirm(array('ok' => 1, 'id_type' => $_REQUEST['id_type'], 'op' => 'delete_jobs_type'), $_SERVER['REQUEST_URI'], sprintf(_AM_JOBS_FORMSUREDEL, $obj->getVar('jobs_type')));
+            xoops_confirm(['ok' => 1, 'id_type' => $_REQUEST['id_type'], 'op' => 'delete_jobs_type'], $_SERVER['REQUEST_URI'], sprintf(_AM_JOBS_FORMSUREDEL, $obj->getVar('jobs_type')));
         }
         break;
 
@@ -213,7 +213,7 @@ switch ($op) {
                 echo $obj->getHtmlErrors();
             }
         } else {
-            xoops_confirm(array('ok' => 1, 'id_price' => $_REQUEST['id_price'], 'op' => 'delete_jobs_price'), $_SERVER['REQUEST_URI'], sprintf(_AM_JOBS_FORMSUREDEL, $obj->getVar('jobs_price')));
+            xoops_confirm(['ok' => 1, 'id_price' => $_REQUEST['id_price'], 'op' => 'delete_jobs_price'], $_SERVER['REQUEST_URI'], sprintf(_AM_JOBS_FORMSUREDEL, $obj->getVar('jobs_price')));
         }
         break;
 

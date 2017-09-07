@@ -19,7 +19,7 @@
 include __DIR__ . '/header.php';
 
 $moduleDirName = basename(__DIR__);
-require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/gtickets.php";
+//require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/gtickets.php";
 include XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/functions.php";
 include XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/resume_functions.php";
 

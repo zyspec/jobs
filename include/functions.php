@@ -27,7 +27,7 @@
 
 $moduleDirName = basename(dirname(__DIR__));
 
-require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/gtickets.php";
+//require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/gtickets.php";
 
 function ExpireJob()
 {
@@ -83,7 +83,7 @@ function ExpireJob()
             }
 
             if ($email) {
-                $tags                = array();
+                $tags                = [];
                 $tags['TITLE']       = $title;
                 $tags['TYPE']        = $type;
                 $tags['COMPANY']     = $company;
@@ -118,7 +118,7 @@ function ExpireJob()
                 $mail->setTemplate('jobs_listing_expired.tpl');
                 $mail->useMail();
                 $mail->setFromEmail($xoopsConfig['adminmail']);
-                $mail->setToEmails(array($email, $extra_user1_email, $extra_user2_email));
+                $mail->setToEmails([$email, $extra_user1_email, $extra_user2_email]);
                 $mail->setSubject($subject);
                 $mail->multimailer->isHTML(true);
                 $mail->assign($tags);
@@ -140,7 +140,7 @@ function jobs_getTotalItems($sel_id, $status = '')
     global $xoopsDB, $mytree, $moduleDirName;
     $categories = jobs_MygetItemIds('' . $moduleDirName . '_view');
     $count      = 0;
-    $arr        = array();
+    $arr        = [];
     if (in_array($sel_id, $categories)) {
         $query = 'SELECT count(*) FROM ' . $xoopsDB->prefix('' . $moduleDirName . '_listing') . ' WHERE cid=' . (int)$sel_id . " AND valid='1' AND status!='0'";
 
@@ -385,7 +385,7 @@ function jobs_getEditor($caption, $name, $value = '', $width = '99%', $height = 
         $nohtml = '0';
     }
 
-    $editor_configs           = array();
+    $editor_configs           = [];
     $editor_configs['name']   = $name;
     $editor_configs['value']  = $value;
     $editor_configs['rows']   = 25;
@@ -461,7 +461,7 @@ function jobs_getCompany($usid = 0)
     if (!$result = $xoopsDB->query($sql)) {
         return 0;
     }
-    $company = array();
+    $company = [];
     while ($row = $xoopsDB->fetchArray($result)) {
         $company = $row;
     }
@@ -479,7 +479,7 @@ function jobs_getPriceType()
     if (!$result = $xoopsDB->query($sql)) {
         return 0;
     } else {
-        $rows = array();
+        $rows = [];
         while ($row = $xoopsDB->fetchArray($result)) {
             $rows[] = $row;
         }
@@ -496,7 +496,7 @@ function jobs_getPriceType()
 function jobs_MygetItemIds($permtype)
 {
     global $xoopsUser, $moduleDirName;
-    static $permissions = array();
+    static $permissions = [];
     if (is_array($permissions) && array_key_exists($permtype, $permissions)) {
         return $permissions[$permtype];
     }
@@ -597,7 +597,7 @@ function jobs_getCompanyWithListing($usid)
     if (!$result = $xoopsDB->query($sql)) {
         return 0;
     }
-    $companies = array();
+    $companies = [];
     while ($row = $xoopsDB->fetchArray($result)) {
         $companies = $row;
     }
@@ -618,7 +618,7 @@ function jobs_getPremiumListings($cid)
     if (!$result = $xoopsDB->query($sql)) {
         return 0;
     }
-    $premium_listings = array();
+    $premium_listings = [];
     while ($row = $xoopsDB->fetchArray($result)) {
         $premium_listings = $row;
     }
@@ -636,7 +636,7 @@ function jobs_getAllCompanies()
     if (!$result = $xoopsDB->query($sql)) {
         return 0;
     }
-    $companies = array();
+    $companies = [];
     while ($row = $xoopsDB->fetchArray($result)) {
         $companies = $row;
     }
@@ -749,7 +749,7 @@ function jobs_getCompanyUsers($comp_id = 0, $usid = 0)
     if (!$result = $xoopsDB->query($sql)) {
         return 0;
     }
-    $their_comp = array();
+    $their_comp = [];
     while ($row = $xoopsDB->fetchArray($result)) {
         $their_comp = $row;
     }
@@ -770,7 +770,7 @@ function jobs_getXtraUsers($comp_id = 0, $member_usid = 0)
     if (!$result = $xoopsDB->query($sql)) {
         return 0;
     }
-    $xtra_users = array();
+    $xtra_users = [];
     while ($row = $xoopsDB->fetchArray($result)) {
         $xtra_users = $row;
     }
@@ -790,7 +790,7 @@ function jobs_getAllUserCompanies($member_usid = 0)
     if (!$result = $xoopsDB->query($sql)) {
         return 0;
     }
-    $xtra_users = array();
+    $xtra_users = [];
     while ($row = $xoopsDB->fetchArray($result)) {
         $xtra_users = $row;
     }
@@ -815,7 +815,7 @@ function jobs_getThisCompany($comp_id, $usid = 0)
     if (!$result = $xoopsDB->query($sql)) {
         return 0;
     }
-    $thiscompany = array();
+    $thiscompany = [];
     while ($row = $xoopsDB->fetchArray($result)) {
         $thiscompany = $row;
     }
@@ -837,7 +837,7 @@ function jobs_getACompany($comp_id = 0)
     if (!$result = $xoopsDB->query($sql)) {
         return 0;
     }
-    $company = array();
+    $company = [];
     while ($row = $xoopsDB->fetchArray($result)) {
         $company = $row;
     }
@@ -993,7 +993,7 @@ function jobs_summary()
     *
     * */
 
-    $summary = array();
+    $summary = [];
 
     /**
      * As many of these will be "joined" at some point.

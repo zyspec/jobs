@@ -220,7 +220,7 @@ switch ($op) {
                 echo $obj->getHtmlErrors();
             }
         } else {
-            xoops_confirm(array('ok' => 1, 'cid' => $_REQUEST['cid'], 'op' => 'delete_category'), $_SERVER['REQUEST_URI'], sprintf(_AM_JOBS_FORMSUREDEL, $obj->getVar('category')));
+            xoops_confirm(['ok' => 1, 'cid' => $_REQUEST['cid'], 'op' => 'delete_category'], $_SERVER['REQUEST_URI'], sprintf(_AM_JOBS_FORMSUREDEL, $obj->getVar('category')));
         }
         break;
 }

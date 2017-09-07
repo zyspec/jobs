@@ -242,7 +242,7 @@ if ($trows > '0') {
             $state = '';
         }
 
-        $xoopsTpl->append('items', array(
+        $xoopsTpl->append('items', [
             'id'           => $lid,
             'cid'          => $cid,
             'title'        => $myts->undoHtmlSpecialChars($title),
@@ -270,7 +270,7 @@ if ($trows > '0') {
             'edit_company' => $edit_company,
             'new'          => $new,
             'istheirs'     => $istheirs
-        ));
+        ]);
     }
 
     $comp_id = (int)$_GET['comp_id'];

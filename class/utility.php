@@ -37,7 +37,7 @@ class JobsUtility extends XoopsObject
         //            }
         //        }
         //        catch (Exception $e) {
-        //            echo 'Caught exception: ', $e->getMessage(), "\n", '<br/>';
+        //            echo 'Caught exception: ', $e->getMessage(), "\n", '<br>';
         //        }
         try {
             if (!file_exists($folder)) {
@@ -48,7 +48,7 @@ class JobsUtility extends XoopsObject
                 }
             }
         } catch (Exception $e) {
-            echo 'Caught exception: ', $e->getMessage(), "\n", '<br/>';
+            echo 'Caught exception: ', $e->getMessage(), "\n", '<br>';
         }
     }
 
@@ -67,7 +67,7 @@ class JobsUtility extends XoopsObject
         //                return copy($file, $folder);
         //            }
         //        } catch (Exception $e) {
-        //            echo 'Caught exception: ', $e->getMessage(), "\n", "<br/>";
+        //            echo 'Caught exception: ', $e->getMessage(), "\n", "<br>";
         //        }
         //        return false;
     }
@@ -127,14 +127,14 @@ class JobsUtility extends XoopsObject
                     break;
                 }
             } else {
-                if ((int)$v > 0) { // handles things like x.x.x.0_RC2
+                if ((int)$v > 0) { // handles versions like x.x.x.0_RC2
                     $success = false;
                     break;
                 }
             }
         }
 
-        if (!$success) {
+        if (false === $success) {
             $module->setErrors(sprintf(_AM_JOBS_ERROR_BAD_XOOPS, $requiredVer, $currentVer));
         }
 

@@ -27,7 +27,7 @@
 
 $moduleDirName = basename(dirname(__DIR__));
 
-require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/gtickets.php";
+//require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/gtickets.php";
 require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/functions.php";
 require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/resume_functions.php";
 $is_resume = !isset($_REQUEST['is_resume']) ? null : $_REQUEST['is_resume'];
@@ -125,7 +125,7 @@ function jobs_search($queryarray, $andor, $limit, $offset, $userid)
         }
         $sql    .= 'ORDER BY date DESC';
         $result = $xoopsDB->query($sql, $limit, $offset);
-        $ret    = array();
+        $ret    = [];
         $i      = 0;
         while ($myrow = $xoopsDB->fetchArray($result)) {
             $statename = jobs_getStateNameFromId($myrow['state']);
@@ -205,7 +205,7 @@ function jobs_search($queryarray, $andor, $limit, $offset, $userid)
         }
         $sql    .= 'ORDER BY date DESC';
         $result = $xoopsDB->query($sql, $limit, $offset);
-        $ret    = array();
+        $ret    = [];
         $i      = 0;
         while ($myrow = $xoopsDB->fetchArray($result)) {
             $statename = resume_getStateNameFromId($myrow['state']);

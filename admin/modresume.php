@@ -66,7 +66,7 @@ if (!empty($_POST['submit'])) {
     if (!empty($_FILES['resume']['name'])) {
         require_once XOOPS_ROOT_PATH . '/class/uploader.php';
         $updir             = $destination;
-        $allowed_mimetypes = array('application/msword', 'application/pdf');
+        $allowed_mimetypes = ['application/msword', 'application/pdf'];
         $uploader          = new XoopsMediaUploader($updir, $allowed_mimetypes, $xoopsModuleConfig['jobs_resumesize']);
         $uploader->setTargetFileName($date . '_' . $_FILES['resume']['name']);
         $uploader->fetchMedia('resume');

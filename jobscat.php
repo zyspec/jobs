@@ -20,7 +20,7 @@ include __DIR__ . '/header.php';
 
 $moduleDirName = basename(__DIR__);
 $main_lang     = '_' . strtoupper($moduleDirName);
-require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/gtickets.php";
+//require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/gtickets.php";
 
 global $xoopsModule;
 $pathIcon16 = \Xmf\Module\Admin::iconUrl('', 16);
@@ -152,12 +152,12 @@ $xoopsTpl->assign('all_listings', _JOBS_LISTINGS);
 $xoopsTpl->assign('cat_title', $title);
 $xoopsTpl->assign('jobs_all', _JOBS_ALL);
 
-$arr = array();
+$arr = [];
 $arr = $mytree->getFirstChild($cid, 'title');
 if (count($arr) > 0) {
     $scount = 1;
     foreach ($arr as $ele) {
-        $sub_arr         = array();
+        $sub_arr         = [];
         $sub_arr         = $mytree->getFirstChild($ele['cid'], 'title');
         $space           = 0;
         $chcount         = 0;
@@ -175,13 +175,13 @@ if (count($arr) > 0) {
             ++$space;
             ++$chcount;
         }
-        $xoopsTpl->append('subcategories', array(
+        $xoopsTpl->append('subcategories', [
             'title'           => $myts->undoHtmlSpecialChars($ele['title']),
             'id'              => $ele['cid'],
             'infercategories' => $infercategories,
             'totallistings'   => jobs_getTotalItems($ele['cid']),
             'count'           => $scount
-        ));
+        ]);
         ++$scount;
         $xoopsTpl->assign('lang_subcat', constant($main_lang . '_AVAILAB'));
     }
@@ -205,7 +205,7 @@ if ($trows == 0) { // the zero option added
 
     $xoopsTpl->assign('min', $min);
     //  we need to examine $orderby and CAST alpha fields that we want to sort numerically. $orderby format is [field ASC] or [field DESC]
-    $fields_tosort = array('view', 'price'); // add others if needed
+    $fields_tosort = ['view', 'price']; // add others if needed
     $orderby1      = $orderby;
     foreach ($fields_tosort as $f) {
         $orderby1 = str_replace($f, 'CAST(' . $f . ' AS SIGNED)', $orderby1);
@@ -244,7 +244,7 @@ if ($trows == 0) { // the zero option added
     }
 
     while (list($lid, $cid, $title, $status, $expire, $type, $company, $price, $typeprice, $date, $town, $state, $valid, $premium, $photo, $vu) = $xoopsDB->fetchRow($result1)) {
-        $a_item     = array();
+        $a_item     = [];
         $title      = $myts->undoHtmlSpecialChars($title);
         $status     = $myts->htmlSpecialChars($status);
         $expire     = $myts->htmlSpecialChars($expire);

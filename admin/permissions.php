@@ -21,24 +21,20 @@ echo $indexAdmin->addNavigation('permissions.php');
 		<fieldset><legend style='font-weight: bold; color: #900;'>" . _AM_WFD_PERM_CPERMISSIONS . "</legend>\n
 		<div style='padding: 2px;'>\n";
 
-$cat_form = new XoopsGroupPermForm('', $xoopsModule->getVar('mid'), 'jobs_category', _AM_WFD_PERM_CSELECTPERMISSIONS,'admin/permissions.php');
+$cat_form = new XoopsGroupPermForm('', $xoopsModule->getVar('mid'), 'jobs_category', _AM_WFD_PERM_CSELECTPERMISSIONS, 'admin/permissions.php');
 
 $category_handler = xoops_getmodulehandler('jobs_categories');
 $categories = $category_handler->getObjects();
-if (count($categories) > 0)
-{
-    foreach (array_keys($categories) as $i)
-    {
+if (count($categories) > 0) {
+    foreach (array_keys($categories) as $i) {
         $cat_form->addItem($categories[$i]->getVar('cid'), $categories[$i]->getVar('title'), $categories[$i]->getVar('pid'));
     }
     echo $cat_form->render();
-}
-else
-{
+} else {
     echo "<div><b>" . _AM_WFD_PERM_CNOCATEGORY . "</b></div>";
 }
-echo "</div></fieldset><br />";
-unset ($cat_form);
+echo "</div></fieldset><br >";
+unset($cat_form);
 
 echo _AM_WFD_PERM_PERMSNOTE;
 

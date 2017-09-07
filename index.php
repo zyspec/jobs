@@ -16,11 +16,11 @@
  * @author      XOOPS Development Team
  */
 
-include __DIR__ . '/header.php';
+require_once __DIR__ . '/header.php';
 
 $moduleDirName = basename(__DIR__);
 $main_lang     = '_' . strtoupper($moduleDirName);
-require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/gtickets.php";
+//require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/gtickets.php";
 
 $myts      = MyTextSanitizer::getInstance();
 $module_id = $xoopsModule->getVar('mid');
@@ -111,7 +111,7 @@ if ($xoopsUser) {
 
     $result = $xoopsDB->query('SELECT comp_id, comp_name, comp_usid, comp_user1, comp_user2  FROM ' . $xoopsDB->prefix('jobs_companies') . ' WHERE ' . $member_usid . ' IN (comp_usid,comp_user1,comp_user2)');
     while ($myrow = $xoopsDB->fetchArray($result)) {
-        $a_comp   = array();
+        $a_comp   = [];
         $istheirs = true;
         $xoopsTpl->assign('istheirs', $istheirs);
 
@@ -190,7 +190,7 @@ while ($myrow = $xoopsDB->fetchArray($result)) {
     $content      .= $title . ' ';
 
     // get child category objects
-    $arr = array();
+    $arr = [];
     if (in_array($myrow['cid'], $categories)) {
         $arr           = $mytree->getFirstChild($myrow['cid'], '' . $xoopsModuleConfig['' . $moduleDirName . '_cat_sortorder'] . '');
         $space         = 0;
@@ -225,7 +225,7 @@ while ($myrow = $xoopsDB->fetchArray($result)) {
                 }
             }
         }
-        $xoopsTpl->append('categories', array(
+        $xoopsTpl->append('categories', [
             'image'         => $img,
             'id'            => $myrow['cid'],
             'title'         => $myts->undoHtmlSpecialChars($myrow['title']),
@@ -233,7 +233,7 @@ while ($myrow = $xoopsDB->fetchArray($result)) {
             'subcategories' => $subcategories,
             'totallisting'  => $totallisting,
             'count'         => $count
-        ));
+        ]);
         ++$count;
     }
 }
@@ -299,7 +299,7 @@ if ($xoopsModuleConfig['jobs_new_jobs'] == '1') {
                     $title = substr($title, 0, 39) . '...';
                 }
             }
-            $a_item     = array();
+            $a_item     = [];
             $useroffset = '';
             if ($xoopsUser) {
                 $timezone = $xoopsUser->timezone();

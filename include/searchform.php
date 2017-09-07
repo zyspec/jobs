@@ -15,7 +15,7 @@
  * @author      XOOPS Development Team
  */
 
-// defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
+// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
@@ -45,7 +45,7 @@ $search_form = new XoopsThemeForm(_SR_SEARCH, 'search', 'search.php', 'get');
 // create form elements
 $search_form->addElement(new XoopsFormText(_SR_KEYWORDS, 'query', 30, 255, htmlspecialchars(stripslashes(implode(' ', $queries)), ENT_QUOTES)), true);
 $type_select = new XoopsFormSelect(_SR_TYPE, 'andor', $andor);
-$type_select->addOptionArray(array('AND' => _SR_ALL, 'OR' => _SR_ANY, 'exact' => _SR_EXACT));
+$type_select->addOptionArray(['AND' => _SR_ALL, 'OR' => _SR_ANY, 'exact' => _SR_EXACT]);
 $search_form->addElement($type_select);
 //  jlm69
 if (!empty($is_resume)) {

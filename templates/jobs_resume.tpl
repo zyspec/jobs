@@ -45,9 +45,9 @@
                         <form action="viewresume.php?lid=<{$id}>&unlock=<{$unlocked}>" method="post" name="unlock">
                             <{securityToken}><{*//mb*}>
                             <table>
-                                <input type="hidden" name="lid" value="$lid"/>
-                                <{$access}><input type="text" name="unlock" size="10"/>
-                                <input type="submit" name="submit" class="button" value="submit"/>
+                                <input type="hidden" name="lid" value="$lid">
+                                <{$access}><input type="text" name="unlock" size="10">
+                                <input type="submit" name="submit" class="button" value="submit">
                             </table>
                         </form>
                     </td>

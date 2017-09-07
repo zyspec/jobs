@@ -110,7 +110,7 @@ if (!empty($_POST['submit'])) {
     if ($valid == '1') {
         $notificationHandler     = xoops_getHandler('notification');
         $lid                     = $xoopsDB->getInsertId();
-        $tags                    = array();
+        $tags                    = [];
         $tags['LID']             = $lid;
         $tags['TITLE']           = $title;
         $tags['TYPE']            = $type;

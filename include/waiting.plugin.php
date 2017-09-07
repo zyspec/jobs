@@ -5,10 +5,10 @@
 function b_waiting_jobs()
 {
     $xoopsDB = XoopsDatabaseFactory::getDatabaseConnection();
-    $ret     = array();
+    $ret     = [];
 
     // jobs listings
-    $block  = array();
+    $block  = [];
     $result = $xoopsDB->query('SELECT COUNT(*) FROM ' . $xoopsDB->prefix('jobs_listing') . " WHERE valid='0'");
     if ($result) {
         $block['adminlink'] = XOOPS_URL . '/modules/jobs/admin/index.php';
@@ -18,7 +18,7 @@ function b_waiting_jobs()
 
     $ret[] = $block;
 
-    $block = array();
+    $block = [];
 
     $result = $xoopsDB->query('SELECT COUNT(*) FROM ' . $xoopsDB->prefix('jobs_resume') . " WHERE valid='0'");
     if ($result) {

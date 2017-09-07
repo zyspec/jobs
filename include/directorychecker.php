@@ -15,7 +15,7 @@
  * @author      XOOPS Development Team
  */
 
-//// defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
+//// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 require_once __DIR__ . '/../../../include/cp_header.php';
 
@@ -33,12 +33,12 @@ class DirectoryChecker
      *
      * @return bool|string
      */
-    public static function getDirectoryStatus($path, $mode = 0777, $languageConstants = array(), $redirectFile)
+    public static function getDirectoryStatus($path, $mode = 0777, $languageConstants = [], $redirectFile)
     {
         global $pathIcon16;
 
-        $languageConstants1 = array($languageConstants[5], $languageConstants[6]);
-        $languageConstants2 = array($languageConstants[7], $languageConstants[8]);
+        $languageConstants1 = [$languageConstants[5], $languageConstants[6]];
+        $languageConstants2 = [$languageConstants[7], $languageConstants[8]];
 
         $myWords1 = urlencode(json_encode($languageConstants1));
         $myWords2 = urlencode(json_encode($languageConstants2));
@@ -112,7 +112,7 @@ $op = isset($_GET['op']) ? $_GET['op'] : '';
 
 switch ($op) {
     case 'createdir':
-        $languageConstants = array();
+        $languageConstants = [];
         if (isset($_GET['path'])) {
             $path = $_GET['path'];
         }
@@ -128,7 +128,7 @@ switch ($op) {
 
         break;
     case 'setperm':
-        $languageConstants = array();
+        $languageConstants = [];
         if (isset($_GET['path'])) {
             $path = $_GET['path'];
         }

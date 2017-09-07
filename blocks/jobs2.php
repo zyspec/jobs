@@ -16,7 +16,7 @@
  * @author      XOOPS Development Team
  */
 
-// defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
+// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 /**
  * @param $options
@@ -27,7 +27,7 @@ function jobs_b2_show($options)
 {
     global $xoopsDB, $blockdirname, $block_lang;
 
-    $block = array();
+    $block = [];
     $myts  = MyTextSanitizer::getInstance();
 
     $blockdirname = basename(dirname(__DIR__));
@@ -54,7 +54,7 @@ function jobs_b2_show($options)
         $company   = $myts->undoHtmlSpecialChars($company);
         $comp_img  = $myts->htmlSpecialChars($comp_img);
         $comp_name = $myts->undoHtmlSpecialChars($comp_name);
-        $a_item    = array();
+        $a_item    = [];
 
         if (!XOOPS_USE_MULTIBYTES) {
             if (strlen($comp_name) >= $options[2]) {
@@ -101,8 +101,8 @@ function jobs_b2_edit($options)
     }
     $form .= '>' . constant($block_lang . '_HITS') . '</option>';
     $form .= "</select>\n";
-    $form .= '&nbsp;' . constant($block_lang . '_DISP') . "&nbsp;<input type='text' name='options[]' value='" . $options[1] . "'/>&nbsp;" . constant($block_lang . '_LISTINGS');
-    $form .= '&nbsp;<br><br>' . constant($block_lang . '_CHARS') . "&nbsp;<input type='text' name='options[]' value='" . $options[2] . "'/>&nbsp;" . constant($block_lang . '_LENGTH') . '<br><br>';
+    $form .= '&nbsp;' . constant($block_lang . '_DISP') . "&nbsp;<input type='text' name='options[]' value='" . $options[1] . "'>&nbsp;" . constant($block_lang . '_LISTINGS');
+    $form .= '&nbsp;<br><br>' . constant($block_lang . '_CHARS') . "&nbsp;<input type='text' name='options[]' value='" . $options[2] . "'>&nbsp;" . constant($block_lang . '_LENGTH') . '<br><br>';
 
     return $form;
 }

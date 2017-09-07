@@ -80,7 +80,7 @@ if (!empty($_POST['submit'])) {
     if (!empty($_FILES['resume']['name'])) {
         require_once XOOPS_ROOT_PATH . '/class/uploader.php';
         $updir             = $destination;
-        $allowed_mimetypes = array('application/msword', 'application/pdf');
+        $allowed_mimetypes = ['application/msword', 'application/pdf'];
         $uploader          = new XoopsMediaUploader($updir, $allowed_mimetypes, $resumesize);
         $uploader->setTargetFileName($date . '_' . $_FILES['resume']['name']);
         $uploader->fetchMedia('resume');
@@ -117,7 +117,7 @@ if (!empty($_POST['submit'])) {
     if ($valid == '1') {
         $notificationHandler = xoops_getHandler('notification');
 
-        $tags                     = array();
+        $tags                     = [];
         $tags['TITLE']            = $title;
         $tags['EXP']              = $exp;
         $tags['NAME']             = $name;

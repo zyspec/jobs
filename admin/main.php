@@ -29,7 +29,7 @@
 require_once __DIR__ . '/../../../include/cp_header.php';
 $moduleDirName = basename(dirname(__DIR__));
 $admin_lang    = '_AM_' . strtoupper($moduleDirName);
-require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/gtickets.php";
+//require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/gtickets.php";
 require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/functions.php";
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/class/jobtree.php";
@@ -995,7 +995,7 @@ function ListingValid(
     }
 
     if ($email) {
-        $tags                   = array();
+        $tags                   = [];
         $tags['TITLE']          = $title;
         $tags['TYPE']           = $type;
         $tags['DESCTEXT']       = $desctext;
@@ -1027,7 +1027,7 @@ function ListingValid(
         $mail->useMail();
         $mail->multimailer->isHTML(true);
         $mail->setFromEmail($xoopsConfig['adminmail']);
-        $mail->setToEmails(array($email, $extra_user1_email, $extra_user2_email));
+        $mail->setToEmails([$email, $extra_user1_email, $extra_user2_email]);
         $mail->setSubject($subject);
         $mail->multimailer->isHTML(true);
         $mail->assign($tags);

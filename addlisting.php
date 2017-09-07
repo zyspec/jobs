@@ -19,7 +19,7 @@
 include __DIR__ . '/header.php';
 $moduleDirName = basename(__DIR__);
 $myts          = MyTextSanitizer::getInstance(); // MyTextSanitizer object
-require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/gtickets.php";
+//require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/gtickets.php";
 require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/class/jobtree.php";
 require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/functions.php";
 
@@ -147,7 +147,7 @@ if (!empty($_POST['submit'])) {
     if ($valid == '1') {
         $notificationHandler      = xoops_getHandler('notification');
         $lid                      = $xoopsDB->getInsertId();
-        $tags                     = array();
+        $tags                     = [];
         $tags['LID']              = $lid;
         $tags['TITLE']            = $title;
         $tags['TYPE']             = $type;

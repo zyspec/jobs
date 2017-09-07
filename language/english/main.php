@@ -153,8 +153,10 @@ define('_JOBS_RES_SUBMITTER', 'Submitter');
 define('_JOBS_RESUME_TITLE', "Resume's");
 define('_JOBS_RES_HOW_LONG', 'How long do you want your<br>resume to be listed (in days)');
 define('_JOBS_HOW_LONG', 'How long do you want Job listing shown (in days)');
-define('_JOBS_RES_PRIVATE',
-       "To keep your resume information private, you must add a code to unlock it. If you don't add a code then your resume will be viewable by everyone.<br><br>If you reply to a job listing, and choose to send your resume, your code will be sent with your reply, so they can view your resume.<br>You can use up to 10 characters");
+define(
+    '_JOBS_RES_PRIVATE',
+       "To keep your resume information private, you must add a code to unlock it. If you don't add a code then your resume will be viewable by everyone.<br><br>If you reply to a job listing, and choose to send your resume, your code will be sent with your reply, so they can view your resume.<br>You can use up to 10 characters"
+);
 define('_JOBS_RES_PCODE', '<b>Privacy Code</b>');
 define('_JOBS_RES_PSIZE', 'Your resume will be public if left blank.');
 define('_JOBS_RES_EXP', 'Experience ');

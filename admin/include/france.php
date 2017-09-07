@@ -16,7 +16,6 @@
  * @author      XOOPS Development Team
  */
 
-
 require_once dirname(dirname(dirname(dirname(__DIR__)))) . '/include/cp_header.php';
 xoops_cp_header();
 $moduleDirName = $xoopsModule->getVar('dirname');

@@ -20,7 +20,7 @@ include __DIR__ . '/header.php';
 
 $moduleDirName = basename(__DIR__);
 
-require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/gtickets.php";
+//require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/gtickets.php";
 
 $myts      = MyTextSanitizer::getInstance();
 $module_id = $xoopsModule->getVar('mid');
@@ -202,7 +202,7 @@ if ($recordexist) {
         $member_id = $xoopsUser->uid();
 
         if ($xoopsModuleConfig['jobs_show_company'] == '1') {
-            $comp_users = array($comp_usid, $comp_user1, $comp_user2);
+            $comp_users = [$comp_usid, $comp_user1, $comp_user2];
             if (in_array($member_id, $comp_users)) {
                 //$xoopsTpl->assign('modify', "<a href=\"modjob.php?lid=".addslashes($lid)."\"><img src=\"assets/images/modif.gif\" border=0 alt=\""._JOBS_MODIFANN."\"></a>&nbsp;<a href=\"deljob.php?lid=".addslashes($lid)."\"><img src=\"assets/images/del.gif\" border=0 alt=\""._JOBS_DEL_JOB."\"></a>");
                 $xoopsTpl->assign('modify', "<a href='modjob.php?lid="

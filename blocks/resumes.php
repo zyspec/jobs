@@ -34,7 +34,7 @@ function resume_show($options)
 {
     global $xoopsDB, $blockdirname, $block_lang;
 
-    $block = array();
+    $block = [];
     $myts  = MyTextSanitizer::getInstance();
 
     $blockdirname = basename(dirname(__DIR__));
@@ -51,7 +51,7 @@ function resume_show($options)
                               . ' DESC', $options[1], 0);
 
     while ($myrow = $xoopsDB->fetchArray($result)) {
-        $a_item    = array();
+        $a_item    = [];
         $cat_name  = resume_getResCatNameFromId($myrow['cid']);
         $name      = $myts->undoHtmlSpecialChars($myrow['name']);
         $title     = $myts->undoHtmlSpecialChars($myrow['title']);
@@ -131,8 +131,8 @@ function resume_edit($options)
     }
     $form .= '>' . constant($block_lang . '_HITS') . '</option>';
     $form .= "</select>\n";
-    $form .= '&nbsp;' . constant($block_lang . '_DISP') . "&nbsp;<input type='text' name='options[]' value='" . $options[1] . "'/>&nbsp;" . constant($block_lang . '_LISTINGS');
-    $form .= '&nbsp;<br><br>' . constant($block_lang . '_CHARS') . "&nbsp;<input type='text' name='options[]' value='" . $options[2] . "'/>&nbsp;" . constant($block_lang . '_LENGTH') . '<br><br>';
+    $form .= '&nbsp;' . constant($block_lang . '_DISP') . "&nbsp;<input type='text' name='options[]' value='" . $options[1] . "'>&nbsp;" . constant($block_lang . '_LISTINGS');
+    $form .= '&nbsp;<br><br>' . constant($block_lang . '_CHARS') . "&nbsp;<input type='text' name='options[]' value='" . $options[2] . "'>&nbsp;" . constant($block_lang . '_LENGTH') . '<br><br>';
 
     return $form;
 }

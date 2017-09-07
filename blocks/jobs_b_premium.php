@@ -16,7 +16,7 @@
  * @author      XOOPS Development Team
  */
 
-// defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
+// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 /**
  * @param $options
@@ -27,7 +27,7 @@ function jobs_block_premium_show($options)
 {
     global $xoopsDB, $blockdirname, $block_lang;
 
-    $block = array();
+    $block = [];
     $myts  = MyTextSanitizer::getInstance();
 
     $blockdirname = basename(dirname(__DIR__));
@@ -70,7 +70,7 @@ function jobs_block_premium_show($options)
         $view      = $myts->htmlSpecialChars($view);
         $comp_img  = $myts->htmlSpecialChars($comp_img);
 
-        $a_item = array();
+        $a_item = [];
 
         if ($thisModuleConfig['jobs_show_company'] == '0') {
             $a_item['show_company'] = 1;
@@ -141,8 +141,8 @@ function jobs_block_premium_edit($options)
     }
     $form .= '>' . constant($block_lang . '_HITS') . '</option>';
     $form .= "</select>\n";
-    $form .= '&nbsp;' . constant($block_lang . '_DISP') . "&nbsp;<input type='text' name='options[]' value='" . $options[1] . "'/>&nbsp;" . constant($block_lang . '_LISTINGS');
-    $form .= '&nbsp;<br><br>' . constant($block_lang . '_CHARS') . "&nbsp;<input type='text' name='options[]' value='" . $options[2] . "'/>&nbsp;" . constant($block_lang . '_LENGTH') . '<br><br>';
+    $form .= '&nbsp;' . constant($block_lang . '_DISP') . "&nbsp;<input type='text' name='options[]' value='" . $options[1] . "'>&nbsp;" . constant($block_lang . '_LISTINGS');
+    $form .= '&nbsp;<br><br>' . constant($block_lang . '_CHARS') . "&nbsp;<input type='text' name='options[]' value='" . $options[2] . "'>&nbsp;" . constant($block_lang . '_LENGTH') . '<br><br>';
 
     return $form;
 }

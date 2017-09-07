@@ -16,7 +16,7 @@
  * @author      XOOPS Development Team
  */
 
-// defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
+// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 $moduleDirName = basename(__DIR__);
 $cloned_lang   = '_MI_' . strtoupper($moduleDirName);
 
@@ -46,7 +46,7 @@ $modversion['module_website_name'] = 'XOOPS';
 $modversion['min_php']             = '5.5';
 $modversion['min_xoops']           = '2.5.9';
 $modversion['min_admin']           = '1.2';
-$modversion['min_db']              = array('mysql' => '5.5');
+$modversion['min_db']              = ['mysql' => '5.5'];
 
 // Admin things
 $modversion['hasAdmin']    = 1;
@@ -145,7 +145,7 @@ $modversion['hasMain'] = 1;
 $modversion['sqlfile']['mysql'] = 'sql/mysql.sql';
 
 // Tables created by sql file (without prefix!)
-$modversion['tables'] = array(
+$modversion['tables'] = [
     $moduleDirName . '_' . 'categories',
     $moduleDirName . '_' . 'jobs_companies',
     $moduleDirName . '_' . 'jobs_created_resumes',
@@ -157,15 +157,15 @@ $modversion['tables'] = array(
     $moduleDirName . '_' . 'jobs_replies',
     $moduleDirName . '_' . 'jobs_type',
     $moduleDirName . '_' . 'jobs_pictures'
-);
+];
 
 // ------------------- Help files ------------------- //
-$modversion['helpsection'] = array(
+$modversion['helpsection'] = [
     ['name' => _MI_JOBS_OVERVIEW, 'link' => 'page=help'],
     ['name' => _MI_JOBS_DISCLAIMER, 'link' => 'page=disclaimer'],
     ['name' => _MI_JOBS_LICENSE, 'link' => 'page=license'],
     ['name' => _MI_JOBS_SUPPORT, 'link' => 'page=support']
-);
+];
 
 // Search
 $modversion['hasSearch']      = 1;
@@ -182,7 +182,7 @@ $modversion['config'][1]['description'] = '';
 $modversion['config'][1]['formtype']    = 'textbox';
 $modversion['config'][1]['valuetype']   = 'text';
 $modversion['config'][1]['default']     = '$';
-$modversion['config'][1]['options']     = array();
+$modversion['config'][1]['options']     = [];
 
 //$xoopsModuleConfig['jobs_moderated']
 $modversion['config'][2]['name']        = '' . $moduleDirName . '_moderated';
@@ -191,7 +191,7 @@ $modversion['config'][2]['description'] = '';
 $modversion['config'][2]['formtype']    = 'yesno';
 $modversion['config'][2]['valuetype']   = 'int';
 $modversion['config'][2]['default']     = '0';
-$modversion['config'][2]['options']     = array();
+$modversion['config'][2]['options']     = [];
 
 //$xoopsModuleConfig['jobs_moderate_up']
 $modversion['config'][3]['name']        = '' . $moduleDirName . '_moderate_up';
@@ -200,7 +200,7 @@ $modversion['config'][3]['description'] = '';
 $modversion['config'][3]['formtype']    = 'yesno';
 $modversion['config'][3]['valuetype']   = 'int';
 $modversion['config'][3]['default']     = '0';
-$modversion['config'][3]['options']     = array();
+$modversion['config'][3]['options']     = [];
 
 //$xoopsModuleConfig['jobs_show_company']
 $modversion['config'][4]['name']        = '' . $moduleDirName . '_show_company';
@@ -209,7 +209,7 @@ $modversion['config'][4]['description'] = '';
 $modversion['config'][4]['formtype']    = 'yesno';
 $modversion['config'][4]['valuetype']   = 'int';
 $modversion['config'][4]['default']     = '1';
-$modversion['config'][4]['options']     = array();
+$modversion['config'][4]['options']     = [];
 
 //$xoopsModuleConfig['jobs_show_state']
 $modversion['config'][5]['name']        = '' . $moduleDirName . '_show_state';
@@ -218,7 +218,7 @@ $modversion['config'][5]['description'] = '';
 $modversion['config'][5]['formtype']    = 'yesno';
 $modversion['config'][5]['valuetype']   = 'int';
 $modversion['config'][5]['default']     = '1';
-$modversion['config'][5]['options']     = array();
+$modversion['config'][5]['options']     = [];
 
 //$xoopsModuleConfig['jobs_multiple_submitters']
 $modversion['config'][6]['name']        = '' . $moduleDirName . '_multiple_submitters';
@@ -227,7 +227,7 @@ $modversion['config'][6]['description'] = '';
 $modversion['config'][6]['formtype']    = 'yesno';
 $modversion['config'][6]['valuetype']   = 'int';
 $modversion['config'][6]['default']     = '1';
-$modversion['config'][6]['options']     = array();
+$modversion['config'][6]['options']     = [];
 
 // $xoopsModuleConfig['jobs_perpage']
 $modversion['config'][7]['name']        = '' . $moduleDirName . '_perpage';
@@ -236,7 +236,7 @@ $modversion['config'][7]['description'] = '';
 $modversion['config'][7]['formtype']    = 'select';
 $modversion['config'][7]['valuetype']   = 'int';
 $modversion['config'][7]['default']     = '10';
-$modversion['config'][7]['options']     = array(
+$modversion['config'][7]['options']     = [
     '10' => 10,
     '15' => 15,
     '20' => 20,
@@ -245,7 +245,7 @@ $modversion['config'][7]['options']     = array(
     '35' => 35,
     '40' => 40,
     '50' => 50
-);
+];
 
 // $xoopsModuleConfig['jobs_new_jobs']
 $modversion['config'][8]['name']        = '' . $moduleDirName . '_new_jobs';
@@ -254,7 +254,7 @@ $modversion['config'][8]['description'] = '';
 $modversion['config'][8]['formtype']    = 'yesno';
 $modversion['config'][8]['valuetype']   = 'int';
 $modversion['config'][8]['default']     = '1';
-$modversion['config'][8]['options']     = array();
+$modversion['config'][8]['options']     = [];
 
 // $xoopsModuleConfig['jobs_new_jobs_count']
 $modversion['config'][9]['name']        = '' . $moduleDirName . '_new_jobs_count';
@@ -263,7 +263,7 @@ $modversion['config'][9]['description'] = $cloned_lang . '_ONHOME';
 $modversion['config'][9]['formtype']    = 'textbox';
 $modversion['config'][9]['valuetype']   = 'int';
 $modversion['config'][9]['default']     = '10';
-$modversion['config'][9]['options']     = array();
+$modversion['config'][9]['options']     = [];
 
 // $xoopsModuleConfig['jobs_countday']
 $modversion['config'][10]['name']        = '' . $moduleDirName . '_countday';
@@ -272,7 +272,7 @@ $modversion['config'][10]['description'] = $cloned_lang . '_INDAYS';
 $modversion['config'][10]['formtype']    = 'textbox';
 $modversion['config'][10]['valuetype']   = 'int';
 $modversion['config'][10]['default']     = '3';
-$modversion['config'][10]['options']     = array();
+$modversion['config'][10]['options']     = [];
 
 // $xoopsModuleConfig['jobsdays']
 $modversion['config'][11]['name']        = '' . $moduleDirName . '_days';
@@ -281,7 +281,7 @@ $modversion['config'][11]['description'] = $cloned_lang . '_INDAYS';
 $modversion['config'][11]['formtype']    = 'textbox';
 $modversion['config'][11]['valuetype']   = 'int';
 $modversion['config'][11]['default']     = '14';
-$modversion['config'][11]['options']     = array();
+$modversion['config'][11]['options']     = [];
 
 // $xoopsModuleConfig['jobs_block']
 $modversion['config'][12]['name']        = '' . $moduleDirName . '_block';
@@ -290,7 +290,7 @@ $modversion['config'][12]['description'] = '';
 $modversion['config'][12]['formtype']    = 'select';
 $modversion['config'][12]['valuetype']   = 'text';
 $modversion['config'][12]['default']     = '1';
-$modversion['config'][12]['options']     = array('_MI_JOBS_LASTTEN' => '1', '_MI_JOBS_JOBRAND' => '2');
+$modversion['config'][12]['options']     = ['_MI_JOBS_LASTTEN' => '1', '_MI_JOBS_JOBRAND' => '2'];
 
 // $xoopsModuleConfig['jobs_display_subcat']
 $modversion['config'][13]['name']        = '' . $moduleDirName . '_display_subcat';
@@ -299,7 +299,7 @@ $modversion['config'][13]['description'] = '';
 $modversion['config'][13]['formtype']    = 'yesno';
 $modversion['config'][13]['valuetype']   = 'int';
 $modversion['config'][13]['default']     = '1';
-$modversion['config'][13]['options']     = array();
+$modversion['config'][13]['options']     = [];
 
 // $xoopsModuleConfig['jobs_days']
 $modversion['config'][14]['name']        = '' . $moduleDirName . '_subcat_num';
@@ -308,7 +308,7 @@ $modversion['config'][14]['description'] = '';
 $modversion['config'][14]['formtype']    = 'textbox';
 $modversion['config'][14]['valuetype']   = 'int';
 $modversion['config'][14]['default']     = '4';
-$modversion['config'][14]['options']     = array();
+$modversion['config'][14]['options']     = [];
 
 // $xoopsModuleConfig['jobs_cat_sortorder']
 $modversion['config'][15]['name']        = '' . $moduleDirName . '_cat_sortorder';
@@ -317,10 +317,10 @@ $modversion['config'][15]['description'] = '';
 $modversion['config'][15]['formtype']    = 'select';
 $modversion['config'][15]['valuetype']   = 'text';
 $modversion['config'][15]['default']     = 'title DESC';
-$modversion['config'][15]['options']     = array(
+$modversion['config'][15]['options']     = [
     $cloned_lang . '_ORDREALPHA' => 'title DESC',
     $cloned_lang . '_ORDREPERSO' => 'ordre DESC'
-);
+];
 
 // $xoopsModuleConfig['jobs_listing_sortorder']
 $modversion['config'][16]['name']        = '' . $moduleDirName . '_listing_sortorder';
@@ -329,13 +329,13 @@ $modversion['config'][16]['description'] = '';
 $modversion['config'][16]['formtype']    = 'select';
 $modversion['config'][16]['valuetype']   = 'text';
 $modversion['config'][16]['default']     = 'date DESC';
-$modversion['config'][16]['options']     = array(
+$modversion['config'][16]['options']     = [
     '_MI_JOBS_ORDER_TITLE'   => 'title DESC',
     '_MI_JOBS_ORDER_COMPANY' => 'company DESC',
     '_MI_JOBS_ORDER_TOWN'    => 'town DESC',
     '_MI_JOBS_ORDER_DATE'    => 'premium,date',
     '_MI_JOBS_ORDER_POP'     => 'view DESC'
-);
+];
 
 // $xoopsModuleConfig['jobs_resume_sortorder']
 $modversion['config'][17]['name']        = '' . $moduleDirName . '_resume_sortorder';
@@ -344,13 +344,13 @@ $modversion['config'][17]['description'] = '';
 $modversion['config'][17]['formtype']    = 'select';
 $modversion['config'][17]['valuetype']   = 'text';
 $modversion['config'][17]['default']     = 'date DESC';
-$modversion['config'][17]['options']     = array(
+$modversion['config'][17]['options']     = [
     '_MI_JOBS_ORDER_TITLE' => 'title DESC',
     '_MI_JOBS_ORDER_EXP'   => 'exp DESC',
     '_MI_JOBS_ORDER_TOWN'  => 'town DESC',
     '_MI_JOBS_ORDER_DATE'  => 'date DESC',
     '_MI_JOBS_ORDER_POP'   => 'view DESC'
-);
+];
 
 //$xoopsModuleConfig['jobs_show_resume']
 $modversion['config'][18]['name']        = '' . $moduleDirName . '_show_resume';
@@ -359,7 +359,7 @@ $modversion['config'][18]['description'] = '';
 $modversion['config'][18]['formtype']    = 'yesno';
 $modversion['config'][18]['valuetype']   = 'int';
 $modversion['config'][18]['default']     = '1';
-$modversion['config'][18]['options']     = array();
+$modversion['config'][18]['options']     = [];
 
 //$xoopsModuleConfig['jobs_moderate_resume']
 $modversion['config'][19]['name']        = '' . $moduleDirName . '_moderate_resume';
@@ -368,7 +368,7 @@ $modversion['config'][19]['description'] = '';
 $modversion['config'][19]['formtype']    = 'yesno';
 $modversion['config'][19]['valuetype']   = 'int';
 $modversion['config'][19]['default']     = '0';
-$modversion['config'][19]['options']     = array();
+$modversion['config'][19]['options']     = [];
 
 //$xoopsModuleConfig['jobs_moderate_res_up']
 $modversion['config'][20]['name']        = '' . $moduleDirName . '_moderate_res_up';
@@ -377,7 +377,7 @@ $modversion['config'][20]['description'] = '';
 $modversion['config'][20]['formtype']    = 'yesno';
 $modversion['config'][20]['valuetype']   = 'int';
 $modversion['config'][20]['default']     = '0';
-$modversion['config'][20]['options']     = array();
+$modversion['config'][20]['options']     = [];
 
 // $xoopsModuleConfig['resdays']
 $modversion['config'][21]['name']        = '' . $moduleDirName . '_res_days';
@@ -386,7 +386,7 @@ $modversion['config'][21]['description'] = $cloned_lang . '_INDAYS';
 $modversion['config'][21]['formtype']    = 'textbox';
 $modversion['config'][21]['valuetype']   = 'int';
 $modversion['config'][21]['default']     = '180';
-$modversion['config'][21]['options']     = array();
+$modversion['config'][21]['options']     = [];
 
 // $xoopsModuleConfig['resume_perpage']
 $modversion['config'][22]['name']        = '' . $moduleDirName . '_resume_perpage';
@@ -395,7 +395,7 @@ $modversion['config'][22]['description'] = '';
 $modversion['config'][22]['formtype']    = 'select';
 $modversion['config'][22]['valuetype']   = 'int';
 $modversion['config'][22]['default']     = '10';
-$modversion['config'][22]['options']     = array(
+$modversion['config'][22]['options']     = [
     '10' => 10,
     '15' => 15,
     '20' => 20,
@@ -404,7 +404,7 @@ $modversion['config'][22]['options']     = array(
     '35' => 35,
     '40' => 40,
     '50' => 50
-);
+];
 
 // $xoopsModuleConfig['resumesize']
 $modversion['config'][23]['name']        = '' . $moduleDirName . '_resumesize';
@@ -413,7 +413,7 @@ $modversion['config'][23]['description'] = $cloned_lang . '_INBYTES';
 $modversion['config'][23]['formtype']    = 'textbox';
 $modversion['config'][23]['valuetype']   = 'int';
 $modversion['config'][23]['default']     = '10000';
-$modversion['config'][23]['options']     = array();
+$modversion['config'][23]['options']     = [];
 
 // $xoopsModuleConfig['jobs_nb_pict']
 $modversion['config'][24]['name']        = '' . $moduleDirName . '_not_premium';
@@ -532,7 +532,7 @@ $modversion['config'][37]['description'] = $cloned_lang . '_LIGHTBOX_DESC';
 $modversion['config'][37]['formtype']    = 'yesno';
 $modversion['config'][37]['valuetype']   = 'int';
 $modversion['config'][37]['default']     = '0';
-$modversion['config'][37]['options']     = array();
+$modversion['config'][37]['options']     = [];
 
 // $xoopsModuleConfig['jobs_admin_mail']
 $modversion['config'][38]['name']        = '' . $moduleDirName . '_admin_mail';
@@ -541,7 +541,7 @@ $modversion['config'][38]['description'] = $cloned_lang . '_ADMIN_MAIL_DESC';
 $modversion['config'][38]['formtype']    = 'yesno';
 $modversion['config'][38]['valuetype']   = 'int';
 $modversion['config'][38]['default']     = '0';
-$modversion['config'][38]['options']     = array();
+$modversion['config'][38]['options']     = [];
 
 // $xoopsModuleConfig['jobs_use_captcha']
 $modversion['config'][39]['name']        = '' . $moduleDirName . '_use_captcha';
@@ -550,7 +550,7 @@ $modversion['config'][39]['description'] = $cloned_lang . '_USE_CAPTCHA_DESC';
 $modversion['config'][39]['formtype']    = 'yesno';
 $modversion['config'][39]['valuetype']   = 'int';
 $modversion['config'][39]['default']     = '1';
-$modversion['config'][39]['options']     = array();
+$modversion['config'][39]['options']     = [];
 
 // $xoopsModuleConfig['jobs_use_index_code']
 $modversion['config'][40]['name']        = '' . $moduleDirName . '_use_index_code';
@@ -559,7 +559,7 @@ $modversion['config'][40]['description'] = $cloned_lang . '_USE_INDEX_CODE_DESC'
 $modversion['config'][40]['formtype']    = 'yesno';
 $modversion['config'][40]['valuetype']   = 'int';
 $modversion['config'][40]['default']     = '1';
-$modversion['config'][40]['options']     = array();
+$modversion['config'][40]['options']     = [];
 
 // $xoopsModuleConfig['jobs_use_banner']
 $modversion['config'][41]['name']        = '' . $moduleDirName . '_use_banner';
@@ -568,7 +568,7 @@ $modversion['config'][41]['description'] = $cloned_lang . '_USE_BANNER_DESC';
 $modversion['config'][41]['formtype']    = 'yesno';
 $modversion['config'][41]['valuetype']   = 'int';
 $modversion['config'][41]['default']     = '1';
-$modversion['config'][41]['options']     = array();
+$modversion['config'][41]['options']     = [];
 
 // $xoopsModuleConfig['jobs_index_code']
 $modversion['config'][42]['name']        = '' . $moduleDirName . '_index_code';
@@ -593,7 +593,7 @@ $modversion['config'][44]['description'] = $cloned_lang . '_RESUME_CODE_DESC';
 $modversion['config'][44]['formtype']    = 'yesno';
 $modversion['config'][44]['valuetype']   = 'int';
 $modversion['config'][44]['default']     = '1';
-$modversion['config'][44]['options']     = array();
+$modversion['config'][44]['options']     = [];
 
 // $xoopsModuleConfig['jobs_offer_search'] - added for optional search
 $modversion['config'][45]['name']        = '' . $moduleDirName . '_offer_search';
@@ -602,7 +602,7 @@ $modversion['config'][45]['description'] = $cloned_lang . '_OFFER_SEARCH_DESC';
 $modversion['config'][45]['formtype']    = 'yesno';
 $modversion['config'][45]['valuetype']   = 'int';
 $modversion['config'][45]['default']     = '1';
-$modversion['config'][45]['options']     = array();
+$modversion['config'][45]['options']     = [];
 
 // $xoopsModuleConfig['jobs_resume_search'] - added for optional search
 $modversion['config'][46]['name']        = '' . $moduleDirName . '_resume_search';
@@ -611,7 +611,7 @@ $modversion['config'][46]['description'] = $cloned_lang . '_RESUME_SEARCH_DESC';
 $modversion['config'][46]['formtype']    = 'yesno';
 $modversion['config'][46]['valuetype']   = 'int';
 $modversion['config'][46]['default']     = '1';
-$modversion['config'][46]['options']     = array();
+$modversion['config'][46]['options']     = [];
 
 // $xoopsModuleConfig['jobs_resume_one']
 $modversion['config'][47]['name']        = '' . $moduleDirName . '_resume_one';
@@ -620,7 +620,7 @@ $modversion['config'][47]['description'] = '';
 $modversion['config'][47]['formtype']    = 'yesno';
 $modversion['config'][47]['valuetype']   = 'int';
 $modversion['config'][47]['default']     = '0';
-$modversion['config'][47]['options']     = array();
+$modversion['config'][47]['options']     = [];
 
 // $xoopsModuleConfig['jobs_resume_one']
 $modversion['config'][48]['name']        = '' . $moduleDirName . '_countries';
@@ -629,7 +629,7 @@ $modversion['config'][48]['description'] = '';
 $modversion['config'][48]['formtype']    = 'yesno';
 $modversion['config'][48]['valuetype']   = 'int';
 $modversion['config'][48]['default']     = '0';
-$modversion['config'][48]['options']     = array();
+$modversion['config'][48]['options']     = [];
 
 // $xoopsModuleConfig['jobs_days']
 $modversion['config'][49]['name']        = '' . $moduleDirName . '_joblisting_num';
@@ -638,7 +638,7 @@ $modversion['config'][49]['description'] = '';
 $modversion['config'][49]['formtype']    = 'textbox';
 $modversion['config'][49]['valuetype']   = 'int';
 $modversion['config'][49]['default']     = '15';
-$modversion['config'][49]['options']     = array();
+$modversion['config'][49]['options']     = [];
 
 // $xoopsModuleConfig['jobs_days']
 $modversion['config'][50]['name']        = '' . $moduleDirName . '_reslisting_num';
@@ -647,7 +647,7 @@ $modversion['config'][50]['description'] = '';
 $modversion['config'][50]['formtype']    = 'textbox';
 $modversion['config'][50]['valuetype']   = 'int';
 $modversion['config'][50]['default']     = '4';
-$modversion['config'][50]['options']     = array();
+$modversion['config'][50]['options']     = [];
 
 //Notification
 //$modversion["notification"] = array();
@@ -659,7 +659,7 @@ $modversion['notification']['lookup_func'] = 'jobs_notify_iteminfo';
 $modversion['notification']['category'][1]['name']           = 'global';
 $modversion['notification']['category'][1]['title']          = _MI_JOBS_GLOBAL_NOTIFY;
 $modversion['notification']['category'][1]['description']    = _MI_JOBS_GLOBAL_NOTIFYDSC;
-$modversion['notification']['category'][1]['subscribe_from'] = array('index.php', 'jobscat.php', 'members.php');
+$modversion['notification']['category'][1]['subscribe_from'] = ['index.php', 'jobscat.php', 'members.php'];
 
 $modversion['notification']['category'][2]['name']           = 'category';
 $modversion['notification']['category'][2]['title']          = _MI_JOBS_CATEGORY_NOTIFY;
@@ -671,14 +671,14 @@ $modversion['notification']['category'][2]['allow_bookmark'] = 1;
 $modversion['notification']['category'][3]['name']           = 'job_listing';
 $modversion['notification']['category'][3]['title']          = _MI_JOBS_NOTIFY;
 $modversion['notification']['category'][3]['description']    = _MI_JOBS_NOTIFYDSC;
-$modversion['notification']['category'][3]['subscribe_from'] = array('viewjobs.php');
+$modversion['notification']['category'][3]['subscribe_from'] = ['viewjobs.php'];
 $modversion['notification']['category'][3]['item_name']      = 'lid';
 $modversion['notification']['category'][3]['allow_bookmark'] = 1;
 
 $modversion['notification']['category'][4]['name']           = 'company_listing';
 $modversion['notification']['category'][4]['title']          = _MI_JOBS_COMPANYCAT_NOTIFY;
 $modversion['notification']['category'][4]['description']    = _MI_JOBS_COMPANY_NOTIFYDSC;
-$modversion['notification']['category'][4]['subscribe_from'] = array('members.php');
+$modversion['notification']['category'][4]['subscribe_from'] = ['members.php'];
 $modversion['notification']['category'][4]['item_name']      = 'comp_id';
 $modversion['notification']['category'][4]['allow_bookmark'] = 1;
 

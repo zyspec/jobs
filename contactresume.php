@@ -65,7 +65,7 @@ if (isset($_POST['submit'])) {
         redirect_header(XOOPS_URL . '/index.php', 3, _NOPERM);
     }
 
-    require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/gtickets.php";
+//    require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/gtickets.php";
 
     global $xoopsConfig, $xoopsDB, $xoopsModuleConfig, $myts, $moduleDirName;
 
@@ -155,7 +155,7 @@ if (isset($_POST['submit'])) {
         redirect_header(XOOPS_URL . '/index.php', 3, _NOPERM);
     }
 
-    require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/gtickets.php";
+//    require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/gtickets.php";
     require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
     global $xoopsConfig, $xoopsUser, $xoopsDB, $myts, $moduleDirName;

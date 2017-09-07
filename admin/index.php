@@ -75,7 +75,7 @@ $tmpdir        = XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar('dirname')
 $adminObject->addConfigBoxLine('');
 $redirectFile = $_SERVER['PHP_SELF'];
 
-$languageConstants = array(
+$languageConstants = [
     _AM_JOBS_AVAILABLE,
     _AM_JOBS_NOTAVAILABLE,
     _AM_JOBS_CREATETHEDIR,
@@ -85,7 +85,7 @@ $languageConstants = array(
     _AM_JOBS_DIRNOTCREATED,
     _AM_JOBS_PERMSET,
     _AM_JOBS_PERMNOTSET
-);
+];
 
 $path = $photodir;
 $adminObject->addConfigBoxLine(DirectoryChecker::getDirectoryStatus($path, 0777, $languageConstants, $redirectFile));

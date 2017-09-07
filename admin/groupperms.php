@@ -41,7 +41,7 @@ if ($cat_rows == '0') {
     echo '' . constant($cloned_lang . '_MUST_ADD_CAT') . '';
 } else {
     $permtoset                = isset($_POST['permtoset']) ? (int)$_POST['permtoset'] : 1;
-    $selected                 = array('', '', '', '', '');
+    $selected                 = ['', '', '', '', ''];
     $selected[$permtoset - 1] = ' selected';
     echo "<form method='post' name='jselperm' action='groupperms.php'><table border=0><tr><td>
 <select name='permtoset' onChange= document.jselperm.submit()'>

@@ -173,7 +173,7 @@ switch ($op) {
         $uploaddir         = XOOPS_UPLOAD_PATH . '/jobs/images/';
         $maxwide           = $xoopsModuleConfig['jobs_resized_width'];
         $maxhigh           = $xoopsModuleConfig['jobs_resized_height'];
-        $allowed_mimetypes = array('image/gif', 'image/jpg', 'image/jpeg', 'image/pjpeg', 'image/png', 'image/x-png');
+        $allowed_mimetypes = ['image/gif', 'image/jpg', 'image/jpeg', 'image/pjpeg', 'image/png', 'image/x-png'];
         $uploader          = new XoopsMediaUploader($uploaddir, $allowed_mimetypes, null, $maxwide, $maxhigh);
         if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
             $uploader->setPrefix('category_img_');
@@ -227,7 +227,7 @@ switch ($op) {
                 echo $obj->getHtmlErrors();
             }
         } else {
-            xoops_confirm(array('ok' => 1, 'cid' => $_REQUEST['cid'], 'op' => 'delete_category'), $_SERVER['REQUEST_URI'], sprintf(_AM_JOBS_FORMSUREDEL, $obj->getVar('category')));
+            xoops_confirm(['ok' => 1, 'cid' => $_REQUEST['cid'], 'op' => 'delete_category'], $_SERVER['REQUEST_URI'], sprintf(_AM_JOBS_FORMSUREDEL, $obj->getVar('category')));
         }
         break;
 }

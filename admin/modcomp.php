@@ -61,7 +61,7 @@ if (!empty($_POST['submit'])) {
     // START - check new entries for company users are OK - contributed by GreenFlatDog
     //  $comp_userid1 = jobs_getIdFromUname($comp_user1);
     //  $comp_userid2 = jobs_getIdFromUname($comp_user2);
-    $comp_users = array();
+    $comp_users = [];
     // get user id for the name entered for company user 1
     if (empty($_POST['comp_user1'])) {
         $comp_userid1 = '';
@@ -129,7 +129,7 @@ if (!empty($_POST['submit'])) {
     if (!empty($_FILES['comp_img']['name'])) {
         require_once XOOPS_ROOT_PATH . '/class/uploader.php';
         $updir             = $destination;
-        $allowed_mimetypes = array('image/gif', 'image/jpg', 'image/jpeg', 'image/pjpeg', 'image/x-png');
+        $allowed_mimetypes = ['image/gif', 'image/jpg', 'image/jpeg', 'image/pjpeg', 'image/x-png'];
         $uploader          = new XoopsMediaUploader($updir, $allowed_mimetypes, $photomax, $maxwide, $maxhigh);
         $uploader->setTargetFileName($date . '_' . $_FILES['comp_img']['name']);
         $uploader->fetchMedia('comp_img');
@@ -182,7 +182,7 @@ if (!empty($_POST['submit'])) {
 
     if ($xoopsUser) {
         $member_id  = $xoopsUser->uid();
-        $comp_users = array($comp_usid, $comp_user1, $comp_user2);
+        $comp_users = [$comp_usid, $comp_user1, $comp_user2];
         if (in_array($member_id, $comp_users)) {
             $comp_name     = $myts->addSlashes($comp_name);
             $comp_address  = $myts->addSlashes($comp_address);

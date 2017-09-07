@@ -24,9 +24,9 @@ $recordexist = $xoopsDB->getRowsNum($result);
 
 if ($recordexist) {
     list($comp_img) = $xoopsDB->fetchRow($result);
-    echo "<center><img src=\"logo_images/$comp_img\" border=0></center>";
+    echo "<div class='center;'><img src=\"logo_images/$comp_img\" border=0></div>";
 }
 
-echo "<center><table><tr><td><a href=#  onClick='window.close()'>" . _JOBS_CLOSEF . '</a></td></tr></table></center>';
+echo "<div class='center;'><table><tr><td><a href=#  onClick='window.close()'>" . _JOBS_CLOSEF . '</a></td></tr></table></div>';
 
 xoops_footer();

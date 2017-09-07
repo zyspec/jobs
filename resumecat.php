@@ -125,13 +125,13 @@ $xoopsTpl->assign('resumes_all', _JOBS_ALL);
 
 //  $categories = resume_MygetItemIds("".$moduleDirName ."_view");
 
-$arr = array();
+$arr = [];
 $arr = $mytree->resume_getFirstChild($cid, 'title');
 if (count($arr) > 0) {
     $scount = 1;
     foreach ($arr as $ele) {
         if (in_array($ele['cid'], $categories)) {
-            $sub_arr         = array();
+            $sub_arr         = [];
             $sub_arr         = $mytree->resume_getFirstChild($ele['cid'], 'title');
             $space           = 0;
             $chcount         = 0;
@@ -154,14 +154,14 @@ if (count($arr) > 0) {
                 }
             }
 
-            $xoopsTpl->append('subcategories', array(
+            $xoopsTpl->append('subcategories', [
                 'title'           => $myts->htmlSpecialChars($ele['title']),
                 'id'              => $ele['cid'],
                 'infercategories' => $infercategories,
                 'totallisting'    => resume_getTotalResumes($ele['cid'], 1),
                 'count'           => $scount,
                 'new'             => '&nbsp;' . resume_categorynewgraphic($ele['cid']) . ''
-            ));
+            ]);
             ++$scount;
             $xoopsTpl->assign('lang_subcat', _JOBS_AVAILAB);
         }
@@ -211,7 +211,7 @@ if ($trows == '0') {
 
     $rank = 1;
     while (list($lid, $cid, $name, $title, $exp, $expire, $private, $salary, $typeprice, $date, $town, $state, $valid, $vu) = $xoopsDB->fetchRow($result1)) {
-        $a_item     = array();
+        $a_item     = [];
         $name       = $myts->htmlSpecialChars($name);
         $title      = $myts->htmlSpecialChars($title);
         $exp        = $myts->htmlSpecialChars($exp);

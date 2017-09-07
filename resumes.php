@@ -107,7 +107,7 @@ if ($xoopsUser) {
 
     $your_res = $xoopsDB->query('SELECT lid,title,usid FROM ' . $xoopsDB->prefix('jobs_resume') . ' WHERE usid =' . $xoopsDB->escape($member_usid) . '');
     while ($myrow = $xoopsDB->fetchArray($your_res)) {
-        $a_res    = array();
+        $a_res    = [];
         $istheirs = '';
         if ($myrow['usid'] == $member_usid) {
             $istheirs = true;
@@ -178,7 +178,7 @@ while ($myrow = $xoopsDB->fetchArray($result)) {
     $content      .= $title . ' ';
 
     // get child category objects
-    $arr = array();
+    $arr = [];
     if (in_array($myrow['cid'], $categories)) {
         $arr           = $mytree->resume_getFirstChild($myrow['cid'], '' . $xoopsModuleConfig['jobs_cat_sortorder'] . '');
         $space         = 0;
@@ -202,7 +202,7 @@ while ($myrow = $xoopsDB->fetchArray($result)) {
                 }
             }
         }
-        $xoopsTpl->append('categories', array(
+        $xoopsTpl->append('categories', [
             'image'         => $img,
             'id'            => $myrow['cid'],
             'title'         => $myts->undoHtmlSpecialChars($myrow['title']),
@@ -210,7 +210,7 @@ while ($myrow = $xoopsDB->fetchArray($result)) {
             'subcategories' => $subcategories,
             'totallisting'  => $totallisting,
             'count'         => $count
-        ));
+        ]);
         ++$count;
     }
 }
@@ -255,7 +255,7 @@ if ($xoopsModuleConfig['jobs_new_jobs'] == 1) {
             $date       = $myts->htmlSpecialChars($date);
             $town       = $myts->htmlSpecialChars($town);
             $state      = $myts->htmlSpecialChars($state);
-            $a_item     = array();
+            $a_item     = [];
             $useroffset = '';
             if ($xoopsUser) {
                 $timezone = $xoopsUser->timezone();

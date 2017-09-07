@@ -15,7 +15,7 @@
  * @author      John Mordo
  * @author      XOOPS Development Team
  */
-                                                                                           //
+//
 require_once __DIR__ . '/../../../include/cp_header.php';
 $moduleDirName = basename(dirname(__DIR__));
 require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/functions.php";

@@ -27,7 +27,7 @@
 
 $moduleDirName = basename(dirname(__DIR__));
 
-require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/gtickets.php";
+//require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/gtickets.php";
 
 function ExpireResume()
 {
@@ -106,7 +106,7 @@ function resume_getTotalResumes($sel_id, $status = '')
     global $xoopsDB, $mytree, $moduleDirName;
     $categories = resume_MygetItemIds('resume_view');
     $count      = 0;
-    $arr        = array();
+    $arr        = [];
     if (in_array($sel_id, $categories)) {
         $query = 'SELECT count(*) FROM ' . $xoopsDB->prefix('' . $moduleDirName . '_resume') . ' WHERE cid=' . (int)$sel_id . " AND valid='1' AND status!='0'";
 
@@ -282,7 +282,7 @@ function resume_getEditor($caption, $name, $value = '', $width = '99%', $height 
 {
     global $xoopsModuleConfig;
 
-    $editor_configs           = array();
+    $editor_configs           = [];
     $editor_configs['name']   = $name;
     $editor_configs['value']  = $value;
     $editor_configs['rows']   = 25;
@@ -351,7 +351,7 @@ function resume_getResume($usid)
     if (!$result = $xoopsDB->query($sql)) {
         return 0;
     }
-    $resume = array();
+    $resume = [];
     while ($row = $xoopsDB->fetchArray($result)) {
         $resume = $row;
     }
@@ -367,7 +367,7 @@ function resume_getResume($usid)
 function resume_MygetItemIds($permtype)
 {
     global $xoopsUser, $moduleDirName;
-    static $permissions = array();
+    static $permissions = [];
     if (is_array($permissions) && array_key_exists($permtype, $permissions)) {
         return $permissions[$permtype];
     }

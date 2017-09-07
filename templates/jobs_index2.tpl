@@ -47,16 +47,16 @@
     <table border="1" class="even" width="80%" align="center">
         <tr>
             <td class="even" align="center">
-                <hr/>
+                <hr>
                 <table border="0">
                     <form name='search' id='search' action='search.php' method='post'
                           onsubmit='return xoopsFormValidate_search();'>
-                        <input type='hidden' name='mids[]' value='<{$xmid}>'/>
-                        <input type='hidden' name='issearch' value='1'/>
+                        <input type='hidden' name='mids[]' value='<{$xmid}>'>
+                        <input type='hidden' name='issearch' value='1'>
                         <td width='15%'><b><{$search_listings}></b></td>
                         <td>
                             <{$keywords}><br><input type='text' name='query' id='query' size='15' maxlength='255'
-                                                    value=''/>
+                                                    value=''>
                         </td>
 
                         <td> <{$bycategory}><br><{$by_cat}></td>
@@ -70,9 +70,9 @@
                                     <option value='OR'><{$any_words}></option>
                                     <option value='exact'><{$exact_match}></option>
                                 </select></td>
-                            <td><input type='submit' class='formButton' name='submit' id='submit' value='Search'/></td>
-                            <input type='hidden' name='action' id='action' value='results'/>
-                            <input type='hidden' name='is_resume' id='is_resume' value='<{$is_resume}>'/>
+                            <td><input type='submit' class='formButton' name='submit' id='submit' value='Search'></td>
+                            <input type='hidden' name='action' id='action' value='results'>
+                            <input type='hidden' name='is_resume' id='is_resume' value='<{$is_resume}>'>
                     </form>
                 </table>
             </td>

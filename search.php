@@ -117,7 +117,7 @@ if (!empty($is_resume)) {
     }
 }
 
-$queries = array();
+$queries = [];
 
 if ($action == 'results') {
     if ($query == '') {
@@ -157,7 +157,7 @@ if ($andor != 'OR' && $andor != 'exact' && $andor != 'AND') {
 $myts = MyTextSanitizer::getInstance();
 if ($action != 'showallbyuser') {
     if ($andor != 'exact') {
-        $ignored_queries = array(); // holds kewords that are shorter than allowed minmum length
+        $ignored_queries = []; // holds kewords that are shorter than allowed minmum length
         $temp_queries    = preg_split('/[\s,]+/', $query);
         foreach ($temp_queries as $q) {
             $q = trim($q);
@@ -175,7 +175,7 @@ if ($action != 'showallbyuser') {
         if (strlen($query) < $xoopsConfigSearch['keyword_min']) {
             redirect_header('search.php', 2, sprintf(_SR_KEYTOOSHORT, $xoopsConfigSearch['keyword_min']));
         }
-        $queries = array($myts->addSlashes($query));
+        $queries = [$myts->addSlashes($query)];
     }
 }
 switch ($action) {
@@ -186,7 +186,7 @@ switch ($action) {
         $criteria->add(new Criteria('isactive', 1));
         $criteria->add(new Criteria('mid', $xmid));
         $modules = $moduleHandler->getObjects($criteria, true);
-        $mids    = isset($_REQUEST['mids']) ? $_REQUEST['mids'] : array();
+        $mids    = isset($_REQUEST['mids']) ? $_REQUEST['mids'] : [];
         if (empty($mids) || !is_array($mids)) {
             unset($mids);
             $mids = array_keys($modules);

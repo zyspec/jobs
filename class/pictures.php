@@ -19,7 +19,7 @@
 /**
  * Protection against inclusion outside the site
  */
-// defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
+// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 $moduleDirName = basename(dirname(__DIR__));
 $main_lang     = '_' . strtoupper($moduleDirName);
 /**
@@ -91,7 +91,7 @@ class jlm_pictures extends XoopsObject
      * @return array
      */
     public function getAll_pictures(
-        $criteria = array(),
+        $criteria = [],
         $asobject = false,
         $sort = 'cod_img',
         $order = 'ASC',
@@ -100,7 +100,7 @@ class jlm_pictures extends XoopsObject
     ) {
         global $moduleDirName;
         $db          = XoopsDatabaseFactory::getDatabaseConnection();
-        $ret         = array();
+        $ret         = [];
         $where_query = '';
         if (is_array($criteria) && count($criteria) > 0) {
             $where_query = ' WHERE';
@@ -280,7 +280,7 @@ class Xoopsjlm_picturesHandler extends XoopsObjectHandler
     {
         global $moduleDirName;
 
-        $ret   = array();
+        $ret   = [];
         $limit = $start = 0;
         $sql   = 'SELECT * FROM ' . $this->db->prefix('jobs_pictures');
         if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
@@ -504,7 +504,7 @@ class Xoopsjlm_picturesHandler extends XoopsObjectHandler
         $hash1 = time();
         $hash  = substr($hash1, 0, 4);
         // mimetypes and settings put this in admin part later
-        $allowed_mimetypes = array('image/jpeg', 'image/pjpeg');
+        $allowed_mimetypes = ['image/jpeg', 'image/pjpeg'];
         $maxfilesize       = $maxfilebytes;
         // create the object to upload
         $uploader = new XoopsMediaUploader($path_upload, $allowed_mimetypes, $maxfilesize, $maxfilewidth, $maxfileheight);

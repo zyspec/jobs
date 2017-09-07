@@ -69,7 +69,7 @@ class jobtree
     public function getFirstChild($sel_id, $order = '')
     {
         global $moduleDirName;
-        $arr = array();
+        $arr = [];
         $sql = 'SELECT * FROM ' . $this->table . ' WHERE ' . $this->pid . '=' . $sel_id . '';
 
         $categories = jobs_MygetItemIds('jobs_view');
@@ -102,7 +102,7 @@ class jobtree
     public function getFirstChildId($sel_id)
     {
         global $moduleDirName;
-        $idarray = array();
+        $idarray = [];
         $result  = $this->db->query('SELECT ' . $this->id . ' FROM ' . $this->table . ' WHERE ' . $this->pid . '=' . $sel_id . '');
 
         $categories = jobs_MygetItemIds('jobs_view');
@@ -130,7 +130,7 @@ class jobtree
      *
      * @return array
      */
-    public function getAllChildId($sel_id, $order = '', $idarray = array())
+    public function getAllChildId($sel_id, $order = '', $idarray = [])
     {
         global $moduleDirName;
         $sql = 'SELECT ' . $this->id . ' FROM ' . $this->table . ' WHERE ' . $this->pid . '=' . $sel_id . '';
@@ -165,7 +165,7 @@ class jobtree
      *
      * @return array
      */
-    public function getAllParentId($sel_id, $order = '', $idarray = array())
+    public function getAllParentId($sel_id, $order = '', $idarray = [])
     {
         global $moduleDirName;
         $sql = 'SELECT ' . $this->pid . ' FROM ' . $this->table . ' WHERE ' . $this->id . '=' . $sel_id . '';
@@ -777,7 +777,7 @@ class jobtree
      *
      * @return array
      */
-    public function getAllChild($sel_id = 0, $order = '', $parray = array())
+    public function getAllChild($sel_id = 0, $order = '', $parray = [])
     {
         global $moduleDirName;
         $sql = 'SELECT * FROM ' . $this->table . ' WHERE ' . $this->pid . '=' . $sel_id . '';
@@ -811,7 +811,7 @@ class jobtree
      *
      * @return array
      */
-    public function getChildTreeArray($sel_id = 0, $order = '', $parray = array(), $r_prefix = '')
+    public function getChildTreeArray($sel_id = 0, $order = '', $parray = [], $r_prefix = '')
     {
         global $moduleDirName;
         $sql = 'SELECT * FROM ' . $this->table . ' WHERE ' . $this->pid . '=' . $sel_id . '';
@@ -846,7 +846,7 @@ class jobtree
      *
      * @return array
      */
-    public function getStateTreeArray($sel_id = 0, $order = '', $parray = array(), $r_prefix = '')
+    public function getStateTreeArray($sel_id = 0, $order = '', $parray = [], $r_prefix = '')
     {
         global $moduleDirName;
         $sql = 'SELECT * FROM ' . $this->table . ' WHERE ' . $this->pid . '=' . $sel_id . '';
@@ -882,7 +882,7 @@ class jobtree
         $moduleDirName = basename(dirname(__DIR__));
 
         $myts = MyTextSanitizer::getInstance();
-        require_once XOOPS_ROOT_PATH . '/modules/jobs/include/gtickets.php';
+//        require_once XOOPS_ROOT_PATH . '/modules/jobs/include/gtickets.php';
 
         if ($sel_name == '') {
             $sel_name = $this->id;
@@ -1004,7 +1004,7 @@ class jobtree
      *
      * @return array
      */
-    public function getChildTreeMapArray($sel_id = 0, $order = '', $parray = array(), $r_prefix = '')
+    public function getChildTreeMapArray($sel_id = 0, $order = '', $parray = [], $r_prefix = '')
     {
         global $xoopsDB, $moduleDirName;
         $sql = 'SELECT * FROM ' . $this->table . ' WHERE ' . $this->pid . '=' . $sel_id . '';
@@ -1037,10 +1037,10 @@ class jobtree
     public function getCategoryList()
     {
         $result = $this->db->query('SELECT cid, pid, title FROM ' . $this->table);
-        $ret    = array();
+        $ret    = [];
         $myts   = MyTextSanitizer::getInstance();
         while ($myrow = $this->db->fetchArray($result)) {
-            $ret[$myrow['cid']] = array('title' => $myts->htmlspecialchars($myrow['title']), 'pid' => $myrow['pid']);
+            $ret[$myrow['cid']] = ['title' => $myts->htmlspecialchars($myrow['title']), 'pid' => $myrow['pid']];
         }
 
         return $ret;

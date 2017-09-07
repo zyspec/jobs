@@ -95,7 +95,7 @@ if ($trows > '0') {
             $request1 = $xoopsDB->query('SELECT comp_usid, comp_user1, comp_user2 FROM ' . $xoopsDB->prefix('jobs_companies') . ' WHERE ' . $member_id . ' IN (comp_usid, comp_user1, comp_user2)');
             list($comp_usid, $comp_user1, $comp_user2) = $xoopsDB->fetchRow($request1);
 
-            $comp_users = array($comp_usid, $comp_user1, $comp_user2);
+            $comp_users = [$comp_usid, $comp_user1, $comp_user2];
             if (in_array($member_id, $comp_users)) {
                 $xoopsTpl->assign('del_reply', '<a href="delreply.php?r_lid=' . addslashes($r_lid) . '"><img src="assets/images/del.gif" border=0 alt="' . _JOBS_DELETE . '"></a>');
             }
@@ -118,14 +118,14 @@ if ($trows > '0') {
         $xoopsTpl->assign('no_resume', _JOBS_NO_RESUME);
         $xoopsTpl->assign('view_resume', _JOBS_VIEW_RESUME);
         $xoopsTpl->assign('email', "<a href ='mailto:$email'>$email</a>");
-        $xoopsTpl->append('items', array(
+        $xoopsTpl->append('items', [
             'id'      => $lid,
             'title'   => $myts->undoHtmlSpecialChars($title),
             'date'    => $myts->htmlSpecialChars($date),
             'message' => $myts->displayTarea($message, 1),
             'resume'  => $myts->htmlSpecialChars($resume),
             'tele'    => $myts->htmlSpecialChars($tele)
-        ));
+        ]);
     }
 
     $lid = (int)$_GET['lid'];

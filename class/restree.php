@@ -58,7 +58,7 @@ class ResTree
     public function resume_getFirstChild($sel_id, $order = '')
     {
         global $moduleDirName;
-        $arr = array();
+        $arr = [];
         $sql = 'SELECT * FROM ' . $this->table . ' WHERE ' . $this->pid . '=' . $sel_id . '';
 
         $categories = resume_MygetItemIds('resume_view');
@@ -91,7 +91,7 @@ class ResTree
     public function resume_getFirstChildId($sel_id)
     {
         global $moduleDirName;
-        $idarray = array();
+        $idarray = [];
         $result  = $this->db->query('SELECT ' . $this->id . ' FROM ' . $this->table . ' WHERE ' . $this->pid . '=' . $sel_id . '');
 
         $categories = resume_MygetItemIds('resume_view');
@@ -119,7 +119,7 @@ class ResTree
      *
      * @return array
      */
-    public function resume_getAllChildId($sel_id, $order = '', $idarray = array())
+    public function resume_getAllChildId($sel_id, $order = '', $idarray = [])
     {
         global $moduleDirName;
         $sql = 'SELECT ' . $this->id . ' FROM ' . $this->table . ' WHERE ' . $this->pid . '=' . $sel_id . '';
@@ -154,7 +154,7 @@ class ResTree
      *
      * @return array
      */
-    public function resume_getAllParentId($sel_id, $order = '', $idarray = array())
+    public function resume_getAllParentId($sel_id, $order = '', $idarray = [])
     {
         global $moduleDirName;
         $sql = 'SELECT ' . $this->pid . ' FROM ' . $this->table . ' WHERE ' . $this->id . '=' . $sel_id . '';
@@ -759,7 +759,7 @@ class ResTree
      *
      * @return array
      */
-    public function resume_getAllChild($sel_id = 0, $order = '', $parray = array())
+    public function resume_getAllChild($sel_id = 0, $order = '', $parray = [])
     {
         global $moduleDirName;
         $sql = 'SELECT * FROM ' . $this->table . ' WHERE ' . $this->pid . '=' . $sel_id . '';
@@ -793,7 +793,7 @@ class ResTree
      *
      * @return array
      */
-    public function resume_getChildTreeArray($sel_id = 0, $order = '', $parray = array(), $r_prefix = '')
+    public function resume_getChildTreeArray($sel_id = 0, $order = '', $parray = [], $r_prefix = '')
     {
         global $moduleDirName;
 
@@ -829,7 +829,7 @@ class ResTree
      *
      * @return array
      */
-    public function getStateTreeArray($sel_id = 0, $order = '', $parray = array(), $r_prefix = '')
+    public function getStateTreeArray($sel_id = 0, $order = '', $parray = [], $r_prefix = '')
     {
         global $moduleDirName;
         $sql = 'SELECT * FROM ' . $this->table . ' WHERE ' . $this->pid . '=' . $sel_id . '';
@@ -928,7 +928,7 @@ class ResTree
      *
      * @return array
      */
-    public function resume_getChildTreeMapArray($sel_id = 0, $order = '', $parray = array(), $r_prefix = '')
+    public function resume_getChildTreeMapArray($sel_id = 0, $order = '', $parray = [], $r_prefix = '')
     {
         global $xoopsDB, $moduleDirName;
         $sql = 'SELECT * FROM ' . $this->table . ' WHERE ' . $this->pid . '=' . $sel_id . '';
@@ -956,10 +956,10 @@ class ResTree
     public function resume_getCategoryList()
     {
         $result = $this->db->query('SELECT cid, pid, title FROM ' . $this->table);
-        $ret    = array();
+        $ret    = [];
         $myts   = MyTextSanitizer::getInstance();
         while ($myrow = $this->db->fetchArray($result)) {
-            $ret[$myrow['cid']] = array('title' => $myts->htmlspecialchars($myrow['title']), 'pid' => $myrow['pid']);
+            $ret[$myrow['cid']] = ['title' => $myts->htmlspecialchars($myrow['title']), 'pid' => $myrow['pid']];
         }
 
         return $ret;

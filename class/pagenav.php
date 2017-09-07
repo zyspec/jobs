@@ -3,7 +3,7 @@
 //  ------------------------------------------------------------------------ //
 //                XOOPS - PHP Content Management System                      //
 //                    Copyright (c) 2000 XOOPS.org                           //
-//                       <http://www.xoops.org/>                             //
+//                       <https://xoops.org>                             //
 //  ------------------------------------------------------------------------ //
 //  This program is free software; you can redistribute it and/or modify     //
 //  it under the terms of the GNU General Public License as published by     //
@@ -25,7 +25,7 @@
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
 //  ------------------------------------------------------------------------ //
 // Author: Kazumi Ono (AKA onokazu)                                          //
-// URL: http://www.myweb.ne.jp/, http://www.xoops.org/, http://jp.xoops.org/ //
+// URL: http://www.myweb.ne.jp/, https://xoops.org/, http://jp.xoops.org/ //
 // Project: The XOOPS Project                                                //
 // ------------------------------------------------------------------------- //
 
@@ -43,10 +43,10 @@ class XoopsPageNav
     /**#@+
      * @access    private
      */
-    var $total;
-    var $perpage;
-    var $current;
-    var $url;
+    public $total;
+    public $perpage;
+    public $current;
+    public $url;
 
     /**#@-*/
 
@@ -59,7 +59,7 @@ class XoopsPageNav
      * @param string $start_name    Name for "start" or "offset"
      * @param string $extra_arg     Additional arguments to pass in the URL
      **/
-    function XoopsPageNav($total_items, $items_perpage, $current_start, $start_name = "start", $extra_arg = "")
+    public function XoopsPageNav($total_items, $items_perpage, $current_start, $start_name = "start", $extra_arg = "")
     {
         $this->total   = intval($total_items);
         $this->perpage = intval($items_perpage);
@@ -76,7 +76,7 @@ class XoopsPageNav
      * @param  integer $offset
      * @return string
      **/
-    function renderNav($offset = 4)
+    public function renderNav($offset = 4)
     {
         $ret = '';
         if ($this->total <= $this->perpage) {
@@ -121,7 +121,7 @@ class XoopsPageNav
      * @param  boolean $showbutton Show the "Go" button?
      * @return string
      **/
-    function renderSelect($showbutton = FALSE)
+    public function renderSelect($showbutton = false)
     {
         if ($this->total < $this->perpage) {
             return;
@@ -146,7 +146,7 @@ class XoopsPageNav
             }
             $ret .= '</select>';
             if ($showbutton) {
-                $ret .= '&nbsp;<input type="submit" value="' . _GO . '" />';
+                $ret .= '&nbsp;<input type="submit" value="' . _GO . '" >';
             }
             $ret .= '</form>';
         }
@@ -160,7 +160,7 @@ class XoopsPageNav
      * @param  integer $offset
      * @return string
      **/
-    function renderImageNav($offset = 4)
+    public function renderImageNav($offset = 4)
     {
         if ($this->total < $this->perpage) {
             return;
@@ -172,7 +172,7 @@ class XoopsPageNav
             $prev = $this->current - $this->perpage;
             if ($prev >= 0) {
                 $ret .= '<td class="pagneutral"><a href="' . $this->url . $prev . '">&lt;</a></td><td><img src="'
-                    . XOOPS_URL . '/images/blank.gif" width="6" alt="" /></td>';
+                    . XOOPS_URL . '/images/blank.gif" width="6" alt="" ></td>';
             }
             $counter      = 1;
             $current_page = intval(floor(($this->current + $this->perpage) / $this->perpage));
@@ -196,7 +196,7 @@ class XoopsPageNav
             $next = $this->current + $this->perpage;
             if ($this->total > $next) {
                 $ret .= '<td><img src="' . XOOPS_URL
-                    . '/images/blank.gif" width="6" alt="" /></td><td class="pagneutral"><a href="' . $this->url . $next
+                    . '/images/blank.gif" width="6" alt="" ></td><td class="pagneutral"><a href="' . $this->url . $next
                     . '">&gt;</a></td>';
             }
             $ret .= '</tr></table>';

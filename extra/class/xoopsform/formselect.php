@@ -12,7 +12,7 @@
 /**
  *  Xoops Form Class Elements
  *
- * @copyright       The XOOPS Project http://sourceforge.net/projects/xoops/
+ * @copyright       XOOPS Project (https://xoops.org)
  * @license         http://www.fsf.org/copyleft/gpl.html GNU public license
  * @package         class
  * @package         kernel
@@ -32,7 +32,7 @@ xoops_load('XoopsFormElement');
  * @author 		Kazumi Ono <onokazu@xoops.org>
  * @author 		Taiwen Jiang <phppp@users.sourceforge.net>
  * @author 		John Neill <catzwolf@xoops.org>
- * @copyright   The XOOPS Project http://sourceforge.net/projects/xoops/
+ * @copyright   XOOPS Project (https://xoops.org)
  * @package 	kernel
  * @subpackage 	form
  * @access 		public
@@ -45,7 +45,7 @@ class XoopsFormSelect extends XoopsFormElement
      * @var array
      * @access private
      */
-    var $_options = array();
+    public $_options = [];
 
     /**
      * Allow multiple selections?
@@ -53,7 +53,7 @@ class XoopsFormSelect extends XoopsFormElement
      * @var bool
      * @access private
      */
-    var $_multiple = false;
+    public $_multiple = false;
 
     /**
      * Number of rows. "1" makes a dropdown list.
@@ -61,7 +61,7 @@ class XoopsFormSelect extends XoopsFormElement
      * @var int
      * @access private
      */
-    var $_size;
+    public $_size;
 
     /**
      * Pre-selcted values
@@ -69,7 +69,7 @@ class XoopsFormSelect extends XoopsFormElement
      * @var array
      * @access private
      */
-    var $_value = array();
+    public $_value = [];
 
     /**
      * Constructor
@@ -80,7 +80,7 @@ class XoopsFormSelect extends XoopsFormElement
      * @param int    $size     Number or rows. "1" makes a drop-down-list
      * @param bool   $multiple Allow multiple selections?
      */
-    function XoopsFormSelect($caption, $name, $value = null, $size = 1, $multiple = false)
+    public function __construct($caption, $name, $value = null, $size = 1, $multiple = false)
     {
         $this->setCaption($caption);
         $this->setName($name);
@@ -96,7 +96,7 @@ class XoopsFormSelect extends XoopsFormElement
      *
      * @return bool
      */
-    function isMultiple()
+    public function isMultiple()
     {
         return $this->_multiple;
     }
@@ -106,7 +106,7 @@ class XoopsFormSelect extends XoopsFormElement
      *
      * @return int
      */
-    function getSize()
+    public function getSize()
     {
         return $this->_size;
     }
@@ -117,13 +117,13 @@ class XoopsFormSelect extends XoopsFormElement
      * @param  bool  $encode To sanitizer the text?
      * @return array
      */
-    function getValue($encode = false)
+    public function getValue($encode = false)
     {
         if (! $encode) {
             return $this->_value;
         }
-        $value = array();
-        foreach($this->_value as $val) {
+        $value = [];
+        foreach ($this->_value as $val) {
             $value[] = $val ? htmlspecialchars($val, ENT_QUOTES) : $val;
         }
 
@@ -135,10 +135,10 @@ class XoopsFormSelect extends XoopsFormElement
      *
      * @param  $value mixed
      */
-    function setValue($value)
+    public function setValue($value)
     {
         if (is_array($value)) {
-            foreach($value as $v) {
+            foreach ($value as $v) {
                 $this->_value[] = $v;
             }
         } elseif (isset($value)) {
@@ -152,7 +152,7 @@ class XoopsFormSelect extends XoopsFormElement
      * @param string $value "value" attribute
      * @param string $name  "name" attribute
      */
-    function addOption($value, $name = '')
+    public function addOption($value, $name = '')
     {
         if ($name != '') {
             $this->_options[$value] = $name;
@@ -166,10 +166,10 @@ class XoopsFormSelect extends XoopsFormElement
      *
      * @param array $options Associative array of value->name pairs
      */
-    function addOptionArray($options)
+    public function addOptionArray($options)
     {
         if (is_array($options)) {
-            foreach($options as $k => $v) {
+            foreach ($options as $k => $v) {
                 $this->addOption($k, $v);
             }
         }
@@ -183,13 +183,13 @@ class XoopsFormSelect extends XoopsFormElement
      * @param  int   $encode To sanitizer the text? potential values: 0 - skip; 1 - only for value; 2 - for both value and name
      * @return array Associative array of value->name pairs
      */
-    function getOptions($encode = false)
+    public function getOptions($encode = false)
     {
         if (! $encode) {
             return $this->_options;
         }
-        $value = array();
-        foreach($this->_options as $val => $name) {
+        $value = [];
+        foreach ($this->_options as $val => $name) {
             $value[$encode ? htmlspecialchars($val, ENT_QUOTES) : $val] = ($encode > 1) ? htmlspecialchars($name, ENT_QUOTES) : $name;
         }
 
@@ -201,7 +201,7 @@ class XoopsFormSelect extends XoopsFormElement
      *
      * @return string HTML
      */
-    function render()
+    public function render()
     {
         $ele_name = $this->getName();
         $ele_title = $this->getTitle();
@@ -213,7 +213,7 @@ class XoopsFormSelect extends XoopsFormElement
         } else {
             $ret .= ' name="' . $ele_name . '" id="' . $ele_name . '" title="'. $ele_title. '">' ;
         }
-        foreach($ele_options as $value => $name) {
+        foreach ($ele_options as $value => $name) {
             $ret .= '<option value="' . htmlspecialchars($value, ENT_QUOTES) . '"';
             if (count($ele_value) > 0 && in_array($value, $ele_value)) {
                 $ret .= ' selected="selected"';
@@ -230,7 +230,7 @@ class XoopsFormSelect extends XoopsFormElement
      *
      * @seealso XoopsForm::renderValidationJS
      */
-    function renderValidationJS()
+    public function renderValidationJS()
     {
         // render custom validation code if any
         if (! empty($this->customValidationCode)) {

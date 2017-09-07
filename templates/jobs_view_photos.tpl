@@ -1,6 +1,6 @@
 <br>
 <div id="head"><a href="index.php"><{$nome_modulo}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<{$lang_albumtitle}></a></div>
-<hr/>
+<hr>
 <div id="Titulo">
     <h2><{$lang_gtitle}>&nbsp;&nbsp;&nbsp;<{$lang_showcase}></h2>
 </div>
@@ -21,17 +21,17 @@
                 <p id="desc"><{$pics_array[i].desc}></p><{ if ($isOwner) }>
                 <form action="delpicture.php" method="post" id="deleteform" class="lado">
                     <{securityToken}><{*//mb*}>
-                    <input type="hidden" value="<{$pics_array[i].cod_img}>" name="cod_img"/>
-                    <input type="hidden" value="<{$pics_array[i].lid}>" name="lid"/>
+                    <input type="hidden" value="<{$pics_array[i].cod_img}>" name="cod_img">
+                    <input type="hidden" value="<{$pics_array[i].lid}>" name="lid">
                     <input name="submit" type="image" alt="<{$lang_delete}>" title="<{$lang_delete}>"
-                           src="<{xoModuleIcons16 delete.png}>"/>
+                           src="<{xoModuleIcons16 delete.png}>">
 
                 </form>
                 <form action="editdesc.php" method="post" id="editform" class="lado">
                     <{securityToken}><{*//mb*}>
-                    <input type="hidden" value="<{$pics_array[i].cod_img}>" name="cod_img"/>
+                    <input type="hidden" value="<{$pics_array[i].cod_img}>" name="cod_img">
                     <input name="submit" type="image" alt="<{$lang_editdesc}>" title="<{$lang_editdesc}>"
-                           src="<{xoModuleIcons16 edit.png}>"/>
+                           src="<{xoModuleIcons16 edit.png}>">
 
                 </form>
                 <{ /if }>

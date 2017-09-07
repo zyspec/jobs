@@ -13,7 +13,7 @@
         <td bgcolor="#FFFF00" align="center" width="15%"><b><{$block.lang_hits}></b></td>
     </tr>
 </table>
-<hr/>
+<hr>
 <{foreach item=item from=$block.items}>
     <table border="0" cellpadding="0" cellspacing="0" width="100%">
         <tr bgcolor="<{cycle values="
@@ -29,6 +29,6 @@
 
         </tr>
     </table>
-    <hr/>
+    <hr>
 <{/foreach}>
 

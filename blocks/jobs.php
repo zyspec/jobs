@@ -34,7 +34,7 @@ function jobs_show($options)
 {
     global $xoopsDB, $blockdirname, $block_lang;
 
-    $block = array();
+    $block = [];
     $myts  = MyTextSanitizer::getInstance();
 
     $blockdirname = basename(dirname(__DIR__));
@@ -57,7 +57,7 @@ function jobs_show($options)
                               . ' DESC', $options[1], 0);
 
     while ($myrow = $xoopsDB->fetchArray($result)) {
-        $a_item = array();
+        $a_item = [];
 
         $cat_id    = jobs_getCompIdFromName($myrow['company']);
         $cat_name  = jobs_getCatNameFromId($myrow['cid']);
@@ -134,8 +134,8 @@ function jobs_edit($options)
     }
     $form .= '>' . constant($block_lang . '_HITS') . '</option>';
     $form .= "</select>\n";
-    $form .= '&nbsp;' . constant($block_lang . '_DISP') . "&nbsp;<input type='text' name='options[]' value='" . $options[1] . "'/>&nbsp;" . constant($block_lang . '_LISTINGS');
-    $form .= '&nbsp;<br><br>' . constant($block_lang . '_CHARS') . "&nbsp;<input type='text' name='options[]' value='" . $options[2] . "'/>&nbsp;" . constant($block_lang . '_LENGTH') . '<br><br>';
+    $form .= '&nbsp;' . constant($block_lang . '_DISP') . "&nbsp;<input type='text' name='options[]' value='" . $options[1] . "'>&nbsp;" . constant($block_lang . '_LISTINGS');
+    $form .= '&nbsp;<br><br>' . constant($block_lang . '_CHARS') . "&nbsp;<input type='text' name='options[]' value='" . $options[2] . "'>&nbsp;" . constant($block_lang . '_LENGTH') . '<br><br>';
 
     return $form;
 }

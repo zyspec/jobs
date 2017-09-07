@@ -46,7 +46,7 @@ if (!$gpermHandler->checkRight('' . $moduleDirName . '_view', $perm_itemid, $gro
     redirect_header(XOOPS_URL . '/index.php', 3, _NOPERM);
 }
 
-require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/gtickets.php";
+//require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/gtickets.php";
 
 if (!empty($_POST['submit'])) {
     // Define Variables for register_globals Off
@@ -157,7 +157,7 @@ if (!empty($_POST['submit'])) {
         $date      = time();
         $r_usid    = $xoopsUser->getVar('uid', 'E');
 
-        $tags                = array();
+        $tags                = [];
         $tags['TITLE']       = $title;
         $tags['TYPE']        = $type;
         $tags['COMPANY']     = $company;
@@ -207,7 +207,7 @@ if (!empty($_POST['submit'])) {
         $mail->setTemplate('jobs_listing_contact.tpl');
         $mail->useMail();
         $mail->setFromEmail($post);
-        $mail->setToEmails(array($email, $extra_user1_email, $extra_user2_email));
+        $mail->setToEmails([$email, $extra_user1_email, $extra_user2_email]);
         $mail->setSubject($subject);
         $mail->multimailer->isHTML(true);
         $mail->assign($tags);

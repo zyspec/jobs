@@ -20,7 +20,7 @@ $moduleDirName = basename(dirname(__DIR__));
 require_once __DIR__ . '/../../../include/cp_header.php';
 require_once XOOPS_ROOT_PATH . '/kernel/module.php';
 //include(XOOPS_ROOT_PATH."/include/cp_functions.php");
-require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/gtickets.php";
+//require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/gtickets.php";
 
 if (file_exists('../language/' . $xoopsConfig['language'] . '/modinfo.php')) {
     require_once __DIR__ . '/../language/' . $xoopsConfig['language'] . '/modinfo.php';

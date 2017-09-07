@@ -18,7 +18,7 @@
 
 include __DIR__ . '/header.php';
 $moduleDirName = basename(__DIR__);
-require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/gtickets.php";
+//require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/gtickets.php";
 $myts      = MyTextSanitizer::getInstance();
 $module_id = $xoopsModule->getVar('mid');
 
@@ -54,7 +54,7 @@ if ($xoopsUser) {
 
         $request1 = $xoopsDB->query('SELECT comp_usid, comp_user1, comp_user2 FROM ' . $xoopsDB->prefix('jobs_companies') . ' WHERE ' . $member_id . ' IN (comp_usid, comp_user1, comp_user2)');
         list($comp_usid, $comp_user1, $comp_user2) = $xoopsDB->fetchRow($request1);
-        $comp_users = array($comp_usid, $comp_user1, $comp_user2);
+        $comp_users = [$comp_usid, $comp_user1, $comp_user2];
         if (in_array($member_id, $comp_users)) {
             if ($ok == 1) {
                 $xoopsDB->queryF('DELETE FROM ' . $xoopsDB->prefix('jobs_listing') . ' WHERE lid=' . $xoopsDB->escape($lid) . '');

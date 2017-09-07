@@ -64,7 +64,7 @@ if (!empty($_POST['submit'])) {
     $comp_contact  = $myts->addSlashes($_POST['comp_contact']);
     // START  - check new entries for company users are OK - GreenFlatDog
 
-    $comp_users = array();
+    $comp_users = [];
     // get user id for the name entered for company user 1
     if (empty($_POST['comp_user1'])) {
         $comp_userid1 = '';
@@ -121,7 +121,7 @@ if (!empty($_POST['submit'])) {
     if (!empty($_FILES['comp_img']['name'])) {
         require_once XOOPS_ROOT_PATH . '/class/uploader.php';
         $updir             = '../logo_images/';
-        $allowed_mimetypes = array('image/gif', 'image/jpg', 'image/jpeg', 'image/pjpeg', 'image/png', 'image/x-png');
+        $allowed_mimetypes = ['image/gif', 'image/jpg', 'image/jpeg', 'image/pjpeg', 'image/png', 'image/x-png'];
         $uploader          = new XoopsMediaUploader($updir, $allowed_mimetypes, $photomax, $maxwide, $maxhigh);
         $uploader->setTargetFileName($date . '_' . $_FILES['comp_img']['name']);
         $uploader->fetchMedia('comp_img');
@@ -138,9 +138,29 @@ if (!empty($_POST['submit'])) {
 
     $newid = $xoopsDB->genId($xoopsDB->prefix('jobs_companies') . '_comp_id_seq');
 
-    $sql = sprintf("INSERT INTO %s (comp_id, comp_name, comp_address, comp_address2, comp_city, comp_state, comp_zip, comp_phone, comp_fax, comp_url, comp_img, comp_usid, comp_user1, comp_user2, comp_contact, comp_user1_contact, comp_user2_contact, comp_date_added) VALUES (%u, '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%u', '%s', '%s', '%s', '%s', '%s', '%s')",
-                   $xoopsDB->prefix('jobs_companies'), $newid, $comp_name, $comp_address, $comp_address2, $comp_city, $comp_state, $comp_zip, $comp_phone, $comp_fax, $comp_url, $filename, $comp_usid, $comp_userid1, $comp_userid2, $comp_contact, $comp_user1_contact, $comp_user2_contact, $date);
-    $xoopsDB->query($sql) || $erh->show('0013');
+    $sql = sprintf(
+        "INSERT INTO %s (comp_id, comp_name, comp_address, comp_address2, comp_city, comp_state, comp_zip, comp_phone, comp_fax, comp_url, comp_img, comp_usid, comp_user1, comp_user2, comp_contact, comp_user1_contact, comp_user2_contact, comp_date_added) VALUES (%u, '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%u', '%s', '%s', '%s', '%s', '%s', '%s')",
+                   $xoopsDB->prefix('jobs_companies'),
+        $newid,
+        $comp_name,
+        $comp_address,
+        $comp_address2,
+        $comp_city,
+        $comp_state,
+        $comp_zip,
+        $comp_phone,
+        $comp_fax,
+        $comp_url,
+        $filename,
+        $comp_usid,
+        $comp_userid1,
+        $comp_userid2,
+        $comp_contact,
+        $comp_user1_contact,
+        $comp_user2_contact,
+        $date
+    );
+    $xoopsDB->query($sql) || $eh->show('0013');
 
     unset($_SESSION['comp_name']);
     unset($_SESSION['comp_address']);

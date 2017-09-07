@@ -4,7 +4,7 @@
             <td align="left"><b><{$item.logo_link}></td>
         </tr>
     </table>
-    <hr/>
+    <hr>
 <{/foreach}>
 <table border="0" cellpadding="0" cellspacing="0" width="100%">
     <tr>

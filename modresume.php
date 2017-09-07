@@ -19,7 +19,7 @@
 include __DIR__ . '/header.php';
 
 $moduleDirName = basename(__DIR__);
-require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/gtickets.php";
+//require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/gtickets.php";
 $myts      = MyTextSanitizer::getInstance();
 $module_id = $xoopsModule->getVar('mid');
 
@@ -84,7 +84,7 @@ if (!empty($_POST['submit'])) {
     if (!empty($_FILES['resume']['name'])) {
         require_once XOOPS_ROOT_PATH . '/class/uploader.php';
         $updir             = $destination;
-        $allowed_mimetypes = array('application/msword', 'application/pdf');
+        $allowed_mimetypes = ['application/msword', 'application/pdf'];
         $uploader          = new XoopsMediaUploader($updir, $allowed_mimetypes, $xoopsModuleConfig['jobs_resumesize']);
         $uploader->setTargetFileName($date . '_' . $_FILES['resume']['name']);
         $uploader->fetchMedia('resume');

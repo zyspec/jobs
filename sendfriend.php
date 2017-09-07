@@ -32,7 +32,7 @@ if (empty($xoopsUser)) {
 }
 
 $moduleDirName = basename(__DIR__);
-require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/gtickets.php";
+//require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/gtickets.php";
 include XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/functions.php";
 
 /**
@@ -134,7 +134,7 @@ function MailJob($lid = 0, $yname, $ymail, $fname, $fmail)
     $town         = $myts->addSlashes($town);
     $state        = $myts->addSlashes($state);
 
-    $tags                       = array();
+    $tags                       = [];
     $tags['YNAME']              = $yname;
     $tags['YMAIL']              = $ymail;
     $tags['FNAME']              = stripslashes($fname);
@@ -273,7 +273,7 @@ function MailResume($lid = 0, $yname, $ymail, $fname, $fmail)
     $town      = $myts->addSlashes($town);
     $state     = $myts->addSlashes($state);
 
-    $tags                       = array();
+    $tags                       = [];
     $tags['YNAME']              = $yname;
     $tags['YMAIL']              = $ymail;
     $tags['FNAME']              = stripslashes($fname);
