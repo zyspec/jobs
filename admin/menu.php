@@ -31,42 +31,42 @@ $moduleHelper->loadLanguage('modinfo');
 
 $adminmenu              = [];
 $i                      = 0;
-$adminmenu[$i]['title'] = _AM_MODULEADMIN_HOME;
-$adminmenu[$i]['link']  = 'admin/index.php';
-$adminmenu[$i]['icon']  = $pathIcon32 . '/home.png';
+'title' =>  _AM_MODULEADMIN_HOME,
+'link' =>  'admin/index.php',
+'icon' =>  $pathIcon32 . '/home.png',
 //++$i;
-//$adminmenu[$i]['title'] = _MI_JOBS_ADMENU2;
-//$adminmenu[$i]['link']  = "admin/map.php";
+//'title' =>  _MI_JOBS_ADMENU2,
+//'link' =>  "admin/map.php",
 //$adminmenu[$i]["icon"]  = $pathIcon32 . '/category.png';
 ++$i;
-$adminmenu[$i]['title'] = _MI_JOBS_ADMENU6;
-$adminmenu[$i]['link']  = 'admin/company.php';
-$adminmenu[$i]['icon']  = $pathIcon32 . '/addlink.png';
+'title' =>  _MI_JOBS_ADMENU6,
+'link' =>  'admin/company.php',
+'icon' =>  $pathIcon32 . '/addlink.png',
 ++$i;
-$adminmenu[$i]['title'] = _MI_JOBS_ADMENU8;
-$adminmenu[$i]['link']  = 'admin/jobs.php';
-$adminmenu[$i]['icon']  = $pathIcon32 . '/cash_stack.png';
+'title' =>  _MI_JOBS_ADMENU8,
+'link' =>  'admin/jobs.php',
+'icon' =>  $pathIcon32 . '/cash_stack.png',
 ++$i;
-$adminmenu[$i]['title'] = _MI_JOBS_ADMENU9;
-$adminmenu[$i]['link']  = 'admin/resumes.php';
-$adminmenu[$i]['icon']  = $pathIcon32 . '/identity.png';
+'title' =>  _MI_JOBS_ADMENU9,
+'link' =>  'admin/resumes.php',
+'icon' =>  $pathIcon32 . '/identity.png',
 //++$i;
-//$adminmenu[$i]['title'] = _MI_JOBS_ADMENU1;
-//$adminmenu[$i]['link']  = "admin/main.php";
+//'title' =>  _MI_JOBS_ADMENU1,
+//'link' =>  "admin/main.php",
 //$adminmenu[$i]["icon"]  = $pathIcon32 . '/manage.png';
 ++$i;
-$adminmenu[$i]['title'] = _MI_JOBS_ADMENU1;
-$adminmenu[$i]['link']  = 'admin/jobs_type.php';
-$adminmenu[$i]['icon']  = $pathIcon32 . '/manage.png';
+'title' =>  _MI_JOBS_ADMENU1,
+'link' =>  'admin/jobs_type.php',
+'icon' =>  $pathIcon32 . '/manage.png',
 ++$i;
-$adminmenu[$i]['title'] = _MI_JOBS_ADMENU3;
-$adminmenu[$i]['link']  = 'admin/groupperms.php';
-$adminmenu[$i]['icon']  = $pathIcon32 . '/permissions.png';
+'title' =>  _MI_JOBS_ADMENU3,
+'link' =>  'admin/groupperms.php',
+'icon' =>  $pathIcon32 . '/permissions.png',
 ++$i;
-$adminmenu[$i]['title'] = _MI_JOBS_ADMENU7;
-$adminmenu[$i]['link']  = 'admin/region.php';
-$adminmenu[$i]['icon']  = $pathIcon32 . '/languages.png';
+'title' =>  _MI_JOBS_ADMENU7,
+'link' =>  'admin/region.php',
+'icon' =>  $pathIcon32 . '/languages.png',
 ++$i;
-$adminmenu[$i]['title'] = _AM_MODULEADMIN_ABOUT;
-$adminmenu[$i]['link']  = 'admin/about.php';
-$adminmenu[$i]['icon']  = $pathIcon32 . '/about.png';
+'title' =>  _AM_MODULEADMIN_ABOUT,
+'link' =>  'admin/about.php',
+'icon' =>  $pathIcon32 . '/about.png',
