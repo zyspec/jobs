@@ -23,50 +23,67 @@ if (false !== ($moduleHelper = Xmf\Module\Helper::getHelper($moduleDirName))) {
     $moduleHelper = Xmf\Module\Helper::getHelper('system');
 }
 
-
 $pathIcon32 = \Xmf\Module\Admin::menuIconPath('');
 //$pathModIcon32 = $moduleHelper->getModule()->getInfo('modicons32');
 
 $moduleHelper->loadLanguage('modinfo');
 
-$adminmenu              = [];
-$i                      = 0;
-'title' =>  _AM_MODULEADMIN_HOME,
-'link' =>  'admin/index.php',
-'icon' =>  $pathIcon32 . '/home.png',
-//++$i;
+$adminmenu[] = [
+    'title' => _AM_MODULEADMIN_HOME,
+    'link'  => 'admin/index.php',
+    'icon'  => $pathIcon32 . '/home.png',
+];
+
+//$adminmenu[] = [
 //'title' =>  _MI_JOBS_ADMENU2,
 //'link' =>  "admin/map.php",
 //$adminmenu[$i]["icon"]  = $pathIcon32 . '/category.png';
-++$i;
-'title' =>  _MI_JOBS_ADMENU6,
-'link' =>  'admin/company.php',
-'icon' =>  $pathIcon32 . '/addlink.png',
-++$i;
-'title' =>  _MI_JOBS_ADMENU8,
-'link' =>  'admin/jobs.php',
-'icon' =>  $pathIcon32 . '/cash_stack.png',
-++$i;
-'title' =>  _MI_JOBS_ADMENU9,
-'link' =>  'admin/resumes.php',
-'icon' =>  $pathIcon32 . '/identity.png',
-//++$i;
+//];
+
+$adminmenu[] = [
+    'title' => _MI_JOBS_ADMENU6,
+    'link'  => 'admin/company.php',
+    'icon'  => $pathIcon32 . '/addlink.png',
+];
+
+$adminmenu[] = [
+    'title' => _MI_JOBS_ADMENU8,
+    'link'  => 'admin/jobs.php',
+    'icon'  => $pathIcon32 . '/cash_stack.png',
+];
+
+$adminmenu[] = [
+    'title' => _MI_JOBS_ADMENU9,
+    'link'  => 'admin/resumes.php',
+    'icon'  => $pathIcon32 . '/identity.png',
+];
+
+//$adminmenu[] = [
 //'title' =>  _MI_JOBS_ADMENU1,
 //'link' =>  "admin/main.php",
 //$adminmenu[$i]["icon"]  = $pathIcon32 . '/manage.png';
-++$i;
-'title' =>  _MI_JOBS_ADMENU1,
-'link' =>  'admin/jobs_type.php',
-'icon' =>  $pathIcon32 . '/manage.png',
-++$i;
-'title' =>  _MI_JOBS_ADMENU3,
-'link' =>  'admin/groupperms.php',
-'icon' =>  $pathIcon32 . '/permissions.png',
-++$i;
-'title' =>  _MI_JOBS_ADMENU7,
-'link' =>  'admin/region.php',
-'icon' =>  $pathIcon32 . '/languages.png',
-++$i;
-'title' =>  _AM_MODULEADMIN_ABOUT,
-'link' =>  'admin/about.php',
-'icon' =>  $pathIcon32 . '/about.png',
+//];
+
+$adminmenu[] = [
+    'title' => _MI_JOBS_ADMENU1,
+    'link'  => 'admin/jobs_type.php',
+    'icon'  => $pathIcon32 . '/manage.png',
+];
+
+$adminmenu[] = [
+    'title' => _MI_JOBS_ADMENU3,
+    'link'  => 'admin/groupperms.php',
+    'icon'  => $pathIcon32 . '/permissions.png',
+];
+
+$adminmenu[] = [
+    'title' => _MI_JOBS_ADMENU7,
+    'link'  => 'admin/region.php',
+    'icon'  => $pathIcon32 . '/languages.png',
+];
+
+$adminmenu[] = [
+    'title' => _AM_MODULEADMIN_ABOUT,
+    'link'  => 'admin/about.php',
+    'icon'  => $pathIcon32 . '/about.png',
+];
