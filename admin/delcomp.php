@@ -47,7 +47,7 @@ list($their_company, $usid) = $xoopsDB->fetchRow($result1);
 
 $ok = !isset($_REQUEST['ok']) ? null : $_REQUEST['ok'];
 
-if ($ok == 1) {
+if (1 == $ok) {
 
     // Delete Company
     $xoopsDB->queryF('DELETE FROM ' . $xoopsDB->prefix('jobs_companies') . ' WHERE comp_id=' . $xoopsDB->escape($comp_id) . '');

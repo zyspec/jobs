@@ -77,12 +77,12 @@ class jobtree
             $sql .= ' AND ' . $this->pid . ' IN (' . implode(',', $categories) . ') ';
         }
 
-        if ($order != '') {
+        if ('' != $order) {
             $sql .= " ORDER BY $order";
         }
         $result = $this->db->query($sql);
         $count  = $this->db->getRowsNum($result);
-        if ($count == 0) {
+        if (0 == $count) {
             return $arr;
         }
         while ($myrow = $this->db->fetchArray($result)) {
@@ -111,7 +111,7 @@ class jobtree
         }
 
         $count = $this->db->getRowsNum($result);
-        if ($count == 0) {
+        if (0 == $count) {
             return $idarray;
         }
         while (list($id) = $this->db->fetchRow($result)) {
@@ -140,12 +140,12 @@ class jobtree
             $sql .= ' AND ' . $this->pid . ' IN (' . implode(',', $categories) . ') ';
         }
 
-        if ($order != '') {
+        if ('' != $order) {
             $sql .= " ORDER BY $order";
         }
         $result = $this->db->query($sql);
         $count  = $this->db->getRowsNum($result);
-        if ($count == 0) {
+        if (0 == $count) {
             return $idarray;
         }
         while (list($r_id) = $this->db->fetchRow($result)) {
@@ -175,12 +175,12 @@ class jobtree
             $sql .= ' AND ' . $this->pid . ' IN (' . implode(',', $categories) . ') ';
         }
 
-        if ($order != '') {
+        if ('' != $order) {
             $sql .= " ORDER BY $order";
         }
         $result = $this->db->query($sql);
         list($r_id) = $this->db->fetchRow($result);
-        if ($r_id == 0) {
+        if (0 == $r_id) {
             return $idarray;
         }
         array_push($idarray, $r_id);
@@ -208,14 +208,14 @@ class jobtree
             $result .= ' AND cid IN (' . implode(',', $categories) . ') ';
         }
 
-        if ($this->db->getRowsNum($result) == 0) {
+        if (0 == $this->db->getRowsNum($result)) {
             return $path;
         }
         list($parentid, $name) = $this->db->fetchRow($result);
         $myts = MyTextSanitizer::getInstance();
         $name = $myts->htmlSpecialChars($name);
         $path = '/' . $name . $path . '';
-        if ($parentid == 0) {
+        if (0 == $parentid) {
             return $path;
         }
         $path = $this->getPathFromId($parentid, $title, $path);
@@ -237,12 +237,12 @@ class jobtree
     public function makeMyCatBox($title, $order = '', $preset_id = 0, $none = 0, $sel_name = '', $onchange = '')
     {
         global $moduleDirName;
-        if ($sel_name == '') {
+        if ('' == $sel_name) {
             $sel_name = $this->id;
         }
         $myts = MyTextSanitizer::getInstance();
         echo "<select name='" . $sel_name . "'";
-        if ($onchange != '') {
+        if ('' != $onchange) {
             echo " onchange='" . $onchange . "'";
         }
         echo ">\n";
@@ -253,7 +253,7 @@ class jobtree
             $sql .= ' AND cid IN (' . implode(',', $categories) . ') ';
         }
 
-        if ($order != '') {
+        if ('' != $order) {
             $sql .= " ORDER BY $order";
         }
         $result = $this->db->query($sql);
@@ -295,12 +295,12 @@ class jobtree
     public function makeMySelBox($title, $order = '', $preset_id = 0, $none = 0, $sel_name = '', $onchange = '')
     {
         global $moduleDirName;
-        if ($sel_name == '') {
+        if ('' == $sel_name) {
             $sel_name = $this->id;
         }
         $myts = MyTextSanitizer::getInstance();
         echo "<select name='" . $sel_name . "'";
-        if ($onchange != '') {
+        if ('' != $onchange) {
             echo " onchange='" . $onchange . "'";
         }
         echo ">\n";
@@ -311,7 +311,7 @@ class jobtree
             $sql .= ' AND cid IN (' . implode(',', $categories) . ') ';
         }
 
-        if ($order != '') {
+        if ('' != $order) {
             $sql .= " ORDER BY $order";
         }
         $result = $this->db->query($sql);
@@ -353,18 +353,18 @@ class jobtree
     public function makeMyAdminSelBox($title, $order = '', $preset_id = 0, $none = 0, $sel_name = '', $onchange = '')
     {
         global $moduleDirName;
-        if ($sel_name == '') {
+        if ('' == $sel_name) {
             $sel_name = $this->id;
         }
         $myts = MyTextSanitizer::getInstance();
         echo "<select name='" . $sel_name . "'";
-        if ($onchange != '') {
+        if ('' != $onchange) {
             echo " onchange='" . $onchange . "'";
         }
         echo ">\n";
         $sql = 'SELECT ' . $this->id . ', ' . $title . ' FROM ' . $this->table . ' WHERE ' . $this->pid . '=0';
 
-        if ($order != '') {
+        if ('' != $order) {
             $sql .= " ORDER BY $order";
         }
         $result = $this->db->query($sql);
@@ -414,12 +414,12 @@ class jobtree
         $by_cat = 0
     ) {
         global $moduleDirName;
-        if ($sel_name == '') {
+        if ('' == $sel_name) {
             $sel_name = $this->id;
         }
         $myts = MyTextSanitizer::getInstance();
         echo "<select name='" . $sel_name . "'";
-        if ($onchange != '') {
+        if ('' != $onchange) {
             echo " onchange='" . $onchange . "'";
         }
         echo ">\n";
@@ -430,7 +430,7 @@ class jobtree
             $sql .= ' AND cid IN (' . implode(',', $categories) . ') ';
         }
 
-        if ($order != '') {
+        if ('' != $order) {
             $sql .= " ORDER BY $order";
         }
         $result = $this->db->query($sql);
@@ -473,18 +473,18 @@ class jobtree
     public function makeMyStateSelBox($title, $order = '', $preset_id = 0, $none = 0, $sel_name = '', $onchange = '')
     {
         global $moduleDirName;
-        if ($sel_name == '') {
+        if ('' == $sel_name) {
             $sel_name = $this->id;
         }
         $myts = MyTextSanitizer::getInstance();
         echo "<select name='" . $sel_name . "'";
-        if ($onchange != '') {
+        if ('' != $onchange) {
             echo " onchange='" . $onchange . "'";
         }
         echo ">\n";
         $sql = 'SELECT ' . $this->id . ', ' . $title . ' FROM ' . $this->table . ' WHERE ' . $this->pid . '=0';
 
-        if ($order != '') {
+        if ('' != $order) {
             $sql .= " ORDER BY $order";
         }
         $result = $this->db->query($sql);
@@ -526,18 +526,18 @@ class jobtree
     public function makeStateSelBox($title, $order = '', $preset_id = 0, $none = 0, $sel_name = '', $onchange = '')
     {
         global $moduleDirName;
-        if ($sel_name == '') {
+        if ('' == $sel_name) {
             $sel_name = $this->id;
         }
         $myts = MyTextSanitizer::getInstance();
         echo "<select name='" . $sel_name . "'";
-        if ($onchange != '') {
+        if ('' != $onchange) {
             echo " onchange='" . $onchange . "'";
         }
         echo ">\n";
         $sql = 'SELECT ' . $this->id . ', ' . $title . ' FROM ' . $this->table . '';
 
-        if ($order != '') {
+        if ('' != $order) {
             $sql .= " ORDER BY $order";
         }
         $result = $this->db->query($sql);
@@ -575,23 +575,23 @@ class jobtree
         $issearch = 1
     ) {
         global $moduleDirName;
-        if ($sel_name == '') {
+        if ('' == $sel_name) {
             $sel_name = $this->id;
         }
         $myts = MyTextSanitizer::getInstance();
         echo "<select name='" . $sel_name . "'";
-        if ($onchange != '') {
+        if ('' != $onchange) {
             echo " onchange='" . $onchange . "'";
         }
         echo ">\n";
         $sql = 'SELECT ' . $this->id . ', `' . $title . '` FROM ' . $this->table . '';
 
-        if ($order != '') {
+        if ('' != $order) {
             $sql .= " ORDER BY $order";
         }
         $result = $this->db->query($sql);
         if ($none) {
-            if ($issearch == '1') {
+            if ('1' == $issearch) {
                 echo "<option value='0'>" . _JOBS_ALL_STATES . "</option>\n";
             } else {
                 echo "<option value='0'>" . _JOBS_SELECT_STATE . "</option>\n";
@@ -628,23 +628,23 @@ class jobtree
         $issearch = 0
     ) {
         global $moduleDirName;
-        if ($sel_name == '') {
+        if ('' == $sel_name) {
             $sel_name = $this->id;
         }
         $myts = MyTextSanitizer::getInstance();
         echo "<select name='" . $sel_name . "'";
-        if ($onchange != '') {
+        if ('' != $onchange) {
             echo " onchange='" . $onchange . "'";
         }
         echo ">\n";
         $sql = 'SELECT ' . $this->id . ', ' . $title . ' FROM ' . $this->table . '';
 
-        if ($order != '') {
+        if ('' != $order) {
             $sql .= " ORDER BY $order";
         }
         $result = $this->db->query($sql);
         if ($none) {
-            if ($issearch == '1') {
+            if ('1' == $issearch) {
                 echo "<option value='0'>" . _AM_JOBS_ALL_STATES . "</option>\n";
             } else {
                 echo "<option value='0'>" . _AM_JOBS_SELECT_STATE . "</option>\n";
@@ -673,18 +673,18 @@ class jobtree
     public function makeMyAdminCompBox($title, $order = '', $preset_id = 0, $none = 0, $sel_name = '', $onchange = '')
     {
         global $moduleDirName;
-        if ($sel_name == '') {
+        if ('' == $sel_name) {
             $sel_name = $this->id;
         }
         $myts = MyTextSanitizer::getInstance();
         echo "<select name='" . $sel_name . "'";
-        if ($onchange != '') {
+        if ('' != $onchange) {
             echo " onchange='" . $onchange . "'";
         }
         echo ">\n";
         $sql = 'SELECT ' . $this->id . ', ' . $title . ' FROM ' . $this->table . ' WHERE ' . $this->pid . '=0';
 
-        if ($order != '') {
+        if ('' != $order) {
             $sql .= " ORDER BY $order";
         }
         $result = $this->db->query($sql);
@@ -727,7 +727,7 @@ class jobtree
         global $moduleDirName;
         $sql    = 'SELECT ' . $this->pid . ', ' . $title . ' FROM ' . $this->table . ' WHERE ' . $this->id . "=$sel_id";
         $result = $this->db->query($sql);
-        if ($this->db->getRowsNum($result) == 0) {
+        if (0 == $this->db->getRowsNum($result)) {
             return $path;
         }
         list($parentid, $name) = $this->db->fetchRow($result);
@@ -738,7 +738,7 @@ class jobtree
 
         $path = "&nbsp;<a href='" . $funcURL . '' . $this->id . '=' . $xoopsDB->escape($sel_id) . "'>&nbsp;" . $arrow . '&nbsp;&nbsp;' . $name . '</a>
         ' . $path . '';
-        if ($parentid == 0) {
+        if (0 == $parentid) {
             return $path;
         }
         $path = $this->getNicePathFromId($parentid, $title, $funcURL, $path);
@@ -757,12 +757,12 @@ class jobtree
     public function getIdPathFromId($sel_id, $path = '')
     {
         $result = $this->db->query('SELECT ' . $this->pid . ' FROM ' . $this->table . ' WHERE ' . $this->id . "=$sel_id");
-        if ($this->db->getRowsNum($result) == 0) {
+        if (0 == $this->db->getRowsNum($result)) {
             return $path;
         }
         list($parentid) = $this->db->fetchRow($result);
         $path = '/' . $sel_id . $path . '';
-        if ($parentid == 0) {
+        if (0 == $parentid) {
             return $path;
         }
         $path = $this->getIdPathFromId($parentid, $path);
@@ -787,12 +787,12 @@ class jobtree
             $sql .= ' AND ' . $this->pid . ' IN (' . implode(',', $categories) . ') ';
         }
 
-        if ($order != '') {
+        if ('' != $order) {
             $sql .= " ORDER BY $order";
         }
         $result = $this->db->query($sql);
         $count  = $this->db->getRowsNum($result);
-        if ($count == 0) {
+        if (0 == $count) {
             return $parray;
         }
         while ($row = $this->db->fetchArray($result)) {
@@ -821,12 +821,12 @@ class jobtree
             $sql .= ' AND cid IN (' . implode(',', $categories) . ') ';
         }
 
-        if ($order != '') {
+        if ('' != $order) {
             $sql .= " ORDER BY $order";
         }
         $result = $this->db->query($sql);
         $count  = $this->db->getRowsNum($result);
-        if ($count == 0) {
+        if (0 == $count) {
             return $parray;
         }
         while ($row = $this->db->fetchArray($result)) {
@@ -851,12 +851,12 @@ class jobtree
         global $moduleDirName;
         $sql = 'SELECT * FROM ' . $this->table . ' WHERE ' . $this->pid . '=' . $sel_id . '';
 
-        if ($order != '') {
+        if ('' != $order) {
             $sql .= " ORDER BY $order";
         }
         $result = $this->db->query($sql);
         $count  = $this->db->getRowsNum($result);
-        if ($count == 0) {
+        if (0 == $count) {
             return $parray;
         }
         while ($row = $this->db->fetchArray($result)) {
@@ -884,12 +884,12 @@ class jobtree
         $myts = MyTextSanitizer::getInstance();
 //        require_once XOOPS_ROOT_PATH . '/modules/jobs/include/gtickets.php';
 
-        if ($sel_name == '') {
+        if ('' == $sel_name) {
             $sel_name = $this->id;
         }
 
         $sql = 'select ' . $this->id . ', ' . $title . ', ordre FROM ' . $this->table . ' WHERE ' . $this->pid . '=0';
-        if ($order != '') {
+        if ('' != $order) {
             $sql .= " ORDER BY $order";
         }
         $result2 = $xoopsDB->query($sql);
@@ -901,7 +901,7 @@ class jobtree
                  . "\"></a>&nbsp;<a href=\"category.php?op=ModCat&amp;cid=$catid\" title=\""
                  . _AM_JOBS_MODIFCAT
                  . "\">$name</a> ";
-            if ($xoopsModuleConfig['jobs_cat_sortorder'] === 'ordre') {
+            if ('ordre' === $xoopsModuleConfig['jobs_cat_sortorder']) {
                 echo "($ordre)";
             }
             echo "<br>\n";
@@ -923,7 +923,7 @@ class jobtree
                                     . $myts->htmlSpecialChars($option[$title]);
                 $ordreS           = $option['ordre'];
                 echo "$catpath</a> ";
-                if ($xoopsModuleConfig['jobs_cat_sortorder'] === 'ordre') {
+                if ('ordre' === $xoopsModuleConfig['jobs_cat_sortorder']) {
                     echo "($ordreS)";
                 }
                 echo "<br>\n";
@@ -946,13 +946,13 @@ class jobtree
         // for "Duplicatable"
         $moduleDirName = basename(dirname(__DIR__));
 
-        if ($sel_name == '') {
+        if ('' == $sel_name) {
             $sel_name = $this->id;
         }
 
         $sql = 'select ' . $this->id . ', ' . $title . ', ordre FROM ' . $this->table . ' WHERE ' . $this->pid . '=0';
 
-        if ($order != '') {
+        if ('' != $order) {
             $sql .= " ORDER BY $order";
         }
         $result = $xoopsDB->query($sql);
@@ -966,7 +966,7 @@ class jobtree
                  . '">'
                  . $name
                  . '</a> ';
-            if ($xoopsModuleConfig['jobs_cat_sortorder'] === 'ordre') {
+            if ('ordre' === $xoopsModuleConfig['jobs_cat_sortorder']) {
                 echo "($ordre)";
             }
             echo "<br>\n";
@@ -988,7 +988,7 @@ class jobtree
                                     . $myts->htmlSpecialChars($option[$title]);
                 $ordreS           = $option['ordre'];
                 echo "$catpath</a> ";
-                if ($xoopsModuleConfig['jobs_cat_sortorder'] === 'ordre') {
+                if ('ordre' === $xoopsModuleConfig['jobs_cat_sortorder']) {
                     echo "($ordreS)";
                 }
                 echo "<br>\n";
@@ -1014,12 +1014,12 @@ class jobtree
             $sql .= ' AND ' . $this->pid . ' IN (' . implode(',', $categories) . ') ';
         }
 
-        if ($order != '') {
+        if ('' != $order) {
             $sql .= " ORDER BY $order";
         }
         $result = $xoopsDB->query($sql);
         $count  = $xoopsDB->getRowsNum($result);
-        if ($count == 0) {
+        if (0 == $count) {
             return $parray;
         }
         while ($row = $xoopsDB->fetchArray($result)) {

@@ -24,7 +24,7 @@ $xmid              = $xoopsModule->getVar('mid');
 $configHandler     = xoops_getHandler('config');
 $xoopsConfigSearch = $configHandler->getConfigsByCat(XOOPS_CONF_SEARCH);
 
-if ($xoopsConfigSearch['enable_search'] != 1) {
+if (1 != $xoopsConfigSearch['enable_search']) {
     header('Location: ' . XOOPS_URL . '/index.php');
     exit();
 }
@@ -119,19 +119,19 @@ if (!empty($is_resume)) {
 
 $queries = [];
 
-if ($action == 'results') {
-    if ($query == '') {
+if ('results' == $action) {
+    if ('' == $query) {
         redirect_header('search.php', 1, _SR_PLZENTER);
     }
-} elseif ($action == 'showall') {
-    if ($query == '' || empty($mid)) {
+} elseif ('showall' == $action) {
+    if ('' == $query || empty($mid)) {
         redirect_header('search.php', 1, _SR_PLZENTER);
     }
-} elseif ($action == 'showallbyuser') {
+} elseif ('showallbyuser' == $action) {
     if (empty($mid) || empty($uid)) {
         redirect_header('search.php', 1, _SR_PLZENTER);
     }
-} elseif ($action == 'showstate') {
+} elseif ('showstate' == $action) {
     if (empty($mid) || empty($uid)) {
         redirect_header('search.php', 1, _SR_PLZENTER);
     }
@@ -141,7 +141,7 @@ $groups            = is_object($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GRO
 $gpermHandler      = xoops_getHandler('groupperm');
 $available_modules = $gpermHandler->getItemIds('module_read', $groups);
 
-if ($action == 'search') {
+if ('search' == $action) {
     include XOOPS_ROOT_PATH . '/header.php';
     //  $issearch = "1";
     include __DIR__ . '/include/searchform.php';
@@ -150,13 +150,13 @@ if ($action == 'search') {
     exit();
 }
 
-if ($andor != 'OR' && $andor != 'exact' && $andor != 'AND') {
+if ('OR' != $andor && 'exact' != $andor && 'AND' != $andor) {
     $andor = 'AND';
 }
 
 $myts = MyTextSanitizer::getInstance();
-if ($action != 'showallbyuser') {
-    if ($andor != 'exact') {
+if ('showallbyuser' != $action) {
+    if ('exact' != $andor) {
         $ignored_queries = []; // holds kewords that are shorter than allowed minmum length
         $temp_queries    = preg_split('/[\s,]+/', $query);
         foreach ($temp_queries as $q) {
@@ -167,7 +167,7 @@ if ($action != 'showallbyuser') {
                 $ignored_queries[] = $myts->addSlashes($q);
             }
         }
-        if (count($queries) == 0) {
+        if (0 == count($queries)) {
             redirect_header('search.php', 2, sprintf(_SR_KEYTOOSHORT, $xoopsConfigSearch['keyword_min']));
         }
     } else {
@@ -206,7 +206,7 @@ switch ($action) {
 
         echo '<h3>' . _SR_SEARCHRESULTS . "</h3>\n";
         echo _SR_KEYWORDS . ':';
-        if ($andor != 'exact') {
+        if ('exact' != $andor) {
             foreach ($queries as $q) {
                 echo ' <b>' . htmlspecialchars(stripslashes($q)) . '</b>';
             }
@@ -229,12 +229,12 @@ switch ($action) {
                 $results = $module->search($queries, $andor, 5, 0);
                 echo '<h3>' . $myts->htmlSpecialChars($module->getVar('name')) . '</h3>';
 
-                if ($is_resume == 1) {
+                if (1 == $is_resume) {
                     echo '<h4>Resumes</h4>';
                 }
 
                 $count = count($results);
-                if (!is_array($results) || $count == 0) {
+                if (!is_array($results) || 0 == $count) {
                     if (!empty($by_state)) {
                         echo '' . _JOBS_INSTATE . "<b> $state_name</b><br><br>";
                     }
@@ -258,7 +258,7 @@ switch ($action) {
                             $results[$i]['link'] = '' . $results[$i]['link'];
                         }
 
-                        if ($is_resume != '1') {
+                        if ('1' != $is_resume) {
                             echo '<br><b>' . $myts->undoHtmlSpecialChars($results[$i]['company']) . ' - ' . $myts->undoHtmlSpecialChars($results[$i]['type']) . ' - ';
                         }
                         echo "<a href='" . $results[$i]['link'] . "'>" . $myts->htmlSpecialChars($results[$i]['title']) . '</a></b><br>&nbsp; ' . $myts->undoHtmlSpecialChars($results[$i]['town']) . ', ' . $results[$i]['state'] . "<br>\n";
@@ -297,14 +297,14 @@ switch ($action) {
             $next_results = $module->search($queries, $andor, 1, $start + 20, $uid, $is_resume);
             $next_count   = count($next_results);
             $has_next     = false;
-            if (is_array($next_results) && $next_count == 1) {
+            if (is_array($next_results) && 1 == $next_count) {
                 $has_next = true;
             }
 
             echo '<h4>' . _SR_SEARCHRESULTS . "</h4>\n";
-            if ($action == 'showall') {
+            if ('showall' == $action) {
                 echo _SR_KEYWORDS . ':';
-                if ($andor != 'exact') {
+                if ('exact' != $andor) {
                     foreach ($queries as $q) {
                         echo ' <b>' . htmlspecialchars(stripslashes($q)) . '</b>';
                     }
@@ -316,7 +316,7 @@ switch ($action) {
             printf(_SR_SHOWING, $start + 1, $start + $count);
             echo '<h5>' . $myts->htmlSpecialChars($module->getVar('name')) . '</h5>';
 
-            if ($is_resume == 1) {
+            if (1 == $is_resume) {
                 echo '<h4>Resumes</h4>';
             }
 
@@ -332,7 +332,7 @@ switch ($action) {
                 if (!preg_match("/^http[s]*:\/\//i", $results[$i]['link'])) {
                     $results[$i]['link'] = 'modules/' . $module->getVar('dirname') . '/' . $results[$i]['link'];
                 }
-                if ($is_resume != '1') {
+                if ('1' != $is_resume) {
                     echo '<br><b>' . $myts->undoHtmlSpecialChars($results[$i]['company']) . ' - ' . $myts->undoHtmlSpecialChars($results[$i]['type']) . ' - ';
                 }
                 echo "<a href='" . $results[$i]['link'] . "'>" . $myts->htmlSpecialChars($results[$i]['title']) . '</a></b><br>&nbsp; ' . $myts->undoHtmlSpecialChars($results[$i]['town']) . ', ' . $myts->undoHtmlSpecialChars($results[$i]['state']) . "<br>\n";
@@ -348,7 +348,7 @@ switch ($action) {
             echo '<table><tr>';
             $search_url = XOOPS_URL . '/modules/jobs/search.php?query=' . urlencode(stripslashes(implode(' ', $queries)));
             $search_url .= "&mid=$mid&action=$action&andor=$andor";
-            if ($action == 'showallbyuser') {
+            if ('showallbyuser' == $action) {
                 $search_url .= "&uid=$uid";
             }
             if ($start > 0) {

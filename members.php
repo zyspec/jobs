@@ -115,7 +115,7 @@ if ($xoopsUser) {
 $xoopsTpl->assign('no_listing', _JOBS_NO_LISTING);
 $xoopsTpl->assign('xoops_pagetitle', $company_name);
 // For Premium Users
-if ($istheirs == '1') {
+if ('1' == $istheirs) {
     $countresult = $xoopsDB->query('SELECT COUNT(*) FROM ' . $xoopsDB->prefix('' . $moduleDirName . '_listing') . ' l, ' . $xoopsDB->prefix('jobs_companies') . ' c WHERE  l.company = c.comp_name AND c.comp_id = ' . $xoopsDB->escape($comp_id) . " AND valid='1'");
     list($trow) = $xoopsDB->fetchRow($countresult);
 
@@ -171,13 +171,13 @@ if ($trows > '0') {
             $company_logo = "<img src=\"logo_images/$comp_img\" alt=\"$comp_name\">";
             $xoopsTpl->assign('company_logo', $company_logo);
         }
-        if ($status == 1) {
+        if (1 == $status) {
             $status_is = _JOBS_ACTIVE;
         }
-        if ($status == 0) {
+        if (0 == $status) {
             $status_is = _JOBS_INACTIVE;
         }
-        if ($status == 2) {
+        if (2 == $status) {
             $status_is = _JOBS_STORE;
         }
 
@@ -185,7 +185,7 @@ if ($trows > '0') {
         $view_now  = '';
         $adminlink = '';
 
-        if ($istheirs == '1') {
+        if ('1' == $istheirs) {
             $replycount = $xoopsDB->query('SELECT COUNT(*) FROM ' . $xoopsDB->prefix('jobs_replies') . ' WHERE lid=' . $xoopsDB->escape($lid) . '');
             list($rrow) = $xoopsDB->fetchRow($replycount);
             $rrows = $rrow;
@@ -207,7 +207,7 @@ if ($trows > '0') {
 
             $member_usid = $xoopsUser->getVar('uid', 'E');
 
-            if ($istheirs == '1') {
+            if ('1' == $istheirs) {
                 $modify_link = "<a href='modjob.php?lid=" . addslashes($lid) . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _JOBS_MODIFANN . "' title='" . _JOBS_MODIFANN . "'></a>";
             }
         }
@@ -236,7 +236,7 @@ if ($trows > '0') {
             }
         }
 
-        if ($xoopsModuleConfig['jobs_show_state'] == '1') {
+        if ('1' == $xoopsModuleConfig['jobs_show_state']) {
             $state = $myts->htmlSpecialChars($state);
         } else {
             $state = '';
@@ -277,7 +277,7 @@ if ($trows > '0') {
     //Calculates how many pages exist.  Which page one should be on, etc...
     $linkpages = ceil($trows / $show);
     //Page Numbering
-    if ($linkpages != 1 && $linkpages != 0) {
+    if (1 != $linkpages && 0 != $linkpages) {
         $prev = $min - $show;
         if ($prev >= 0) {
             $pagenav .= "<a href='members.php?comp_id=$comp_id&min=$prev&show=$show'><b><u>&laquo;</u></b></a> ";

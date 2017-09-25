@@ -736,8 +736,8 @@ $modversion['notification']['event'][5]['mail_subject']  = _MI_JOBS_COMPANY_NOTI
 //new listings in all categories posted
 
 // On Update
-if (!empty($_POST['fct']) && !empty($_POST['op']) && !empty($_POST['diranme']) && $_POST['fct'] == 'modulesadmin'
-    && $_POST['op'] == 'update_ok'
+if (!empty($_POST['fct']) && !empty($_POST['op']) && !empty($_POST['diranme']) && 'modulesadmin' == $_POST['fct']
+    && 'update_ok' == $_POST['op']
     && $_POST['dirname'] == $modversion['dirname']) {
     include __DIR__ . '/include/onupdate.inc.php';
 }

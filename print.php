@@ -91,7 +91,7 @@ function Jprint($lid = 0)
     <tr>
     <td><br><br><b>' . _JOBS_REQUIRE . "</b><br><br><div style=\"text-align:justify;\">$requirements</div><P>";
 
-    if ($price == 1) {
+    if (1 == $price) {
         echo '<br><b>' . _JOBS_PRICE2 . '</b> ' . $xoopsModuleConfig['jobs_money'] . " $price - $typeprice<br>";
     }
     if ($town) {
@@ -168,7 +168,7 @@ function Rprint($lid = 0)
     echo "<tr><td><b>$name :</b> <i>$title</i> ";
     echo '</td>
     </tr><tr><td><br>';
-    if ($salary == 1) {
+    if (1 == $salary) {
         echo '<br><b>' . _JOBS_PRICE2 . '</b> ' . $xoopsModuleConfig['jobs_money'] . " $salary - $typeprice<br>";
     }
     if ($town) {

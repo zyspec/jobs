@@ -114,13 +114,13 @@ $xoopsTpl->assign('module_name', $xoopsModule->getVar('name'));
 $xoopsTpl->assign('category_path', $pathstring);
 $xoopsTpl->assign('category_id', $cid);
 
-if ($xoopsModuleConfig['jobs_show_company'] == '1') {
+if ('1' == $xoopsModuleConfig['jobs_show_company']) {
     $show_company = true;
     $xoopsTpl->assign('show_company', true);
 } else {
     $show_company = false;
 }
-if ($xoopsModuleConfig['jobs_show_state'] == '0') {
+if ('0' == $xoopsModuleConfig['jobs_show_state']) {
     $xoopsTpl->assign('show_state', '1');
 } else {
     $xoopsTpl->assign('show_state', '0');
@@ -135,7 +135,7 @@ $countpremium = $xoopsDB->query('select COUNT(*) FROM ' . $xoopsDB->prefix('jobs
 list($premrow) = $xoopsDB->fetchRow($countpremium);
 $premrows = $premrow;
 
-if ($premrows != '0') {
+if ('0' != $premrows) {
     $xoopsTpl->assign('premrows', $premrows);
     $xoopsTpl->assign('sponsored', _JOBS_SPONSORED_LISTINGS);
 }
@@ -190,7 +190,7 @@ if (count($arr) > 0) {
 }
 $pagenav = '';
 
-if ($trows == 0) { // the zero option added
+if (0 == $trows) { // the zero option added
     $xoopsTpl->assign('no_jobs_to_show', _JOBS_NOANNINCAT);
 } elseif ($trows > '0') {
     $xoopsTpl->assign('last_head', _JOBS_THE . ' ' . $xoopsModuleConfig['jobs_new_jobs_count'] . ' ' . _JOBS_LASTADD);
@@ -296,7 +296,7 @@ if ($trows == 0) { // the zero option added
         $a_item['status'] = $status;
         $a_item['date']   = $date;
 
-        if ($xoopsModuleConfig['jobs_show_state'] == '1') {
+        if ('1' == $xoopsModuleConfig['jobs_show_state']) {
             $state_name = jobs_getStateNameFromId($state);
 
             $a_item['state'] = $state_name;
@@ -318,7 +318,7 @@ if ($trows == 0) { // the zero option added
     //Calculates how many pages exist.  Which page one should be on, etc...
     $linkpages = ceil($trows / $show);
     //Page Numbering
-    if ($linkpages != 1 && $linkpages != 0) {
+    if (1 != $linkpages && 0 != $linkpages) {
         $prev = $min - $show;
         if ($prev >= 0) {
             $pagenav .= "<a href='jobscat.php?cid=$cid&min=$prev&orderby=$orderby&show=$show'><b><u>&laquo;</u></b></a> ";

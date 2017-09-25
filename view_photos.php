@@ -113,7 +113,7 @@ $pictures_number = $album_factory->getCount($criteria_lid, $criteria_uid);
 /**
  * If there is no pictures in the album
  */
-if ($pictures_number == 0) {
+if (0 == $pictures_number) {
     $nopicturesyet = _JOBS_NOTHINGYET;
     $xoopsTpl->assign('lang_nopicyet', $nopicturesyet);
 } else {
@@ -153,7 +153,7 @@ $identifier = $owner->getUnameFromId($uid);
  * Adding to the module js and css of the lightbox and new ones
  */
 
-if ($xoopsModuleConfig['' . $moduleDirName . '_lightbox'] == 1) {
+if (1 == $xoopsModuleConfig['' . $moduleDirName . '_lightbox']) {
     $header_lightbox = '<script type="text/javascript" src="assets/js/lightbox/js/prototype.js"></script>
 <script type="text/javascript" src="assets/js/lightbox/js/scriptaculous.js?load=effects"></script>
 <script type="text/javascript" src="assets/js/lightbox/js/lightbox.js"></script>

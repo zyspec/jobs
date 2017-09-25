@@ -73,12 +73,12 @@ if (!empty($_POST['submit'])) {
     $expire  = $myts->addSlashes($_POST['expire']);
     $type    = $myts->addSlashes($_POST['type']);
     $company = $myts->addSlashes($_POST['company']);
-    if ($xoopsModuleConfig['jobs_form_options'] == 'dhtmltextarea') {
+    if ('dhtmltextarea' == $xoopsModuleConfig['jobs_form_options']) {
         $desctext = $myts->displayTarea($_POST['desctext'], 0, 0, 0, 0, 0);
     } else {
         $desctext = $myts->displayTarea($_POST['desctext'], 1, 1, 1, 1, 1);
     }
-    if ($xoopsModuleConfig['jobs_form_options'] == 'dhtmltextarea') {
+    if ('dhtmltextarea' == $xoopsModuleConfig['jobs_form_options']) {
         $requirements = $myts->displayTarea($_POST['requirements'], 0, 0, 0, 0, 0);
     } else {
         $requirements = $myts->displayTarea($_POST['requirements'], 1, 1, 1, 1, 1);
@@ -107,7 +107,7 @@ if (!empty($_POST['submit'])) {
                    . " (lid, cid, title, status, expire, type, company, desctext, requirements, tel, price, typeprice, contactinfo, contactinfo1, contactinfo2, date, email, submitter, usid, town, state, valid, photo, view) VALUES ('$newid', '$cid', '$title', '$status', '$expire', '$type', '$company', '$desctext', '$requirements', '$tel', '$price', '$typeprice', '$contactinfo', '$contactinfo1', '$contactinfo2', '$date', '$email', '$submitter', '$usid', '$town', '$state', '$valid', '$photo', '$view')");
     $xoopsDB->query($sql);
 
-    if ($valid == '1') {
+    if ('1' == $valid) {
         $notificationHandler     = xoops_getHandler('notification');
         $lid                     = $xoopsDB->getInsertId();
         $tags                    = [];
@@ -133,7 +133,7 @@ if (!empty($_POST['submit'])) {
         $notificationHandler->triggerEvent('listing', $lid, 'new_job', $tags);
     }
     redirect_header('jobs.php', 3, _AM_JOBS_JOBADDED);
-} elseif (empty($_POST['select']) && ($xoopsModuleConfig['jobs_show_company'] == '1')) {
+} elseif (empty($_POST['select']) && ('1' == $xoopsModuleConfig['jobs_show_company'])) {
     require_once __DIR__ . '/admin_header.php';
     xoops_cp_header();
     //loadModuleAdminMenu(0, "");
@@ -199,7 +199,7 @@ if (!empty($_POST['submit'])) {
     $member_uname = $xoopsUser->getVar('uname', 'E');
     $email        = $member_email;
 
-    if ($xoopsModuleConfig['jobs_show_company'] == '1') {
+    if ('1' == $xoopsModuleConfig['jobs_show_company']) {
         $company = jobs_getACompany($comp_id);
     }
     $result  = $xoopsDB->query('SELECT rid, name FROM ' . $xoopsDB->prefix('jobs_region') . ' ORDER BY rid');
@@ -211,8 +211,8 @@ if (!empty($_POST['submit'])) {
     $form->addElement(new XoopsFormLabel(_AM_JOBS_SUBMITTER, $member_uname));
     $form->addElement(new XoopsFormHidden('submitter', $member_uname));
     $form->addElement(new XoopsFormText(_AM_JOBS_EMAIL, 'email', 50, 100, $email), true);
-    if ($xoopsModuleConfig['jobs_show_company'] == '1') {
-        if ($comp_id == '') {
+    if ('1' == $xoopsModuleConfig['jobs_show_company']) {
+        if ('' == $comp_id) {
             $form->addElement(new XoopsFormText(_AM_JOBS_COMPANY, 'company', 50, 50, '', true));
         } else {
             $form->addElement(new XoopsFormLabel(_AM_JOBS_COMPANY, $company['comp_name']));
@@ -221,7 +221,7 @@ if (!empty($_POST['submit'])) {
 
         $form->addElement(new XoopsFormText(_AM_JOBS_TOWN, 'town', 50, 50, $company['comp_city']), false);
 
-        if ($xoopsModuleConfig['jobs_show_state'] == '1') {
+        if ('1' == $xoopsModuleConfig['jobs_show_state']) {
             $state_form = new XoopsFormSelect(_AM_JOBS_STATE, 'state', $company['comp_state'], '0', false);
             while (list($rid, $name) = $xoopsDB->fetchRow($result)) {
                 $state_form->addOption('', _AM_JOBS_SELECT_STATE);
@@ -287,7 +287,7 @@ if (!empty($_POST['submit'])) {
         echo $submit_form;
     } else {
         $form->addElement(new XoopsFormText(_AM_JOBS_TOWN, 'town', 50, 50, ''), false);
-        if ($xoopsModuleConfig['jobs_show_state'] == '1') {
+        if ('1' == $xoopsModuleConfig['jobs_show_state']) {
             $state_form = new XoopsFormSelect(_AM_JOBS_STATE, 'state', '', '0', false);
             while (list($rid, $name) = $xoopsDB->fetchRow($result)) {
                 $state_form->addOption('', _AM_JOBS_SELECT_STATE);

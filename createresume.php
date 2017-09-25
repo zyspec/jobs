@@ -68,8 +68,8 @@ if (!empty($_POST['submit'])) {
     $notify      = !empty($_POST['notify']) ? 1 : 0;
     $member_usid = $xoopsUser->getVar('uid', 'E');
 
-    if ($xoopsModuleConfig['jobs_resume_options'] === 'dhtmltextarea'
-        || $xoopsModuleConfig['jobs_form_options'] === 'dhtml') {
+    if ('dhtmltextarea' === $xoopsModuleConfig['jobs_resume_options']
+        || 'dhtml' === $xoopsModuleConfig['jobs_form_options']) {
         $made_resume = $myts->displayTarea($_POST['resume'], 0, 0, 0, 0, 0);
     } else {
         $made_resume = $myts->displayTarea($_POST['resume'], 1, 0, 1, 1, 1);

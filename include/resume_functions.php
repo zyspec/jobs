@@ -197,34 +197,34 @@ function resume_convertorderbyin($orderby)
  */
 function resume_convertorderbytrans($orderby)
 {
-    if ($orderby == 'view ASC') {
+    if ('view ASC' == $orderby) {
         $orderbyTrans = '' . _JOBS_POPULARITYLTOM . '';
     }
-    if ($orderby == 'view DESC') {
+    if ('view DESC' == $orderby) {
         $orderbyTrans = '' . _JOBS_POPULARITYMTOL . '';
     }
-    if ($orderby == 'title ASC') {
+    if ('title ASC' == $orderby) {
         $orderbyTrans = '' . _JOBS_TITLEATOZ . '';
     }
-    if ($orderby == 'title DESC') {
+    if ('title DESC' == $orderby) {
         $orderbyTrans = '' . _JOBS_TITLEZTOA . '';
     }
-    if ($orderby == 'date ASC') {
+    if ('date ASC' == $orderby) {
         $orderbyTrans = '' . _JOBS_DATEOLD . '';
     }
-    if ($orderby == 'date DESC') {
+    if ('date DESC' == $orderby) {
         $orderbyTrans = '' . _JOBS_DATENEW . '';
     }
-    if ($orderby == 'company ASC') {
+    if ('company ASC' == $orderby) {
         $orderbyTrans = '' . _JOBS_COMPANYATOZ . '';
     }
-    if ($orderby == 'company DESC') {
+    if ('company DESC' == $orderby) {
         $orderbyTrans = '' . _JOBS_COMPANYZTOA . '';
     }
-    if ($orderby == 'exp ASC') {
+    if ('exp ASC' == $orderby) {
         $orderbyTrans = '' . _JOBS_EXPLTOH . '';
     }
-    if ($orderby == 'exp DESC') {
+    if ('exp DESC' == $orderby) {
         $orderbyTrans = '' . _JOBS_EXPHTOL . '';
     }
 
@@ -236,34 +236,34 @@ function resume_convertorderbytrans($orderby)
  */
 function resume_convertorderbyout($orderby)
 {
-    if ($orderby == 'title ASC') {
+    if ('title ASC' == $orderby) {
         $orderby = 'titleA';
     }
-    if ($orderby == 'date ASC') {
+    if ('date ASC' == $orderby) {
         $orderby = 'dateA';
     }
-    if ($orderby == 'view ASC') {
+    if ('view ASC' == $orderby) {
         $orderby = 'viewA';
     }
-    if ($orderby == 'company ASC') {
+    if ('company ASC' == $orderby) {
         $orderby = 'companyA';
     }
-    if ($orderby == 'exp ASC') {
+    if ('exp ASC' == $orderby) {
         $orderby = 'expA';
     }
-    if ($orderby == 'title DESC') {
+    if ('title DESC' == $orderby) {
         $orderby = 'titleD';
     }
-    if ($orderby == 'date DESC') {
+    if ('date DESC' == $orderby) {
         $orderby = 'dateD';
     }
-    if ($orderby == 'view DESC') {
+    if ('view DESC' == $orderby) {
         $orderby = 'viewD';
     }
-    if ($orderby == 'company DESC') {
+    if ('company DESC' == $orderby) {
         $orderby = 'companyD';
     }
-    if ($orderby == 'exp DESC') {
+    if ('exp DESC' == $orderby) {
         $orderby = 'expD';
     }
 }

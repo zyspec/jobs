@@ -98,7 +98,7 @@ if (!empty($_POST['submit'])) {
     $comp_user2    = $myts->addSlashes($_POST['comp_user2']);
     $comp_contact  = $myts->addSlashes($_POST['comp_contact']);
 
-    if ($premium == '1') {
+    if ('1' == $premium) {
 
         // START  - check new entries for company users are OK - GreenFlatDog
 
@@ -230,12 +230,12 @@ if (!empty($_POST['submit'])) {
 
     $token = $GLOBALS['xoopsSecurity']->createToken();
 
-    if (isset($_GET['cuser1']) && $_GET['cuser1'] != '') {
+    if (isset($_GET['cuser1']) && '' != $_GET['cuser1']) {
         $cuser1        = $_GET['cuser1'];
         $prob1         = $_GET['prob1'];
         $alert_message = _JOBS_PLS_CORRECT;
     }
-    if (isset($_GET['cuser2']) && $_GET['cuser2'] != '') {
+    if (isset($_GET['cuser2']) && '' != $_GET['cuser2']) {
         $cuser2        = $_GET['cuser2'];
         $prob2         = $_GET['prob2'];
         $alert_message = _JOBS_PLS_CORRECT;
@@ -286,16 +286,16 @@ if (!empty($_POST['submit'])) {
     $form->addElement(new XoopsFormFile(_JOBS_COMPANY_LOGO, 'comp_img', 0), false);
     $form->addElement(new XoopsFormTextArea(_JOBS_COMPANY_CONTACT, 'comp_contact', '' . $_SESSION['comp_contact'] . '', 6, 40), false);
     $form->insertBreak();
-    if ($premium == '1') {
+    if ('1' == $premium) {
         $form->insertBreak(_JOBS_COMPANY_OTHERS, 'head');
         $form->insertBreak();
 
         // START - check new entries for company users are OK - contributed by GreenFlatDog
         $alert = "<br><span style='color:#f00;'>%s%s</span>";
 
-        if (isset($_GET['cuser1']) && $_GET['cuser1'] != '') {
+        if (isset($_GET['cuser1']) && '' != $_GET['cuser1']) {
             if ($cuser1) {
-                $prob   = ($prob1 === 'n') ? _JOBS_COMP_USER_NOTTHERE : _JOBS_COMP_USER_NOPERM;
+                $prob   = ('n' === $prob1) ? _JOBS_COMP_USER_NOTTHERE : _JOBS_COMP_USER_NOPERM;
                 $alert1 = sprintf($alert, $cuser1, $prob);
                 unset($prob);
             }
@@ -309,9 +309,9 @@ if (!empty($_POST['submit'])) {
 
         $form->addElement(new XoopsFormTextArea(_JOBS_USER1_CONTACT, 'comp_user1_contact', '' . $_SESSION['comp_user1_contact'] . '', 6, 40), false);
 
-        if (isset($_GET['cuser2']) && $_GET['cuser2'] != '') {
+        if (isset($_GET['cuser2']) && '' != $_GET['cuser2']) {
             if ($cuser2) {
-                $prob   = ($prob2 === 'n') ? _JOBS_COMP_USER_NOTTHERE : _JOBS_COMP_USER_NOPERM;
+                $prob   = ('n' === $prob2) ? _JOBS_COMP_USER_NOTTHERE : _JOBS_COMP_USER_NOPERM;
                 $alert2 = sprintf($alert, $cuser2, $prob);
                 unset($prob);
             }

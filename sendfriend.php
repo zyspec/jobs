@@ -76,7 +76,7 @@ function SendJob($lid = 0)
     <td class='even'><input class=\"textbox\" type=\"text\" name=\"fmail\"></td>
     </tr>";
 
-    if ($xoopsModuleConfig['jobs_use_captcha'] == '1') {
+    if ('1' == $xoopsModuleConfig['jobs_use_captcha']) {
         echo "<tr><td class='head'>" . _JOBS_CAPTCHA . " </td><td class='even'>";
         $jlm_captcha = '';
         $jlm_captcha = new XoopsFormCaptcha(_JOBS_CAPTCHA, 'xoopscaptcha', false);
@@ -101,7 +101,7 @@ function MailJob($lid = 0, $yname, $ymail, $fname, $fmail)
 {
     global $xoopsConfig, $xoopsUser, $xoopsDB, $xoopsModule, $xoopsModuleConfig, $myts, $xoopsLogger, $moduleDirName;
 
-    if ($xoopsModuleConfig['jobs_use_captcha'] == '1') {
+    if ('1' == $xoopsModuleConfig['jobs_use_captcha']) {
         $x24plus = jobs_isX24plus();
         if ($x24plus) {
             xoops_load('xoopscaptcha');
@@ -215,7 +215,7 @@ function SendResume($lid = 0)
     <td class='even'><input class=\"textbox\" type=\"text\" name=\"fmail\"></td>
     </tr>";
 
-    if ($xoopsModuleConfig['jobs_use_captcha'] == '1') {
+    if ('1' == $xoopsModuleConfig['jobs_use_captcha']) {
         echo "<tr><td class='head'>" . _JOBS_CAPTCHA . " </td><td class='even'>";
         $jlm_captcha = '';
         $jlm_captcha = new XoopsFormCaptcha(_JOBS_CAPTCHA, 'xoopscaptcha', false);
@@ -241,7 +241,7 @@ function MailResume($lid = 0, $yname, $ymail, $fname, $fmail)
 {
     global $xoopsConfig, $xoopsUser, $xoopsDB, $xoopsModule, $xoopsModuleConfig, $myts, $xoopsLogger, $moduleDirName;
 
-    if ($xoopsModuleConfig['jobs_use_captcha'] == '1') {
+    if ('1' == $xoopsModuleConfig['jobs_use_captcha']) {
         $x24plus = jobs_isX24plus();
         if ($x24plus) {
             xoops_load('xoopscaptcha');

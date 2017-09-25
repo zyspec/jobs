@@ -49,14 +49,14 @@ list($usid, $photo) = $xoopsDB->fetchRow($result);
 
 if ($xoopsUser) {
     $ok = !isset($_REQUEST['ok']) ? null : $_REQUEST['ok'];
-    if ($xoopsModuleConfig['jobs_show_company'] == '1') {
+    if ('1' == $xoopsModuleConfig['jobs_show_company']) {
         $member_id = $xoopsUser->getVar('uid', 'E');
 
         $request1 = $xoopsDB->query('SELECT comp_usid, comp_user1, comp_user2 FROM ' . $xoopsDB->prefix('jobs_companies') . ' WHERE ' . $member_id . ' IN (comp_usid, comp_user1, comp_user2)');
         list($comp_usid, $comp_user1, $comp_user2) = $xoopsDB->fetchRow($request1);
         $comp_users = [$comp_usid, $comp_user1, $comp_user2];
         if (in_array($member_id, $comp_users)) {
-            if ($ok == 1) {
+            if (1 == $ok) {
                 $xoopsDB->queryF('DELETE FROM ' . $xoopsDB->prefix('jobs_listing') . ' WHERE lid=' . $xoopsDB->escape($lid) . '');
                 redirect_header('index.php', 3, _JOBS_JOBDEL);
             } else {
@@ -68,7 +68,7 @@ if ($xoopsUser) {
             echo '</td></tr></table>';
         }
     } else {
-        if ($ok == 1) {
+        if (1 == $ok) {
             $xoopsDB->queryF('DELETE FROM ' . $xoopsDB->prefix('jobs_listing') . ' WHERE lid=' . $xoopsDB->escape($lid) . '');
             redirect_header('index.php', 3, _JOBS_JOBDEL);
         } else {

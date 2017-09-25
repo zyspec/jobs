@@ -54,7 +54,7 @@ if ($xoopsUser) {
 
     $member_usid = $xoopsUser->getVar('uid', 'E');
     if ($comp_usid == $member_usid) {
-        if ($ok == 1) {
+        if (1 == $ok) {
             // Delete Company
             $xoopsDB->queryF('DELETE FROM ' . $xoopsDB->prefix('jobs_companies') . ' WHERE comp_id=' . $xoopsDB->escape($comp_id) . '');
 

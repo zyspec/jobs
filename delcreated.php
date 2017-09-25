@@ -46,7 +46,7 @@ if ($xoopsUser) {
     include XOOPS_ROOT_PATH . '/header.php';
     $calusern = $xoopsUser->getVar('uid', 'E');
     if ($usid == $calusern) {
-        if ($ok == 1) {
+        if (1 == $ok) {
             $xoopsDB->queryF('DELETE FROM ' . $xoopsDB->prefix('jobs_created_resumes') . ' WHERE lid=' . $xoopsDB->escape($lid) . '');
             if ($made_resume) {
                 $destination = XOOPS_ROOT_PATH . "/modules/$moduleDirName/resumes";

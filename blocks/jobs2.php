@@ -64,7 +64,7 @@ function jobs_b2_show($options)
 
         $a_item['company'] = $company;
 
-        if ($comp_img != '') {
+        if ('' != $comp_img) {
             $a_item['logo_link'] = '<a href="' . XOOPS_URL . "/modules/$blockdirname/members.php?comp_id=" . $comp_id . '" ><img src="' . XOOPS_URL . "/modules/$blockdirname/logo_images/$comp_img\" alt=\"$comp_name\"  width=\"120px\"></a>";
         } else {
             $a_item['logo_link'] = '';
@@ -91,12 +91,12 @@ function jobs_b2_edit($options)
 
     $form = constant($block_lang . '_ORDER') . "&nbsp;<select name='options[]'>";
     $form .= "<option value='date'";
-    if ($options[0] === 'date') {
+    if ('date' === $options[0]) {
         $form .= ' selected';
     }
     $form .= '>' . constant($block_lang . '_DATE') . "</option>\n";
     $form .= "<option value='hits'";
-    if ($options[0] === 'hits') {
+    if ('hits' === $options[0]) {
         $form .= ' selected';
     }
     $form .= '>' . constant($block_lang . '_HITS') . '</option>';

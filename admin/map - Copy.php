@@ -57,7 +57,7 @@ $mytree->makeJobSelBox('title', '' . $xoopsModuleConfig['jobs_cat_sortorder'] . 
 echo '<br><hr>';
 echo '<p>' . _AM_JOBS_HELP1 . ' </p>';
 
-if ($xoopsModuleConfig['jobs_cat_sortorder'] == 'ordre') {
+if ('ordre' == $xoopsModuleConfig['jobs_cat_sortorder']) {
     echo '<p>' . _AM_JOBS_HELP2 . ' </p>';
 }
 echo '<br></fieldset><br>';

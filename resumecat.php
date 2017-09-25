@@ -172,7 +172,7 @@ if (count($arr) > 0) {
 
 $pagenav = '';
 
-if ($trows == '0') {
+if ('0' == $trows) {
     $xoopsTpl->assign('show_nav', false);
     $xoopsTpl->assign('no_resumes_to_show', _JOBS_NOANNINCAT);
 } elseif ($trows > '0') {
@@ -276,7 +276,7 @@ if ($trows == '0') {
     //Calculates how many pages exist.  Which page one should be on, etc...
     $linkpages = ceil($trows / $show);
     //Page Numbering
-    if ($linkpages != 1 && $linkpages != 0) {
+    if (1 != $linkpages && 0 != $linkpages) {
         $prev = $min - $show;
         if ($prev >= 0) {
             $pagenav .= "<a href='resumecat.php?cid=$cid&min=$prev&orderby=$orderby&show=$show'><b><u>&laquo;</u></b></a> ";

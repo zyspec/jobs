@@ -62,7 +62,7 @@ $cod_img = $_POST['cod_img'];
 $lid     = $_POST['lid'];
 $marker  = $_POST['marker'];
 
-if ($marker == 1) {
+if (1 == $marker) {
     /**
      * Creating the factory  loading the picture changing its caption
      */

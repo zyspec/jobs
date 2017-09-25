@@ -93,9 +93,9 @@ $varnom[$x] = $title;
 
 list($res) = $xoopsDB->fetchRow($xoopsDB->query('SELECT COUNT(*) FROM ' . $xoopsDB->prefix('jobs_resume') . " WHERE valid='1' AND cid=" . $xoopsDB->escape($cid) . ''));
 
-if ($pid != 0) {
+if (0 != $pid) {
     $x = 1;
-    while ($pid != 0) {
+    while (0 != $pid) {
         $result3 = $xoopsDB->query('SELECT cid, pid, title FROM ' . $xoopsDB->prefix('jobs_res_categories') . ' WHERE cid=' . addslashes($pid) . '');
         list($ccid, $pid, $title) = $xoopsDB->fetchRow($result3);
 
@@ -133,16 +133,16 @@ if ($recordexist) {
             $useroffset = $xoopsConfig['default_TZ'];
         }
         //  Specification for Japan: view count up judge
-        if (($xoopsUser->getVar('uid') == 1) || ($xoopsUser->getVar('uid') == $usid)) {
+        if ((1 == $xoopsUser->getVar('uid')) || ($xoopsUser->getVar('uid') == $usid)) {
             $viewcount_judge = false;
         }
     }
     //  Specification for Japan: view count up judge
-    if ($viewcount_judge === true) {
+    if (true === $viewcount_judge) {
         $xoopsDB->queryF('UPDATE ' . $xoopsDB->prefix('jobs_resume') . ' SET view=view+1 WHERE lid = ' . $xoopsDB->escape($lid) . '');
     }
 
-    if ($valid == '0') {
+    if ('0' == $valid) {
         $xoopsTpl->assign('not_yet_approved', '<font style="color:red;">' . _JOBS_NOT_APPROVED . '</font>');
     }
 
@@ -232,11 +232,11 @@ if ($recordexist) {
     $xoopsTpl->assign('contact_head', _JOBS_CONTACT);
     $xoopsTpl->assign('contact_email', '<a href="contactresume.php?lid=' . addslashes($lid) . '">' . _JOBS_BYMAIL2 . '</a>');
 
-    if ($resume != '') {
+    if ('' != $resume) {
         if (!empty($private) && $unlock != $private) {
             $xoopsTpl->assign('resume', _JOBS_RES_IS_PRIVATE);
             $xoopsTpl->assign('show_private', _JOBS_RES_PRIVATE_DESC);
-        } elseif ($resume != 'created') {
+        } elseif ('created' != $resume) {
             $xoopsTpl->assign('resume', "<a href=\"../$moduleDirName/resumes/$resume\">" . _JOBS_VIEWRESUME . '</a>');
         } else {
             $xoopsTpl->assign('resume', "$created_resume");
@@ -244,7 +244,7 @@ if ($recordexist) {
     } else {
         $xoopsTpl->assign('noresume', _JOBS_RES_NORESUME);
     }
-    if ($rphoto != '') {
+    if ('' != $rphoto) {
         $xoopsTpl->assign('photo', '<a href="view_photos.php?lid=' . addslashes($lid) . '&uid=' . addslashes($uid_owner) . "\" target=_self><img src=\"$updir/$url\" alt=\"$title\" width=\"130px\">");
         if ($rphoto > '1') {
             $xoopsTpl->assign('more_photos', _JOBS_MORE_PHOTOS);

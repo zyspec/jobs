@@ -37,7 +37,7 @@ global $xoopsDB;
 $countresult = $xoopsDB->query('SELECT COUNT(*) FROM ' . $xoopsDB->prefix('' . $moduleDirName . '_categories') . ' ');
 list($cat_row) = $xoopsDB->fetchRow($countresult);
 $cat_rows = $cat_row;
-if ($cat_rows == '0') {
+if ('0' == $cat_rows) {
     echo '' . constant($cloned_lang . '_MUST_ADD_CAT') . '';
 } else {
     $permtoset                = isset($_POST['permtoset']) ? (int)$_POST['permtoset'] : 1;

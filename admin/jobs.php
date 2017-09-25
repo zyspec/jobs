@@ -91,7 +91,7 @@ if ($crows > '0') {
 
         echo "<tr class='" . $class . "'>";
 
-        $class = ($class === 'even') ? 'odd' : 'even';
+        $class = ('even' === $class) ? 'odd' : 'even';
 
         echo '<td align="center">' . $lid . '</td>';
         echo '<td align="center">' . $title . '</td>';

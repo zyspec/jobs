@@ -83,7 +83,7 @@ class XoopsGroupPermForm extends XoopsForm
         $this->_permName = $permname;
         $this->_permDesc = $permdesc;
         $this->addElement(new XoopsFormHidden('modid', $this->_modid));
-        if ($url != "") {
+        if ("" != $url) {
             $this->addElement(new XoopsFormHidden('redirect_url', $url));
         }
         $this->_showAnonymous = $anonymous;
@@ -145,7 +145,7 @@ class XoopsGroupPermForm extends XoopsForm
         $member_handler = &xoops_gethandler('member');
         $glist          = $member_handler->getGroupList();
         foreach (array_keys($glist) as $i) {
-            if ($i == XOOPS_GROUP_ANONYMOUS && !$this->_showAnonymous) {
+            if (XOOPS_GROUP_ANONYMOUS == $i && !$this->_showAnonymous) {
                 continue;
             }
             // get selected item id(s) for each group
@@ -174,7 +174,7 @@ class XoopsGroupPermForm extends XoopsForm
                 $ret .= $elements[$i];
             } elseif (!$elements[$i]->isHidden()) {
                 $ret .= '<tr valign="top" align="left"><td class="head">' . $elements[$i]->getCaption();
-                if ($elements[$i]->getDescription() != "") {
+                if ("" != $elements[$i]->getDescription()) {
                     $ret
                         .=
                         "<br ><br ><span style='font-weight: normal;'>" . $elements[$i]->getDescription() . "</span>";

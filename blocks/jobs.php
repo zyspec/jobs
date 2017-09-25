@@ -124,12 +124,12 @@ function jobs_edit($options)
 
     $form = constant($block_lang . '_ORDER') . "&nbsp;<select name='options[]'>";
     $form .= "<option value='date'";
-    if ($options[0] === 'date') {
+    if ('date' === $options[0]) {
         $form .= ' selected';
     }
     $form .= '>' . constant($block_lang . '_DATE') . "</option>\n";
     $form .= "<option value='view'";
-    if ($options[0] === 'view') {
+    if ('view' === $options[0]) {
         $form .= ' selected';
     }
     $form .= '>' . constant($block_lang . '_HITS') . '</option>';

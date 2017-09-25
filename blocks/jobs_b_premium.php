@@ -72,7 +72,7 @@ function jobs_block_premium_show($options)
 
         $a_item = [];
 
-        if ($thisModuleConfig['jobs_show_company'] == '0') {
+        if ('0' == $thisModuleConfig['jobs_show_company']) {
             $a_item['show_company'] = 1;
         } else {
             $a_item['show_company'] = '';
@@ -93,7 +93,7 @@ function jobs_block_premium_show($options)
 
         $a_item['ltitle'] = '<a href="' . XOOPS_URL . "/modules/$blockdirname/viewjobs.php?lid=$lid\"><b>$title</b></a>";
 
-        if ($comp_img != '') {
+        if ('' != $comp_img) {
             $a_item['logo_link'] = '<a href="' . XOOPS_URL . "/modules/$blockdirname/members.php?comp_id=" . $comp_id . '" ><img src="' . XOOPS_URL . "/modules/$blockdirname/logo_images/$comp_img\" alt=\"$comp_name\"  width=\"120px\"></a>";
         } else {
             $a_item['logo_link'] = '';
@@ -131,12 +131,12 @@ function jobs_block_premium_edit($options)
 
     $form = constant($block_lang . '_ORDER') . "&nbsp;<select name='options[]'>";
     $form .= "<option value='date'";
-    if ($options[0] === 'date') {
+    if ('date' === $options[0]) {
         $form .= ' selected';
     }
     $form .= '>' . constant($block_lang . '_DATE') . "</option>\n";
     $form .= "<option value='view'";
-    if ($options[0] === 'view') {
+    if ('view' === $options[0]) {
         $form .= ' selected';
     }
     $form .= '>' . constant($block_lang . '_HITS') . '</option>';

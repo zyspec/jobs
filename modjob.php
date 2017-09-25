@@ -58,15 +58,15 @@ if (!empty($_POST['submit'])) {
     $type    = $myts->addSlashes($_POST['type']);
     $company = $myts->undoHtmlSpecialChars($_POST['company']);
 
-    if ($xoopsModuleConfig['jobs_form_options'] == 'dhtmltextarea'
-        || $xoopsModuleConfig['jobs_form_options'] == 'dhtml') {
+    if ('dhtmltextarea' == $xoopsModuleConfig['jobs_form_options']
+        || 'dhtml' == $xoopsModuleConfig['jobs_form_options']) {
         $desctext = $myts->displayTarea($_POST['desctext'], 0, 0, 1, 1, 0);
     } else {
         $desctext = $myts->displayTarea($_POST['desctext'], 1, 0, 1, 1, 1);
     }
 
-    if ($xoopsModuleConfig['jobs_form_options'] == 'dhtmltextarea'
-        || $xoopsModuleConfig['jobs_form_options'] == 'dhtml') {
+    if ('dhtmltextarea' == $xoopsModuleConfig['jobs_form_options']
+        || 'dhtml' == $xoopsModuleConfig['jobs_form_options']) {
         $requirements = $myts->displayTarea($_POST['requirements'], 0, 0, 1, 1, 0);
     } else {
         $requirements = $myts->displayTarea($_POST['requirements'], 1, 0, 1, 1, 1);
@@ -92,7 +92,7 @@ if (!empty($_POST['submit'])) {
                     . $xoopsDB->escape($lid)
                     . '');
 
-    if ($valid == '1') {
+    if ('1' == $valid) {
         redirect_header('viewjobs.php?lid=' . addslashes($lid) . '', 3, _JOBS_JOBMOD2);
     } else {
         redirect_header('index.php', 3, _JOBS_MODIFBEFORE);
@@ -132,15 +132,15 @@ if (!empty($_POST['submit'])) {
             $type    = $myts->htmlSpecialChars($type);
             $company = $myts->undoHtmlSpecialChars($company);
 
-            if ($xoopsModuleConfig['jobs_form_options'] == 'dhtmltextarea'
-                || $xoopsModuleConfig['jobs_form_options'] == 'dhtml') {
+            if ('dhtmltextarea' == $xoopsModuleConfig['jobs_form_options']
+                || 'dhtml' == $xoopsModuleConfig['jobs_form_options']) {
                 $desctext = $myts->undoHtmlSpecialChars($myts->displayTarea($desctext, 0, 0, 1, 1, 0));
             } else {
                 $desctext = $myts->displayTarea($desctext, 1, 0, 1, 1, 1);
             }
 
-            if ($xoopsModuleConfig['jobs_form_options'] == 'dhtmltextarea'
-                || $xoopsModuleConfig['jobs_form_options'] == 'dhtml') {
+            if ('dhtmltextarea' == $xoopsModuleConfig['jobs_form_options']
+                || 'dhtml' == $xoopsModuleConfig['jobs_form_options']) {
                 $requirements = $myts->undoHtmlSpecialChars($myts->displayTarea($requirements, 0, 0, 1, 1, 0));
             } else {
                 $requirements = $myts->displayTarea($requirements, 1, 0, 1, 1, 1);
@@ -178,7 +178,7 @@ if (!empty($_POST['submit'])) {
 
             $form->addElement(new XoopsFormLabel(_JOBS_NUMANNN, $lid . ' ' . _JOBS_ADDED . ' ' . $dates));
             $form->addElement(new XoopsFormLabel(_JOBS_SENDBY, $submitter));
-            if ($xoopsModuleConfig['jobs_show_company'] == '1') {
+            if ('1' == $xoopsModuleConfig['jobs_show_company']) {
                 $form->addElement(new XoopsFormLabel(_JOBS_COMPANY2, $company));
                 $form->addElement(new XoopsFormHidden('company', $company));
             } else {
@@ -188,7 +188,7 @@ if (!empty($_POST['submit'])) {
             $form->addElement(new XoopsFormText(_JOBS_TEL, 'tel', 30, 30, $tel), false);
             $form->addElement(new XoopsFormText(_JOBS_TOWN, 'town', 50, 50, $town), false);
 
-            if ($xoopsModuleConfig['jobs_show_state'] == '1') {
+            if ('1' == $xoopsModuleConfig['jobs_show_state']) {
                 $state_form = new XoopsFormSelect(_JOBS_STATE, 'state', $state, '0', false);
                 while (list($rid, $name) = $xoopsDB->fetchRow($result2)) {
                     $state_form->addOption('', _JOBS_SELECT_STATE);
@@ -199,7 +199,7 @@ if (!empty($_POST['submit'])) {
                 $form->addElement(new XoopsFormHidden('state', ''));
             }
 
-            if (($premium == '1') || ($temp_premium == '1')) {
+            if (('1' == $premium) || ('1' == $temp_premium)) {
                 $radio        = new XoopsFormRadio(_JOBS_STATUS, 'status', $status);
                 $options['1'] = _JOBS_ACTIVE;
                 $options['0'] = _JOBS_INACTIVE;
@@ -209,7 +209,7 @@ if (!empty($_POST['submit'])) {
                 $form->addElement(new XoopsFormHidden('status', '1'));
             }
             $form->addElement(new XoopsFormText(_JOBS_TITLE, 'title', 40, 50, $title), true);
-            if (($premium == '1') || ($temp_premium == '1')) {
+            if (('1' == $premium) || ('1' == $temp_premium)) {
                 $form->addElement(new XoopsFormText(_JOBS_HOW_LONG, 'expire', 3, 3, $xoopsModuleConfig['jobs_days']), true);
             } else {
                 $form->addElement(new XoopsFormLabel(_JOBS_NON_HOW_LONG, $xoopsModuleConfig['jobs_days']));
@@ -242,7 +242,7 @@ if (!empty($_POST['submit'])) {
 
             $form->addElement(new XoopsFormTextArea(_JOBS_CONTACTINFO, 'contactinfo', $contactinfo, 6, 40), false);
 
-            if (($premium == '1') || ($temp_premium == '1')) {
+            if (('1' == $premium) || ('1' == $temp_premium)) {
                 $form->addElement(new XoopsFormTextArea(_JOBS_CONTACTINFO1, 'contactinfo1', $contactinfo1, 6, 40), false);
                 $form->addElement(new XoopsFormTextArea(_JOBS_CONTACTINFO2, 'contactinfo2', $contactinfo2, 6, 40), false);
             } else {
@@ -250,7 +250,7 @@ if (!empty($_POST['submit'])) {
                 $form->addElement(new XoopsFormHidden('contactinfo2', ''));
             }
 
-            if ($xoopsModuleConfig['jobs_moderated'] == 0) {
+            if (0 == $xoopsModuleConfig['jobs_moderated']) {
                 $form->addElement(new XoopsFormHidden('valid', '1'), false);
             } else {
                 $form->addElement(new XoopsFormHidden('valid', '0'), false);

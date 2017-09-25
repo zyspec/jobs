@@ -75,7 +75,7 @@ if (!empty($_POST['submit'])) {
     $maxhigh     = $xoopsModuleConfig['jobs_resized_height'];
     $date        = time();
 
-    if ($del_old === true) {
+    if (true === $del_old) {
         if (file_exists("$destination/$comp_img_old")) {
             unlink("$destination/$comp_img_old");
         }
@@ -83,7 +83,7 @@ if (!empty($_POST['submit'])) {
     }
     $comp_user1 = $_POST['comp_user1'];
     $comp_user2 = $_POST['comp_user2'];
-    if (($premium == '1') || ($temp_premium == '1')) {
+    if (('1' == $premium) || ('1' == $temp_premium)) {
 
         // START - check new entries for company users are OK - contributed by GreenFlatDog
         //  $comp_userid1 = jobs_getIdFromUname($comp_user1);
@@ -224,14 +224,14 @@ if (!empty($_POST['submit'])) {
 
             $comp_state = stripslashes($comp_state);
 
-            if ($comp_user1 != 0) {
+            if (0 != $comp_user1) {
                 xoops_load('xoopsuserutility');
                 $comp_username1 = XoopsUser::getUnameFromId($comp_user1);
             } else {
                 $comp_username1 = '';
             }
 
-            if ($comp_user2 != 0) {
+            if (0 != $comp_user2) {
                 xoops_load('xoopsuserutility');
                 $comp_username2 = XoopsUser::getUnameFromId($comp_user2);
             } else {
@@ -259,14 +259,14 @@ if (!empty($_POST['submit'])) {
             $alert1        = '';
             $alert2        = '';
             // START - check new entries for company users are OK - contributed by GreenFlatDog
-            if (isset($_GET['cuser1']) && $_GET['cuser1'] != '') {
+            if (isset($_GET['cuser1']) && '' != $_GET['cuser1']) {
                 $cuser1        = $_GET['cuser1'];
                 $prob1         = $_GET['prob1'];
                 $alert_message = _JOBS_PLS_CORRECT;
             } else {
                 $cuser1 = '';
             }
-            if (isset($_GET['cuser2']) && $_GET['cuser2'] != '') {
+            if (isset($_GET['cuser2']) && '' != $_GET['cuser2']) {
                 $cuser2        = $_GET['cuser2'];
                 $prob2         = $_GET['prob2'];
                 $alert_message = _JOBS_PLS_CORRECT;
@@ -291,7 +291,7 @@ if (!empty($_POST['submit'])) {
             $form->addElement(new XoopsFormText(_JOBS_COMPANY_ADDRESS2, 'comp_address2', 30, 100, $comp_address2), false);
             $form->addElement(new XoopsFormText(_JOBS_TOWN, 'comp_city', 30, 50, $comp_city), false);
 
-            if ($xoopsModuleConfig['jobs_show_state'] == '1') {
+            if ('1' == $xoopsModuleConfig['jobs_show_state']) {
                 $state_form = new XoopsFormSelect(_JOBS_STATE, 'comp_state', $comp_state, '0', false);
                 while (list($rid, $name) = $xoopsDB->fetchRow($result)) {
                     $state_form->addOption('', _JOBS_SELECT_STATE);
@@ -308,12 +308,12 @@ if (!empty($_POST['submit'])) {
             $form->addElement(new XoopsFormText(_JOBS_COMPANY_SITEURL, 'comp_url', 30, 30, $comp_url), false);
             $form->addElement(new XoopsFormTextArea(_JOBS_CONTACTINFO, 'comp_contact', $comp_contact, 6, 35), false);
 
-            if ($premium == '1' || $temp_premium == '1') {
+            if ('1' == $premium || '1' == $temp_premium) {
 
                 // START - check new entries for company users are OK - contributed by GreenFlatDog
                 $alert = "<br><span style='color:#f00;'>%s%s</span>";
                 if ($cuser1) {
-                    $prob   = ($prob1 == 'n') ? _JOBS_COMP_USER_NOTTHERE : _JOBS_COMP_USER_NOPERM;
+                    $prob   = ('n' == $prob1) ? _JOBS_COMP_USER_NOTTHERE : _JOBS_COMP_USER_NOPERM;
                     $alert1 = sprintf($alert, $cuser1, $prob);
                     unset($prob);
                 }
@@ -321,7 +321,7 @@ if (!empty($_POST['submit'])) {
                 $form->addElement(new XoopsFormTextArea(_JOBS_USER1_CONTACT, 'comp_user1_contact', $comp_user1_contact, 6, 35), false);
 
                 if ($cuser2) {
-                    $prob   = ($prob2 == 'n') ? _JOBS_COMP_USER_NOTTHERE : _JOBS_COMP_USER_NOPERM;
+                    $prob   = ('n' == $prob2) ? _JOBS_COMP_USER_NOTTHERE : _JOBS_COMP_USER_NOPERM;
                     $alert2 = sprintf($alert, $cuser2, $prob);
                     unset($prob);
                 }

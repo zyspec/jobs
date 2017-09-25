@@ -134,7 +134,7 @@ if (!empty($_POST['submit'])) {
     unset($_SESSION['name'], $_SESSION['title'], $_SESSION['status'], $_SESSION['exp'], $_SESSION['expire'], $_SESSION['private'], $_SESSION['tel'], $_SESSION['salary'], $_SESSION['typeprice'], $_SESSION['submitter'], $_SESSION['town'], $_SESSION['state'], $_SESSION['make_resume'], $_SESSION['email']);
 
     $lid = $xoopsDB->getInsertId();
-    if ($valid == '1') {
+    if ('1' == $valid) {
         $notificationHandler = xoops_getHandler('notification');
 
         $tags                     = [];
@@ -159,7 +159,7 @@ if (!empty($_POST['submit'])) {
         $notificationHandler->triggerEvent('resume_listing', $lid, 'new_resume', $tags);
     }
 
-    if ($make_resume != '0') {
+    if ('0' != $make_resume) {
         redirect_header('createresume.php?lid=' . addslashes($lid) . '', 4, _JOBS_RES_ADDED_PLUS);
     } else {
         redirect_header('viewresume.php?lid=' . addslashes($lid) . '', 4, _JOBS_RES_ADDED);
@@ -196,7 +196,7 @@ if (!empty($_POST['submit'])) {
         $xoopsTpl->assign('days', $resdays);
         $xoopsTpl->assign('res_moderate2', _JOBS_RES_MODERATE2);
 
-        if ($xoopsModuleConfig['jobs_moderate_resume'] == '1') {
+        if ('1' == $xoopsModuleConfig['jobs_moderate_resume']) {
             $xoopsTpl->assign('res_moderate', _JOBS_RES_JOBMODERATE);
         } else {
             $xoopsTpl->assign('res_moderate', _JOBS_RES_JOBNOMODERATE);
@@ -286,7 +286,7 @@ if (!empty($_POST['submit'])) {
         //        $form->addElement(new XoopsFormCaptcha(_JOBS_CAPTCHA, "xoopscaptcha", false), true);
         //  }
 
-        if ($xoopsModuleConfig['jobs_moderate_resume'] == 0) {
+        if (0 == $xoopsModuleConfig['jobs_moderate_resume']) {
             $form->addElement(new XoopsFormHidden('valid', '1'), false);
         } else {
             $form->addElement(new XoopsFormHidden('valid', '0'), false);

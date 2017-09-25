@@ -55,7 +55,7 @@ if ($xoopsUser) {
     list($comp_usid, $comp_user1, $comp_user2) = $xoopsDB->fetchRow($request1);
     $comp_users = [$comp_usid, $comp_user1, $comp_user2];
     if (in_array($member_id, $comp_users)) {
-        if ($ok == 1) {
+        if (1 == $ok) {
             $xoopsDB->queryF('DELETE FROM ' . $xoopsDB->prefix('jobs_replies') . ' WHERE r_lid=' . $xoopsDB->escape($r_lid) . '');
 
             redirect_header('index.php', 3, _JOBS_JOBDEL);

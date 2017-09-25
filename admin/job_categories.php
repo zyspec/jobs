@@ -76,14 +76,14 @@ switch ($op) {
                         <a href='job_categories.php?op=delete_category&cid=" . $category_arr[$i]->getVar('cid') . "'><img src=" . $pathIcon16 . "/delete.png alt='" . _DELETE . "' title='" . _DELETE . "'></a>
                       </td>
                     </tr>";
-                $class    = ($class === 'even') ? 'odd' : 'even';
+                $class    = ('even' === $class) ? 'odd' : 'even';
                 $criteria = new CriteriaCompo();
                 $criteria->add(new Criteria('pid', $category_arr[$i]->getVar('cid')));
                 $criteria->setSort('title');
                 $criteria->setOrder('ASC');
                 $pid     = $jobsJobs_categoriesHandler->getall($criteria);
                 $num_pid = $jobsJobs_categoriesHandler->getCount();
-                if ($num_pid != 0) {
+                if (0 != $num_pid) {
                     jobsCategoryDisplayChildren($cid, $pid, $prefix, $order, $class);
                 }
             }
@@ -102,7 +102,7 @@ switch ($op) {
             $class  = 'odd';
             $prefix = "<img src='" . XOOPS_URL . "/modules/jobs/assets/images/arrow.gif'>";
             foreach (array_keys($category_arr) as $i) {
-                if ($category_arr[$i]->getVar('pid') == 0) {
+                if (0 == $category_arr[$i]->getVar('pid')) {
                     $cid   = $category_arr[$i]->getVar('cid');
                     $img   = $category_arr[$i]->getVar('img');
                     $title = $category_arr[$i]->getVar('title');
@@ -121,7 +121,7 @@ switch ($op) {
                             <a href='job_categories.php?op=delete_category&cid=" . $category_arr[$i]->getVar('cid') . "'><img src=" . $pathIcon16 . "/delete.png alt='" . _DELETE . "' title='" . _DELETE . "'></a>
                         </td>
                     </tr>";
-                    $class    = ($class === 'even') ? 'odd' : 'even';
+                    $class    = ('even' === $class) ? 'odd' : 'even';
                     $criteria = new CriteriaCompo();
                     $criteria->add(new Criteria('pid', $cid));
                     $criteria->setSort('title');
@@ -129,7 +129,7 @@ switch ($op) {
                     $pid     = $jobsJobs_categoriesHandler->getall($criteria);
                     $num_pid = $jobsJobs_categoriesHandler->getCount();
 
-                    if ($num_pid != 0) {
+                    if (0 != $num_pid) {
                         jobsCategoryDisplayChildren($cid, $pid, $prefix, 'title', $class);
                     }
                 }
@@ -217,7 +217,7 @@ switch ($op) {
     case 'delete_category':
         xoops_cp_header();
         $obj = $jobsJobs_categoriesHandler->get($_REQUEST['cid']);
-        if (isset($_REQUEST['ok']) && $_REQUEST['ok'] == 1) {
+        if (isset($_REQUEST['ok']) && 1 == $_REQUEST['ok']) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 redirect_header('jobs.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
             }

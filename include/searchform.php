@@ -54,8 +54,8 @@ if (!empty($is_resume)) {
     $search_form->addElement(new XoopsFormLabel(_JOBS_CAT, ob_get_contents()));
     ob_end_clean();
 
-    if ($xoopsModuleConfig['jobs_show_state'] == '1') {
-        if ($xoopsModuleConfig['jobs_countries'] == '1') {
+    if ('1' == $xoopsModuleConfig['jobs_show_state']) {
+        if ('1' == $xoopsModuleConfig['jobs_countries']) {
             ob_start();
             $staterestree->resume_makeMyStateSelBox('name', 'rid', $by_state, '1', 'by_state');
             $search_form->addElement(new XoopsFormLabel(_JOBS_STATE, ob_get_contents()));
@@ -75,8 +75,8 @@ if (!empty($is_resume)) {
     $search_form->addElement(new XoopsFormLabel(_JOBS_CAT, ob_get_contents()));
     ob_end_clean();
 
-    if ($xoopsModuleConfig['jobs_show_state'] == '1') {
-        if ($xoopsModuleConfig['jobs_countries'] == '1') {
+    if ('1' == $xoopsModuleConfig['jobs_show_state']) {
+        if ('1' == $xoopsModuleConfig['jobs_countries']) {
             ob_start();
             $statetree->makeMyStateSelBox('name', 'rid', $by_state, '1', 'by_state');
             $search_form->addElement(new XoopsFormLabel(_JOBS_STATE, ob_get_contents()));

@@ -132,22 +132,22 @@ if (!empty($_POST['submit'])) {
         $type    = $myts->addSlashes($type);
         $company = $myts->addSlashes($company);
 
-        if ($xoopsModuleConfig['jobs_form_options'] === 'dhtmltextarea'
-            || $xoopsModuleConfig['jobs_form_options'] === 'dhtml') {
+        if ('dhtmltextarea' === $xoopsModuleConfig['jobs_form_options']
+            || 'dhtml' === $xoopsModuleConfig['jobs_form_options']) {
             $desctext = $myts->undoHtmlSpecialChars($myts->displayTarea($desctext, 0, 0, 1, 1, 0));
         } else {
             $desctext = $myts->displayTarea($desctext, 0, 0, 1, 1, 1);
         }
 
-        if ($xoopsModuleConfig['jobs_form_options'] === 'dhtmltextarea'
-            || $xoopsModuleConfig['jobs_form_options'] === 'dhtml') {
+        if ('dhtmltextarea' === $xoopsModuleConfig['jobs_form_options']
+            || 'dhtml' === $xoopsModuleConfig['jobs_form_options']) {
             $requirements = $myts->displayTarea($requirements, 0, 0, 1, 1, 0);
         } else {
             $requirements = $myts->displayTarea($requirements, 1, 0, 1, 1, 1);
         }
 
-        if ($xoopsModuleConfig['jobs_form_options'] === 'dhtmltextarea'
-            || $xoopsModuleConfig['jobs_form_options'] === 'dhtml') {
+        if ('dhtmltextarea' === $xoopsModuleConfig['jobs_form_options']
+            || 'dhtml' === $xoopsModuleConfig['jobs_form_options']) {
             $messtext = $myts->displayTarea($messtext, 0, 0, 1, 1, 0);
         } else {
             $messtext = $myts->displayTarea($messtext, 1, 0, 1, 1, 1);
@@ -188,7 +188,7 @@ if (!empty($_POST['submit'])) {
         $tags['PRIVATE']     = $private;
         $tags['SENDER_IP']   = $_SERVER['REMOTE_ADDR'];
         $tags['VIEW_YOUR']   = _JOBS_VIEW_JOB;
-        if (($resume == '0') || ($resume == '')) {
+        if (('0' == $resume) || ('' == $resume)) {
             $tags['VIEW_RESUME'] = '';
             $tags['RESUME_URL']  = '';
         } else {

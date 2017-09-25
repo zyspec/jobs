@@ -56,12 +56,12 @@ $GLOBALS['xoopsOption']['template_main'] = 'jobs_item.tpl';
 
 include XOOPS_ROOT_PATH . '/header.php';
 
-if ($xoopsModuleConfig['jobs_show_company'] == '1') {
+if ('1' == $xoopsModuleConfig['jobs_show_company']) {
     $xoopsTpl->assign('show_company', '1');
 } else {
     $xoopsTpl->assign('show_company', '');
 }
-if ($xoopsModuleConfig['jobs_show_state'] == '1') {
+if ('1' == $xoopsModuleConfig['jobs_show_state']) {
     $xoopsTpl->assign('show_state', '1');
 } else {
     $xoopsTpl->assign('show_state', '');
@@ -97,9 +97,9 @@ $varnom[$x] = $title;
 
 list($trows) = $xoopsDB->fetchRow($xoopsDB->query('SELECT COUNT(*) FROM ' . $xoopsDB->prefix('jobs_listing') . " WHERE valid='1' AND cid=" . $xoopsDB->escape($cid) . ''));
 
-if ($pid != 0) {
+if (0 != $pid) {
     $x = 1;
-    while ($pid != 0) {
+    while (0 != $pid) {
         $result3 = $xoopsDB->query('SELECT cid, pid, title FROM ' . $xoopsDB->prefix('jobs_categories') . ' WHERE cid=' . addslashes($pid) . '');
         list($ccid, $pid, $title) = $xoopsDB->fetchRow($result3);
 
@@ -136,12 +136,12 @@ if ($recordexist) {
             $useroffset = $xoopsConfig['default_TZ'];
         }
         //  Specification for Japan: view count up judge
-        if (($xoopsUser->getVar('uid') == 1) || ($xoopsUser->getVar('uid') == $usid)) {
+        if ((1 == $xoopsUser->getVar('uid')) || ($xoopsUser->getVar('uid') == $usid)) {
             $viewcount_judge = false;
         }
     }
     //  Specification for Japan: view count up judge
-    if ($viewcount_judge === true) {
+    if (true === $viewcount_judge) {
         $xoopsDB->queryF('UPDATE ' . $xoopsDB->prefix('jobs_listing') . ' SET view=view+1 WHERE lid = ' . $xoopsDB->escape($lid) . '');
     }
 
@@ -175,7 +175,7 @@ if ($recordexist) {
         $xoopsTpl->assign('submitter', _JOBS_SUBMITTED_BY . " $submitter");
     }
 
-    if ($xoopsModuleConfig['jobs_show_company'] == '1') {
+    if ('1' == $xoopsModuleConfig['jobs_show_company']) {
         $comp_id = jobs_getCompIdFromName(addslashes($company));
         $result4 = $xoopsDB->query('SELECT comp_id, comp_name, comp_img, comp_usid, comp_user1, comp_user2, comp_user1_contact, comp_user2_contact FROM '
                                    . $xoopsDB->prefix('jobs_companies')
@@ -201,7 +201,7 @@ if ($recordexist) {
     if ($xoopsUser) {
         $member_id = $xoopsUser->uid();
 
-        if ($xoopsModuleConfig['jobs_show_company'] == '1') {
+        if ('1' == $xoopsModuleConfig['jobs_show_company']) {
             $comp_users = [$comp_usid, $comp_user1, $comp_user2];
             if (in_array($member_id, $comp_users)) {
                 //$xoopsTpl->assign('modify', "<a href=\"modjob.php?lid=".addslashes($lid)."\"><img src=\"assets/images/modif.gif\" border=0 alt=\""._JOBS_MODIFANN."\"></a>&nbsp;<a href=\"deljob.php?lid=".addslashes($lid)."\"><img src=\"assets/images/del.gif\" border=0 alt=\""._JOBS_DEL_JOB."\"></a>");
@@ -282,7 +282,7 @@ if ($recordexist) {
             $xoopsTpl->assign('price_typeprice', "$typeprice");
         }
     } else {
-        if ($price != '') {
+        if ('' != $price) {
             $xoopsTpl->assign('price_head', _JOBS_PRICE2);
             $xoopsTpl->assign('price_price', " $price");
             $xoopsTpl->assign('price', '<b>' . _JOBS_PRICE2 . '</b>' . $price . '');

@@ -199,7 +199,7 @@ function RegionDel($rid = 0, $ok = 0)
 
     $ok          = !isset($_REQUEST['ok']) ? null : $_REQUEST['ok'];
     $member_usid = $xoopsUser->getVar('uid', 'E');
-    if ($ok == 1) {
+    if (1 == $ok) {
 
         // Delete Region
         $xoopsDB->queryF('DELETE FROM ' . $xoopsDB->prefix('jobs_region') . ' WHERE rid=' . $xoopsDB->escape($rid) . '');

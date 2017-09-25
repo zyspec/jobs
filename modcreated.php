@@ -43,8 +43,8 @@ if (!empty($_POST['submit'])) {
     if (!$GLOBALS['xoopsSecurity']->check(true, $_REQUEST['token'])) {
         redirect_header(XOOPS_URL . "/modules/$moduleDirName/index.php", 3, $GLOBALS['xoopsSecurity']->getErrors());
     }
-    if ($xoopsModuleConfig['jobs_resume_options'] == 'dhtmltextarea'
-        || $xoopsModuleConfig['jobs_form_options'] == 'dhtml') {
+    if ('dhtmltextarea' == $xoopsModuleConfig['jobs_resume_options']
+        || 'dhtml' == $xoopsModuleConfig['jobs_form_options']) {
         $made_resume = $myts->displayTarea($_POST['made_resume'], 0, 0, 0, 0, 0);
     } else {
         $made_resume = $myts->displayTarea($_POST['made_resume'], 1, 1, 1, 1, 1);
@@ -71,8 +71,8 @@ if (!empty($_POST['submit'])) {
         if ($usid == $calusern) {
             echo "<fieldset><legend style='font-weight: bold; color: #900;'>" . _JOBS_EDIT_RESUME . '</legend>';
 
-            if ($xoopsModuleConfig['jobs_resume_options'] == 'dhtmltextarea'
-                || $xoopsModuleConfig['jobs_form_options'] == 'dhtml') {
+            if ('dhtmltextarea' == $xoopsModuleConfig['jobs_resume_options']
+                || 'dhtml' == $xoopsModuleConfig['jobs_form_options']) {
                 $made_resume = $myts->undoHtmlSpecialChars($myts->displayTarea($made_resume, 0, 0, 0, 0, 0));
             } else {
                 $made_resume = $myts->displayTarea($made_resume, 1, 1, 1, 1, 1);

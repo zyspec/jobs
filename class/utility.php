@@ -81,7 +81,7 @@ class JobsUtility extends XoopsObject
         $dir = opendir($src);
         //    @mkdir($dst);
         while (false !== ($file = readdir($dir))) {
-            if (($file !== '.') && ($file !== '..')) {
+            if (('.' !== $file) && ('..' !== $file)) {
                 if (is_dir($src . '/' . $file)) {
                     self::recurseCopy($src . '/' . $file, $dst . '/' . $file);
                 } else {

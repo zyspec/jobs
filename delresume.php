@@ -48,8 +48,8 @@ if ($xoopsUser) {
     $ok       = !isset($_REQUEST['ok']) ? null : $_REQUEST['ok'];
     $calusern = $xoopsUser->getVar('uid', 'E');
     if ($usid == $calusern || $xoopsUser->isAdmin()) {
-        if ($ok == 1) {
-            if ($resume === 'created') {
+        if (1 == $ok) {
+            if ('created' === $resume) {
                 $xoopsDB->queryF('DELETE FROM ' . $xoopsDB->prefix('jobs_created_resumes') . ' WHERE lid=' . $xoopsDB->escape($lid) . '');
             } else {
                 $xoopsDB->queryF('DELETE FROM ' . $xoopsDB->prefix('jobs_resume') . ' WHERE lid=' . $xoopsDB->escape($lid) . '');

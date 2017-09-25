@@ -66,12 +66,12 @@ class ResTree
             $sql .= ' AND ' . $this->pid . ' IN (' . implode(',', $categories) . ') ';
         }
 
-        if ($order != '') {
+        if ('' != $order) {
             $sql .= " ORDER BY $order";
         }
         $result = $this->db->query($sql);
         $count  = $this->db->getRowsNum($result);
-        if ($count == 0) {
+        if (0 == $count) {
             return $arr;
         }
         while ($myrow = $this->db->fetchArray($result)) {
@@ -100,7 +100,7 @@ class ResTree
         }
 
         $count = $this->db->getRowsNum($result);
-        if ($count == 0) {
+        if (0 == $count) {
             return $idarray;
         }
         while (list($id) = $this->db->fetchRow($result)) {
@@ -129,12 +129,12 @@ class ResTree
             $sql .= ' AND ' . $this->pid . ' IN (' . implode(',', $categories) . ') ';
         }
 
-        if ($order != '') {
+        if ('' != $order) {
             $sql .= " ORDER BY $order";
         }
         $result = $this->db->query($sql);
         $count  = $this->db->getRowsNum($result);
-        if ($count == 0) {
+        if (0 == $count) {
             return $idarray;
         }
         while (list($r_id) = $this->db->fetchRow($result)) {
@@ -164,12 +164,12 @@ class ResTree
             $sql .= ' AND ' . $this->pid . ' IN (' . implode(',', $categories) . ') ';
         }
 
-        if ($order != '') {
+        if ('' != $order) {
             $sql .= " ORDER BY $order";
         }
         $result = $this->db->query($sql);
         list($r_id) = $this->db->fetchRow($result);
-        if ($r_id == 0) {
+        if (0 == $r_id) {
             return $idarray;
         }
         array_push($idarray, $r_id);
@@ -197,14 +197,14 @@ class ResTree
             $result .= ' AND cid IN (' . implode(',', $categories) . ') ';
         }
 
-        if ($this->db->getRowsNum($result) == 0) {
+        if (0 == $this->db->getRowsNum($result)) {
             return $path;
         }
         list($parentid, $name) = $this->db->fetchRow($result);
         $myts = MyTextSanitizer::getInstance();
         $name = $myts->htmlSpecialChars($name);
         $path = '/' . $name . $path . '';
-        if ($parentid == 0) {
+        if (0 == $parentid) {
             return $path;
         }
         $path = $this->resume_getPathFromId($parentid, $title, $path);
@@ -232,12 +232,12 @@ class ResTree
         $onchange = ''
     ) {
         global $moduleDirName;
-        if ($sel_name == '') {
+        if ('' == $sel_name) {
             $sel_name = $this->id;
         }
         $myts = MyTextSanitizer::getInstance();
         echo "<select name='" . $sel_name . "'";
-        if ($onchange != '') {
+        if ('' != $onchange) {
             echo " onchange='" . $onchange . "'";
         }
         echo ">\n";
@@ -248,7 +248,7 @@ class ResTree
             $sql .= ' AND cid IN (' . implode(',', $categories) . ') ';
         }
 
-        if ($order != '') {
+        if ('' != $order) {
             $sql .= " ORDER BY $order";
         }
         $result = $this->db->query($sql);
@@ -296,12 +296,12 @@ class ResTree
         $onchange = ''
     ) {
         global $moduleDirName;
-        if ($sel_name == '') {
+        if ('' == $sel_name) {
             $sel_name = $this->id;
         }
         $myts = MyTextSanitizer::getInstance();
         echo "<select name='" . $sel_name . "'";
-        if ($onchange != '') {
+        if ('' != $onchange) {
             echo " onchange='" . $onchange . "'";
         }
         echo ">\n";
@@ -312,7 +312,7 @@ class ResTree
             $sql .= ' AND cid IN (' . implode(',', $categories) . ') ';
         }
 
-        if ($order != '') {
+        if ('' != $order) {
             $sql .= " ORDER BY $order";
         }
         $result = $this->db->query($sql);
@@ -360,12 +360,12 @@ class ResTree
         $onchange = ''
     ) {
         global $moduleDirName;
-        if ($sel_name == '') {
+        if ('' == $sel_name) {
             $sel_name = $this->id;
         }
         $myts = MyTextSanitizer::getInstance();
         echo "<select name='" . $sel_name . "'";
-        if ($onchange != '') {
+        if ('' != $onchange) {
             echo " onchange='" . $onchange . "'";
         }
         echo ">\n";
@@ -376,7 +376,7 @@ class ResTree
             $sql .= ' AND cid IN (' . implode(',', $categories) . ') ';
         }
 
-        if ($order != '') {
+        if ('' != $order) {
             $sql .= " ORDER BY $order";
         }
         $result = $this->db->query($sql);
@@ -426,12 +426,12 @@ class ResTree
         $by_cat = 0
     ) {
         global $moduleDirName;
-        if ($sel_name == '') {
+        if ('' == $sel_name) {
             $sel_name = $this->id;
         }
         $myts = MyTextSanitizer::getInstance();
         echo "<select name='" . $sel_name . "'";
-        if ($onchange != '') {
+        if ('' != $onchange) {
             echo " onchange='" . $onchange . "'";
         }
         echo ">\n";
@@ -442,7 +442,7 @@ class ResTree
             $sql .= ' AND cid IN (' . implode(',', $categories) . ') ';
         }
 
-        if ($order != '') {
+        if ('' != $order) {
             $sql .= " ORDER BY $order";
         }
         $result = $this->db->query($sql);
@@ -490,18 +490,18 @@ class ResTree
         $onchange = ''
     ) {
         global $moduleDirName;
-        if ($sel_name == '') {
+        if ('' == $sel_name) {
             $sel_name = $this->id;
         }
         $myts = MyTextSanitizer::getInstance();
         echo "<select name='" . $sel_name . "'";
-        if ($onchange != '') {
+        if ('' != $onchange) {
             echo " onchange='" . $onchange . "'";
         }
         echo ">\n";
         $sql = 'SELECT ' . $this->id . ', ' . $title . ' FROM ' . $this->table . ' WHERE ' . $this->pid . '=0';
 
-        if ($order != '') {
+        if ('' != $order) {
             $sql .= " ORDER BY $order";
         }
         $result = $this->db->query($sql);
@@ -549,18 +549,18 @@ class ResTree
         $onchange = ''
     ) {
         global $moduleDirName;
-        if ($sel_name == '') {
+        if ('' == $sel_name) {
             $sel_name = $this->id;
         }
         $myts = MyTextSanitizer::getInstance();
         echo "<select name='" . $sel_name . "'";
-        if ($onchange != '') {
+        if ('' != $onchange) {
             echo " onchange='" . $onchange . "'";
         }
         echo ">\n";
         $sql = 'SELECT ' . $this->id . ', ' . $title . ' FROM ' . $this->table . '';
 
-        if ($order != '') {
+        if ('' != $order) {
             $sql .= " ORDER BY $order";
         }
         $result = $this->db->query($sql);
@@ -598,23 +598,23 @@ class ResTree
         $issearch = 0
     ) {
         global $moduleDirName;
-        if ($sel_name == '') {
+        if ('' == $sel_name) {
             $sel_name = $this->id;
         }
         $myts = MyTextSanitizer::getInstance();
         echo "<select name='" . $sel_name . "'";
-        if ($onchange != '') {
+        if ('' != $onchange) {
             echo " onchange='" . $onchange . "'";
         }
         echo ">\n";
         $sql = 'SELECT ' . $this->id . ', ' . $title . ' FROM ' . $this->table . '';
 
-        if ($order != '') {
+        if ('' != $order) {
             $sql .= " ORDER BY $order";
         }
         $result = $this->db->query($sql);
         if ($none) {
-            if ($issearch == '1') {
+            if ('1' == $issearch) {
                 echo "<option value='0'>" . _JOBS_ALL_STATES . "</option>\n";
             } else {
                 echo "<option value='0'>" . _JOBS_SELECT_STATE . "</option>\n";
@@ -650,12 +650,12 @@ class ResTree
         $onchange = ''
     ) {
         global $moduleDirName;
-        if ($sel_name == '') {
+        if ('' == $sel_name) {
             $sel_name = $this->id;
         }
         $myts = MyTextSanitizer::getInstance();
         echo "<select name='" . $sel_name . "'";
-        if ($onchange != '') {
+        if ('' != $onchange) {
             echo " onchange='" . $onchange . "'";
         }
         echo ">\n";
@@ -666,7 +666,7 @@ class ResTree
             $sql .= ' AND cid IN (' . implode(',', $categories) . ') ';
         }
 
-        if ($order != '') {
+        if ('' != $order) {
             $sql .= " ORDER BY $order";
         }
         $result = $this->db->query($sql);
@@ -709,7 +709,7 @@ class ResTree
         global $moduleDirName;
         $sql    = 'SELECT ' . $this->pid . ', ' . $title . ' FROM ' . $this->table . ' WHERE ' . $this->id . "=$sel_id";
         $result = $this->db->query($sql);
-        if ($this->db->getRowsNum($result) == 0) {
+        if (0 == $this->db->getRowsNum($result)) {
             return $path;
         }
         list($parentid, $name) = $this->db->fetchRow($result);
@@ -720,7 +720,7 @@ class ResTree
 
         $path = "&nbsp;<a href='" . $funcURL . '' . $this->id . '=' . $xoopsDB->escape($sel_id) . "'>&nbsp;" . $arrow . '&nbsp;&nbsp;' . $name . '</a>
         ' . $path . '';
-        if ($parentid == 0) {
+        if (0 == $parentid) {
             return $path;
         }
         $path = $this->resume_getNicePathFromId($parentid, $title, $funcURL, $path);
@@ -739,12 +739,12 @@ class ResTree
     public function resume_getIdPathFromId($sel_id, $path = '')
     {
         $result = $this->db->query('SELECT ' . $this->pid . ' FROM ' . $this->table . ' WHERE ' . $this->id . "=$sel_id");
-        if ($this->db->getRowsNum($result) == 0) {
+        if (0 == $this->db->getRowsNum($result)) {
             return $path;
         }
         list($parentid) = $this->db->fetchRow($result);
         $path = '/' . $sel_id . $path . '';
-        if ($parentid == 0) {
+        if (0 == $parentid) {
             return $path;
         }
         $path = $this->resume_getIdPathFromId($parentid, $path);
@@ -769,12 +769,12 @@ class ResTree
             $sql .= ' AND ' . $this->pid . ' IN (' . implode(',', $categories) . ') ';
         }
 
-        if ($order != '') {
+        if ('' != $order) {
             $sql .= " ORDER BY $order";
         }
         $result = $this->db->query($sql);
         $count  = $this->db->getRowsNum($result);
-        if ($count == 0) {
+        if (0 == $count) {
             return $parray;
         }
         while ($row = $this->db->fetchArray($result)) {
@@ -804,12 +804,12 @@ class ResTree
             $sql .= ' AND cid IN (' . implode(',', $categories) . ') ';
         }
 
-        if ($order != '') {
+        if ('' != $order) {
             $sql .= " ORDER BY $order";
         }
         $result = $this->db->query($sql);
         $count  = $this->db->getRowsNum($result);
-        if ($count == 0) {
+        if (0 == $count) {
             return $parray;
         }
         while ($row = $this->db->fetchArray($result)) {
@@ -834,12 +834,12 @@ class ResTree
         global $moduleDirName;
         $sql = 'SELECT * FROM ' . $this->table . ' WHERE ' . $this->pid . '=' . $sel_id . '';
 
-        if ($order != '') {
+        if ('' != $order) {
             $sql .= " ORDER BY $order";
         }
         $result = $this->db->query($sql);
         $count  = $this->db->getRowsNum($result);
-        if ($count == 0) {
+        if (0 == $count) {
             return $parray;
         }
         while ($row = $this->db->fetchArray($result)) {
@@ -872,13 +872,13 @@ class ResTree
         // for "Duplicatable"
         $moduleDirName = basename(dirname(__DIR__));
 
-        if ($sel_name == '') {
+        if ('' == $sel_name) {
             $sel_name = $this->id;
         }
 
         $sql = 'select ' . $this->id . ', ' . $title . ', ordre FROM ' . $this->table . ' WHERE ' . $this->pid . '=0';
 
-        if ($order != '') {
+        if ('' != $order) {
             $sql .= " ORDER BY $order";
         }
         $result = $xoopsDB->query($sql);
@@ -890,7 +890,7 @@ class ResTree
                  . "\"></a>&nbsp;<a href=\"category.php?op=ModResCat&amp;cid=$catid\" title=\""
                  . _AM_JOBS_MODIFCAT
                  . "\">$name</a> ";
-            if ($xoopsModuleConfig['jobs_cat_sortorder'] == 'ordre') {
+            if ('ordre' == $xoopsModuleConfig['jobs_cat_sortorder']) {
                 echo "($ordre)";
             }
             echo "<br>\n";
@@ -912,7 +912,7 @@ class ResTree
                                     . $myts->htmlSpecialChars($option[$title]);
                 $ordreS           = $option['ordre'];
                 echo "$catpath</a> ";
-                if ($xoopsModuleConfig['jobs_cat_sortorder'] == 'ordre') {
+                if ('ordre' == $xoopsModuleConfig['jobs_cat_sortorder']) {
                     echo "($ordreS)";
                 }
                 echo "<br>\n";
@@ -933,12 +933,12 @@ class ResTree
         global $xoopsDB, $moduleDirName;
         $sql = 'SELECT * FROM ' . $this->table . ' WHERE ' . $this->pid . '=' . $sel_id . '';
 
-        if ($order != '') {
+        if ('' != $order) {
             $sql .= " ORDER BY $order";
         }
         $result2 = $xoopsDB->query($sql);
         $count   = $xoopsDB->getRowsNum($result2);
-        if ($count == 0) {
+        if (0 == $count) {
             return $parray;
         }
         while ($row = $xoopsDB->fetchArray($result2)) {

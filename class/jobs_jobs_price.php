@@ -43,7 +43,7 @@ class jobs_jobs_price extends XoopsObject
     {
         global $xoopsDB, $xoopsModuleConfig;
 
-        if ($action === false) {
+        if (false === $action) {
             $action = $_SERVER['REQUEST_URI'];
         }
 

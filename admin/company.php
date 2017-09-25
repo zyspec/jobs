@@ -75,7 +75,7 @@ if ($crows > '0') {
         $date2     = formatTimestamp($comp_date_added, 's');
 
         echo "<tr class='" . $class . "'>";
-        $class = ($class === 'even') ? 'odd' : 'even';
+        $class = ('even' === $class) ? 'odd' : 'even';
         echo "<td align=\"center\">$comp_id</td>";
         echo '<td align="center">' . $comp_name . '</td>';
         echo '<td align="center">' . $comp_usid . '</td>';

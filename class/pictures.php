@@ -175,7 +175,7 @@ class Xoopsjlm_picturesHandler extends XoopsObjectHandler
             return false;
         }
         $numrows = $this->db->getRowsNum($result);
-        if ($numrows == 1) {
+        if (1 == $numrows) {
             $jlm_pictures = new jlm_pictures();
             $jlm_pictures->assignVars($this->db->fetchArray($result));
 
@@ -196,7 +196,7 @@ class Xoopsjlm_picturesHandler extends XoopsObjectHandler
     public function insert(XoopsObject $jlm_pictures, $force = false)
     {
         global $xoopsConfig, $lid, $moduleDirName;
-        if (get_class($jlm_pictures) != 'jlm_pictures') {
+        if ('jlm_pictures' != get_class($jlm_pictures)) {
             return false;
         }
         if (!$jlm_pictures->isDirty()) {
@@ -252,7 +252,7 @@ class Xoopsjlm_picturesHandler extends XoopsObjectHandler
     {
         global $moduleDirName;
 
-        if (get_class($jlm_pictures) != 'jlm_pictures') {
+        if ('jlm_pictures' != get_class($jlm_pictures)) {
             return false;
         }
         $sql = sprintf('DELETE FROM %s WHERE cod_img = %u', $this->db->prefix('jobs_pictures'), $jlm_pictures->getVar('cod_img'));
@@ -285,7 +285,7 @@ class Xoopsjlm_picturesHandler extends XoopsObjectHandler
         $sql   = 'SELECT * FROM ' . $this->db->prefix('jobs_pictures');
         if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
             $sql .= ' ' . $criteria->renderWhere();
-            if ($criteria->getSort() != '') {
+            if ('' != $criteria->getSort()) {
                 $sql .= ' ORDER BY ' . $criteria->getSort() . ' ' . $criteria->getOrder();
             }
             $limit = $criteria->getLimit();

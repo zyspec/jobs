@@ -88,7 +88,7 @@ class MyXoopsGroupPermForm extends XoopsForm
         $this->_permName = $permname;
         $this->_permDesc = $permdesc;
         $this->addElement(new XoopsFormHidden('modid', $this->_modid));
-        if ($url != "") {
+        if ("" != $url) {
             $this->addElement(new XoopsFormHidden('redirect_url', $url));
         }
     }
@@ -170,7 +170,7 @@ class MyXoopsGroupPermForm extends XoopsForm
                 $ret .= $elements[$i];
             } elseif (!$elements[$i]->isHidden()) {
                 $ret .= "<tr valign='top' align='left'><td class='head'>" . $elements[$i]->getCaption();
-                if ($elements[$i]->getDescription() != '') {
+                if ('' != $elements[$i]->getDescription()) {
                     $ret
                         .=
                         '<br ><br ><span style="font-weight: normal;">' . $elements[$i]->getDescription() . '</span>';

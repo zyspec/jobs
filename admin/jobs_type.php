@@ -47,9 +47,9 @@ switch ($op) {
             $class = 'odd';
 
             foreach (array_keys($jobs_type_arr) as $i) {
-                if ($jobs_type_arr[$i]->getVar('jobs_type_pid') == 0) {
+                if (0 == $jobs_type_arr[$i]->getVar('jobs_type_pid')) {
                     echo "<tr class='" . $class . "'>";
-                    $class = ($class === 'even') ? 'odd' : 'even';
+                    $class = ('even' === $class) ? 'odd' : 'even';
                     echo '<td align="center">' . $jobs_type_arr[$i]->getVar('nom_type') . '</td>';
 
                     echo "<td align='center' width='10%'>
@@ -84,9 +84,9 @@ switch ($op) {
             $class = 'odd';
 
             foreach (array_keys($jobs_price_arr) as $i) {
-                if ($jobs_price_arr[$i]->getVar('jobs_price_pid') == 0) {
+                if (0 == $jobs_price_arr[$i]->getVar('jobs_price_pid')) {
                     echo "<tr class='" . $class . "'>";
-                    $class = ($class === 'even') ? 'odd' : 'even';
+                    $class = ('even' === $class) ? 'odd' : 'even';
                     echo '<td align="center">' . $jobs_price_arr[$i]->getVar('nom_price') . '</td>';
 
                     echo "<td align='center' width='10%'>
@@ -145,7 +145,7 @@ switch ($op) {
 
     case 'delete_jobs_type':
         $obj = $jobs_typeHandler->get($_REQUEST['id_type']);
-        if (isset($_REQUEST['ok']) && $_REQUEST['ok'] == 1) {
+        if (isset($_REQUEST['ok']) && 1 == $_REQUEST['ok']) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 redirect_header('jobs_type.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
             }
@@ -203,7 +203,7 @@ switch ($op) {
 
     case 'delete_jobs_price':
         $obj = $jobs_priceHandler->get($_REQUEST['id_price']);
-        if (isset($_REQUEST['ok']) && $_REQUEST['ok'] == 1) {
+        if (isset($_REQUEST['ok']) && 1 == $_REQUEST['ok']) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 redirect_header('jobs_type.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
             }

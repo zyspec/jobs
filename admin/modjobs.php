@@ -257,7 +257,7 @@ if (!empty($_POST['submit'])) {
             //
             //            $form->addElement($state_form, true);
 
-            if ($xoopsModuleConfig['jobs_show_state'] == '1') {
+            if ('1' == $xoopsModuleConfig['jobs_show_state']) {
                 $result2    = $xoopsDB->query('SELECT rid, name FROM ' . $xoopsDB->prefix('jobs_region') . ' ORDER BY rid');
                 $state_form = new XoopsFormSelect(_AM_JOBS_STATE, 'state', $state, '1', false);
                 while (list($rid, $name) = $xoopsDB->fetchRow($result2)) {

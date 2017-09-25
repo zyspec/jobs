@@ -72,11 +72,11 @@ function NewCat($cat)
     //    while (list($key, $file) = each($filelist)) {
     foreach ($filelist as $key => $file) {
         if (!preg_match('/.gif|.jpg|.png/i', $file)) {
-            if ($file === '.' || $file === '..') {
+            if ('.' === $file || '..' === $file) {
                 $a = 1;
             }
         } else {
-            if ($file === 'default.gif') {
+            if ('default.gif' === $file) {
                 echo "<option value=$file selected>$file</option>";
             } else {
                 echo "<option value=$file>$file</option>";
@@ -138,7 +138,7 @@ function ModCat($cat)
     //    while (list($key, $file) = each($filelist)) {
     foreach ($filelist as $key => $file) {
         if (!preg_match('/.gif|.jpg|.png/i', $file)) {
-            if ($file === '.' || $file === '..') {
+            if ('.' === $file || '..' === $file) {
                 $a = 1;
             }
         } else {
@@ -152,11 +152,11 @@ function ModCat($cat)
     echo "</select>&nbsp;&nbsp;<img src=\"" . XOOPS_URL . "/modules/$moduleDirName/assets/images/cat/$imgs\" name=\"avatar\" align=\"absmiddle\"> </td></tr><tr><td>&nbsp;</td><td>" . _AM_JOBS_REPIMGCAT . " /modules/$moduleDirName/assets/images/cat/</td></tr>";
 
     echo '<tr><td>' . _AM_JOBS_DISPLPRICE2 . " </td><td><input type=\"radio\" name=\"affprice\" value=\"1\"";
-    if ($affprice == '1') {
+    if ('1' == $affprice) {
         echo 'checked';
     }
     echo '>' . _AM_JOBS_OUI . "&nbsp;&nbsp; <input type=\"radio\" name=\"affprice\" value=\"0\"";
-    if ($affprice == '0') {
+    if ('0' == $affprice) {
         echo 'checked';
     }
     echo '>' . _AM_JOBS_NON . ' (' . _AM_JOBS_INTHISCAT . ')</td></tr>';
@@ -214,7 +214,7 @@ function AddCat($title, $cid, $img, $ordre, $affprice)
     global $xoopsDB, $xoopsConfig, $myts, $moduleDirName;
 
     $title = $myts->htmlSpecialChars($title);
-    if ($title == '') {
+    if ('' == $title) {
         $title = '! ! ? ! !';
     }
     $xoopsDB->query('insert into ' . $xoopsDB->prefix('jobs_categories') . " values (null, '$cid', '$title', '$img', '$ordre', '$affprice')");
@@ -230,7 +230,7 @@ function DelCat($cid, $ok = 0)
 {
     global $xoopsDB, $xoopsConfig, $xoopsModule, $moduleDirName;
 
-    if ((int)$ok == 1) {
+    if (1 == (int)$ok) {
         $xoopsDB = XoopsDatabaseFactory::getDatabaseConnection();
         $xoopsDB->queryF('delete from ' . $xoopsDB->prefix('jobs_categories') . " where cid=$cid or pid=$cid");
         $xoopsDB->queryF('delete from ' . $xoopsDB->prefix('jobs_listing') . " where cid=$cid");
@@ -283,11 +283,11 @@ function NewResCat($cat)
     //    while (list($key, $file) = each($filelist)) {
     foreach ($filelist as $key => $file) {
         if (!preg_match('/.gif|.jpg|.png/i', $file)) {
-            if ($file === '.' || $file === '..') {
+            if ('.' === $file || '..' === $file) {
                 $a = 1;
             }
         } else {
-            if ($file === 'default.gif') {
+            if ('default.gif' === $file) {
                 echo "<option value=$file selected>$file</option>";
             } else {
                 echo "<option value=$file>$file</option>";
@@ -350,7 +350,7 @@ function ModResCat($cat)
     //    while (list($key, $file) = each($filelist)) {
     foreach ($filelist as $key => $file) {
         if (!preg_match('/.gif|.jpg|.png/i', $file)) {
-            if ($file === '.' || $file === '..') {
+            if ('.' === $file || '..' === $file) {
                 $a = 1;
             }
         } else {
@@ -365,11 +365,11 @@ function ModResCat($cat)
 
     echo '<tr><td>' . _AM_JOBS_DISPLPRICE2 . " </td><td colspan=2>
     <input type=\"radio\"name=\"affprice\"value=\"1\"";
-    if ($affprice == '1') {
+    if ('1' == $affprice) {
         echo 'checked';
     }
     echo '>' . _AM_JOBS_OUI . "&nbsp;&nbsp; <input type=\"radio\" name=\"affprice\" value=\"0\"";
-    if ($affprice == '0') {
+    if ('0' == $affprice) {
         echo 'checked';
     }
     echo '>' . _AM_JOBS_NON . ' (' . _AM_JOBS_INTHISCAT . ')</td></tr>';
@@ -431,7 +431,7 @@ function AddResCat($title, $cid, $img, $ordre, $affprice)
     global $xoopsDB, $xoopsConfig, $myts, $moduleDirName, $mydirnumber;
 
     $title = $myts->htmlSpecialChars($title);
-    if ($title == '') {
+    if ('' == $title) {
         $title = '! ! ? ! !';
     }
     $xoopsDB->query('insert into ' . $xoopsDB->prefix('jobs_res_categories') . " values (null, '$cid', '$title', '$img', '$ordre', '$affprice')");
@@ -449,7 +449,7 @@ function DelResCat($cid, $ok = 0)
 {
     global $xoopsDB, $xoopsConfig, $xoopsModule, $moduleDirName;
 
-    if ((int)$ok == 1) {
+    if (1 == (int)$ok) {
         $xoopsDB = XoopsDatabaseFactory::getDatabaseConnection();
         $xoopsDB->queryF('delete from ' . $xoopsDB->prefix('jobs_res_categories') . " where cid=$cid or pid=$cid");
         $xoopsDB->queryF('delete from ' . $xoopsDB->prefix('jobs_resume') . " where cid=$cid");

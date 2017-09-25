@@ -49,7 +49,7 @@ if (!empty($_POST['submit'])) {
     $maxhigh     = $xoopsModuleConfig['jobs_resized_height'];
     $date        = time();
 
-    if ($del_old === true) {
+    if (true === $del_old) {
         if (file_exists("$destination/$comp_img_old")) {
             unlink("$destination/$comp_img_old");
         }
@@ -195,14 +195,14 @@ if (!empty($_POST['submit'])) {
             $comp_url      = $myts->addSlashes($comp_url);
             $comp_usid     = $myts->addSlashes($comp_usid);
 
-            if ($comp_user1 != 0) {
+            if (0 != $comp_user1) {
                 xoops_load('xoopsuserutility');
                 $comp_username1 = XoopsUser::getUnameFromId($comp_user1);
             } else {
                 $comp_username1 = '';
             }
 
-            if ($comp_user2 != 0) {
+            if (0 != $comp_user2) {
                 xoops_load('xoopsuserutility');
                 $comp_username2 = XoopsUser::getUnameFromId($comp_user2);
             } else {
@@ -230,14 +230,14 @@ if (!empty($_POST['submit'])) {
             $alert1        = '';
             $alert2        = '';
             // START - check new entries for company users are OK - contributed by GreenFlatDog
-            if (isset($_GET['cuser1']) && $_GET['cuser1'] != '') {
+            if (isset($_GET['cuser1']) && '' != $_GET['cuser1']) {
                 $cuser1        = $_GET['cuser1'];
                 $prob1         = $_GET['prob1'];
                 $alert_message = _AM_JOBS_PLS_CORRECT;
             } else {
                 $cuser1 = '';
             }
-            if (isset($_GET['cuser2']) && $_GET['cuser2'] != '') {
+            if (isset($_GET['cuser2']) && '' != $_GET['cuser2']) {
                 $cuser2        = $_GET['cuser2'];
                 $prob2         = $_GET['prob2'];
                 $alert_message = _AM_JOBS_PLS_CORRECT;
@@ -278,7 +278,7 @@ if (!empty($_POST['submit'])) {
             // START - check new entries for company users are OK - contributed by GreenFlatDog
             $alert = "<br><span style='color:#f00'>%s%s</span>";
             if ($cuser1) {
-                $prob   = ($prob1 == 'n') ? _AM_JOBS_COMP_USER_NOTTHERE : _AM_JOBS_COMP_USER_NOPERM;
+                $prob   = ('n' == $prob1) ? _AM_JOBS_COMP_USER_NOTTHERE : _AM_JOBS_COMP_USER_NOPERM;
                 $alert1 = sprintf($alert, $cuser1, $prob);
                 unset($prob);
             }
@@ -286,7 +286,7 @@ if (!empty($_POST['submit'])) {
             $form->addElement(new XoopsFormTextArea(_AM_JOBS_USER1_CONTACT, 'comp_user1_contact', $comp_user1_contact, 6, 35), false);
 
             if ($cuser2) {
-                $prob   = ($prob2 == 'n') ? _AM_JOBS_COMP_USER_NOTTHERE : _AM_JOBS_COMP_USER_NOPERM;
+                $prob   = ('n' == $prob2) ? _AM_JOBS_COMP_USER_NOTTHERE : _AM_JOBS_COMP_USER_NOPERM;
                 $alert2 = sprintf($alert, $cuser2, $prob);
                 unset($prob);
             }

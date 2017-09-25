@@ -114,7 +114,7 @@ if (!empty($_POST['submit'])) {
     unset($_SESSION['email']);
 
     $lid = $xoopsDB->getInsertId();
-    if ($valid == '1') {
+    if ('1' == $valid) {
         $notificationHandler = xoops_getHandler('notification');
 
         $tags                     = [];
@@ -139,7 +139,7 @@ if (!empty($_POST['submit'])) {
         $notificationHandler->triggerEvent('resume_listing', $lid, 'new_resume', $tags);
     }
 
-    if ($make_resume != '0') {
+    if ('0' != $make_resume) {
         redirect_header('../createresume.php?lid=' . addslashes($lid) . '', 4, _AM_JOBS_RES_ADDED_PLUS);
     } else {
         redirect_header('resumes.php', 3, _AM_JOBS_RES_ADDED);
@@ -260,7 +260,7 @@ if (!empty($_POST['submit'])) {
         $res_radio->addOptionArray($options);
         $form->addElement($res_radio, true);
 
-        if ($xoopsModuleConfig['jobs_moderate_resume'] == 0) {
+        if (0 == $xoopsModuleConfig['jobs_moderate_resume']) {
             $form->addElement(new XoopsFormHidden('valid', '1'), false);
         } else {
             $form->addElement(new XoopsFormHidden('valid', '0'), false);

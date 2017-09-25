@@ -101,7 +101,7 @@ if (isset($_POST['submit'])) {
         $message .= "\n";
         $message .= stripslashes("$messtext\n\n");
         $message .= '   ' . _JOBS_ENDMESS . "\n\n";
-        if ($listing != '0') {
+        if ('0' != $listing) {
             $message .= '' . _JOBS_RES_LISTING . "\n\n";
             $message .= "$listing\n\n";
         }

@@ -61,7 +61,7 @@ function jobs_search($queryarray, $andor, $limit, $offset, $userid)
 {
     global $xoopsDB, $xoopsUser, $is_resume, $by_state, $by_cat, $state_name;
 
-    if ($is_resume != 1) {
+    if (1 != $is_resume) {
         $cat_perms  = '';
         $categories = jobs_MygetItemIds('jobs_view');
         if (is_array($categories) && count($categories) > 0) {
@@ -70,11 +70,11 @@ function jobs_search($queryarray, $andor, $limit, $offset, $userid)
 
         $sql = 'SELECT  lid,cid,title,type,company,desctext,requirements,tel,price,contactinfo,town,state,usid,valid,date FROM ' . $xoopsDB->prefix('jobs_listing') . " WHERE valid='1'  AND date<=" . time() . "$cat_perms";
 
-        if ($userid != 0) {
+        if (0 != $userid) {
             $sql .= ' AND usid=' . $userid . ' ';
         }
 
-        if (($by_state != '') && ($by_cat != '')) {
+        if (('' != $by_state) && ('' != $by_cat)) {
 
             // because count() returns 1 even if a supplied variable
             // is not an array, we must check if $querryarray is really an array
@@ -86,7 +86,7 @@ function jobs_search($queryarray, $andor, $limit, $offset, $userid)
                 }
                 $sql .= ') ';
             }
-        } elseif ($by_state != '') {
+        } elseif ('' != $by_state) {
 
             // because count() returns 1 even if a supplied variable
             // is not an array, we must check if $querryarray is really an array
@@ -98,7 +98,7 @@ function jobs_search($queryarray, $andor, $limit, $offset, $userid)
                 }
                 $sql .= ') ';
             }
-        } elseif ($by_cat != '') {
+        } elseif ('' != $by_cat) {
 
             // because count() returns 1 even if a supplied variable
             // is not an array, we must check if $querryarray is really an array
@@ -150,11 +150,11 @@ function jobs_search($queryarray, $andor, $limit, $offset, $userid)
 
         $sql = 'SELECT lid, cid, name, title, exp, expire, private, salary, typeprice, date, usid, town, state, valid FROM ' . $xoopsDB->prefix('jobs_resume') . " WHERE valid='1' and date<=" . time() . " $rescat_perms";
 
-        if ($userid != 0) {
+        if (0 != $userid) {
             $sql .= ' AND usid=' . $userid . ' ';
         }
 
-        if (($by_state != '') && ($by_cat != '')) {
+        if (('' != $by_state) && ('' != $by_cat)) {
 
             // because count() returns 1 even if a supplied variable
             // is not an array, we must check if $querryarray is really an array
@@ -166,7 +166,7 @@ function jobs_search($queryarray, $andor, $limit, $offset, $userid)
                 }
                 $sql .= ') ';
             }
-        } elseif ($by_state != '') {
+        } elseif ('' != $by_state) {
 
             // because count() returns 1 even if a supplied variable
             // is not an array, we must check if $querryarray is really an array
@@ -178,7 +178,7 @@ function jobs_search($queryarray, $andor, $limit, $offset, $userid)
                 }
                 $sql .= ') ';
             }
-        } elseif ($by_cat != '') {
+        } elseif ('' != $by_cat) {
 
             // because count() returns 1 even if a supplied variable
             // is not an array, we must check if $querryarray is really an array

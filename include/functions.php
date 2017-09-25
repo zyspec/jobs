@@ -237,40 +237,40 @@ function jobs_convertorderbyin($orderby)
  */
 function jobs_convertorderbytrans($orderby)
 {
-    if ($orderby === 'view ASC') {
+    if ('view ASC' === $orderby) {
         $orderbyTrans = '' . _JOBS_POPULARITYLTOM . '';
     }
-    if ($orderby === 'view DESC') {
+    if ('view DESC' === $orderby) {
         $orderbyTrans = '' . _JOBS_POPULARITYMTOL . '';
     }
-    if ($orderby === 'title ASC') {
+    if ('title ASC' === $orderby) {
         $orderbyTrans = '' . _JOBS_TITLEATOZ . '';
     }
-    if ($orderby === 'title DESC') {
+    if ('title DESC' === $orderby) {
         $orderbyTrans = '' . _JOBS_TITLEZTOA . '';
     }
-    if ($orderby === 'date ASC') {
+    if ('date ASC' === $orderby) {
         $orderbyTrans = '' . _JOBS_DATEOLD . '';
     }
-    if ($orderby === 'date DESC') {
+    if ('date DESC' === $orderby) {
         $orderbyTrans = '' . _JOBS_DATENEW . '';
     }
-    if ($orderby === 'company ASC') {
+    if ('company ASC' === $orderby) {
         $orderbyTrans = '' . _JOBS_COMPANYATOZ . '';
     }
-    if ($orderby === 'company DESC') {
+    if ('company DESC' === $orderby) {
         $orderbyTrans = '' . _JOBS_COMPANYZTOA . '';
     }
-    if ($orderby === 'town ASC') {
+    if ('town ASC' === $orderby) {
         $orderbyTrans = '' . _JOBS_LOCALATOZ . '';
     }
-    if ($orderby === 'town DESC') {
+    if ('town DESC' === $orderby) {
         $orderbyTrans = '' . _JOBS_LOCALZTOA . '';
     }
-    if ($orderby === 'state ASC') {
+    if ('state ASC' === $orderby) {
         $orderbyTrans = '' . _JOBS_STATEATOZ . '';
     }
-    if ($orderby === 'state DESC') {
+    if ('state DESC' === $orderby) {
         $orderbyTrans = '' . _JOBS_STATEZTOA . '';
     }
 
@@ -284,40 +284,40 @@ function jobs_convertorderbytrans($orderby)
  */
 function jobs_convertorderby($orderby)
 {
-    if ($orderby === 'title ASC') {
+    if ('title ASC' === $orderby) {
         $orderby = 'titleA';
     }
-    if ($orderby === 'date ASC') {
+    if ('date ASC' === $orderby) {
         $orderby = 'dateA';
     }
-    if ($orderby === 'company ASC') {
+    if ('company ASC' === $orderby) {
         $orderby = 'companyA';
     }
-    if ($orderby === 'town ASC') {
+    if ('town ASC' === $orderby) {
         $orderby = 'townA';
     }
-    if ($orderby === 'state ASC') {
+    if ('state ASC' === $orderby) {
         $orderby = 'stateA';
     }
-    if ($orderby === 'view ASC') {
+    if ('view ASC' === $orderby) {
         $orderby = 'viewA';
     }
-    if ($orderby === 'title DESC') {
+    if ('title DESC' === $orderby) {
         $orderby = 'titleD';
     }
-    if ($orderby === 'date DESC') {
+    if ('date DESC' === $orderby) {
         $orderby = 'dateD';
     }
-    if ($orderby === 'company DESC') {
+    if ('company DESC' === $orderby) {
         $orderby = 'companyD';
     }
-    if ($orderby === 'town DESC') {
+    if ('town DESC' === $orderby) {
         $orderby = 'townD';
     }
-    if ($orderby === 'state DESC') {
+    if ('state DESC' === $orderby) {
         $orderby = 'stateD';
     }
-    if ($orderby === 'view DESC') {
+    if ('view DESC' === $orderby) {
         $orderby = 'viewD';
     }
 
@@ -379,7 +379,7 @@ function jobs_getEditor($caption, $name, $value = '', $width = '99%', $height = 
 {
     global $xoopsModuleConfig;
 
-    if ($xoopsModuleConfig['jobs_form_options'] === 'dhtmltextarea') {
+    if ('dhtmltextarea' === $xoopsModuleConfig['jobs_form_options']) {
         $nohtml = '1';
     } else {
         $nohtml = '0';
@@ -1147,7 +1147,7 @@ function jobs_CleanVars(&$global, $key, $default = '', $type = 'int')
             $ret = isset($global[$key]) ? filter_var($global[$key], FILTER_SANITIZE_NUMBER_INT) : $default;
             break;
     }
-    if ($ret === false) {
+    if (false === $ret) {
         return $default;
     }
 

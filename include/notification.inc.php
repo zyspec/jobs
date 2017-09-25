@@ -33,7 +33,7 @@ function jobs_notify_iteminfo($category, $item_id)
 
     $item_id = (int)$item_id;
 
-    if ($category == 'global') {
+    if ('global' == $category) {
         $item['name'] = '';
         $item['url']  = '';
 
@@ -42,7 +42,7 @@ function jobs_notify_iteminfo($category, $item_id)
 
     global $xoopsDB, $moduleDirName;
 
-    if ($category == 'category') {
+    if ('category' == $category) {
         // Assume we have a valid topid id
         $sql = 'SELECT title  FROM ' . $xoopsDB->prefix('' . $moduleDirName . '_categories') . ' WHERE cid = ' . $item_id . ' LIMIT 1';
         if (!$result = $xoopsDB->query($sql)) {
@@ -54,7 +54,7 @@ function jobs_notify_iteminfo($category, $item_id)
 
         return $item;
     }
-    if ($category == 'job_listing') {
+    if ('job_listing' == $category) {
         // Assume we have a valid post id
         $sql = 'SELECT title FROM ' . $xoopsDB->prefix('' . $moduleDirName . '_listing') . ' WHERE lid = ' . $item_id . ' LIMIT 1';
         if (!$result = $xoopsDB->query($sql)) {
@@ -66,7 +66,7 @@ function jobs_notify_iteminfo($category, $item_id)
 
         return $item;
     }
-    if ($category == 'company_listing') {
+    if ('company_listing' == $category) {
         $company_name = jobs_getCompNameFromId($item_id);
 
         // Assume we have a valid post id
@@ -81,14 +81,14 @@ function jobs_notify_iteminfo($category, $item_id)
         return $item;
     }
 
-    if ($category == 'res_global') {
+    if ('res_global' == $category) {
         $item['name'] = '';
         $item['url']  = '';
 
         return $item;
     }
 
-    if ($category == 'resume') {
+    if ('resume' == $category) {
 
         // Assume we have a valid topid id
         $sql = 'SELECT title FROM ' . $xoopsDB->prefix('jobs_res_categories') . ' WHERE cid = ' . $item_id . ' LIMIT 1';
@@ -103,7 +103,7 @@ function jobs_notify_iteminfo($category, $item_id)
         return $item;
     }
 
-    if ($category == 'resume_listing') {
+    if ('resume_listing' == $category) {
         // Assume we have a valid post id
         $sql = 'SELECT title FROM ' . $xoopsDB->prefix('' . $moduleDirName . '_resume') . ' WHERE lid = ' . $item_id . ' LIMIT 1';
         if (!$result = $xoopsDB->query($sql)) {

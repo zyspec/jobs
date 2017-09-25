@@ -58,7 +58,7 @@ $mytree->makeJobSelBox('title', '' . $xoopsModuleConfig['jobs_cat_sortorder'] . 
 echo '<br><hr>';
 echo '<p>' . _AM_JOBS_HELP1 . ' </p>';
 
-if ($xoopsModuleConfig['jobs_cat_sortorder'] == 'ordre') {
+if ('ordre' == $xoopsModuleConfig['jobs_cat_sortorder']) {
     echo '<p>' . _AM_JOBS_HELP2 . ' </p>';
 }
 echo '<br></fieldset><br>';
@@ -114,7 +114,7 @@ if ($crows > '0') {
         //$expire2     = formatTimestamp($expire, "s");
 
         echo "<tr class='" . $class . "'>";
-        $class = ($class == 'even') ? 'odd' : 'even';
+        $class = ('even' == $class) ? 'odd' : 'even';
         echo "<td align=\"center\">$lid</td>";
         echo '<td align="center">' . $cid . '</td>';
         echo '<td align="center">' . $pid . '</td>';

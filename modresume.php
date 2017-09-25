@@ -53,13 +53,13 @@ if (!empty($_POST['submit'])) {
     $resume_old      = !isset($_REQUEST['resume_old']) ? null : $_REQUEST['resume_old'];
     $make_resume     = !isset($_REQUEST['make_resume']) ? null : $_REQUEST['make_resume'];
 
-    if ($del_old == 1) {
+    if (1 == $del_old) {
         if (file_exists("$destination/$resume_old")) {
             unlink("$destination/$resume_old");
         }
         $resume_old = '';
     }
-    if ($del_made_resume == 1) {
+    if (1 == $del_made_resume) {
         $xoopsDB->query('DELETE FROM ' . $xoopsDB->prefix('jobs_created_resumes') . ' WHERE lid=' . $xoopsDB->escape($lid) . '');
         $resume_old = '';
     }
@@ -207,7 +207,7 @@ if (!empty($_POST['submit'])) {
             $form->addElement($sel_form);
 
             if ($resume_old) {
-                if ($resume_old != 'created') {
+                if ('created' != $resume_old) {
                     $resume_link = "<a href=\"resumes/$resume_old\">$resume_old</a>";
 
                     $form->addElement(new XoopsFormLabel(_JOBS_ACTUALRES, $resume_link));
@@ -236,7 +236,7 @@ if (!empty($_POST['submit'])) {
             $res_radio->addOptionArray($options);
             $form->addElement($res_radio, true);
 
-            if ($xoopsModuleConfig['jobs_moderate_res_up'] == 0) {
+            if (0 == $xoopsModuleConfig['jobs_moderate_res_up']) {
                 $form->addElement(new XoopsFormHidden('valid', '1'), false);
             } else {
                 $form->addElement(new XoopsFormHidden('valid', '0'), false);

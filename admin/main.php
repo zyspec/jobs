@@ -318,14 +318,14 @@ function IndexView($lid = 0)
         $expire  = $myts->htmlSpecialChars($expire);
         $type    = $myts->htmlSpecialChars($type);
         $company = $myts->htmlSpecialChars($company);
-        if ($xoopsModuleConfig['jobs_form_options'] == 'dhtmltextarea'
-            || $xoopsModuleConfig['jobs_form_options'] == 'dhtml') {
+        if ('dhtmltextarea' == $xoopsModuleConfig['jobs_form_options']
+            || 'dhtml' == $xoopsModuleConfig['jobs_form_options']) {
             $desctext = $myts->undoHtmlSpecialChars($myts->displayTarea($desctext, 0, 0, 1, 1, 0));
         } else {
             $desctext = $myts->displayTarea($desctext, 1, 1, 1, 1, 1);
         }
-        if ($xoopsModuleConfig['jobs_form_options'] == 'dhtmltextarea'
-            || $xoopsModuleConfig['jobs_form_options'] == 'dhtml') {
+        if ('dhtmltextarea' == $xoopsModuleConfig['jobs_form_options']
+            || 'dhtml' == $xoopsModuleConfig['jobs_form_options']) {
             $requirements = $myts->undoHtmlSpecialChars($myts->displayTarea($requirements, 0, 0, 1, 1, 0));
         } else {
             $requirements = $myts->displayTarea($requirements, 1, 1, 1, 1, 1);
@@ -358,7 +358,7 @@ function IndexView($lid = 0)
             <td class=\"head\">" . _AM_JOBS_TOWN . " </td><td class=\"head\"><input type=\"text\" name=\"town\" size=\"30\" value=\"$town\"></td>
             </tr>";
 
-        if ($xoopsModuleConfig['jobs_show_state'] == '1') {
+        if ('1' == $xoopsModuleConfig['jobs_show_state']) {
             echo "<tr>
     <td class=\"head\">" . _AM_JOBS_STATE1 . " </td><td class=\"head\"><select name=\"state\">";
             $result5 = $xoopsDB->query('SELECT rid, name FROM ' . $xoopsDB->prefix('jobs_region') . ' ORDER BY rid');
@@ -378,13 +378,13 @@ function IndexView($lid = 0)
         echo "<tr>
         <td class='head'>" . constant($admin_lang . '_PREMIUM') . "</td><td class='head'>
         <input type=\"radio\" name=\"premium\" value=\"1\"";
-        if ($premium == '1') {
+        if ('1' == $premium) {
             echo 'checked';
         }
         echo '>' . constant($admin_lang . '_YES') . "&nbsp;&nbsp;
 
         <input type=\"radio\" name=\"premium\" value=\"0\"";
-        if ($premium == '0') {
+        if ('0' == $premium) {
             echo 'checked';
         }
         echo '>' . constant($admin_lang . '_NO') . '&nbsp;&nbsp; </td></tr>';
@@ -413,11 +413,11 @@ function IndexView($lid = 0)
         echo '</select></td>
             </tr>';
         echo "<tr><td  class=\"head\">" . _AM_JOBS_STATUS . "</td><td class=\"head\"><input type=\"radio\" name=\"status\" value=\"0\"";
-        if ($status == '1') {
+        if ('1' == $status) {
             echo 'checked';
         }
         echo '>' . _AM_JOBS_ACTIVE . "&nbsp;&nbsp; <input type=\"radio\" name=\"status\" value=\"1\"";
-        if ($status == '0') {
+        if ('0' == $status) {
             echo 'checked';
         }
         echo '>' . _AM_JOBS_INACTIVE . '</td></tr>';
@@ -515,7 +515,7 @@ function IndexResumeView($lid = 0)
             <td>" . _AM_JOBS_TOWN . " </td><td><input type=\"text\" name=\"town\" size=\"30\" value=\"$town\"></td>
             </tr>";
 
-        if ($xoopsModuleConfig['jobs_show_state'] == '1') {
+        if ('1' == $xoopsModuleConfig['jobs_show_state']) {
             echo '<tr>
     <td>' . _AM_JOBS_STATE1 . " </td><td><select name=\"state\">";
             $result5 = $xoopsDB->query('SELECT rid, name FROM ' . $xoopsDB->prefix('jobs_region') . ' ORDER BY rid');
@@ -553,11 +553,11 @@ function IndexResumeView($lid = 0)
         }
         echo '</select></td></tr>';
         echo '<tr><td>' . _AM_JOBS_STATUS . "</td><td><input type=\"radio\" name=\"status\" value=\"0\"";
-        if ($status == '1') {
+        if ('1' == $status) {
             echo 'checked';
         }
         echo '>' . _AM_JOBS_ACTIVE . "&nbsp;&nbsp; <input type=\"radio\" name=\"status\" value=\"1\"";
-        if ($status == '0') {
+        if ('0' == $status) {
             echo 'checked';
         }
         echo '>' . _AM_JOBS_INACTIVE . '</td></tr>';
@@ -613,14 +613,14 @@ function ModJob($lid = 0)
         $expire  = $myts->htmlSpecialChars($expire);
         $type    = $myts->htmlSpecialChars($type);
         $company = $myts->htmlSpecialChars($company);
-        if ($xoopsModuleConfig['jobs_form_options'] == 'dhtmltextarea'
-            || $xoopsModuleConfig['jobs_form_options'] == 'dhtml') {
+        if ('dhtmltextarea' == $xoopsModuleConfig['jobs_form_options']
+            || 'dhtml' == $xoopsModuleConfig['jobs_form_options']) {
             $desctext = $myts->undoHtmlSpecialChars($myts->displayTarea($desctext, 0, 0, 1, 1, 0));
         } else {
             $desctext = $myts->displayTarea($desctext, 1, 1, 1, 1, 1);
         }
-        if ($xoopsModuleConfig['jobs_form_options'] == 'dhtmltextarea'
-            || $xoopsModuleConfig['jobs_form_options'] == 'dhtml') {
+        if ('dhtmltextarea' == $xoopsModuleConfig['jobs_form_options']
+            || 'dhtml' == $xoopsModuleConfig['jobs_form_options']) {
             $requirements = $myts->undoHtmlSpecialChars($myts->displayTarea($requirements, 0, 0, 1, 1, 0));
         } else {
             $requirements = $myts->displayTarea($requirements, 1, 1, 1, 1, 1);
@@ -652,11 +652,11 @@ function ModJob($lid = 0)
         <td class=\"outer\">" . _AM_JOBS_TITLE2 . " </td><td class=\"odd\"><input type=\"text\" name=\"title\" size=\"30\" value=\"$title\"></td>
         </tr>";
         echo "<tr><td class='outer'>" . _AM_JOBS_STATUS1 . "</td><td class='odd'><input type=\"radio\" name=\"status\" value=\"1\"";
-        if ($status == '1') {
+        if ('1' == $status) {
             echo 'checked';
         }
         echo '>' . _AM_JOBS_ACTIVE . "&nbsp;&nbsp; <input type=\"radio\" name=\"status\" value=\"0\"";
-        if ($status == '0') {
+        if ('0' == $status) {
             echo 'checked';
         }
         echo '>' . _AM_JOBS_INACTIVE . '</td></tr>';
@@ -702,7 +702,7 @@ function ModJob($lid = 0)
     <td class=\"outer\">" . _AM_JOBS_TOWN . " </td><td class=\"odd\"><input type=\"text\" name=\"town\" size=\"30\" value=\"$town\"></td>
     </tr>";
 
-        if ($xoopsModuleConfig['jobs_show_state'] == '1') {
+        if ('1' == $xoopsModuleConfig['jobs_show_state']) {
             echo "<tr>
     <td class=\"outer\">" . _AM_JOBS_STATE1 . " </td><td class=\"odd\"><select name=\"state\">";
             $result5 = $xoopsDB->query('SELECT rid, name FROM ' . $xoopsDB->prefix('jobs_region') . ' ORDER BY rid');
@@ -722,13 +722,13 @@ function ModJob($lid = 0)
         echo "<tr>
     <td class='outer'>" . constant($admin_lang . '_PREMIUM') . "</td><td class='odd'>
     <input type=\"radio\" name=\"premium\" value=\"1\"";
-        if ($premium == '1') {
+        if ('1' == $premium) {
             echo 'checked';
         }
         echo '>' . constant($admin_lang . '_YES') . "&nbsp;&nbsp;
 
     <input type=\"radio\" name=\"premium\" value=\"0\"";
-        if ($premium == '0') {
+        if ('0' == $premium) {
             echo 'checked';
         }
         echo '>' . constant($admin_lang . '_NO') . '&nbsp;&nbsp; </td></tr>';
@@ -816,14 +816,14 @@ function ModJobS(
     $expire  = $myts->addSlashes($expire);
     $type    = $myts->addSlashes($type);
     $company = $myts->addSlashes($company);
-    if ($xoopsModuleConfig['jobs_form_options'] == 'dhtmltextarea'
-        || $xoopsModuleConfig['jobs_form_options'] == 'dhtml') {
+    if ('dhtmltextarea' == $xoopsModuleConfig['jobs_form_options']
+        || 'dhtml' == $xoopsModuleConfig['jobs_form_options']) {
         $desctext = $myts->displayTarea($desctext, 0, 0, 1, 1, 0);
     } else {
         $desctext = $myts->displayTarea($desctext, 1, 1, 1, 1, 1);
     }
-    if ($xoopsModuleConfig['jobs_form_options'] == 'dhtmltextarea'
-        || $xoopsModuleConfig['jobs_form_options'] == 'dhtml') {
+    if ('dhtmltextarea' == $xoopsModuleConfig['jobs_form_options']
+        || 'dhtml' == $xoopsModuleConfig['jobs_form_options']) {
         $requirements = $myts->displayTarea($requirements, 0, 0, 1, 1, 0);
     } else {
         $requirements = $myts->displayTarea($requirements, 1, 1, 1, 1, 1);
@@ -944,14 +944,14 @@ function ListingValid(
     $expire  = $myts->addSlashes($expire);
     $type    = $myts->addSlashes($type);
     $company = $myts->addSlashes($company);
-    if ($xoopsModuleConfig['jobs_form_options'] == 'dhtmltextarea'
-        || $xoopsModuleConfig['jobs_form_options'] == 'dhtml') {
+    if ('dhtmltextarea' == $xoopsModuleConfig['jobs_form_options']
+        || 'dhtml' == $xoopsModuleConfig['jobs_form_options']) {
         $desctext = $myts->displayTarea($desctext, 0, 0, 1, 1, 0);
     } else {
         $desctext = $myts->displayTarea($desctext, 1, 1, 1, 1, 1);
     }
-    if ($xoopsModuleConfig['jobs_form_options'] == 'dhtmltextarea'
-        || $xoopsModuleConfig['jobs_form_options'] == 'dhtml') {
+    if ('dhtmltextarea' == $xoopsModuleConfig['jobs_form_options']
+        || 'dhtml' == $xoopsModuleConfig['jobs_form_options']) {
         $requirements = $myts->displayTarea($requirements, 0, 0, 1, 1, 0);
     } else {
         $requirements = $myts->displayTarea($requirements, 1, 1, 1, 1, 1);
@@ -1102,7 +1102,7 @@ function ResumeValid(
                     . $xoopsDB->prefix('jobs_resume')
                     . " set cid='$cat', title='$title', status='$status', exp='$exp', expire='$expire', private='$private', tel='$tel', salary='$salary', typeprice='$typeprice', date='$date', email='$email', submitter='$submitter', town='$town', state='$state', valid='$valid', resume='$resume'  where lid=$lid");
 
-    if ($email == '') {
+    if ('' == $email) {
     } else {
         $message = "$submitter " . _AM_JOBS_HELLO . "\n\n " . _AM_JOBS_RES_JOBACCEPT . " :\n\n $title\n\n\n " . _AM_JOBS_CONSULTTO . "\n " . XOOPS_URL . "/modules/$moduleDirName/viewresume.php?lid=$lid\n\n " . _AM_JOBS_THANK . "\n\n" . _AM_JOBS_TEAMOF . ' ' . $meta['title'] . "\n" . XOOPS_URL . '';
         $subject = '' . _AM_JOBS_RES_JOBACCEPT . '';
@@ -1144,7 +1144,7 @@ function ListingAddType($type)
     } else {
         $type = $myts->addSlashes($type);
 
-        if ($type == '') {
+        if ('' == $type) {
             $type = '! ! ? ! !';
         }
         $xoopsDB->query('insert into ' . $xoopsDB->prefix('jobs_type') . " values (null, '$type')");
@@ -1245,7 +1245,7 @@ function ListingAddprice($type)
         require_once __DIR__ . '/admin_footer.php';
     } else {
         $type = $myts->addSlashes($type);
-        if ($type == '') {
+        if ('' == $type) {
             $type = '! ! ? ! !';
         }
         $xoopsDB->query('insert into ' . $xoopsDB->prefix('jobs_price') . " values (null, '$type')");

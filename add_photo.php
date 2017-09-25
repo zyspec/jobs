@@ -58,7 +58,7 @@ $maxfilewidth  = $xoopsModuleConfig['jobs_max_original_width'];
 /**
  * If we are receiving a file
  */
-if ($_POST['xoops_upload_file'][0] === 'sel_photo') {
+if ('sel_photo' === $_POST['xoops_upload_file'][0]) {
 
     /**
      * Check if using Xoops or XoopsCube (by jlm69)

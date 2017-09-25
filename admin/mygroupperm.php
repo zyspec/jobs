@@ -35,12 +35,12 @@ if (is_array($_POST['perms']) && !empty($_POST['perms'])) {
         if (false != $gpermHandler->deleteByModule($modid, $perm_name)) {
             foreach ($perm_data['groups'] as $group_id => $item_ids) {
                 foreach ($item_ids as $item_id => $selected) {
-                    if ($selected == 1) {
+                    if (1 == $selected) {
                         // make sure that all parent ids are selected as well
-                        if ($perm_data['parents'][$item_id] != '') {
+                        if ('' != $perm_data['parents'][$item_id]) {
                             $parent_ids = explode(':', $perm_data['parents'][$item_id]);
                             foreach ($parent_ids as $pid) {
-                                if ($pid != 0 && !array_key_exists($pid, $item_ids)) {
+                                if (0 != $pid && !array_key_exists($pid, $item_ids)) {
                                     // one of the parent items were not selected, so skip this item
                                     $msg[] = sprintf(_MD_AM_PERMADDNG, '<b>' . $perm_name . '</b>', '<b>' . $perm_data['itemname'][$item_id] . '</b>', '<b>' . $group_list[$group_id] . '</b>') . ' (' . _MD_AM_PERMADDNGP . ')';
                                     continue 2;
