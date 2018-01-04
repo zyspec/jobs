@@ -22,7 +22,7 @@ $moduleDirName = basename(dirname(__DIR__));
 require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/functions.php";
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
-$myts = MyTextSanitizer::getInstance();
+$myts = \MyTextSanitizer::getInstance();
 
 $comp_id     = !isset($_REQUEST['comp_id']) ? null : $_REQUEST['comp_id'];
 $member_usid = $xoopsUser->uid();

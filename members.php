@@ -20,7 +20,7 @@ include __DIR__ . '/header.php';
 
 $moduleDirName = basename(__DIR__);
 include XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/functions.php";
-$myts = MyTextSanitizer::getInstance(); // MyTextSanitizer object
+$myts = \MyTextSanitizer::getInstance(); // MyTextSanitizer object
 require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/class/jobtree.php";
 $mytree                                  = new JobTree($xoopsDB->prefix('jobs_categories'), 'cid', 'pid');
 $GLOBALS['xoopsOption']['template_main'] = 'jobs_members.tpl';

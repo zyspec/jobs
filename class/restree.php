@@ -201,7 +201,7 @@ class ResTree
             return $path;
         }
         list($parentid, $name) = $this->db->fetchRow($result);
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
         $name = $myts->htmlSpecialChars($name);
         $path = '/' . $name . $path . '';
         if (0 == $parentid) {
@@ -235,7 +235,7 @@ class ResTree
         if ('' == $sel_name) {
             $sel_name = $this->id;
         }
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
         echo "<select name='" . $sel_name . "'";
         if ('' != $onchange) {
             echo " onchange='" . $onchange . "'";
@@ -299,7 +299,7 @@ class ResTree
         if ('' == $sel_name) {
             $sel_name = $this->id;
         }
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
         echo "<select name='" . $sel_name . "'";
         if ('' != $onchange) {
             echo " onchange='" . $onchange . "'";
@@ -363,7 +363,7 @@ class ResTree
         if ('' == $sel_name) {
             $sel_name = $this->id;
         }
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
         echo "<select name='" . $sel_name . "'";
         if ('' != $onchange) {
             echo " onchange='" . $onchange . "'";
@@ -429,7 +429,7 @@ class ResTree
         if ('' == $sel_name) {
             $sel_name = $this->id;
         }
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
         echo "<select name='" . $sel_name . "'";
         if ('' != $onchange) {
             echo " onchange='" . $onchange . "'";
@@ -493,7 +493,7 @@ class ResTree
         if ('' == $sel_name) {
             $sel_name = $this->id;
         }
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
         echo "<select name='" . $sel_name . "'";
         if ('' != $onchange) {
             echo " onchange='" . $onchange . "'";
@@ -552,7 +552,7 @@ class ResTree
         if ('' == $sel_name) {
             $sel_name = $this->id;
         }
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
         echo "<select name='" . $sel_name . "'";
         if ('' != $onchange) {
             echo " onchange='" . $onchange . "'";
@@ -601,7 +601,7 @@ class ResTree
         if ('' == $sel_name) {
             $sel_name = $this->id;
         }
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
         echo "<select name='" . $sel_name . "'";
         if ('' != $onchange) {
             echo " onchange='" . $onchange . "'";
@@ -653,7 +653,7 @@ class ResTree
         if ('' == $sel_name) {
             $sel_name = $this->id;
         }
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
         echo "<select name='" . $sel_name . "'";
         if ('' != $onchange) {
             echo " onchange='" . $onchange . "'";
@@ -713,10 +713,10 @@ class ResTree
             return $path;
         }
         list($parentid, $name) = $this->db->fetchRow($result);
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
         $name = $myts->undoHtmlSpecialChars($name);
 
-        $arrow = "<img src=\"" . XOOPS_URL . "/modules/$moduleDirName/assets/images/arrow.gif\" alt=\"&raquo;\">";
+        $arrow = '<img src="' . XOOPS_URL . "/modules/$moduleDirName/assets/images/arrow.gif\" alt=\"&raquo;\">";
 
         $path = "&nbsp;<a href='" . $funcURL . '' . $this->id . '=' . $xoopsDB->escape($sel_id) . "'>&nbsp;" . $arrow . '&nbsp;&nbsp;' . $name . '</a>
         ' . $path . '';
@@ -868,7 +868,7 @@ class ResTree
         $onchange = ''
     ) {
         global $xoopsModuleConfig, $xoopsDB, $moduleDirName;
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
         // for "Duplicatable"
         $moduleDirName = basename(dirname(__DIR__));
 
@@ -898,17 +898,17 @@ class ResTree
             foreach ($arr as $option) {
                 $option['prefix'] = str_replace('.', ' --->', $option['prefix']);
                 $catpath          = $option['prefix']
-                                    . "&nbsp;<a href=\"category.php?op=NewResCat&amp;cid="
+                                    . '&nbsp;<a href="category.php?op=NewResCat&amp;cid='
                                     . $option[$this->id]
-                                    . "\"><img src=\""
+                                    . '"><img src="'
                                     . XOOPS_URL
                                     . "/modules/$moduleDirName/assets/images/plus.gif\" border=0 width=10 height=10 alt=\""
                                     . _AM_JOBS_ADDSUBCAT
-                                    . "\"></a>&nbsp;<a href=\"category.php?op=ModResCat&amp;cid="
+                                    . '"></a>&nbsp;<a href="category.php?op=ModResCat&amp;cid='
                                     . $option[$this->id]
-                                    . "\" title=\""
+                                    . '" title="'
                                     . _AM_JOBS_MODIFCAT
-                                    . "\">"
+                                    . '">'
                                     . $myts->htmlSpecialChars($option[$title]);
                 $ordreS           = $option['ordre'];
                 echo "$catpath</a> ";
@@ -957,7 +957,7 @@ class ResTree
     {
         $result = $this->db->query('SELECT cid, pid, title FROM ' . $this->table);
         $ret    = [];
-        $myts   = MyTextSanitizer::getInstance();
+        $myts   = \MyTextSanitizer::getInstance();
         while ($myrow = $this->db->fetchArray($result)) {
             $ret[$myrow['cid']] = ['title' => $myts->htmlspecialchars($myrow['title']), 'pid' => $myrow['pid']];
         }

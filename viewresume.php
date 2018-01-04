@@ -20,7 +20,7 @@ include __DIR__ . '/header.php';
 
 $moduleDirName = basename(__DIR__);
 
-$myts      = MyTextSanitizer::getInstance();
+$myts      = \MyTextSanitizer::getInstance();
 $module_id = $xoopsModule->getVar('mid');
 
 if (is_object($xoopsUser)) {
@@ -104,7 +104,7 @@ if (0 != $pid) {
         $varnom[$x] = $title;
         ++$x;
     }
-    $x = $x - 1;
+    --$x;
 }
 
 $subcats   = '';
@@ -112,7 +112,7 @@ $arrow     = '&nbsp;<img src="' . XOOPS_URL . "/modules/$moduleDirName/assets/im
 $backarrow = '&nbsp;<img src="' . XOOPS_URL . "/modules/$moduleDirName/assets/images/backarrow.gif\" alt=\"&laquo;\">";
 while ($x != -1) {
     $subcats .= " $arrow <a href=\"resumecat.php?cid=" . $varid[$x] . '">' . $varnom[$x] . '</a>';
-    $x       = $x - 1;
+    --$x;
 }
 $xoopsTpl->assign('nav_jobs', '<a href="index.php">' . _JOBS_RES_BACKTO . "</a>$backarrow");
 $xoopsTpl->assign('nav_main', '<a href="resumes.php">' . _JOBS_MAIN . '</a>');

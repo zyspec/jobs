@@ -17,6 +17,6 @@
  */
 
 include __DIR__ . '/../../mainfile.php';
-$myts = MyTextSanitizer::getInstance();
+$myts = \MyTextSanitizer::getInstance();
 global $xoopsModule;
 $pathIcon16 = \Xmf\Module\Admin::iconUrl('', 16);

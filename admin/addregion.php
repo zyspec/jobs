@@ -21,7 +21,7 @@ $moduleDirName = basename(dirname(__DIR__));
 require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/functions.php";
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
-$myts = MyTextSanitizer::getInstance();
+$myts = \MyTextSanitizer::getInstance();
 
 if (!empty($_POST['submit'])) {
     $name   = $myts->addSlashes($_POST['name']);

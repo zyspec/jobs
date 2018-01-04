@@ -671,7 +671,7 @@ function jobs_categorynewgraphic($cat)
     $startdate = (time() - (86400 * $days_new));
 
     if ($startdate < $date) {
-        return "<img src=\"" . XOOPS_URL . "/modules/$moduleDirName/assets/images/newred.gif\">";
+        return '<img src="' . XOOPS_URL . "/modules/$moduleDirName/assets/images/newred.gif\">";
     }
 }
 
@@ -705,10 +705,10 @@ function jobs_listingnewgraphic($date)
     global $xoopsDB, $moduleDirName, $xoopsModuleConfig;
 
     $days_new  = $xoopsModuleConfig['jobs_countday'];
-    $startdate = ((int)time() - (86400 * (int)$days_new));
+    $startdate = (time() - (86400 * (int)$days_new));
 
     if ($startdate < $date) {
-        return "<img src=\"" . XOOPS_URL . "/modules/$moduleDirName/assets/images/newred.gif\">";
+        return '<img src="' . XOOPS_URL . "/modules/$moduleDirName/assets/images/newred.gif\">";
     }
 }
 
@@ -869,7 +869,7 @@ function jobs_filechecks()
     global $xoopsModule, $xoopsConfig;
 
     echo '<fieldset>';
-    echo "<legend style=\"color: #990000; font-weight: bold;\">" . _AM_JOBS_FILECHECKS . '</legend>';
+    echo '<legend style="color: #990000; font-weight: bold;">' . _AM_JOBS_FILECHECKS . '</legend>';
     /*
         $photodir = XOOPS_ROOT_PATH . "/modules/" . $xoopsModule->getVar('dirname') . "/photo";
         $photothumbdir = XOOPS_ROOT_PATH . "/modules/" . $xoopsModule->getVar('dirname') . "/photo/thumbs";
@@ -1011,9 +1011,9 @@ function jobs_summary()
     list($waitJobValidation) = $xoopsDB->fetchRow($result);// {
 
     if ($waitJobValidation < 1) {
-        $summary['waitJobValidation'] = "<span style=\"font-weight: bold;\">0</span>";
+        $summary['waitJobValidation'] = '<span style="font-weight: bold;">0</span>';
     } else {
-        $summary['waitJobValidation'] = "<span style=\"font-weight: bold; color: red;\">" . $waitJobValidation . '</span>';
+        $summary['waitJobValidation'] = '<span style="font-weight: bold; color: red;">' . $waitJobValidation . '</span>';
     }
 
     //       $result1  = $xoopsDB->query("select lid, title, date from " . $xoopsDB->prefix("jobs_resume") . " WHERE valid='0' order by lid");
@@ -1032,9 +1032,9 @@ function jobs_summary()
     list($waitResumeValidation) = $xoopsDB->fetchRow($result);// {
 
     if ($waitResumeValidation < 1) {
-        $summary['waitResumeValidation'] = "<span style=\"font-weight: bold;\">0</span>";
+        $summary['waitResumeValidation'] = '<span style="font-weight: bold;">0</span>';
     } else {
-        $summary['waitResumeValidation'] = "<span style=\"font-weight: bold; color: red;\">" . $waitResumeValidation . '</span>';
+        $summary['waitResumeValidation'] = '<span style="font-weight: bold; color: red;">' . $waitResumeValidation . '</span>';
     }
 
     //       $result1  = $xoopsDB->query("select lid, title, date from " . $xoopsDB->prefix("jobs_resume") . " WHERE valid='0' order by lid");
@@ -1050,7 +1050,7 @@ function jobs_summary()
     if (!$result) {
         $summary['jobPublished'] = 0;
     } else {
-        $summary['jobPublished'] = "<span style=\"font-weight: bold; color: green;\">" . $jobPublished . '</span>';
+        $summary['jobPublished'] = '<span style="font-weight: bold; color: green;">' . $jobPublished . '</span>';
     }
 
     /**
@@ -1062,7 +1062,7 @@ function jobs_summary()
     if (!$result) {
         $summary['jobCategoryCount'] = 0;
     } else {
-        $summary['jobCategoryCount'] = "<span style=\"font-weight: bold; color: green;\">" . $jobCategoryCount . '</span>';
+        $summary['jobCategoryCount'] = '<span style="font-weight: bold; color: green;">' . $jobCategoryCount . '</span>';
     }
     unset($result);
 
@@ -1076,7 +1076,7 @@ function jobs_summary()
     if (!$result) {
         $summary['resumePublished'] = 0;
     } else {
-        $summary['resumePublished'] = "<span style=\"font-weight: bold; color: green;\">" . $resumePublished . '</span>';
+        $summary['resumePublished'] = '<span style="font-weight: bold; color: green;">' . $resumePublished . '</span>';
     }
 
     /**
@@ -1088,7 +1088,7 @@ function jobs_summary()
     if (!$result) {
         $summary['resumeCategoryCount'] = 0;
     } else {
-        $summary['resumeCategoryCount'] = "<span style=\"font-weight: bold; color: green;\">" . $resumeCategoryCount . '</span>';
+        $summary['resumeCategoryCount'] = '<span style="font-weight: bold; color: green;">' . $resumeCategoryCount . '</span>';
     }
     unset($result);
 
@@ -1101,7 +1101,7 @@ function jobs_summary()
     if (!$result) {
         $summary['companies'] = 0;
     } else {
-        $summary['companies'] = "<span style=\"font-weight: bold; color: green;\">" . $companies . '</span>';
+        $summary['companies'] = '<span style="font-weight: bold; color: green;">' . $companies . '</span>';
     }
     unset($result);
 

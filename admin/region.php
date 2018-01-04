@@ -22,7 +22,7 @@ require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/functions.php";
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 xoops_load('XoopsPageNav');
 
-$myts = MyTextSanitizer::getInstance();
+$myts = \MyTextSanitizer::getInstance();
 #  function Index
 #####################################################
 function Region()
@@ -99,15 +99,15 @@ function Region()
         echo '<br> ' . _AM_JOBS_NOREGION . '<br><br>';
 
         echo '<br> ' . _AM_JOBS_INSTALL_NOW . '<br><br>';
-        echo "<a href=\"include/usstates.php\">" . _AM_JOBS_US_STATES . '</a><br>';
-        echo "<a href=\"include/canada.php\">" . _AM_JOBS_CANADA_STATES . '</a><br>';
-        echo "<a href=\"include/france.php\">" . _AM_JOBS_FRANCE . '</a><br>';
-        echo "<a href=\"include/italy.php\">" . _AM_JOBS_ITALY . '</a><br>';
-        echo "<a href=\"include/england.php\">" . _AM_JOBS_ENGLAND . '</a><br>';
+        echo '<a href="include/usstates.php">' . _AM_JOBS_US_STATES . '</a><br>';
+        echo '<a href="include/canada.php">' . _AM_JOBS_CANADA_STATES . '</a><br>';
+        echo '<a href="include/france.php">' . _AM_JOBS_FRANCE . '</a><br>';
+        echo '<a href="include/italy.php">' . _AM_JOBS_ITALY . '</a><br>';
+        echo '<a href="include/england.php">' . _AM_JOBS_ENGLAND . '</a><br>';
         echo "</fieldset>
 
     <fieldset><legend style='font-weight: bold; color:#900;'>" . _AM_JOBS_ADD_REGION . '</legend>';
-        echo "<a href=\"addregion.php\">" . _AM_JOBS_ADD_REGION . '</a></fieldset>
+        echo '<a href="addregion.php">' . _AM_JOBS_ADD_REGION . '</a></fieldset>
     </table<br>';
     }
     xoops_cp_footer();
@@ -134,10 +134,10 @@ function ModRegion($rid = 0)
         $name   = $myts->htmlSpecialChars($name);
         $abbrev = $myts->htmlSpecialChars($abbrev);
 
-        echo "<form action=\"region.php\" method=\"post\">";
+        echo '<form action="region.php" method="post">';
         echo $GLOBALS['xoopsSecurity']->getTokenHTML();
-        echo "<table class=\"outer\" border=\"1\"><tr>
-    <td class=\"head\">" . _AM_JOBS_REGION_NUMBER . " </td><td class=\"head\">$rid</td>
+        echo '<table class="outer" border="1"><tr>
+    <td class="head">' . _AM_JOBS_REGION_NUMBER . " </td><td class=\"head\">$rid</td>
     </tr><tr>
     <td class=\"head\">" . _AM_JOBS_REGION_NAME . " </td><td class=\"head\"><input type=\"text\" name=\"name\" size=\"30\" value=\"$name\"></td>
     </tr><tr>
@@ -146,14 +146,14 @@ function ModRegion($rid = 0)
 
         $time = time();
 
-        echo "<tr>
+        echo '<tr>
     <td>&nbsp;</td><td>
 
-    <select name=\"op\">
-    <option value=\"ModRegionS\"> " . _AM_JOBS_MODIF . "
-    <option value=\"RegionDel\"> " . _AM_JOBS_DEL . "
-    </select><input type=\"submit\" value=\"" . _AM_JOBS_GO . "\"></td>
-    </tr></table>";
+    <select name="op">
+    <option value="ModRegionS"> ' . _AM_JOBS_MODIF . '
+    <option value="RegionDel"> ' . _AM_JOBS_DEL . '
+    </select><input type="submit" value="' . _AM_JOBS_GO . '"></td>
+    </tr></table>';
         echo "<input type=\"hidden\" name=\"pid\" value=\"0\">
     <input type=\"hidden\" name=\"rid\" value=\"$rid\">";
 
@@ -211,7 +211,7 @@ function RegionDel($rid = 0, $ok = 0)
         echo '<br><center>';
         echo '<b>' . _AM_JOBS_SURDELREGION . '</b><br><br>';
     }
-    echo "[ <a href=\"region.php?op=RegionDel&amp;rid=" . addslashes($rid) . "&amp;ok=1\">" . _AM_JOBS_YES . "</a> | <a href=\"index.php\">" . _AM_JOBS_NO . '</a> ]<br><br>';
+    echo '[ <a href="region.php?op=RegionDel&amp;rid=' . addslashes($rid) . '&amp;ok=1">' . _AM_JOBS_YES . '</a> | <a href="index.php">' . _AM_JOBS_NO . '</a> ]<br><br>';
     echo '</td></tr></table>';
     xoops_cp_footer();
 }

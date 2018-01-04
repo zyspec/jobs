@@ -25,7 +25,7 @@ $main_lang     = '_' . strtoupper($moduleDirName);
 global $xoopsModule;
 $pathIcon16 = \Xmf\Module\Admin::iconUrl('', 16);
 
-$myts      = MyTextSanitizer::getInstance();
+$myts      = \MyTextSanitizer::getInstance();
 $module_id = $xoopsModule->getVar('mid');
 if (is_object($xoopsUser)) {
     $groups =& $xoopsUser->getGroups();
@@ -64,7 +64,7 @@ $orderby = !isset($_REQUEST['orderby']) ? $default_orderby : $_REQUEST['orderby'
 $GLOBALS['xoopsOption']['template_main'] = 'jobs_category.tpl';
 include XOOPS_ROOT_PATH . '/header.php';
 
-$cid  = ((int)$cid > 0) ? (int)$cid : 0;
+$cid  = ($cid > 0) ? $cid : 0;
 $min  = ((int)$min > 0) ? (int)$min : 0;
 $show = ((int)$show > 0) ? (int)$show : $xoopsModuleConfig['' . $moduleDirName . '_perpage'];
 $max  = $min + $show;

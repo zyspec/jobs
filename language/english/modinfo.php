@@ -290,3 +290,7 @@ define('_MI_JOBS_OVERVIEW', 'Overview');
 define('_MI_JOBS_DISCLAIMER', 'Disclaimer');
 define('_MI_JOBS_LICENSE', 'License');
 define('_MI_JOBS_SUPPORT', 'Support');
+
+
+define('_MI_JOBS_HOME', 'Home');
+define('_MI_JOBS_ABOUT', 'About');

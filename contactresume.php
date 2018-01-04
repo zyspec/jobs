@@ -162,10 +162,10 @@ if (isset($_POST['submit'])) {
 
     include XOOPS_ROOT_PATH . '/header.php';
     echo "<table width='100%' border='0' cellspacing='1' cellpadding='8'><tr class='bg4'><td valign='top'>\n";
-    echo "<script type=\"text/javascript\">
+    echo '<script type="text/javascript">
           function verify()
           {
-                var msg = \"" . _JOBS_VALIDERORMSG . "\\n__________________________________________________\\n\\n\";
+                var msg = "' . _JOBS_VALIDERORMSG . "\\n__________________________________________________\\n\\n\";
                 var errors = \"false\";
 
                 if (document.cont.namep.value == \"\") {
@@ -192,9 +192,9 @@ if (isset($_POST['submit'])) {
     if ($xoopsUser) {
         echo '<b>' . _JOBS_RES_CONTACTHEAD . '</b><br><br>';
         echo '' . _JOBS_RES_TOREPLY . '<br>';
-        echo "<form onsubmit=\"return verify();\" method=\"post\" action=\"contactresume.php\" name=\"cont\">";
+        echo '<form onsubmit="return verify();" method="post" action="contactresume.php" name="cont">';
         echo "<input type=\"hidden\" name=\"id\" value=\"$lid\">";
-        echo "<input type=\"hidden\" name=\"submit\" value=\"1\">";
+        echo '<input type="hidden" name="submit" value="1">';
 
         $idd  = $xoopsUser->getVar('uname', 'E');
         $idde = $xoopsUser->getVar('email', 'E');
@@ -236,7 +236,7 @@ if (isset($_POST['submit'])) {
 
             $dropdown = $xoopsDB->query('select lid, title, date, email FROM  ' . $xoopsDB->prefix('jobs_listing') . " WHERE email = '$idde' ORDER BY date DESC");
             while (list($lid, $title, $date, $email) = $xoopsDB->fetchRow($dropdown)) {
-                echo "<option value=\"" . XOOPS_URL . '/modules/' . $moduleDirName . "/viewjobs.php?lid=$lid\">" . $title . '</option>';
+                echo '<option value="' . XOOPS_URL . '/modules/' . $moduleDirName . "/viewjobs.php?lid=$lid\">" . $title . '</option>';
             }
             echo '</select></td></tr>';
         }
@@ -248,11 +248,11 @@ if (isset($_POST['submit'])) {
         //  echo $jlm_captcha->render();
         //  }
         echo "</td></tr></table>
-    <table class='outer'><tr><td>" . _JOBS_YOUR_IP . "&nbsp;
-        <img src=\"" . XOOPS_URL . "/modules/$moduleDirName/ip_image.php\" alt=\"\"><br>" . _JOBS_IP_LOGGED . "
+    <table class='outer'><tr><td>" . _JOBS_YOUR_IP . '&nbsp;
+        <img src="' . XOOPS_URL . "/modules/$moduleDirName/ip_image.php\" alt=\"\"><br>" . _JOBS_IP_LOGGED . '
         </td></tr></table>
     <br>
-      <p><input type=\"submit\" name=\"submit\" value=\"" . _JOBS_SENDFR . "\"></p>" . $GLOBALS['xoopsSecurity']->getTokenHTML('token') . '
+      <p><input type="submit" name="submit" value="' . _JOBS_SENDFR . '"></p>' . $GLOBALS['xoopsSecurity']->getTokenHTML('token') . '
     </form>';
     }
     echo '</td></tr></table>';

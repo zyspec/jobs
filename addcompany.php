@@ -18,7 +18,7 @@
 
 include __DIR__ . '/header.php';
 $moduleDirName = basename(__DIR__);
-$myts          = MyTextSanitizer::getInstance(); // MyTextSanitizer object
+$myts          = \MyTextSanitizer::getInstance(); // MyTextSanitizer object
 require_once XOOPS_ROOT_PATH . '/class/module.errorhandler.php';
 include XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/functions.php";
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';

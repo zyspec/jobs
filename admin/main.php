@@ -33,7 +33,7 @@ $admin_lang    = '_AM_' . strtoupper($moduleDirName);
 require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/functions.php";
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/class/jobtree.php";
-$myts = MyTextSanitizer::getInstance();
+$myts = \MyTextSanitizer::getInstance();
 #  function Index
 #####################################################
 function Index()
@@ -54,7 +54,7 @@ function Index()
     // Checks your version to see if you are updateing
     $module_version = $xoopsModule->getVar('version');
     if ($module_version < 300) {
-        echo "<fieldset><legend style='font-weight: bold; color: #900;'>" . _AM_JOBS_YOUR_USING . " $module_version</legend>" . _AM_JOBS_DATABASE_CHANGE . "<br><br><a href=\"" . XOOPS_URL . "/modules/$moduleDirName/upgrade/upgrade.php\">  " . _AM_JOBS_UPGRADE_NOW . '</a></fieldset>';
+        echo "<fieldset><legend style='font-weight: bold; color: #900;'>" . _AM_JOBS_YOUR_USING . " $module_version</legend>" . _AM_JOBS_DATABASE_CHANGE . '<br><br><a href="' . XOOPS_URL . "/modules/$moduleDirName/upgrade/upgrade.php\">  " . _AM_JOBS_UPGRADE_NOW . '</a></fieldset>';
     } else {
         /*
         // logo_images dir setting checker
@@ -194,58 +194,58 @@ function Index()
 
         // Add Type
         echo "<fieldset><legend style='font-weight: bold; color: #900;'>" . _AM_JOBS_ADDTYPE . '</legend>';
-        echo "<form method=\"post\" action=\"main.php\"><br>
-        <input type=\"text\" name=\"type\" size=\"30\" maxlength=\"100\">
-        <input type=\"hidden\" name=\"op\" value=\"ListingAddType\">
-        <input type=\"submit\" value=\"" . _AM_JOBS_ADD . "\">
-        </form>";
+        echo '<form method="post" action="main.php"><br>
+        <input type="text" name="type" size="30" maxlength="100">
+        <input type="hidden" name="op" value="ListingAddType">
+        <input type="submit" value="' . _AM_JOBS_ADD . '">
+        </form>';
         echo '</fieldset><br>';
 
         // Modify Type
         echo "<fieldset><legend style='font-weight: bold; color: #900;'>" . _AM_JOBS_MODTYPE . '</font></legend>';
         list($numrows) = $xoopsDB->fetchRow($xoopsDB->query('SELECT COUNT(*) FROM ' . $xoopsDB->prefix('jobs_type') . ''));
         if ($numrows > 0) {
-            echo "<form method=\"post\" action=\"main.php\"><br>";
+            echo '<form method="post" action="main.php"><br>';
             $result = $xoopsDB->query('SELECT id_type, nom_type FROM ' . $xoopsDB->prefix('jobs_type') . ' ORDER BY nom_type');
-            echo '' . _AM_JOBS_TYPE . " <select name=\"id_type\">";
+            echo '' . _AM_JOBS_TYPE . ' <select name="id_type">';
 
             while (list($id_type, $nom_type) = $xoopsDB->fetchRow($result)) {
                 $nom_type = $myts->htmlSpecialChars($nom_type);
                 echo "<option value=\"$id_type\">$nom_type</option>";
             }
-            echo "</select>
-            <input type=\"hidden\" name=\"op\" value=\"ListingModType\">
-            <input type=\"submit\" value=\"" . _AM_JOBS_MODIF . "\">
-            </form>";
+            echo '</select>
+            <input type="hidden" name="op" value="ListingModType">
+            <input type="submit" value="' . _AM_JOBS_MODIF . '">
+            </form>';
             echo '</fieldset><br>';
         }
 
         // Add price
         echo "<fieldset><legend style='font-weight: bold; color: #900;'>" . _AM_JOBS_ADDPRICE . '</legend>';
-        echo "<form method=\"post\" action=\"main.php\"><br>
-        <input type=\"text\" name=\"type\" size=\"30\" maxlength=\"100\">
-        <input type=\"hidden\" name=\"op\" value=\"ListingAddprice\">
-        <input type=\"submit\" value=\"" . _AM_JOBS_ADD . "\">
-        </form>";
+        echo '<form method="post" action="main.php"><br>
+        <input type="text" name="type" size="30" maxlength="100">
+        <input type="hidden" name="op" value="ListingAddprice">
+        <input type="submit" value="' . _AM_JOBS_ADD . '">
+        </form>';
         echo '</fieldset><br>';
 
         // Modify price
         echo "<fieldset><legend style='font-weight: bold; color: #900;'>" . _AM_JOBS_MODPRICE . '</font></legend>';
         list($numrows) = $xoopsDB->fetchRow($xoopsDB->query('SELECT COUNT(*) FROM ' . $xoopsDB->prefix('jobs_price') . ''));
         if ($numrows > 0) {
-            echo "<form method=\"post\" action=\"main.php\">
-            <br>";
+            echo '<form method="post" action="main.php">
+            <br>';
             $result = $xoopsDB->query('SELECT id_price, nom_price FROM ' . $xoopsDB->prefix('jobs_price') . ' ORDER BY nom_price');
-            echo '' . _AM_JOBS_TYPE . " <select name=\"id_price\">";
+            echo '' . _AM_JOBS_TYPE . ' <select name="id_price">';
 
             while (list($id_price, $nom_price) = $xoopsDB->fetchRow($result)) {
                 $nom_price = $myts->htmlSpecialChars($nom_price);
                 echo "<option value=\"$id_price\">$nom_price</option>";
             }
-            echo "</select>
-            <input type=\"hidden\" name=\"op\" value=\"ListingModprice\">
-            <input type=\"submit\" value=\"" . _AM_JOBS_MODIF . "\">
-            </form>";
+            echo '</select>
+            <input type="hidden" name="op" value="ListingModprice">
+            <input type="submit" value="' . _AM_JOBS_MODIF . '">
+            </form>';
             echo '</fieldset><br>';
         }
 
@@ -342,10 +342,10 @@ function IndexView($lid = 0)
         $state        = stripslashes($state);
         $premium      = $myts->htmlSpecialChars($premium);
 
-        echo "<form action=\"main.php\" method=\"post\">";
+        echo '<form action="main.php" method="post">';
         echo $GLOBALS['xoopsSecurity']->getTokenHTML();
-        echo "<table class=\"outer\" border=\"1\"><tr>
-            <td class=\"head\">" . _AM_JOBS_NUMANN . " </td><td class=\"head\">$lid / $date2</td>
+        echo '<table class="outer" border="1"><tr>
+            <td class="head">' . _AM_JOBS_NUMANN . " </td><td class=\"head\">$lid / $date2</td>
             </tr><tr>
             <td class=\"head\">" . _AM_JOBS_SENDBY . " </td><td class=\"head\">$submitter</td>
             </tr><tr>
@@ -359,8 +359,8 @@ function IndexView($lid = 0)
             </tr>";
 
         if ('1' == $xoopsModuleConfig['jobs_show_state']) {
-            echo "<tr>
-    <td class=\"head\">" . _AM_JOBS_STATE1 . " </td><td class=\"head\"><select name=\"state\">";
+            echo '<tr>
+    <td class="head">' . _AM_JOBS_STATE1 . ' </td><td class="head"><select name="state">';
             $result5 = $xoopsDB->query('SELECT rid, name FROM ' . $xoopsDB->prefix('jobs_region') . ' ORDER BY rid');
             while (list($rid, $name) = $xoopsDB->fetchRow($result5)) {
                 $sel = '';
@@ -372,7 +372,7 @@ function IndexView($lid = 0)
             echo '</select></td>
     </tr>';
         } else {
-            echo "<input type=\"hidden\" name=\"state\" value=\"\">";
+            echo '<input type="hidden" name="state" value="">';
         }
 
         echo "<tr>
@@ -381,26 +381,26 @@ function IndexView($lid = 0)
         if ('1' == $premium) {
             echo 'checked';
         }
-        echo '>' . constant($admin_lang . '_YES') . "&nbsp;&nbsp;
+        echo '>' . constant($admin_lang . '_YES') . '&nbsp;&nbsp;
 
-        <input type=\"radio\" name=\"premium\" value=\"0\"";
+        <input type="radio" name="premium" value="0"';
         if ('0' == $premium) {
             echo 'checked';
         }
         echo '>' . constant($admin_lang . '_NO') . '&nbsp;&nbsp; </td></tr>';
 
-        echo "<tr>
-            <td class=\"head\">" . _AM_JOBS_CAT . " </td><td class=\"head\">";
+        echo '<tr>
+            <td class="head">' . _AM_JOBS_CAT . ' </td><td class="head">';
         $mytree->makeMySelBox('title', 'title', $cid);
         echo '</td>
             </tr>';
 
-        echo "<tr>
-        <td class=\"head\">" . _AM_JOBS_TITLE2 . " </td><td class=\"head\"><input type=\"text\" name=\"title\" size=\"30\" value=\"$title\"></td>
+        echo '<tr>
+        <td class="head">' . _AM_JOBS_TITLE2 . " </td><td class=\"head\"><input type=\"text\" name=\"title\" size=\"30\" value=\"$title\"></td>
         </tr><tr>
         <td class=\"head\">" . _AM_JOBS_EXPIRE . " </td><td class=\"head\"><input type=\"text\" name=\"expire\" size=\"30\" value=\"$expire\"></td>
         </tr><tr>
-        <td class=\"head\">" . _AM_JOBS_TYPE . " </td><td class=\"head\"><select name=\"type\">";
+        <td class=\"head\">" . _AM_JOBS_TYPE . ' </td><td class="head"><select name="type">';
 
         $result5 = $xoopsDB->query('SELECT nom_type FROM ' . $xoopsDB->prefix('jobs_type') . ' ORDER BY nom_type');
         while (list($nom_type) = $xoopsDB->fetchRow($result5)) {
@@ -412,26 +412,26 @@ function IndexView($lid = 0)
         }
         echo '</select></td>
             </tr>';
-        echo "<tr><td  class=\"head\">" . _AM_JOBS_STATUS . "</td><td class=\"head\"><input type=\"radio\" name=\"status\" value=\"0\"";
+        echo '<tr><td  class="head">' . _AM_JOBS_STATUS . '</td><td class="head"><input type="radio" name="status" value="0"';
         if ('1' == $status) {
             echo 'checked';
         }
-        echo '>' . _AM_JOBS_ACTIVE . "&nbsp;&nbsp; <input type=\"radio\" name=\"status\" value=\"1\"";
+        echo '>' . _AM_JOBS_ACTIVE . '&nbsp;&nbsp; <input type="radio" name="status" value="1"';
         if ('0' == $status) {
             echo 'checked';
         }
         echo '>' . _AM_JOBS_INACTIVE . '</td></tr>';
-        echo "<td class=\"head\">" . _AM_JOBS_DESC2 . " </td><td class=\"head\">";
+        echo '<td class="head">' . _AM_JOBS_DESC2 . ' </td><td class="head">';
         $wysiwyg_text_area = jobs_getEditor(_AM_JOBS_DESC2, 'desctext', $desctext, '100%', '200px', 'small');
         echo $wysiwyg_text_area->render();
         echo '</td></tr>';
 
-        echo "<tr><td class=\"head\">" . _AM_JOBS_REQUIRE . " </td><td class=\"head\">";
+        echo '<tr><td class="head">' . _AM_JOBS_REQUIRE . ' </td><td class="head">';
         $wysiwyg_requirements_area = jobs_getEditor(_AM_JOBS_REQUIRE, 'requirements', $requirements, '100%', '200px', 'small');
         echo $wysiwyg_requirements_area->render();
         echo '</td></tr>';
 
-        echo "<td class=\"head\">" . _AM_JOBS_PRICE2 . " </td><td class=\"head\"><input type=\"text\" name=\"price\" size=\"20\" value=\"$price\"> " . $xoopsModuleConfig['jobs_money'] . '';
+        echo '<td class="head">' . _AM_JOBS_PRICE2 . " </td><td class=\"head\"><input type=\"text\" name=\"price\" size=\"20\" value=\"$price\"> " . $xoopsModuleConfig['jobs_money'] . '';
 
         $result3 = $xoopsDB->query('SELECT nom_price FROM ' . $xoopsDB->prefix('jobs_price') . ' ORDER BY id_price');
         echo " <select name=\"typeprice\"><option value=\"$typeprice\">$typeprice</option>";
@@ -439,23 +439,23 @@ function IndexView($lid = 0)
             echo "<option value=\"$nom_price\">$nom_price</option>";
         }
         echo '</select></td>';
-        echo "<tr><td class=\"head\"><b>" . _AM_JOBS_CONTACTINFO . "</b></td><td class=\"head\"><textarea name=\"contactinfo\" cols=\"25\" rows=\"6\">$contactinfo</textarea></td>";
+        echo '<tr><td class="head"><b>' . _AM_JOBS_CONTACTINFO . "</b></td><td class=\"head\"><textarea name=\"contactinfo\" cols=\"25\" rows=\"6\">$contactinfo</textarea></td>";
         echo '</tr><tr>';
 
-        echo "<tr><td class=\"head\"><b>" . _AM_JOBS_CONTACTINFO1 . "</b></td><td class=\"head\"><textarea name=\"contactinfo1\" cols=\"25\" rows=\"6\">$contactinfo1</textarea></td>";
+        echo '<tr><td class="head"><b>' . _AM_JOBS_CONTACTINFO1 . "</b></td><td class=\"head\"><textarea name=\"contactinfo1\" cols=\"25\" rows=\"6\">$contactinfo1</textarea></td>";
         echo '</tr><tr>';
 
-        echo "<tr><td class=\"head\"><b>" . _AM_JOBS_CONTACTINFO2 . "</b></td><td class=\"head\"><textarea name=\"contactinfo2\" cols=\"25\" rows=\"6\">$contactinfo2</textarea></td>";
-        echo "</tr><tr><tr>
-            <td class=\"head\">&nbsp;</td><td class=\"head\"><br><br><select name=\"op\">
-            <option value=\"ListingValid\"> " . _AM_JOBS_OK . "
-            <option value=\"ListingDel\"> " . _AM_JOBS_DEL . "
-            </select><input type=\"submit\" value=\"" . _AM_JOBS_GO . "\"></td>
-            </tr></table>";
-        echo "<input type=\"hidden\" name=\"valid\" value=\"Yes\">";
+        echo '<tr><td class="head"><b>' . _AM_JOBS_CONTACTINFO2 . "</b></td><td class=\"head\"><textarea name=\"contactinfo2\" cols=\"25\" rows=\"6\">$contactinfo2</textarea></td>";
+        echo '</tr><tr><tr>
+            <td class="head">&nbsp;</td><td class="head"><br><br><select name="op">
+            <option value="ListingValid"> ' . _AM_JOBS_OK . '
+            <option value="ListingDel"> ' . _AM_JOBS_DEL . '
+            </select><input type="submit" value="' . _AM_JOBS_GO . '"></td>
+            </tr></table>';
+        echo '<input type="hidden" name="valid" value="Yes">';
         echo "<input type=\"hidden\" name=\"lid\" value=\"$lid\">";
         echo "<input type=\"hidden\" name=\"date\" value=\"$date\">";
-        echo "<input type=\"hidden\" name=\"photo\" value=\"\">";
+        echo '<input type="hidden" name="photo" value="">';
         echo "<input type=\"hidden\" name=\"usid\" value=\"$usid\">";
         echo "<input type=\"hidden\" name=\"submitter\" value=\"$submitter\">
             </form>";
@@ -501,10 +501,10 @@ function IndexResumeView($lid = 0)
         $town      = $myts->htmlSpecialChars($town);
         $state     = $myts->htmlSpecialChars($state);
 
-        echo "<form action=\"main.php\" method=\"post\">";
+        echo '<form action="main.php" method="post">';
         echo $GLOBALS['xoopsSecurity']->getTokenHTML();
-        echo "<table><tr>
-            <td>" . _AM_JOBS_NUMANN . " </td><td>$lid / $date2</td>
+        echo '<table><tr>
+            <td>' . _AM_JOBS_NUMANN . " </td><td>$lid / $date2</td>
             </tr><tr>
             <td>" . _AM_JOBS_SENDBY . " </td><td>$submitter</td>
             </tr><tr>
@@ -517,7 +517,7 @@ function IndexResumeView($lid = 0)
 
         if ('1' == $xoopsModuleConfig['jobs_show_state']) {
             echo '<tr>
-    <td>' . _AM_JOBS_STATE1 . " </td><td><select name=\"state\">";
+    <td>' . _AM_JOBS_STATE1 . ' </td><td><select name="state">';
             $result5 = $xoopsDB->query('SELECT rid, name FROM ' . $xoopsDB->prefix('jobs_region') . ' ORDER BY rid');
             while (list($rid, $name) = $xoopsDB->fetchRow($result5)) {
                 $sel = '';
@@ -529,7 +529,7 @@ function IndexResumeView($lid = 0)
             echo '</select></td>
     </tr>';
         } else {
-            echo "<input type=\"hidden\" name=\"state\" value=\"\">";
+            echo '<input type="hidden" name="state" value="">';
         }
 
         echo '<tr>
@@ -552,11 +552,11 @@ function IndexResumeView($lid = 0)
             echo "<option value=\"$nom_price\">$nom_price</option>";
         }
         echo '</select></td></tr>';
-        echo '<tr><td>' . _AM_JOBS_STATUS . "</td><td><input type=\"radio\" name=\"status\" value=\"0\"";
+        echo '<tr><td>' . _AM_JOBS_STATUS . '</td><td><input type="radio" name="status" value="0"';
         if ('1' == $status) {
             echo 'checked';
         }
-        echo '>' . _AM_JOBS_ACTIVE . "&nbsp;&nbsp; <input type=\"radio\" name=\"status\" value=\"1\"";
+        echo '>' . _AM_JOBS_ACTIVE . '&nbsp;&nbsp; <input type="radio" name="status" value="1"';
         if ('0' == $status) {
             echo 'checked';
         }
@@ -564,14 +564,14 @@ function IndexResumeView($lid = 0)
         echo '<tr>
             <td>' . _AM_JOBS_CAT . ' </td><td>';
         $mytree->makeMySelBox('title', 'title', $cid);
-        echo "</td>
+        echo '</td>
             </tr><tr>
-            <td>&nbsp;</td><td><select name=\"op\">
-            <option value=\"ResumeValid\"> " . _AM_JOBS_OK . "
-            <option value=\"ResumeDel\"> " . _AM_JOBS_DEL . "
-            </select><input type=\"submit\" value=\"" . _AM_JOBS_GO . "\"></td>
-            </tr></table>";
-        echo "<input type=\"hidden\" name=\"valid\" value=\"Yes\">";
+            <td>&nbsp;</td><td><select name="op">
+            <option value="ResumeValid"> ' . _AM_JOBS_OK . '
+            <option value="ResumeDel"> ' . _AM_JOBS_DEL . '
+            </select><input type="submit" value="' . _AM_JOBS_GO . '"></td>
+            </tr></table>';
+        echo '<input type="hidden" name="valid" value="Yes">';
         echo "<input type=\"hidden\" name=\"lid\" value=\"$lid\">";
         echo "<input type=\"hidden\" name=\"date\" value=\"$date\">";
         echo "<input type=\"hidden\" name=\"submitter\" value=\"$submitter\">
@@ -638,10 +638,10 @@ function ModJob($lid = 0)
         $premium      = $myts->htmlSpecialChars($premium);
         $date2        = formatTimestamp($date, 's');
 
-        echo "<form action=\"main.php\" method=post>";
+        echo '<form action="main.php" method=post>';
         echo $GLOBALS['xoopsSecurity']->getTokenHTML();
-        echo "<table class=\"outer\" border=0><tr>
-        <td class=\"outer\">" . _AM_JOBS_NUMANN . " </td><td class=\"odd\">$lid &nbsp;" . _AM_JOBS_SUBMITTED_ON . "&nbsp; $date2</td>
+        echo '<table class="outer" border=0><tr>
+        <td class="outer">' . _AM_JOBS_NUMANN . " </td><td class=\"odd\">$lid &nbsp;" . _AM_JOBS_SUBMITTED_ON . "&nbsp; $date2</td>
         </tr><tr>
         <td class=\"outer\">" . _AM_JOBS_SENDBY . " </td><td class=\"odd\">$submitter</td>
         </tr><tr>
@@ -655,15 +655,15 @@ function ModJob($lid = 0)
         if ('1' == $status) {
             echo 'checked';
         }
-        echo '>' . _AM_JOBS_ACTIVE . "&nbsp;&nbsp; <input type=\"radio\" name=\"status\" value=\"0\"";
+        echo '>' . _AM_JOBS_ACTIVE . '&nbsp;&nbsp; <input type="radio" name="status" value="0"';
         if ('0' == $status) {
             echo 'checked';
         }
         echo '>' . _AM_JOBS_INACTIVE . '</td></tr>';
-        echo "<tr>
-    <td class=\"outer\">" . _AM_JOBS_EXPIRE . " </td><td class=\"odd\"><input type=\"text\" name=\"expire\" size=\"30\" value=\"$expire\"></td>
+        echo '<tr>
+    <td class="outer">' . _AM_JOBS_EXPIRE . " </td><td class=\"odd\"><input type=\"text\" name=\"expire\" size=\"30\" value=\"$expire\"></td>
     </tr><tr>
-    <td class=\"outer\">" . _AM_JOBS_TYPE . " </td><td class=\"odd\"><select name=\"type\">";
+    <td class=\"outer\">" . _AM_JOBS_TYPE . ' </td><td class="odd"><select name="type">';
 
         $result5 = $xoopsDB->query('SELECT nom_type FROM ' . $xoopsDB->prefix('jobs_type') . ' ORDER BY nom_type');
         while (list($nom_type) = $xoopsDB->fetchRow($result5)) {
@@ -673,21 +673,21 @@ function ModJob($lid = 0)
             }
             echo "<option value=\"$nom_type\" $sel>$nom_type</option>";
         }
-        echo "</select></td>
+        echo '</select></td>
     </tr><tr>
-    <td class=\"outer\">" . _AM_JOBS_CAT2 . " </td><td class=\"odd\">";
+    <td class="outer">' . _AM_JOBS_CAT2 . ' </td><td class="odd">';
         $mytree->makeMySelBox('title', 'title', $cid);
-        echo "</td>
+        echo '</td>
     </tr><tr>
-    <td class=\"outer\">" . _AM_JOBS_DESC2 . " </td><td class=\"odd\">";
+    <td class="outer">' . _AM_JOBS_DESC2 . ' </td><td class="odd">';
         $wysiwyg_text_area = jobs_getEditor(_AM_JOBS_DESC2, 'desctext', $desctext, '100%', '200px', 'small');
         echo $wysiwyg_text_area->render();
         echo '</td></tr>';
-        echo "<td class=\"outer\">" . _AM_JOBS_REQUIRE . " </td><td class=\"odd\">";
+        echo '<td class="outer">' . _AM_JOBS_REQUIRE . ' </td><td class="odd">';
         $wysiwyg_requirements_area = jobs_getEditor(_AM_JOBS_REQUIRE, 'requirements', $requirements, '100%', '200px', 'small');
         echo $wysiwyg_requirements_area->render();
         echo '</td></tr><tr>';
-        echo "<td class=\"outer\">" . _AM_JOBS_PRICE2 . " </td><td class=\"odd\">" . $xoopsModuleConfig['jobs_money'] . "&nbsp;&nbsp;<input type=\"text\" name=\"price\" size=\"20\" value=\"$price\"> ";
+        echo '<td class="outer">' . _AM_JOBS_PRICE2 . ' </td><td class="odd">' . $xoopsModuleConfig['jobs_money'] . "&nbsp;&nbsp;<input type=\"text\" name=\"price\" size=\"20\" value=\"$price\"> ";
 
         $result = $xoopsDB->query('SELECT nom_price FROM ' . $xoopsDB->prefix('jobs_price') . ' ORDER BY nom_price');
         echo " <select name=\"id_price\"><option value=\"$typeprice\">$typeprice</option>";
@@ -696,15 +696,15 @@ function ModJob($lid = 0)
             echo "<option value=\"$nom_price\">$nom_price</option>";
         }
         echo '</select></td>';
-        echo "</tr><tr>
-    <td class=\"outer\">" . _AM_JOBS_TEL . " </td><td class=\"odd\"><input type=\"text\" name=\"tel\" size=\"30\" value=\"$tel\"></td>
+        echo '</tr><tr>
+    <td class="outer">' . _AM_JOBS_TEL . " </td><td class=\"odd\"><input type=\"text\" name=\"tel\" size=\"30\" value=\"$tel\"></td>
     </tr><tr>
     <td class=\"outer\">" . _AM_JOBS_TOWN . " </td><td class=\"odd\"><input type=\"text\" name=\"town\" size=\"30\" value=\"$town\"></td>
     </tr>";
 
         if ('1' == $xoopsModuleConfig['jobs_show_state']) {
-            echo "<tr>
-    <td class=\"outer\">" . _AM_JOBS_STATE1 . " </td><td class=\"odd\"><select name=\"state\">";
+            echo '<tr>
+    <td class="outer">' . _AM_JOBS_STATE1 . ' </td><td class="odd"><select name="state">';
             $result5 = $xoopsDB->query('SELECT rid, name FROM ' . $xoopsDB->prefix('jobs_region') . ' ORDER BY rid');
             while (list($rid, $name) = $xoopsDB->fetchRow($result5)) {
                 $sel = '';
@@ -716,7 +716,7 @@ function ModJob($lid = 0)
             echo '</select></td>
     </tr>';
         } else {
-            echo "<input type=\"hidden\" name=\"state\" value=\"\">";
+            echo '<input type="hidden" name="state" value="">';
         }
 
         echo "<tr>
@@ -725,28 +725,28 @@ function ModJob($lid = 0)
         if ('1' == $premium) {
             echo 'checked';
         }
-        echo '>' . constant($admin_lang . '_YES') . "&nbsp;&nbsp;
+        echo '>' . constant($admin_lang . '_YES') . '&nbsp;&nbsp;
 
-    <input type=\"radio\" name=\"premium\" value=\"0\"";
+    <input type="radio" name="premium" value="0"';
         if ('0' == $premium) {
             echo 'checked';
         }
         echo '>' . constant($admin_lang . '_NO') . '&nbsp;&nbsp; </td></tr>';
-        echo "<tr><td class=\"outer\">" . _AM_JOBS_CONTACTINFO . "</td><td class=\"odd\"><textarea name=\"contactinfo\" cols=\"28\" rows=\"4\">$contactinfo</textarea></td></tr>";
+        echo '<tr><td class="outer">' . _AM_JOBS_CONTACTINFO . "</td><td class=\"odd\"><textarea name=\"contactinfo\" cols=\"28\" rows=\"4\">$contactinfo</textarea></td></tr>";
 
-        echo "<tr><td class=\"outer\">" . _AM_JOBS_CONTACTINFO1 . "</td><td class=\"odd\"><textarea name=\"contactinfo1\" cols=\"28\" rows=\"4\">$contactinfo1</textarea></td></tr>";
+        echo '<tr><td class="outer">' . _AM_JOBS_CONTACTINFO1 . "</td><td class=\"odd\"><textarea name=\"contactinfo1\" cols=\"28\" rows=\"4\">$contactinfo1</textarea></td></tr>";
 
-        echo "<tr><td class=\"outer\">" . _AM_JOBS_CONTACTINFO2 . "</td><td class=\"odd\"><textarea name=\"contactinfo2\" cols=\"28\" rows=\"4\">$contactinfo2</textarea></td>";
+        echo '<tr><td class="outer">' . _AM_JOBS_CONTACTINFO2 . "</td><td class=\"odd\"><textarea name=\"contactinfo2\" cols=\"28\" rows=\"4\">$contactinfo2</textarea></td>";
 
         $time = time();
 
-        echo "</tr><tr>
-    <td>&nbsp;</td><td><select name=\"op\">
-    <option value=\"ModJobS\"> " . _AM_JOBS_MODIF . "
-    <option value=\"ListingDel\"> " . _AM_JOBS_DEL . "
-    </select><input type=\"submit\" value=\"" . _AM_JOBS_GO . "\"></td>
-    </tr></table>";
-        echo "<input type=\"hidden\" name=\"valid\" value=\"1\">";
+        echo '</tr><tr>
+    <td>&nbsp;</td><td><select name="op">
+    <option value="ModJobS"> ' . _AM_JOBS_MODIF . '
+    <option value="ListingDel"> ' . _AM_JOBS_DEL . '
+    </select><input type="submit" value="' . _AM_JOBS_GO . '"></td>
+    </tr></table>';
+        echo '<input type="hidden" name="valid" value="1">';
         echo "<input type=\"hidden\" name=\"lid\" value=\"$lid\">";
         echo "<input type=\"hidden\" name=\"usid\" value=\"$usid\">";
         echo "<input type=\"hidden\" name=\"date\" value=\"$time\">";
@@ -1133,12 +1133,12 @@ function ListingAddType($type)
         xoops_cp_header();
         echo "<table width='100%' border='0' cellspacing='1' cellpadding='8'><tr class='bg4'><td valign='top'>\n";
         echo '<br><center><b>' . _AM_JOBS_ERRORTYPE . " $nom_type " . _AM_JOBS_EXIST . '</b><br><br>';
-        echo "<form method=\"post\" action=\"main.php\">
-            <b>" . _AM_JOBS_ADDTYPE . '</b><br><br>
-            ' . _AM_JOBS_TYPE . "   <input type=\"text\" name=\"type\" size=\"30\" maxlength=\"100\">
-            <input type=\"hidden\" name=\"op\" value=\"ListingAddType\">
-            <input type=\"submit\" value=\"" . _AM_JOBS_ADD . "\">
-            </form>";
+        echo '<form method="post" action="main.php">
+            <b>' . _AM_JOBS_ADDTYPE . '</b><br><br>
+            ' . _AM_JOBS_TYPE . '   <input type="text" name="type" size="30" maxlength="100">
+            <input type="hidden" name="op" value="ListingAddType">
+            <input type="submit" value="' . _AM_JOBS_ADD . '">
+            </form>';
         echo '</td></tr></table>';
         require_once __DIR__ . '/admin_footer.php';
     } else {
@@ -1171,23 +1171,23 @@ function ListingModType($id_type)
 
     $nom_type = $myts->htmlSpecialChars($nom_type);
 
-    echo "<form action=\"main.php\" method=\"post\">";
+    echo '<form action="main.php" method="post">';
     echo $GLOBALS['xoopsSecurity']->getTokenHTML();
     echo ''
          . _AM_JOBS_TYPE
          . " <input type=\"text\" name=\"nom_type\" value=\"$nom_type\" size=\"51\" maxlength=\"50\"><br>"
          . "<input type=\"hidden\" name=\"id_type\" value=\"$id_type\">"
-         . "<input type=\"hidden\" name=\"op\" value=\"ListingModTypeS\">"
-         . "<table border=\"0\"><tr><td>"
-         . "<input type=\"submit\" value=\""
+         . '<input type="hidden" name="op" value="ListingModTypeS">'
+         . '<table border="0"><tr><td>'
+         . '<input type="submit" value="'
          . _AM_JOBS_SAVMOD
-         . "\"></form></td><td>"
-         . "<form action=\"main.php\" method=\"post\">"
+         . '"></form></td><td>'
+         . '<form action="main.php" method="post">'
          . "<input type=\"hidden\" name=\"id_type\" value=\"$id_type\">"
-         . "<input type=\"hidden\" name=\"op\" value=\"ListingDelType\">"
-         . "<input type=\"submit\" value=\""
+         . '<input type="hidden" name="op" value="ListingDelType">'
+         . '<input type="submit" value="'
          . _AM_JOBS_DEL
-         . "\"></form></td></tr></table>";
+         . '"></form></td></tr></table>';
 
     echo '</td></tr></table>';
     require_once __DIR__ . '/admin_footer.php';
@@ -1235,12 +1235,12 @@ function ListingAddprice($type)
         xoops_cp_header();
         echo "<table width='100%' border='0' cellspacing='1' cellpadding='8'><tr class='bg4'><td valign='top'>\n";
         echo '<br><center><b>' . _AM_JOBS_ERRORPRICE . " $nom_price " . _AM_JOBS_EXIST . '</b><br><br>';
-        echo "<form method=\"post\" action=\"main.php\">
-            <b>" . _AM_JOBS_ADDPRICE . '</b><br><br>
-            ' . _AM_JOBS_TYPE . "   <input type=\"text\" name=\"type\" size=\"30\" maxlength=\"100\">
-            <input type=\"hidden\" name=\"op\" value=\"ListingAddprice\">
-            <input type=\"submit\" value=\"" . _AM_JOBS_ADD . "\">
-            </form>";
+        echo '<form method="post" action="main.php">
+            <b>' . _AM_JOBS_ADDPRICE . '</b><br><br>
+            ' . _AM_JOBS_TYPE . '   <input type="text" name="type" size="30" maxlength="100">
+            <input type="hidden" name="op" value="ListingAddprice">
+            <input type="submit" value="' . _AM_JOBS_ADD . '">
+            </form>';
         echo '</td></tr></table>';
         require_once __DIR__ . '/admin_footer.php';
     } else {
@@ -1273,23 +1273,23 @@ function ListingModprice($id_price)
 
     $nom_price = $myts->htmlSpecialChars($nom_price);
 
-    echo "<form action=\"main.php\" method=\"post\">";
+    echo '<form action="main.php" method="post">';
     echo $GLOBALS['xoopsSecurity']->getTokenHTML();
     echo ''
          . _AM_JOBS_TYPE
          . " <input type=\"text\" name=\"nom_price\" value=\"$nom_price\" size=\"50\" maxlength=\"50\"><br>"
          . "<input type=\"hidden\" name=\"id_price\" value=\"$id_price\">"
-         . "<input type=\"hidden\" name=\"op\" value=\"ListingModpriceS\">"
-         . "<table border=\"0\"><tr><td>"
-         . "<input type=\"submit\" value=\""
+         . '<input type="hidden" name="op" value="ListingModpriceS">'
+         . '<table border="0"><tr><td>'
+         . '<input type="submit" value="'
          . _AM_JOBS_SAVMOD
-         . "\"></form></td><td>"
-         . "<form action=\"main.php\" method=\"post\">"
+         . '"></form></td><td>'
+         . '<form action="main.php" method="post">'
          . "<input type=\"hidden\" name=\"id_price\" value=\"$id_price\">"
-         . "<input type=\"hidden\" name=\"op\" value=\"ListingDelprice\">"
-         . "<input type=\"submit\" value=\""
+         . '<input type="hidden" name="op" value="ListingDelprice">'
+         . '<input type="submit" value="'
          . _AM_JOBS_DEL
-         . "\"></form></td></tr></table>";
+         . '"></form></td></tr></table>';
     echo '</td></tr></table>';
     require_once __DIR__ . '/admin_footer.php';
 }

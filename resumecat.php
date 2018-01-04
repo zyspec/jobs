@@ -20,7 +20,7 @@ include __DIR__ . '/header.php';
 
 $moduleDirName = basename(__DIR__);
 
-$myts      = MyTextSanitizer::getInstance();
+$myts      = \MyTextSanitizer::getInstance();
 $module_id = $xoopsModule->getVar('mid');
 
 if (is_object($xoopsUser)) {
@@ -54,7 +54,7 @@ $GLOBALS['xoopsOption']['template_main'] = 'jobs_res_category.tpl';
 include XOOPS_ROOT_PATH . '/header.php';
 $default_sort = $xoopsModuleConfig['jobs_resume_sortorder'];
 
-$cid  = ((int)$cid > 0) ? (int)$cid : 0;
+$cid  = ($cid > 0) ? $cid : 0;
 $min  = ((int)$min > 0) ? (int)$min : 0;
 $show = ((int)$show > 0) ? (int)$show : $xoopsModuleConfig['' . $moduleDirName . '_resume_perpage'];
 $max  = $min + $show;

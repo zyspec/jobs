@@ -83,10 +83,10 @@ function SendJob($lid = 0)
         echo $jlm_captcha->render();
         echo '</td></tr>';
     }
-    echo "</table><br>
-    <input type=\"hidden\" name=\"op\" value=\"MailJob\">
-    <input type=\"submit\" value=\"" . _JOBS_SENDFR . "\">
-    </form>     ";
+    echo '</table><br>
+    <input type="hidden" name="op" value="MailJob">
+    <input type="submit" value="' . _JOBS_SENDFR . '">
+    </form>     ';
     echo '</td></tr></table>';
 }
 
@@ -223,10 +223,10 @@ function SendResume($lid = 0)
         echo '</td></tr>';
     }
 
-    echo "</table><br>
-    <input type=\"hidden\" name=\"op\" value=\"MailResume\">
-    <input type=\"submit\" value=\"" . _JOBS_SENDFR . "\">
-    </form>     ";
+    echo '</table><br>
+    <input type="hidden" name="op" value="MailResume">
+    <input type="submit" value="' . _JOBS_SENDFR . '">
+    </form>     ';
     echo '</td></tr></table>';
 }
 

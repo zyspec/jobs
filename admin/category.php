@@ -32,7 +32,7 @@ $moduleDirName = basename(dirname(__DIR__));
 //require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/gtickets.php";
 require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/functions.php";
 require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/class/jobtree.php";
-$myts = MyTextSanitizer::getInstance();
+$myts = \MyTextSanitizer::getInstance();
 #  function NewCat
 #####################################################
 /**
@@ -51,9 +51,9 @@ function NewCat($cat)
     echo "<fieldset><legend style='font-weight: bold; color: #900;'>" . _AM_JOBS_ADDSUBCAT . '</legend>';
 
     JobsShowImg();
-    echo "<form method=\"post\" action=\"category.php\" name=\"imcat\"><input type=\"hidden\" name=\"op\" value=\"AddCat\">
+    echo '<form method="post" action="category.php" name="imcat"><input type="hidden" name="op" value="AddCat">
         <table border=0><tr>
-      <td width=\"12%\">" . _AM_JOBS_CATNAME . " </td><td><input type=\"text\" name=\"title\" size=\"30\" maxlength=\"100\">&nbsp; " . _AM_JOBS_IN . ' &nbsp;';
+      <td width="12%">' . _AM_JOBS_CATNAME . ' </td><td><input type="text" name="title" size="30" maxlength="100">&nbsp; ' . _AM_JOBS_IN . ' &nbsp;';
 
     $result = $xoopsDB->query('select pid, title, img, ordre from ' . $xoopsDB->prefix('jobs_categories') . " where cid=$cat");
     list($pid, $title, $imgs, $ordre) = $xoopsDB->fetchRow($result);
@@ -61,7 +61,7 @@ function NewCat($cat)
     echo '</td>
     </tr>
     <tr>
-      <td>' . _AM_JOBS_IMGCAT . "  </td><td><select name=\"img\" onChange=\"showimage()\">";
+      <td>' . _AM_JOBS_IMGCAT . '  </td><td><select name="img" onChange="showimage()">';
 
     $rep    = XOOPS_ROOT_PATH . "/modules/$moduleDirName/assets/images/cat";
     $handle = opendir($rep);
@@ -83,14 +83,14 @@ function NewCat($cat)
             }
         }
     }
-    echo "</select>&nbsp;&nbsp;<img src=\"" . XOOPS_URL . "/modules/$moduleDirName/assets/images/cat/default.gif\" name=\"avatar\" align=\"absmiddle\"> </td></tr><tr><td>&nbsp;</td><td>" . _AM_JOBS_REPIMGCAT . " /modules/$moduleDirName/assets/images/cat/</td></tr>";
+    echo '</select>&nbsp;&nbsp;<img src="' . XOOPS_URL . "/modules/$moduleDirName/assets/images/cat/default.gif\" name=\"avatar\" align=\"absmiddle\"> </td></tr><tr><td>&nbsp;</td><td>" . _AM_JOBS_REPIMGCAT . " /modules/$moduleDirName/assets/images/cat/</td></tr>";
 
-    echo '<tr><td>' . _AM_JOBS_DISPLPRICE2 . " </td><td><input type=\"radio\" name=\"affprice\" value=\"1\" checked>" . _AM_JOBS_OUI . "&nbsp;&nbsp; <input type=\"radio\" name=\"affprice\" value=\"0\">" . _AM_JOBS_NON . ' (' . _AM_JOBS_INTHISCAT . ')</td></tr>';
+    echo '<tr><td>' . _AM_JOBS_DISPLPRICE2 . ' </td><td><input type="radio" name="affprice" value="1" checked>' . _AM_JOBS_OUI . '&nbsp;&nbsp; <input type="radio" name="affprice" value="0">' . _AM_JOBS_NON . ' (' . _AM_JOBS_INTHISCAT . ')</td></tr>';
 
     if ($xoopsModuleConfig['jobs_cat_sortorder'] = 'ordre') {
-        echo '<tr><td>' . _AM_JOBS_ORDRE . " </td><td><input type=\"text\" name=\"ordre\" size=\"4\"></td></tr><tr><td><br><input type=\"submit\" value=\"" . _AM_JOBS_ADD . "\"></td></tr>";
+        echo '<tr><td>' . _AM_JOBS_ORDRE . ' </td><td><input type="text" name="ordre" size="4"></td></tr><tr><td><br><input type="submit" value="' . _AM_JOBS_ADD . '"></td></tr>';
     } else {
-        echo "<tr><td><br><input type=\"submit\" value=\"" . _AM_JOBS_ADD . "\"></td></tr>";
+        echo '<tr><td><br><input type="submit" value="' . _AM_JOBS_ADD . '"></td></tr>';
     }
 
     echo '</table>
@@ -121,13 +121,13 @@ function ModCat($cat)
 
     $title = $myts->undoHtmlSpecialChars($title);
 
-    echo "<form action=\"category.php\" method=\"post\" name=\"imcat\">";
+    echo '<form action="category.php" method="post" name="imcat">';
     echo $GLOBALS['xoopsSecurity']->getTokenHTML();
-    echo "<table border=\"0\"><tr>
-    <td>" . _AM_JOBS_CATNAME . "   </td><td><input type=\"text\" name=\"title\" value=\"$title\" size=\"30\" maxlength=\"50\">&nbsp; " . _AM_JOBS_IN . ' &nbsp;';
+    echo '<table border="0"><tr>
+    <td>' . _AM_JOBS_CATNAME . "   </td><td><input type=\"text\" name=\"title\" value=\"$title\" size=\"30\" maxlength=\"50\">&nbsp; " . _AM_JOBS_IN . ' &nbsp;';
     $mytree->makeMyCatBox('title', 'title', $pid, 1);
     echo '</td></tr><tr>
-    <td>' . _AM_JOBS_IMGCAT . "  </td><td><select name=\"img\" onChange=\"showimage()\">";
+    <td>' . _AM_JOBS_IMGCAT . '  </td><td><select name="img" onChange="showimage()">';
 
     $rep    = XOOPS_ROOT_PATH . "/modules/$moduleDirName/assets/images/cat";
     $handle = opendir($rep);
@@ -149,13 +149,13 @@ function ModCat($cat)
             }
         }
     }
-    echo "</select>&nbsp;&nbsp;<img src=\"" . XOOPS_URL . "/modules/$moduleDirName/assets/images/cat/$imgs\" name=\"avatar\" align=\"absmiddle\"> </td></tr><tr><td>&nbsp;</td><td>" . _AM_JOBS_REPIMGCAT . " /modules/$moduleDirName/assets/images/cat/</td></tr>";
+    echo '</select>&nbsp;&nbsp;<img src="' . XOOPS_URL . "/modules/$moduleDirName/assets/images/cat/$imgs\" name=\"avatar\" align=\"absmiddle\"> </td></tr><tr><td>&nbsp;</td><td>" . _AM_JOBS_REPIMGCAT . " /modules/$moduleDirName/assets/images/cat/</td></tr>";
 
-    echo '<tr><td>' . _AM_JOBS_DISPLPRICE2 . " </td><td><input type=\"radio\" name=\"affprice\" value=\"1\"";
+    echo '<tr><td>' . _AM_JOBS_DISPLPRICE2 . ' </td><td><input type="radio" name="affprice" value="1"';
     if ('1' == $affprice) {
         echo 'checked';
     }
-    echo '>' . _AM_JOBS_OUI . "&nbsp;&nbsp; <input type=\"radio\" name=\"affprice\" value=\"0\"";
+    echo '>' . _AM_JOBS_OUI . '&nbsp;&nbsp; <input type="radio" name="affprice" value="0"';
     if ('0' == $affprice) {
         echo 'checked';
     }
@@ -169,17 +169,17 @@ function ModCat($cat)
 
     echo '</table>';
     echo "<input type=\"hidden\" name=\"cidd\" value=\"$cat\">"
-         . "<input type=\"hidden\" name=\"op\" value=\"ModCatS\">"
-         . "<table border=\"0\"><tr><td><br>"
-         . "<input type=\"submit\" value=\""
+         . '<input type="hidden" name="op" value="ModCatS">'
+         . '<table border="0"><tr><td><br>'
+         . '<input type="submit" value="'
          . _AM_JOBS_SAVMOD
-         . "\"></form></td></tr><tr><td><br>"
-         . "<form action=\"category.php\" method=\"post\">"
+         . '"></form></td></tr><tr><td><br>'
+         . '<form action="category.php" method="post">'
          . "<input type=\"hidden\" name=\"cid\" value=\"$cat\">"
-         . "<input type=\"hidden\" name=\"op\" value=\"DelCat\">"
-         . "<input type=\"submit\" value=\""
+         . '<input type="hidden" name="op" value="DelCat">'
+         . '<input type="submit" value="'
          . _AM_JOBS_DEL
-         . "\"></form></td></tr></table>";
+         . '"></form></td></tr></table>';
 
     echo '</fieldset><br>';
     xoops_cp_footer();
@@ -237,9 +237,9 @@ function DelCat($cid, $ok = 0)
         redirect_header('map.php', 3, _AM_JOBS_CATDEL);
     } else {
         xoops_cp_header();
-        echo "<table border=\"0\"><tr><td>";
+        echo '<table border="0"><tr><td>';
         echo '<br><center><b>' . _AM_JOBS_SURDELCAT . '</b><br><br>';
-        echo "[ <a href=\"category.php?op=DelCat&cid=$cid&ok=1\">" . _AM_JOBS_OUI . "</a> | <a href=\"map.php\">" . _AM_JOBS_NON . '</a> ]<br><br>';
+        echo "[ <a href=\"category.php?op=DelCat&cid=$cid&ok=1\">" . _AM_JOBS_OUI . '</a> | <a href="map.php">' . _AM_JOBS_NON . '</a> ]<br><br>';
         echo '</td></tr></table>';
         xoops_cp_footer();
     }
@@ -262,9 +262,9 @@ function NewResCat($cat)
     echo "<fieldset><legend style='font-weight: bold; color: #900;'>" . _AM_JOBS_RES_ADDSUBCAT . '</legend>';
 
     JobsShowImg();
-    echo "<form method=\"post\" action=\"category.php\" name=\"imcat\"><input type=\"hidden\" name=\"op\" value=\"AddResCat\">
+    echo '<form method="post" action="category.php" name="imcat"><input type="hidden" name="op" value="AddResCat">
         <table border=0><tr>
-      <td width=\"12%\">" . _AM_JOBS_CATNAME . " </td><td><input type=\"text\" name=\"title\" size=\"30\" maxlength=\"100\">&nbsp; " . _AM_JOBS_IN . ' &nbsp;';
+      <td width="12%">' . _AM_JOBS_CATNAME . ' </td><td><input type="text" name="title" size="30" maxlength="100">&nbsp; ' . _AM_JOBS_IN . ' &nbsp;';
 
     $result = $xoopsDB->query('select pid, title, img, ordre from ' . $xoopsDB->prefix('jobs_res_categories') . " where cid=$cat");
     list($pid, $title, $imgs, $ordre) = $xoopsDB->fetchRow($result);
@@ -272,7 +272,7 @@ function NewResCat($cat)
     echo '</td>
     </tr>
     <tr>
-      <td>' . _AM_JOBS_IMGCAT . "  </td><td><select name=\"img\" onChange=\"showimage()\">";
+      <td>' . _AM_JOBS_IMGCAT . '  </td><td><select name="img" onChange="showimage()">';
 
     $rep    = XOOPS_ROOT_PATH . "/modules/$moduleDirName/assets/images/cat";
     $handle = opendir($rep);
@@ -294,14 +294,14 @@ function NewResCat($cat)
             }
         }
     }
-    echo "</select>&nbsp;&nbsp;<img src=\"" . XOOPS_URL . "/modules/$moduleDirName/assets/images/cat/default.gif\" name=\"avatar\" align=\"absmiddle\"> </td></tr><tr><td>&nbsp;</td><td>" . _AM_JOBS_REPIMGCAT . " /modules/$moduleDirName/assets/images/cat/</td></tr>";
+    echo '</select>&nbsp;&nbsp;<img src="' . XOOPS_URL . "/modules/$moduleDirName/assets/images/cat/default.gif\" name=\"avatar\" align=\"absmiddle\"> </td></tr><tr><td>&nbsp;</td><td>" . _AM_JOBS_REPIMGCAT . " /modules/$moduleDirName/assets/images/cat/</td></tr>";
 
-    echo '<tr><td>' . _AM_JOBS_DISPLPRICE2 . " </td><td><input type=\"radio\" name=\"affprice\" value=\"1\" checked>" . _AM_JOBS_OUI . "&nbsp;&nbsp; <input type=\"radio\" name=\"affprice\" value=\"0\">" . _AM_JOBS_NON . ' (' . _AM_JOBS_INTHISCAT . ')</td></tr>';
+    echo '<tr><td>' . _AM_JOBS_DISPLPRICE2 . ' </td><td><input type="radio" name="affprice" value="1" checked>' . _AM_JOBS_OUI . '&nbsp;&nbsp; <input type="radio" name="affprice" value="0">' . _AM_JOBS_NON . ' (' . _AM_JOBS_INTHISCAT . ')</td></tr>';
 
     if ($xoopsModuleConfig['jobs_cat_sortorder'] = 'ordre') {
-        echo '<tr><td>' . _AM_JOBS_ORDRE . " </td><td><input type=\"text\" name=\"ordre\" size=\"4\"></td></tr><tr><td><br><input type=\"submit\" value=\"" . _AM_JOBS_ADD . "\"></td></tr>";
+        echo '<tr><td>' . _AM_JOBS_ORDRE . ' </td><td><input type="text" name="ordre" size="4"></td></tr><tr><td><br><input type="submit" value="' . _AM_JOBS_ADD . '"></td></tr>';
     } else {
-        echo "<tr><td><br><input type=\"submit\" value=\"" . _AM_JOBS_ADD . "\"></td></tr>";
+        echo '<tr><td><br><input type="submit" value="' . _AM_JOBS_ADD . '"></td></tr>';
     }
     echo '</table>
         </form>';
@@ -331,15 +331,15 @@ function ModResCat($cat)
     list($pid, $title, $imgs, $ordre, $affprice) = $xoopsDB->fetchRow($result);
 
     $title = $myts->htmlSpecialChars($title);
-    echo "<table border=\"0\"><tr>";
-    echo "<form action=\"category.php\" method=\"post\" name=\"imcat\">";
+    echo '<table border="0"><tr>';
+    echo '<form action="category.php" method="post" name="imcat">';
     echo $GLOBALS['xoopsSecurity']->getTokenHTML();
 
-    echo "<td>" . _AM_JOBS_CATNAME . "   </td><td><input type=\"text\" name=\"title\" value=\"$title\" size=\"30\" maxlength=\"50\">&nbsp; " . _AM_JOBS_IN . ' &nbsp;';
+    echo '<td>' . _AM_JOBS_CATNAME . "   </td><td><input type=\"text\" name=\"title\" value=\"$title\" size=\"30\" maxlength=\"50\">&nbsp; " . _AM_JOBS_IN . ' &nbsp;';
     $mytree->makeMyCatBox('title', 'title', $pid, 1);
     echo '</td></tr>
     <tr>
-    <td>' . _AM_JOBS_IMGCAT . "  </td><td><select name=\"img\" onChange=\"showimage()\">";
+    <td>' . _AM_JOBS_IMGCAT . '  </td><td><select name="img" onChange="showimage()">';
 
     $rep    = XOOPS_ROOT_PATH . "/modules/$moduleDirName/assets/images/cat";
     $handle = opendir($rep);
@@ -361,14 +361,14 @@ function ModResCat($cat)
             }
         }
     }
-    echo "</select>&nbsp;&nbsp;<img src=\"" . XOOPS_URL . "/modules/$moduleDirName/assets/images/cat/$imgs\" name=\"avatar\" align=\"absmiddle\"> </td></tr><tr><td>&nbsp;</td><td>" . _AM_JOBS_REPIMGCAT . " /modules/$moduleDirName/assets/images/cat/</td></tr>";
+    echo '</select>&nbsp;&nbsp;<img src="' . XOOPS_URL . "/modules/$moduleDirName/assets/images/cat/$imgs\" name=\"avatar\" align=\"absmiddle\"> </td></tr><tr><td>&nbsp;</td><td>" . _AM_JOBS_REPIMGCAT . " /modules/$moduleDirName/assets/images/cat/</td></tr>";
 
-    echo '<tr><td>' . _AM_JOBS_DISPLPRICE2 . " </td><td colspan=2>
-    <input type=\"radio\"name=\"affprice\"value=\"1\"";
+    echo '<tr><td>' . _AM_JOBS_DISPLPRICE2 . ' </td><td colspan=2>
+    <input type="radio"name="affprice"value="1"';
     if ('1' == $affprice) {
         echo 'checked';
     }
-    echo '>' . _AM_JOBS_OUI . "&nbsp;&nbsp; <input type=\"radio\" name=\"affprice\" value=\"0\"";
+    echo '>' . _AM_JOBS_OUI . '&nbsp;&nbsp; <input type="radio" name="affprice" value="0"';
     if ('0' == $affprice) {
         echo 'checked';
     }
@@ -382,17 +382,17 @@ function ModResCat($cat)
 
     echo '</table>';
     echo "<input type=\"hidden\" name=\"cidd\" value=\"$cat\">"
-         . "<input type=\"hidden\" name=\"op\" value=\"ModResCatS\">"
-         . "<table border=\"0\"><tr><td>"
-         . "<input type=\"submit\" value=\""
+         . '<input type="hidden" name="op" value="ModResCatS">'
+         . '<table border="0"><tr><td>'
+         . '<input type="submit" value="'
          . _AM_JOBS_SAVMOD
-         . "\"></form></td><td>"
-         . "<form action=\"category.php\" method=\"post\">"
+         . '"></form></td><td>'
+         . '<form action="category.php" method="post">'
          . "<input type=\"hidden\" name=\"cid\" value=\"$cat\">"
-         . "<input type=\"hidden\" name=\"op\" value=\"DelResCat\">"
-         . "<input type=\"submit\" value=\""
+         . '<input type="hidden" name="op" value="DelResCat">'
+         . '<input type="submit" value="'
          . _AM_JOBS_DEL
-         . "\"></form></td></tr></table>";
+         . '"></form></td></tr></table>';
 
     echo '</fieldset><br>';
     xoops_cp_footer();
@@ -459,7 +459,7 @@ function DelResCat($cid, $ok = 0)
         xoops_cp_header();
         OpenTable();
         echo '<br><center><b>' . _AM_JOBS_SURDELCAT . '</b><br><br>';
-        echo "[ <a href=\"category.php?op=DelResCat&cid=$cid&ok=1\">" . _AM_JOBS_OUI . "</a> | <a href=\"map.php\">" . _AM_JOBS_NON . '</a> ]<br><br>';
+        echo "[ <a href=\"category.php?op=DelResCat&cid=$cid&ok=1\">" . _AM_JOBS_OUI . '</a> | <a href="map.php">' . _AM_JOBS_NON . '</a> ]<br><br>';
         CloseTable();
         xoops_cp_footer();
     }

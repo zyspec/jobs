@@ -19,7 +19,7 @@
 
             <{foreach from=$items item=item name=items}>
                 <{if $use_extra_code == 1}>
-                    <{if ($smarty.foreach.items.index % $index_code_place == 0) && !($smarty.foreach.items.first)}>
+                    <{if ($index_code_place != 0 && $smarty.foreach.items.index % $index_code_place == 0) && !($smarty.foreach.items.first)}>
                         <{if $jobs_use_banner == 1}>
                             <table>
                                 <tr>

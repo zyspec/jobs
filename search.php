@@ -154,7 +154,7 @@ if ('OR' != $andor && 'exact' != $andor && 'AND' != $andor) {
     $andor = 'AND';
 }
 
-$myts = MyTextSanitizer::getInstance();
+$myts = \MyTextSanitizer::getInstance();
 if ('showallbyuser' != $action) {
     if ('exact' != $andor) {
         $ignored_queries = []; // holds kewords that are shorter than allowed minmum length

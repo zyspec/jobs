@@ -248,10 +248,10 @@ if (!empty($_POST['submit'])) {
     echo "<table width='100%' border='0' cellspacing='1' cellpadding='8'><tr class='bg4'><td valign='top'>\n";
     $time     = time();
     $ipnumber = "$_SERVER[REMOTE_ADDR]";
-    echo "<script type=\"text/javascript\">
+    echo '<script type="text/javascript">
           function verify()
           {
-                var msg = \"" . _JOBS_VALIDERORMSG . "\\n__________________________________________________\\n\\n\";
+                var msg = "' . _JOBS_VALIDERORMSG . "\\n__________________________________________________\\n\\n\";
                 var errors = \"false\";
 
                 if (document.cont.namep.value == \"\") {
@@ -288,9 +288,9 @@ if (!empty($_POST['submit'])) {
 
         echo '<b>' . _JOBS_CONTACTAUTOR . '</b><br><br>';
         echo '' . _JOBS_TEXTAUTO . '<br>';
-        echo "<form onsubmit=\"return verify();\" method=\"post\" action=\"contact.php\" name=\"cont\">";
+        echo '<form onsubmit="return verify();" method="post" action="contact.php" name="cont">';
         echo "<input type=\"hidden\" name=\"id\" value=\"$lid\">";
-        echo "<input type=\"hidden\" name=\"submit\" value=\"1\">";
+        echo '<input type="hidden" name="submit" value="1">';
         echo "<table width='100%' class='outer' cellspacing='1'>
     <tr><input type=\"hidden\" name=\"private\" value=\"$private\">";
         echo "<td class='head'>" . _JOBS_YOURNAME . "</td>
@@ -305,8 +305,8 @@ if (!empty($_POST['submit'])) {
     <td class='even'><input type=\"text\" name=\"tele\" size=\"40\"></td>
     </tr>";
 
-        echo "<tr>
-    <td class=\"head\">" . _JOBS_YOURMESSAGE . " </td><td class=\"odd\">";
+        echo '<tr>
+    <td class="head">' . _JOBS_YOURMESSAGE . ' </td><td class="odd">';
         $wysiwyg_text_area = jobs_getEditor(_JOBS_DESC2, 'messtext', '', '100%', '200px');
         echo $wysiwyg_text_area->render();
         echo '</td></tr><tr>';
@@ -318,7 +318,7 @@ if (!empty($_POST['submit'])) {
 
             $dropdown = $xoopsDB->query('select lid, title, private, email FROM  ' . $xoopsDB->prefix('jobs_resume') . " WHERE email='$idde' AND lid=$rlid ORDER BY date DESC");
             while (list($rlid, $title, $private, $email) = $xoopsDB->fetchRow($dropdown)) {
-                echo "<option value=\"" . XOOPS_URL . "/modules/$moduleDirName/viewresume.php?lid=$rlid&amp;unlock=$private\">" . $title . '</option>';
+                echo '<option value="' . XOOPS_URL . "/modules/$moduleDirName/viewresume.php?lid=$rlid&amp;unlock=$private\">" . $title . '</option>';
             }
             echo '</select></td></tr>';
         }
@@ -331,15 +331,15 @@ if (!empty($_POST['submit'])) {
         //  }
         //  echo "</td></tr>";
         echo "</table>
-    <table class='outer'><tr><td>" . _JOBS_YOUR_IP . "&nbsp;
-        <img src=\"" . XOOPS_URL . "/modules/$moduleDirName/ip_image.php\" alt=\"\"><br>" . _JOBS_IP_LOGGED . '
+    <table class='outer'><tr><td>" . _JOBS_YOUR_IP . '&nbsp;
+        <img src="' . XOOPS_URL . "/modules/$moduleDirName/ip_image.php\" alt=\"\"><br>" . _JOBS_IP_LOGGED . '
         </td></tr></table>
     <br>';
         echo "<input type=\"hidden\" name=\"private\" value=\"$private\">";
         echo "<input type=\"hidden\" name=\"ipnumber\" value=\"$ipnumber\">";
         echo "<input type=\"hidden\" name=\"date\" value=\"$time\">";
-        echo "<input type=\"hidden\" name=\"submit\" value=\"1\">";
-        echo "<p><input type=\"submit\" value=\"" . _JOBS_SENDFR . "\"></p>" . $GLOBALS['xoopsSecurity']->getTokenHTML('token') . '
+        echo '<input type="hidden" name="submit" value="1">';
+        echo '<p><input type="submit" value="' . _JOBS_SENDFR . '"></p>' . $GLOBALS['xoopsSecurity']->getTokenHTML('token') . '
     </form>';
     }
 }

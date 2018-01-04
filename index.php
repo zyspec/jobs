@@ -22,7 +22,7 @@ $moduleDirName = basename(__DIR__);
 $main_lang     = '_' . strtoupper($moduleDirName);
 //require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/gtickets.php";
 
-$myts      = MyTextSanitizer::getInstance();
+$myts      = \MyTextSanitizer::getInstance();
 $module_id = $xoopsModule->getVar('mid');
 
 if (is_object($xoopsUser)) {

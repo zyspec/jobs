@@ -20,7 +20,7 @@ include __DIR__ . '/header.php';
 
 $moduleDirName = basename(__DIR__);
 include XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/resume_functions.php";
-$myts                                    = MyTextSanitizer::getInstance(); // MyTextSanitizer object
+$myts                                    = \MyTextSanitizer::getInstance(); // MyTextSanitizer object
 $GLOBALS['xoopsOption']['template_main'] = 'jobs_view_created.tpl';
 include XOOPS_ROOT_PATH . '/header.php';
 

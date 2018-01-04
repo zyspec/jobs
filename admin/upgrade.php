@@ -25,7 +25,7 @@ if (!@require_once XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar('dirname
     require_once XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar('dirname') . '/language/english/main.php';
 }
 
-$myts = MyTextSanitizer::getInstance();
+$myts = \MyTextSanitizer::getInstance();
 
 if (is_object($xoopsUser) && $xoopsUser->isAdmin($xoopsModule->mid())) {
     $errors = 0;

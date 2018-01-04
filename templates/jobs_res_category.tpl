@@ -213,7 +213,7 @@
 <{if $use_extra_code == 1}>
 
     <{foreach from=$items item=item name=items}>
-        <{if ($smarty.foreach.items.index % $index_code_place == 0) && !($smarty.foreach.items.first)}>
+        <{if ($index_code_place != 0 && $smarty.foreach.items.index % $index_code_place == 0) && !($smarty.foreach.items.first)}>
 
             <{if $jobs_use_banner == 1}>
                 <table border="0" cellpadding="0" cellspacing="0" style="width:100%;">

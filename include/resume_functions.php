@@ -71,7 +71,7 @@ function ExpireResume()
                            . _JOBS_OTHER
                            . ' '
                            . XOOPS_URL
-                           . "/modules/jobs\n\n"
+                           . "/modules/Jobs\n\n"
                            . _JOBS_THANK
                            . "\n\n"
                            . _JOBS_TEAM
@@ -456,7 +456,7 @@ function resume_categorynewgraphic($cat)
     $startdate = (time() - (86400 * $days_new));
 
     if ($startdate < $date) {
-        return "<img src=\"" . XOOPS_URL . "/modules/$moduleDirName/assets/images/newred.gif\">";
+        return '<img src="' . XOOPS_URL . "/modules/$moduleDirName/assets/images/newred.gif\">";
     }
 }
 
@@ -470,10 +470,10 @@ function resume_listingnewgraphic($date)
     global $xoopsDB, $moduleDirName, $xoopsModuleConfig;
 
     $days_new  = $xoopsModuleConfig['jobs_countday'];
-    $startdate = ((int)time() - (86400 * (int)$days_new));
+    $startdate = (time() - (86400 * (int)$days_new));
 
     if ($startdate < $date) {
-        return "<img src=\"" . XOOPS_URL . "/modules/$moduleDirName/assets/images/newred.gif\">";
+        return '<img src="' . XOOPS_URL . "/modules/$moduleDirName/assets/images/newred.gif\">";
     }
 }
 

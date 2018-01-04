@@ -212,7 +212,7 @@ class jobtree
             return $path;
         }
         list($parentid, $name) = $this->db->fetchRow($result);
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
         $name = $myts->htmlSpecialChars($name);
         $path = '/' . $name . $path . '';
         if (0 == $parentid) {
@@ -240,7 +240,7 @@ class jobtree
         if ('' == $sel_name) {
             $sel_name = $this->id;
         }
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
         echo "<select name='" . $sel_name . "'";
         if ('' != $onchange) {
             echo " onchange='" . $onchange . "'";
@@ -298,7 +298,7 @@ class jobtree
         if ('' == $sel_name) {
             $sel_name = $this->id;
         }
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
         echo "<select name='" . $sel_name . "'";
         if ('' != $onchange) {
             echo " onchange='" . $onchange . "'";
@@ -356,7 +356,7 @@ class jobtree
         if ('' == $sel_name) {
             $sel_name = $this->id;
         }
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
         echo "<select name='" . $sel_name . "'";
         if ('' != $onchange) {
             echo " onchange='" . $onchange . "'";
@@ -417,7 +417,7 @@ class jobtree
         if ('' == $sel_name) {
             $sel_name = $this->id;
         }
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
         echo "<select name='" . $sel_name . "'";
         if ('' != $onchange) {
             echo " onchange='" . $onchange . "'";
@@ -476,7 +476,7 @@ class jobtree
         if ('' == $sel_name) {
             $sel_name = $this->id;
         }
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
         echo "<select name='" . $sel_name . "'";
         if ('' != $onchange) {
             echo " onchange='" . $onchange . "'";
@@ -529,7 +529,7 @@ class jobtree
         if ('' == $sel_name) {
             $sel_name = $this->id;
         }
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
         echo "<select name='" . $sel_name . "'";
         if ('' != $onchange) {
             echo " onchange='" . $onchange . "'";
@@ -578,7 +578,7 @@ class jobtree
         if ('' == $sel_name) {
             $sel_name = $this->id;
         }
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
         echo "<select name='" . $sel_name . "'";
         if ('' != $onchange) {
             echo " onchange='" . $onchange . "'";
@@ -631,7 +631,7 @@ class jobtree
         if ('' == $sel_name) {
             $sel_name = $this->id;
         }
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
         echo "<select name='" . $sel_name . "'";
         if ('' != $onchange) {
             echo " onchange='" . $onchange . "'";
@@ -676,7 +676,7 @@ class jobtree
         if ('' == $sel_name) {
             $sel_name = $this->id;
         }
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
         echo "<select name='" . $sel_name . "'";
         if ('' != $onchange) {
             echo " onchange='" . $onchange . "'";
@@ -731,7 +731,7 @@ class jobtree
             return $path;
         }
         list($parentid, $name) = $this->db->fetchRow($result);
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
         $name = $myts->undoHtmlSpecialChars($name);
 
         $arrow = '<img src="' . XOOPS_URL . '/modules/jobs/assets/images/arrow.gif" alt="&raquo;">';
@@ -881,7 +881,7 @@ class jobtree
         global $xoopsModuleConfig, $xoopsDB, $moduleDirName;
         $moduleDirName = basename(dirname(__DIR__));
 
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
 //        require_once XOOPS_ROOT_PATH . '/modules/jobs/include/gtickets.php';
 
         if ('' == $sel_name) {
@@ -942,7 +942,7 @@ class jobtree
     public function makeResSelBox($title, $order = '', $preset_id = 0, $none = 0, $sel_name = '', $onchange = '')
     {
         global $xoopsModuleConfig, $xoopsDB, $moduleDirName;
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
         // for "Duplicatable"
         $moduleDirName = basename(dirname(__DIR__));
 
@@ -1038,7 +1038,7 @@ class jobtree
     {
         $result = $this->db->query('SELECT cid, pid, title FROM ' . $this->table);
         $ret    = [];
-        $myts   = MyTextSanitizer::getInstance();
+        $myts   = \MyTextSanitizer::getInstance();
         while ($myrow = $this->db->fetchArray($result)) {
             $ret[$myrow['cid']] = ['title' => $myts->htmlspecialchars($myrow['title']), 'pid' => $myrow['pid']];
         }

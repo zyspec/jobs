@@ -18,7 +18,7 @@
 
 require_once __DIR__ . '/admin_header.php';
 $moduleDirName = basename(dirname(__DIR__));
-$myts          = MyTextSanitizer::getInstance(); // MyTextSanitizer object
+$myts          = \MyTextSanitizer::getInstance(); // MyTextSanitizer object
 
 require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/functions.php";
 

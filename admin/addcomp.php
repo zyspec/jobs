@@ -22,7 +22,7 @@ require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/functions.php";
 
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
-$myts = MyTextSanitizer::getInstance();
+$myts = \MyTextSanitizer::getInstance();
 
 $module_id = $xoopsModule->getVar('mid');
 

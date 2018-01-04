@@ -24,7 +24,7 @@ if (empty($xoopsUser)) {
 
 $moduleDirName = basename(__DIR__);
 include XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/functions.php";
-$myts = MyTextSanitizer::getInstance(); // MyTextSanitizer object
+$myts = \MyTextSanitizer::getInstance(); // MyTextSanitizer object
 require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/class/jobtree.php";
 $mytree                                  = new JobTree($xoopsDB->prefix('jobs_categories'), 'cid', 'pid');
 $lid                                     = isset($_GET['lid']) ? (int)$_GET['lid'] : 0;

@@ -85,7 +85,7 @@ class XoopsFormSelect extends XoopsFormElement
         $this->setCaption($caption);
         $this->setName($name);
         $this->_multiple = $multiple;
-        $this->_size = intval($size);
+        $this->_size = (int)$size;
         if (isset($value)) {
             $this->setValue($value);
         }
@@ -242,7 +242,7 @@ class XoopsFormSelect extends XoopsFormElement
             $eltmsg = empty($eltcaption) ? sprintf(_FORM_ENTER, $eltname) : sprintf(_FORM_ENTER, $eltcaption);
             $eltmsg = str_replace('"', '\"', stripslashes($eltmsg));
 
-            return "\nvar hasSelected = false; var selectBox = myform.{$eltname};" . "for (i = 0; i < selectBox.options.length; i++ ) { if (selectBox.value != \"\") { hasSelected = true; break; } }" . "if (!hasSelected) { window.alert(\"{$eltmsg}\"); selectBox.focus(); return false; }";
+            return "\nvar hasSelected = false; var selectBox = myform.{$eltname};" . 'for (i = 0; i < selectBox.options.length; i++ ) { if (selectBox.value != "") { hasSelected = true; break; } }' . "if (!hasSelected) { window.alert(\"{$eltmsg}\"); selectBox.focus(); return false; }";
         }
 
         return '';

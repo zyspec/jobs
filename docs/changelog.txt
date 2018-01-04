@@ -1,4 +1,4 @@
-<h5>4.4 RC 4       [NOT RELEASED]</h5>
+<h5>4.4 RC 4       [NOT RELEASED]</h5>  Dev: Xoops 2.5.9, PHP 7.2.0
 <hr>
 - moved all images, CSS, and JS files to /assets (mamba)
 - renamed .html Smarty templates to .tpl (mamba)

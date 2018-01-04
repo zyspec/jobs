@@ -22,7 +22,7 @@ $moduleDirName = basename(__DIR__);
 
 //require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/gtickets.php";
 
-$myts      = MyTextSanitizer::getInstance();
+$myts      = \MyTextSanitizer::getInstance();
 $module_id = $xoopsModule->getVar('mid');
 
 if (is_object($xoopsUser)) {
@@ -109,14 +109,14 @@ if (0 != $pid) {
         $varnom[$x] = $title;
         ++$x;
     }
-    $x = $x - 1;
+    --$x;
 }
 
 $subcats = '';
 $arrow   = '&nbsp;<img src="' . XOOPS_URL . "/modules/$moduleDirName/assets/images/arrow.gif\" alt=\"&raquo;\">";
 while ($x != -1) {
     $subcats .= " $arrow <a href=\"jobscat.php?cid=" . $varid[$x] . '">' . $varnom[$x] . '</a>';
-    $x       = $x - 1;
+    --$x;
 }
 $xoopsTpl->assign('nav_main', '<a href="index.php">' . _JOBS_MAIN . '</a>');
 $xoopsTpl->assign('nav_sub', $subcats);
@@ -187,7 +187,7 @@ if ($recordexist) {
         list($comp_id, $comp_name, $comp_img, $comp_usid, $comp_user1, $comp_user2, $comp_user1_contact, $comp_user2_contact) = $xoopsDB->fetchRow($result4);
         $comp_id = (int)$comp_id;
         if ($result4) {
-            $comp_id = (int)$comp_id;
+            $comp_id = $comp_id;
             $xoopsTpl->assign('all_jobs', _JOBS_VIEW_MY_JOBS . "<a href='members.php?comp_id=" . addslashes($comp_id) . "'>$company</a>");
         }
 

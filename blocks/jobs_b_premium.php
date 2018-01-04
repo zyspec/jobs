@@ -28,7 +28,7 @@ function jobs_block_premium_show($options)
     global $xoopsDB, $blockdirname, $block_lang;
 
     $block = [];
-    $myts  = MyTextSanitizer::getInstance();
+    $myts  = \MyTextSanitizer::getInstance();
 
     $blockdirname = basename(dirname(__DIR__));
     $block_lang   = '_MB_' . strtoupper($blockdirname);

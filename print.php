@@ -50,13 +50,13 @@ function Jprint($lid = 0)
 
     echo '
     <html>
-    <head><title>' . $xoopsConfig['sitename'] . "</title>
-    <link rel=\"StyleSheet\" href=\"../../themes/" . $currenttheme . "/style/style.css\" type=\"text/css\">
+    <head><title>' . $xoopsConfig['sitename'] . '</title>
+    <link rel="StyleSheet" href="../../themes/' . $currenttheme . '/style/style.css" type="text/css">
     </head>
-    <body bgcolor=\"#FFFFFF\" text=\"#000000\">
+    <body bgcolor="#FFFFFF" text="#000000">
     <table border=0><tr><td>
-    <table border=0 width=640 cellpadding=0 cellspacing=1 bgcolor=\"#000000\"><tr><td>
-    <table border=0 width=100% cellpadding=8 cellspacing=1 bgcolor=\"#FFFFFF\"><tr><td>";
+    <table border=0 width=640 cellpadding=0 cellspacing=1 bgcolor="#000000"><tr><td>
+    <table border=0 width=100% cellpadding=8 cellspacing=1 bgcolor="#FFFFFF"><tr><td>';
 
     $useroffset = '';
     if ($xoopsUser) {
@@ -107,8 +107,8 @@ function Jprint($lid = 0)
     </table>';
     echo '<br><br></td></tr></table></td></tr></table>
     <br><br><center>
-    ' . _JOBS_EXTRANN . ' <b>' . $xoopsConfig['sitename'] . "</b><br>
-    <a href=\"" . XOOPS_URL . "/modules/$moduleDirName/\">" . XOOPS_URL . "/modules/$moduleDirName/</a>
+    ' . _JOBS_EXTRANN . ' <b>' . $xoopsConfig['sitename'] . '</b><br>
+    <a href="' . XOOPS_URL . "/modules/$moduleDirName/\">" . XOOPS_URL . "/modules/$moduleDirName/</a>
     </td></tr></table>
     </body>
     </html>";
@@ -139,13 +139,13 @@ function Rprint($lid = 0)
 
     echo '
     <html>
-    <head><title>' . $xoopsConfig['sitename'] . "</title>
-    <link rel=\"StyleSheet\" href=\"../../themes/" . $currenttheme . "/style/style.css\" type=\"text/css\">
+    <head><title>' . $xoopsConfig['sitename'] . '</title>
+    <link rel="StyleSheet" href="../../themes/' . $currenttheme . '/style/style.css" type="text/css">
     </head>
-    <body bgcolor=\"#FFFFFF\" text=\"#000000\">
+    <body bgcolor="#FFFFFF" text="#000000">
     <table border=0><tr><td>
-    <table border=0 width=640 cellpadding=0 cellspacing=1 bgcolor=\"#000000\"><tr><td>
-    <table border=0 width=100% cellpadding=8 cellspacing=1 bgcolor=\"#FFFFFF\"><tr><td>";
+    <table border=0 width=640 cellpadding=0 cellspacing=1 bgcolor="#000000"><tr><td>
+    <table border=0 width=100% cellpadding=8 cellspacing=1 bgcolor="#FFFFFF"><tr><td>';
 
     $useroffset = '';
     if ($xoopsUser) {
@@ -186,8 +186,8 @@ function Rprint($lid = 0)
 
     echo '<br><br></td></tr></table></td></tr></table>
     <br><br><center>
-    ' . _JOBS_EXTRANN . ' <b>' . $xoopsConfig['sitename'] . "</b><br>
-    <a href=\"" . XOOPS_URL . "/modules/$moduleDirName/\">" . XOOPS_URL . "/modules/$moduleDirName/</a>
+    ' . _JOBS_EXTRANN . ' <b>' . $xoopsConfig['sitename'] . '</b><br>
+    <a href="' . XOOPS_URL . "/modules/$moduleDirName/\">" . XOOPS_URL . "/modules/$moduleDirName/</a>
     </td></tr></table>
     </body>
     </html>";
