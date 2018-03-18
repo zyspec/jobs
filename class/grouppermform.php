@@ -82,9 +82,9 @@ class XoopsGroupPermForm extends XoopsForm
         $this->_modid    = (int)$modid;
         $this->_permName = $permname;
         $this->_permDesc = $permdesc;
-        $this->addElement(new XoopsFormHidden('modid', $this->_modid));
+        $this->addElement(new \XoopsFormHidden('modid', $this->_modid));
         if ('' != $url) {
-            $this->addElement(new XoopsFormHidden('redirect_url', $url));
+            $this->addElement(new \XoopsFormHidden('redirect_url', $url));
         }
         $this->_showAnonymous = $anonymous;
     }
@@ -150,14 +150,14 @@ class XoopsGroupPermForm extends XoopsForm
             }
             // get selected item id(s) for each group
             $selected = $gperm_handler->getItemIds($this->_permName, $i, $this->_modid);
-            $ele      = new XoopsGroupFormCheckBox($glist[$i], 'perms[' . $this->_permName . ']', $i, $selected);
+            $ele      = new \XoopsGroupFormCheckBox($glist[$i], 'perms[' . $this->_permName . ']', $i, $selected);
             $ele->setOptionTree($this->_itemTree);
             $this->addElement($ele);
             unset($ele);
         }
-        $tray = new XoopsFormElementTray('');
-        $tray->addElement(new XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
-        $tray->addElement(new XoopsFormButton('', 'reset', _CANCEL, 'reset'));
+        $tray = new \XoopsFormElementTray('');
+        $tray->addElement(new \XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
+        $tray->addElement(new \XoopsFormButton('', 'reset', _CANCEL, 'reset'));
         $this->addElement($tray);
 
         $ret = '<h4>' . $this->getTitle() . '</h4>';

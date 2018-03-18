@@ -210,7 +210,7 @@ if ('0' == $trows) {
     }
 
     $rank = 1;
-    while (list($lid, $cid, $name, $title, $exp, $expire, $private, $salary, $typeprice, $date, $town, $state, $valid, $vu) = $xoopsDB->fetchRow($result1)) {
+    while (false !== (list($lid, $cid, $name, $title, $exp, $expire, $private, $salary, $typeprice, $date, $town, $state, $valid, $vu) = $xoopsDB->fetchRow($result1))) {
         $a_item     = [];
         $name       = $myts->htmlSpecialChars($name);
         $title      = $myts->htmlSpecialChars($title);

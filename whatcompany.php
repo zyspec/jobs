@@ -53,7 +53,7 @@ if ($xoopsUser) {
     include XOOPS_ROOT_PATH . '/header.php';
 
     $result = $xoopsDB->query('SELECT comp_id, comp_name FROM ' . $xoopsDB->prefix('jobs_companies') . ' WHERE ' . $member_usid . ' IN (comp_usid, comp_user1, comp_user2)');
-    while ($myrow = $xoopsDB->fetchArray($result)) {
+    while (false !== ($myrow = $xoopsDB->fetchArray($result))) {
         $a_comp   = [];
         $istheirs = true;
         $xoopsTpl->assign('istheirs', $istheirs);

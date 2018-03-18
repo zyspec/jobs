@@ -59,7 +59,7 @@ if ($crows > '0') {
     echo '<table border=1 width=100% cellpadding=2 cellspacing=0 border=0><td><tr>';
 
     if ($crows > 0) {
-        $nav = new XoopsPageNav($crows, $showonpage, $start, 'start', '');
+        $nav = new \XoopsPageNav($crows, $showonpage, $start, 'start', '');
         echo '<br>' . _AM_JOBS_THEREIS . " <b>$crows</b> " . _AM_JOBS_JOBLISTINGS . '<br><br>';
         echo $nav->renderNav();
 
@@ -84,7 +84,7 @@ if ($crows > '0') {
     $class   = 'odd';
     $result1 = $xoopsDB->query($sql, $show, $start);
 
-    while (list($lid, $title, $date, $status, $expire, $submitter, $valid, $premium) = $xoopsDB->fetchRow($result1)) {
+    while (false !== (list($lid, $title, $date, $status, $expire, $submitter, $valid, $premium) = $xoopsDB->fetchRow($result1))) {
         $title = $myts->htmlSpecialChars($title);
         $date2 = formatTimestamp($date, 's');
         // $expire2     = formatTimestamp($expire, "s");
@@ -128,7 +128,7 @@ if ($crows > '0') {
 //}
 //$title='stnihsathsthsths';
 //$form = new myTableForm($title, "form", $action, "post", true);
-//$form->addElement(new XoopsFormButton("", "submit", _SUBMIT, "submit"));
+//$form->addElement(new \XoopsFormButton("", "submit", _SUBMIT, "submit"));
 //$form->display();
 
 require_once __DIR__ . '/job_categories.php';

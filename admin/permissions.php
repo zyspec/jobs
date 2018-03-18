@@ -21,7 +21,7 @@ echo $indexAdmin->addNavigation('permissions.php');
 		<fieldset><legend style='font-weight: bold; color: #900;'>" . _AM_WFD_PERM_CPERMISSIONS . "</legend>\n
 		<div style='padding: 2px;'>\n";
 
-$cat_form = new XoopsGroupPermForm('', $xoopsModule->getVar('mid'), 'jobs_category', _AM_WFD_PERM_CSELECTPERMISSIONS, 'admin/permissions.php');
+$cat_form = new \XoopsGroupPermForm('', $xoopsModule->getVar('mid'), 'jobs_category', _AM_WFD_PERM_CSELECTPERMISSIONS, 'admin/permissions.php');
 
 $category_handler = xoops_getModuleHandler('jobs_categories');
 $categories = $category_handler->getObjects();

@@ -15,7 +15,7 @@
  * @author      XOOPS Development Team
  */
 
-// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+// defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
@@ -40,69 +40,69 @@ if (!empty($_GET['is_resume'])) {
 }
 // end jlm69
 // create form
-$search_form = new XoopsThemeForm(_SR_SEARCH, 'search', 'search.php', 'get');
+$search_form = new \XoopsThemeForm(_SR_SEARCH, 'search', 'search.php', 'get');
 
 // create form elements
-$search_form->addElement(new XoopsFormText(_SR_KEYWORDS, 'query', 30, 255, htmlspecialchars(stripslashes(implode(' ', $queries)), ENT_QUOTES)), true);
-$type_select = new XoopsFormSelect(_SR_TYPE, 'andor', $andor);
+$search_form->addElement(new \XoopsFormText(_SR_KEYWORDS, 'query', 30, 255, htmlspecialchars(stripslashes(implode(' ', $queries)), ENT_QUOTES)), true);
+$type_select = new \XoopsFormSelect(_SR_TYPE, 'andor', $andor);
 $type_select->addOptionArray(['AND' => _SR_ALL, 'OR' => _SR_ANY, 'exact' => _SR_EXACT]);
 $search_form->addElement($type_select);
 //  jlm69
 if (!empty($is_resume)) {
     ob_start();
     $restree->resume_makeMySearchSelBox('title', 'title', $by_cat, '1', 'by_cat');
-    $search_form->addElement(new XoopsFormLabel(_JOBS_CAT, ob_get_contents()));
+    $search_form->addElement(new \XoopsFormLabel(_JOBS_CAT, ob_get_contents()));
     ob_end_clean();
 
     if ('1' == $xoopsModuleConfig['jobs_show_state']) {
         if ('1' == $xoopsModuleConfig['jobs_countries']) {
             ob_start();
             $staterestree->resume_makeMyStateSelBox('name', 'rid', $by_state, '1', 'by_state');
-            $search_form->addElement(new XoopsFormLabel(_JOBS_STATE, ob_get_contents()));
+            $search_form->addElement(new \XoopsFormLabel(_JOBS_STATE, ob_get_contents()));
             ob_end_clean();
         } else {
             ob_start();
             $staterestree->resume_makeStateSelBox('name', 'rid', $by_state, '1', 'by_state');
-            $search_form->addElement(new XoopsFormLabel(_JOBS_STATE, ob_get_contents()));
+            $search_form->addElement(new \XoopsFormLabel(_JOBS_STATE, ob_get_contents()));
             ob_end_clean();
         }
     } else {
-        $search_form->addElement(new XoopsFormHidden('state', ''));
+        $search_form->addElement(new \XoopsFormHidden('state', ''));
     }
 } else {
     ob_start();
     $mytree->makeMySearchSelBox('title', 'title', $by_cat, '1', 'by_cat');
-    $search_form->addElement(new XoopsFormLabel(_JOBS_CAT, ob_get_contents()));
+    $search_form->addElement(new \XoopsFormLabel(_JOBS_CAT, ob_get_contents()));
     ob_end_clean();
 
     if ('1' == $xoopsModuleConfig['jobs_show_state']) {
         if ('1' == $xoopsModuleConfig['jobs_countries']) {
             ob_start();
             $statetree->makeMyStateSelBox('name', 'rid', $by_state, '1', 'by_state');
-            $search_form->addElement(new XoopsFormLabel(_JOBS_STATE, ob_get_contents()));
+            $search_form->addElement(new \XoopsFormLabel(_JOBS_STATE, ob_get_contents()));
             ob_end_clean();
         } else {
             $statetree->makeStateSelBox('name', 'rid', $by_state, '1', 'by_state');
-            $search_form->addElement(new XoopsFormLabel(_JOBS_STATE, ob_get_contents()));
+            $search_form->addElement(new \XoopsFormLabel(_JOBS_STATE, ob_get_contents()));
             ob_end_clean();
         }
     } else {
-        $search_form->addElement(new XoopsFormHidden('state', ''));
+        $search_form->addElement(new \XoopsFormHidden('state', ''));
     }
 }
 
 //  if (!empty($mids)) {
-//  $mods_checkbox = new XoopsFormCheckBox(_SR_SEARCHIN, "mids[]", $mids);
+//  $mods_checkbox = new \XoopsFormCheckBox(_SR_SEARCHIN, "mids[]", $mids);
 //  } else {
-$mods_checkbox = new XoopsFormCheckBox(_SR_SEARCHIN, 'mids[]', $mid);
+$mods_checkbox = new \XoopsFormCheckBox(_SR_SEARCHIN, 'mids[]', $mid);
 //  }
 //end jlm69
 if (empty($modules)) {
-    $criteria = new CriteriaCompo();
-    $criteria->add(new Criteria('hassearch', 1));
-    $criteria->add(new Criteria('isactive', 1));
+    $criteria = new \CriteriaCompo();
+    $criteria->add(new \Criteria('hassearch', 1));
+    $criteria->add(new \Criteria('isactive', 1));
     if (!empty($available_modules)) {
-        $criteria->add(new Criteria('mid', $xmid));
+        $criteria->add(new \Criteria('mid', $xmid));
     }
     /** @var XoopsModuleHandler $moduleHandler */
     $moduleHandler = xoops_getHandler('module');
@@ -115,14 +115,14 @@ if (empty($modules)) {
 }
 //jlm69
 //  $search_form->addElement($mods_checkbox);
-//$search_form->addElement(new XoopsFormHidden("mods_checkbox","array(mods_checkbox => $mods_checkbox)"));
+//$search_form->addElement(new \XoopsFormHidden("mods_checkbox","array(mods_checkbox => $mods_checkbox)"));
 // end jlm69
 if ($xoopsConfigSearch['keyword_min'] > 0) {
-    $search_form->addElement(new XoopsFormLabel(_SR_SEARCHRULE, sprintf(_SR_KEYIGNORE, $xoopsConfigSearch['keyword_min'])));
+    $search_form->addElement(new \XoopsFormLabel(_SR_SEARCHRULE, sprintf(_SR_KEYIGNORE, $xoopsConfigSearch['keyword_min'])));
 }
 
-$search_form->addElement(new XoopsFormHidden('issearch', '1'));
-$search_form->addElement(new XoopsFormHidden('is_resume', $is_resume));
-$search_form->addElement(new XoopsFormHidden('action', 'results'));
-$search_form->addElement(new XoopsFormHiddenToken('id'));
-$search_form->addElement(new XoopsFormButton('', 'submit', _SR_SEARCH, 'submit'));
+$search_form->addElement(new \XoopsFormHidden('issearch', '1'));
+$search_form->addElement(new \XoopsFormHidden('is_resume', $is_resume));
+$search_form->addElement(new \XoopsFormHidden('action', 'results'));
+$search_form->addElement(new \XoopsFormHiddenToken('id'));
+$search_form->addElement(new \XoopsFormButton('', 'submit', _SR_SEARCH, 'submit'));

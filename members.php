@@ -166,7 +166,7 @@ if ($trows > '0') {
         $xoopsTpl->assign('lang_cursortedby', _JOBS_CURSORTEDBY . 'date');
     }
 
-    while (list($lid, $cid, $title, $status, $expire, $type, $company, $price, $typeprice, $date, $email, $submitter, $usid, $town, $state, $valid, $photo, $vu, $comp_id, $comp_name, $comp_img, $comp_usid, $comp_user1, $comp_user2) = $xoopsDB->fetchRow($result)) {
+    while (false !== (list($lid, $cid, $title, $status, $expire, $type, $company, $price, $typeprice, $date, $email, $submitter, $usid, $town, $state, $valid, $photo, $vu, $comp_id, $comp_name, $comp_img, $comp_usid, $comp_user1, $comp_user2) = $xoopsDB->fetchRow($result))) {
         if ($comp_img) {
             $company_logo = "<img src=\"logo_images/$comp_img\" alt=\"$comp_name\">";
             $xoopsTpl->assign('company_logo', $company_logo);

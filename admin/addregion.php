@@ -44,12 +44,12 @@ if (!empty($_POST['submit'])) {
     require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
     ob_start();
-    $form = new XoopsThemeForm(_AM_JOBS_ADD_REGION, 'regionform', 'addregion.php');
+    $form = new \XoopsThemeForm(_AM_JOBS_ADD_REGION, 'regionform', 'addregion.php');
     $form->setExtra('enctype="multipart/form-data"');
-    $form->addElement(new XoopsFormText(_AM_JOBS_REGION_NAME, 'name', 20, 50, ''), true);
-    $form->addElement(new XoopsFormText(_AM_JOBS_REGION_ABBREV, 'abbrev', 2, 4, ''), false);
-    $form->addElement(new XoopsFormButton('', 'submit', _AM_JOBS_ADDREGION, 'submit'));
-    $form->addElement(new XoopsFormHidden('pid', '0'));
+    $form->addElement(new \XoopsFormText(_AM_JOBS_REGION_NAME, 'name', 20, 50, ''), true);
+    $form->addElement(new \XoopsFormText(_AM_JOBS_REGION_ABBREV, 'abbrev', 2, 4, ''), false);
+    $form->addElement(new \XoopsFormButton('', 'submit', _AM_JOBS_ADDREGION, 'submit'));
+    $form->addElement(new \XoopsFormHidden('pid', '0'));
     $form->display();
     $submit_form = ob_get_contents();
     ob_end_clean();

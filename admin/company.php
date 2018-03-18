@@ -70,7 +70,7 @@ if ($crows > '0') {
 
     $class   = 'odd';
     $result1 = $xoopsDB->query($sql, $show, $start);
-    while (list($comp_id, $comp_name, $comp_date_added, $comp_city, $comp_state, $comp_usid) = $xoopsDB->fetchRow($result1)) {
+    while (false !== (list($comp_id, $comp_name, $comp_date_added, $comp_city, $comp_state, $comp_usid) = $xoopsDB->fetchRow($result1))) {
         $comp_name = $myts->htmlSpecialChars($comp_name);
         $date2     = formatTimestamp($comp_date_added, 's');
 

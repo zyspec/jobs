@@ -16,7 +16,7 @@
  * @author      XOOPS Development Team
  */
 
-// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+// defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 /**
  * @param $options
@@ -50,7 +50,7 @@ function jobs_b2_show($options)
 
     $result = $xoopsDB->query('SELECT c.comp_id, c.comp_name, c.comp_img, l.company FROM ' . $xoopsDB->prefix('jobs_companies') . ' AS c LEFT OUTER JOIN ' . $xoopsDB->prefix('jobs_listing') . " AS l on c.comp_name = l.company WHERE l.valid = '1' and l.status!='0' $cat_perms GROUP BY c.comp_img");
 
-    while (list($comp_id, $comp_name, $comp_img, $company) = $xoopsDB->fetchRow($result)) {
+    while (false !== (list($comp_id, $comp_name, $comp_img, $company) = $xoopsDB->fetchRow($result))) {
         $company   = $myts->undoHtmlSpecialChars($company);
         $comp_img  = $myts->htmlSpecialChars($comp_img);
         $comp_name = $myts->undoHtmlSpecialChars($comp_name);

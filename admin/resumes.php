@@ -59,7 +59,7 @@ if ($crows > '0') {
     echo '<table border=1 width=100% cellpadding=2 cellspacing=0 border=0><td><tr>';
 
     if ($crows > 0) {
-        $nav = new XoopsPageNav($crows, $showonpage, $start, 'start', '');
+        $nav = new \XoopsPageNav($crows, $showonpage, $start, 'start', '');
         echo '<br>' . _AM_JOBS_THEREIS . " <b>$crows</b> " . _AM_JOBS_RES_LISTINGS . '<br><br>';
         echo $nav->renderNav();
         echo '<br><br><table width=100% cellpadding=2 cellspacing=0 border=0>';
@@ -83,7 +83,7 @@ if ($crows > '0') {
 
     $class   = 'odd';
     $result1 = $xoopsDB->query($sql, $show, $start);
-    while (list($lid, $title, $name, $date, $status, $expire, $submitter, $valid, $resume) = $xoopsDB->fetchRow($result1)) {
+    while (false !== (list($lid, $title, $name, $date, $status, $expire, $submitter, $valid, $resume) = $xoopsDB->fetchRow($result1))) {
         $name  = $myts->htmlSpecialChars($name);
         $title = $myts->htmlSpecialChars($title);
         $date2 = formatTimestamp($date, 's');

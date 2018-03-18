@@ -93,12 +93,12 @@ if (!empty($xoopsUser)) {
 /**
  * Filter for search pictures in database
  */
-$criteria_lid = new criteria('lid', $lid);
-$criteria_uid = new criteria('uid', $uid);
+$criteria_lid = new \Criteria('lid', $lid);
+$criteria_uid = new \Criteria('uid', $uid);
 /**
  * Creating a factory of pictures
  */
-$album_factory = new Xoopsjlm_picturesHandler($xoopsDB);
+$album_factory = new \Xoopsjlm_picturesHandler($xoopsDB);
 
 /**
  * Fetch pictures from the factory
@@ -146,7 +146,7 @@ if (!empty($xoopsUser)) {
 /**
  * Let's get the user name of the owner of the album
  */
-$owner      = new XoopsUser();
+$owner      = new \XoopsUser();
 $identifier = $owner->getUnameFromId($uid);
 
 /**
@@ -169,7 +169,7 @@ if (1 == $xoopsModuleConfig['' . $moduleDirName . '_lightbox']) {
 
 $sql    = 'SELECT name FROM ' . $xoopsDB->prefix('jobs_resume') . ' WHERE lid=' . addslashes($lid) . '';
 $result = $xoopsDB->query($sql);
-while (list($name) = $xoopsDB->fetchRow($result)) {
+while (false !== (list($name) = $xoopsDB->fetchRow($result))) {
     $xoopsTpl->assign('lang_gtitle', "<a href='viewresume.php?lid=" . addslashes($lid) . "'>" . $name . '</a>');
     $xoopsTpl->assign('lang_showcase', _JOBS_SHOWCASE);
 }

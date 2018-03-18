@@ -95,7 +95,7 @@ function Index()
         //                echo "<table width=100% cellpadding=2 cellspacing=0 border=0>";
         //                $rank = 1;
         //
-        //                while (list($lid, $title, $date) = $xoopsDB->fetchRow($result)) {
+        //                while (false !== (list($lid, $title, $date) = $xoopsDB->fetchRow($result))) {
         //                    $title = $myts->htmlSpecialChars($title);
         //                    $date2 = formatTimestamp($date, "s");
         //
@@ -129,7 +129,7 @@ function Index()
         //                echo "<table width=100% cellpadding=2 cellspacing=0 border=0>";
         //                $rank = 1;
         //
-        //                while (list($lid, $title, $date) = $xoopsDB->fetchRow($result1)) {
+        //                while (false !== (list($lid, $title, $date) = $xoopsDB->fetchRow($result1))) {
         //                    $title = $myts->htmlSpecialChars($title);
         //                    $date2 = formatTimestamp($date, "s");
         //
@@ -209,7 +209,7 @@ function Index()
             $result = $xoopsDB->query('SELECT id_type, nom_type FROM ' . $xoopsDB->prefix('jobs_type') . ' ORDER BY nom_type');
             echo '' . _AM_JOBS_TYPE . ' <select name="id_type">';
 
-            while (list($id_type, $nom_type) = $xoopsDB->fetchRow($result)) {
+            while (false !== (list($id_type, $nom_type) = $xoopsDB->fetchRow($result))) {
                 $nom_type = $myts->htmlSpecialChars($nom_type);
                 echo "<option value=\"$id_type\">$nom_type</option>";
             }
@@ -238,7 +238,7 @@ function Index()
             $result = $xoopsDB->query('SELECT id_price, nom_price FROM ' . $xoopsDB->prefix('jobs_price') . ' ORDER BY nom_price');
             echo '' . _AM_JOBS_TYPE . ' <select name="id_price">';
 
-            while (list($id_price, $nom_price) = $xoopsDB->fetchRow($result)) {
+            while (false !== (list($id_price, $nom_price) = $xoopsDB->fetchRow($result))) {
                 $nom_price = $myts->htmlSpecialChars($nom_price);
                 echo "<option value=\"$id_price\">$nom_price</option>";
             }
@@ -262,7 +262,7 @@ function Index()
         //            echo "<table width=100% cellpadding=2 cellspacing=0 border=0>";
         //            $rank = 1;
         //
-        //            while (list($comp_id, $comp_name, $comp_date_added) = $xoopsDB->fetchRow($result)) {
+        //            while (false !== (list($comp_id, $comp_name, $comp_date_added) = $xoopsDB->fetchRow($result))) {
         //                $comp_name = $myts->htmlSpecialChars($comp_name);
         //                $date2     = formatTimestamp($comp_date_added, "s");
         //
@@ -362,7 +362,7 @@ function IndexView($lid = 0)
             echo '<tr>
     <td class="head">' . _AM_JOBS_STATE1 . ' </td><td class="head"><select name="state">';
             $result5 = $xoopsDB->query('SELECT rid, name FROM ' . $xoopsDB->prefix('jobs_region') . ' ORDER BY rid');
-            while (list($rid, $name) = $xoopsDB->fetchRow($result5)) {
+            while (false !== (list($rid, $name) = $xoopsDB->fetchRow($result5))) {
                 $sel = '';
                 if ($rid == $state) {
                     $sel = 'selected';
@@ -403,7 +403,7 @@ function IndexView($lid = 0)
         <td class=\"head\">" . _AM_JOBS_TYPE . ' </td><td class="head"><select name="type">';
 
         $result5 = $xoopsDB->query('SELECT nom_type FROM ' . $xoopsDB->prefix('jobs_type') . ' ORDER BY nom_type');
-        while (list($nom_type) = $xoopsDB->fetchRow($result5)) {
+        while (false !== (list($nom_type) = $xoopsDB->fetchRow($result5))) {
             $sel = '';
             if ($nom_type == $type) {
                 $sel = 'selected';
@@ -435,7 +435,7 @@ function IndexView($lid = 0)
 
         $result3 = $xoopsDB->query('SELECT nom_price FROM ' . $xoopsDB->prefix('jobs_price') . ' ORDER BY id_price');
         echo " <select name=\"typeprice\"><option value=\"$typeprice\">$typeprice</option>";
-        while (list($nom_price) = $xoopsDB->fetchRow($result3)) {
+        while (false !== (list($nom_price) = $xoopsDB->fetchRow($result3))) {
             echo "<option value=\"$nom_price\">$nom_price</option>";
         }
         echo '</select></td>';
@@ -519,7 +519,7 @@ function IndexResumeView($lid = 0)
             echo '<tr>
     <td>' . _AM_JOBS_STATE1 . ' </td><td><select name="state">';
             $result5 = $xoopsDB->query('SELECT rid, name FROM ' . $xoopsDB->prefix('jobs_region') . ' ORDER BY rid');
-            while (list($rid, $name) = $xoopsDB->fetchRow($result5)) {
+            while (false !== (list($rid, $name) = $xoopsDB->fetchRow($result5))) {
                 $sel = '';
                 if ($rid == $state) {
                     $sel = 'selected';
@@ -548,7 +548,7 @@ function IndexResumeView($lid = 0)
 
         $result3 = $xoopsDB->query('SELECT nom_price FROM ' . $xoopsDB->prefix('jobs_price') . ' ORDER BY id_price');
         echo " <select name=\"typeprice\"><option value=\"$typeprice\">$typeprice</option>";
-        while (list($nom_price) = $xoopsDB->fetchRow($result3)) {
+        while (false !== (list($nom_price) = $xoopsDB->fetchRow($result3))) {
             echo "<option value=\"$nom_price\">$nom_price</option>";
         }
         echo '</select></td></tr>';
@@ -607,7 +607,7 @@ function ModJob($lid = 0)
                               . $xoopsDB->prefix('jobs_listing')
                               . " where lid=$lid");
 
-    while (list($lid, $cid, $title, $status, $expire, $type, $company, $desctext, $requirements, $tel, $price, $typeprice, $contactinfo, $contactinfo1, $contactinfo2, $date, $email, $submitter, $usid, $town, $state, $valid, $premium, $photo) = $xoopsDB->fetchRow($result)) {
+    while (false !== (list($lid, $cid, $title, $status, $expire, $type, $company, $desctext, $requirements, $tel, $price, $typeprice, $contactinfo, $contactinfo1, $contactinfo2, $date, $email, $submitter, $usid, $town, $state, $valid, $premium, $photo) = $xoopsDB->fetchRow($result))) {
         $title   = $myts->htmlSpecialChars($title);
         $status  = $myts->htmlSpecialChars($status);
         $expire  = $myts->htmlSpecialChars($expire);
@@ -666,7 +666,7 @@ function ModJob($lid = 0)
     <td class=\"outer\">" . _AM_JOBS_TYPE . ' </td><td class="odd"><select name="type">';
 
         $result5 = $xoopsDB->query('SELECT nom_type FROM ' . $xoopsDB->prefix('jobs_type') . ' ORDER BY nom_type');
-        while (list($nom_type) = $xoopsDB->fetchRow($result5)) {
+        while (false !== (list($nom_type) = $xoopsDB->fetchRow($result5))) {
             $sel = '';
             if ($nom_type == $type) {
                 $sel = 'selected';
@@ -691,7 +691,7 @@ function ModJob($lid = 0)
 
         $result = $xoopsDB->query('SELECT nom_price FROM ' . $xoopsDB->prefix('jobs_price') . ' ORDER BY nom_price');
         echo " <select name=\"id_price\"><option value=\"$typeprice\">$typeprice</option>";
-        while (list($nom_price) = $xoopsDB->fetchRow($result)) {
+        while (false !== (list($nom_price) = $xoopsDB->fetchRow($result))) {
             $nom_price = $myts->htmlSpecialChars($nom_price);
             echo "<option value=\"$nom_price\">$nom_price</option>";
         }
@@ -706,7 +706,7 @@ function ModJob($lid = 0)
             echo '<tr>
     <td class="outer">' . _AM_JOBS_STATE1 . ' </td><td class="odd"><select name="state">';
             $result5 = $xoopsDB->query('SELECT rid, name FROM ' . $xoopsDB->prefix('jobs_region') . ' ORDER BY rid');
-            while (list($rid, $name) = $xoopsDB->fetchRow($result5)) {
+            while (false !== (list($rid, $name) = $xoopsDB->fetchRow($result5))) {
                 $sel = '';
                 if ($rid == $state) {
                     $sel = 'selected';

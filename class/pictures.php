@@ -19,7 +19,7 @@
 /**
  * Protection against inclusion outside the site
  */
-// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+// defined('XOOPS_ROOT_PATH') || die('Restricted access');
 $moduleDirName = basename(dirname(__DIR__));
 $main_lang     = '_' . strtoupper($moduleDirName);
 /**
@@ -47,7 +47,7 @@ class jlm_pictures extends XoopsObject
      */
     public function __construct($id = null, $lid = null)
     {
-        $this->db = XoopsDatabaseFactory::getDatabaseConnection();
+        $this->db = \XoopsDatabaseFactory::getDatabaseConnection();
         $this->initVar('cod_img', XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('title', XOBJ_DTYPE_TXTBOX, null, false);
         $this->initVar('date_added', XOBJ_DTYPE_TXTBOX, null, false);
@@ -99,7 +99,7 @@ class jlm_pictures extends XoopsObject
         $start = 0
     ) {
         global $moduleDirName;
-        $db          = XoopsDatabaseFactory::getDatabaseConnection();
+        $db          = \XoopsDatabaseFactory::getDatabaseConnection();
         $ret         = [];
         $where_query = '';
         if (is_array($criteria) && count($criteria) > 0) {
@@ -114,13 +114,13 @@ class jlm_pictures extends XoopsObject
         if (!$asobject) {
             $sql    = 'SELECT cod_img FROM ' . $db->prefix('jobs_pictures') . "$where_query ORDER BY $sort $order";
             $result = $db->query($sql, $limit, $start);
-            while ($myrow = $db->fetchArray($result)) {
+            while (false !== ($myrow = $db->fetchArray($result))) {
                 $ret[] = $myrow['jlm_pictures_id'];
             }
         } else {
             $sql    = 'SELECT * FROM ' . $db->prefix('jobs_pictures') . "$where_query ORDER BY $sort $order";
             $result = $db->query($sql, $limit, $start);
-            while ($myrow = $db->fetchArray($result)) {
+            while (false !== ($myrow = $db->fetchArray($result))) {
                 $ret[] = new jlm_pictures($myrow);
             }
         }
@@ -193,7 +193,7 @@ class Xoopsjlm_picturesHandler extends XoopsObjectHandler
      * @param bool        $force
      * @return bool false if failed, true if already present and unchanged or successful
      */
-    public function insert(XoopsObject $jlm_pictures, $force = false)
+    public function insert(\XoopsObject $jlm_pictures, $force = false)
     {
         global $xoopsConfig, $lid, $moduleDirName;
         if ('jlm_pictures' != get_class($jlm_pictures)) {
@@ -213,12 +213,12 @@ class Xoopsjlm_picturesHandler extends XoopsObjectHandler
             // ajout/modification d'un jlm_pictures
             $jlm_pictures = new jlm_pictures();
 
-            $format = 'INSERT INTO "%s" (cod_img, title, date_added, date_modified, lid, uid_owner, url)';
+            $format = 'INSERT INTO %s (cod_img, title, date_added, date_modified, lid, uid_owner, url)';
             $format .= 'VALUES (%u, %s, %s, %s, %s, %s, %s)';
             $sql    = sprintf($format, $this->db->prefix('jobs_pictures'), $cod_img, $this->db->quoteString($title), $now, $now, $this->db->quoteString($lid), $this->db->quoteString($uid_owner), $this->db->quoteString($url));
             $force  = true;
         } else {
-            $format = 'UPDATE "%s" SET ';
+            $format = 'UPDATE %s SET ';
             $format .= 'cod_img=%u, title=%s, date_added=%s, date_modified=%s, lid=%s, uid_owner=%s, url=%s';
             $format .= ' WHERE cod_img = %u';
             $sql    = sprintf($format, $this->db->prefix('jobs_pictures'), $cod_img, $this->db->quoteString($title), $now, $now, $this->db->quoteString($lid), $this->db->quoteString($uid_owner), $this->db->quoteString($url), $cod_img);
@@ -248,7 +248,7 @@ class Xoopsjlm_picturesHandler extends XoopsObjectHandler
      *
      * @return bool false if failed.
      */
-    public function delete(XoopsObject $jlm_pictures, $force = false)
+    public function delete(\XoopsObject $jlm_pictures, $force = false)
     {
         global $moduleDirName;
 
@@ -295,7 +295,7 @@ class Xoopsjlm_picturesHandler extends XoopsObjectHandler
         if (!$result) {
             return $ret;
         }
-        while ($myrow = $this->db->fetchArray($result)) {
+       while (false !== ($myrow = $this->db->fetchArray($result))) {
             $jlm_pictures = new jlm_pictures();
             $jlm_pictures->assignVars($myrow);
             if (!$id_as_key) {
@@ -369,14 +369,14 @@ class Xoopsjlm_picturesHandler extends XoopsObjectHandler
     public function renderFormSubmit($uid, $lid, $maxbytes, $xoopsTpl)
     {
         global $moduleDirName, $main_lang, $xoopsUser;
-        $form       = new XoopsThemeForm(_JOBS_SUBMIT_PIC_TITLE, 'form_picture', "add_photo.php?lid=$lid&uid=" . $xoopsUser->getVar('uid') . '', 'post', true);
-        $field_url  = new XoopsFormFile(_JOBS_SELECT_PHOTO, 'sel_photo', 2000000);
-        $field_desc = new XoopsFormText(_JOBS_CAPTION, 'caption', 35, 55);
+        $form       = new \XoopsThemeForm(_JOBS_SUBMIT_PIC_TITLE, 'form_picture', "add_photo.php?lid=$lid&uid=" . $xoopsUser->getVar('uid') . '', 'post', true);
+        $field_url  = new \XoopsFormFile(_JOBS_SELECT_PHOTO, 'sel_photo', 2000000);
+        $field_desc = new \XoopsFormText(_JOBS_CAPTION, 'caption', 35, 55);
         $form->setExtra('enctype="multipart/form-data"');
-        $button_send   = new XoopsFormButton('', 'submit_button', _JOBS_UPLOADPICTURE, 'submit');
-        $field_warning = new XoopsFormLabel(sprintf(_JOBS_YOUCANUPLOAD, $maxbytes / 1024));
-        $field_lid     = new XoopsFormHidden('lid', $lid);
-        $field_uid     = new XoopsFormHidden('uid', $uid);
+        $button_send   = new \XoopsFormButton('', 'submit_button', _JOBS_UPLOADPICTURE, 'submit');
+        $field_warning = new \XoopsFormLabel(sprintf(_JOBS_YOUCANUPLOAD, $maxbytes / 1024));
+        $field_lid     = new \XoopsFormHidden('lid', $lid);
+        $field_uid     = new \XoopsFormHidden('uid', $uid);
         /**
          * Check if using Xoops or XoopsCube (by jlm69)
          */
@@ -426,14 +426,14 @@ class Xoopsjlm_picturesHandler extends XoopsObjectHandler
     {
         global $moduleDirName, $main_lang;
 
-        $form       = new XoopsThemeForm(_JOBS_EDIT_CAPTION, 'form_picture', 'editdesc.php', 'post', true);
-        $field_desc = new XoopsFormText($caption, 'caption', 35, 55);
+        $form       = new \XoopsThemeForm(_JOBS_EDIT_CAPTION, 'form_picture', 'editdesc.php', 'post', true);
+        $field_desc = new \XoopsFormText($caption, 'caption', 35, 55);
         $form->setExtra('enctype="multipart/form-data"');
-        $button_send   = new XoopsFormButton(_JOBS_EDIT, 'submit_button', 'Submit', 'submit');
-        $field_warning = new XoopsFormLabel("<img src='" . $filename . "' alt='sssss'>");
-        $field_cod_img = new XoopsFormHidden('cod_img', $cod_img);
-        $field_lid     = new XoopsFormHidden('lid', $lid);
-        $field_marker  = new XoopsFormHidden('marker', 1);
+        $button_send   = new \XoopsFormButton(_JOBS_EDIT, 'submit_button', 'Submit', 'submit');
+        $field_warning = new \XoopsFormLabel("<img src='" . $filename . "' alt='sssss'>");
+        $field_cod_img = new \XoopsFormHidden('cod_img', $cod_img);
+        $field_lid     = new \XoopsFormHidden('lid', $lid);
+        $field_marker  = new \XoopsFormHidden('marker', 1);
 
         /**
          * Check if using Xoops or XoopsCube (by jlm69)
@@ -507,7 +507,7 @@ class Xoopsjlm_picturesHandler extends XoopsObjectHandler
         $allowed_mimetypes = ['image/jpeg', 'image/pjpeg'];
         $maxfilesize       = $maxfilebytes;
         // create the object to upload
-        $uploader = new XoopsMediaUploader($path_upload, $allowed_mimetypes, $maxfilesize, $maxfilewidth, $maxfileheight);
+        $uploader = new \XoopsMediaUploader($path_upload, $allowed_mimetypes, $maxfilesize, $maxfilewidth, $maxfileheight);
         // fetch the media
         if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
             //lets create a name for it

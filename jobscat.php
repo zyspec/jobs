@@ -243,7 +243,7 @@ if (0 == $trows) { // the zero option added
         $xoopsTpl->assign('lang_cursortedby', sprintf(_JOBS_CURSORTEDBY, jobs_convertorderbytrans($orderby)));
     }
 
-    while (list($lid, $cid, $title, $status, $expire, $type, $company, $price, $typeprice, $date, $town, $state, $valid, $premium, $photo, $vu) = $xoopsDB->fetchRow($result1)) {
+    while (false !== (list($lid, $cid, $title, $status, $expire, $type, $company, $price, $typeprice, $date, $town, $state, $valid, $premium, $photo, $vu) = $xoopsDB->fetchRow($result1))) {
         $a_item     = [];
         $title      = $myts->undoHtmlSpecialChars($title);
         $status     = $myts->htmlSpecialChars($status);

@@ -106,7 +106,7 @@ if ($xoopsUser) {
     $member_usid = $xoopsUser->getVar('uid', 'E');
 
     $your_res = $xoopsDB->query('SELECT lid,title,usid FROM ' . $xoopsDB->prefix('jobs_resume') . ' WHERE usid =' . $xoopsDB->escape($member_usid) . '');
-    while ($myrow = $xoopsDB->fetchArray($your_res)) {
+    while (false !== ($myrow = $xoopsDB->fetchArray($your_res))) {
         $a_res    = [];
         $istheirs = '';
         if ($myrow['usid'] == $member_usid) {
@@ -165,7 +165,7 @@ $result = $xoopsDB->query($sql);
 
 $count   = 1;
 $content = '';
-while ($myrow = $xoopsDB->fetchArray($result)) {
+while (false !== ($myrow = $xoopsDB->fetchArray($result))) {
     $title = $myts->undoHtmlSpecialChars($myrow['title']);
 
     if ($myrow['img'] && 'http://' != $myrow['img']) {
@@ -244,7 +244,7 @@ if (1 == $xoopsModuleConfig['jobs_new_jobs']) {
         $xoopsTpl->assign('last_res_head_views', _JOBS_VIEW);
         $rank = 1;
 
-        while (list($lid, $name, $title, $status, $exp, $expire, $private, $salary, $typeprice, $date, $usid, $town, $state, $valid, $vu) = $xoopsDB->fetchRow($result)) {
+        while (false !== (list($lid, $name, $title, $status, $exp, $expire, $private, $salary, $typeprice, $date, $usid, $town, $state, $valid, $vu) = $xoopsDB->fetchRow($result))) {
             $name       = $myts->htmlSpecialChars($name);
             $title      = $myts->htmlSpecialChars($title);
             $status     = $myts->htmlSpecialChars($status);

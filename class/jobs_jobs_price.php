@@ -16,7 +16,7 @@
  * @author      XOOPS Development Team
  */
 
-// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+// defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 /**
  * Class jobs_jobs_price
@@ -51,19 +51,19 @@ class jobs_jobs_price extends XoopsObject
 
         require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
-        $form = new XoopsThemeForm($title, 'form', $action, 'post', true);
+        $form = new \XoopsThemeForm($title, 'form', $action, 'post', true);
         $form->setExtra('enctype="multipart/form-data"');
 
-        $form->addElement(new XoopsFormText(_AM_JOBS_JOBS_PRICE_NOM_PRICE, 'nom_price', 50, 255, $this->getVar('nom_price')), false);
+        $form->addElement(new \XoopsFormText(_AM_JOBS_JOBS_PRICE_NOM_PRICE, 'nom_price', 50, 255, $this->getVar('nom_price')), false);
 
-        $form->addElement(new XoopsFormHidden('op', 'save_jobs_price'));
+        $form->addElement(new \XoopsFormHidden('op', 'save_jobs_price'));
 
         //Submit buttons
-        $button_tray   = new XoopsFormElementTray('', '');
-        $submit_button = new XoopsFormButton('', 'submit', _SUBMIT, 'submit');
+        $button_tray   = new \XoopsFormElementTray('', '');
+        $submit_button = new \XoopsFormButton('', 'submit', _SUBMIT, 'submit');
         $button_tray->addElement($submit_button);
 
-        $cancel_button = new XoopsFormButton('', '', _CANCEL, 'cancel');
+        $cancel_button = new \XoopsFormButton('', '', _CANCEL, 'cancel');
         $cancel_button->setExtra('onclick="history.go(-1)"');
         $button_tray->addElement($cancel_button);
 
@@ -79,9 +79,9 @@ class jobs_jobs_price extends XoopsObject
 class jobsjobs_jobs_priceHandler extends XoopsPersistableObjectHandler
 {
     /**
-     * @param null|XoopsDatabase $db
+     * @param null|\XoopsDatabase $db
      */
-    public function __construct(XoopsDatabase $db)
+    public function __construct(\XoopsDatabase $db)
     {
         parent::__construct($db, 'jobs_price', 'jobs_jobs_price', 'id_price', 'nom_price');
     }

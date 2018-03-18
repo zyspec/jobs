@@ -108,7 +108,7 @@ if ($crows > '0') {
 
     $class   = 'odd';
     $result1 = $xoopsDB->query($sql, $show, $start);
-    while (list($cid, $pid, $title, $img, $ordre, $affprice) = $xoopsDB->fetchRow($result1)) {
+    while (false !== (list($cid, $pid, $title, $img, $ordre, $affprice) = $xoopsDB->fetchRow($result1))) {
         $title = $myts->htmlSpecialChars($title);
 
         //$expire2     = formatTimestamp($expire, "s");

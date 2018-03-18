@@ -35,7 +35,7 @@ switch ($op) {
         $adminObject->addItemButton(_AM_JOBS_ADDSUBCAT, 'job_categories.php?op=new_category', 'add');
         $adminObject->displayButton('left', '');
 
-        $criteria = new CriteriaCompo();
+        $criteria = new \CriteriaCompo();
         $criteria->setSort('cid');
         $criteria->setOrder('ASC');
         $numrows      = $jobsJobs_categoriesHandler->getCount();
@@ -77,8 +77,8 @@ switch ($op) {
                       </td>
                     </tr>";
                 $class    = ('even' === $class) ? 'odd' : 'even';
-                $criteria = new CriteriaCompo();
-                $criteria->add(new Criteria('pid', $category_arr[$i]->getVar('cid')));
+                $criteria = new \CriteriaCompo();
+                $criteria->add(new \Criteria('pid', $category_arr[$i]->getVar('cid')));
                 $criteria->setSort('title');
                 $criteria->setOrder('ASC');
                 $pid     = $jobsJobs_categoriesHandler->getall($criteria);
@@ -122,8 +122,8 @@ switch ($op) {
                         </td>
                     </tr>";
                     $class    = ('even' === $class) ? 'odd' : 'even';
-                    $criteria = new CriteriaCompo();
-                    $criteria->add(new Criteria('pid', $cid));
+                    $criteria = new \CriteriaCompo();
+                    $criteria->add(new \Criteria('pid', $cid));
                     $criteria->setSort('title');
                     $criteria->setOrder('ASC');
                     $pid     = $jobsJobs_categoriesHandler->getall($criteria);
@@ -174,7 +174,7 @@ switch ($op) {
         $maxwide           = $xoopsModuleConfig['jobs_resized_width'];
         $maxhigh           = $xoopsModuleConfig['jobs_resized_height'];
         $allowed_mimetypes = ['image/gif', 'image/jpg', 'image/jpeg', 'image/pjpeg', 'image/png', 'image/x-png'];
-        $uploader          = new XoopsMediaUploader($uploaddir, $allowed_mimetypes, null, $maxwide, $maxhigh);
+        $uploader          = new \XoopsMediaUploader($uploaddir, $allowed_mimetypes, null, $maxwide, $maxhigh);
         if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
             $uploader->setPrefix('category_img_');
             $uploader->fetchMedia($_POST['xoops_upload_file'][0]);

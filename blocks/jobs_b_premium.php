@@ -16,7 +16,7 @@
  * @author      XOOPS Development Team
  */
 
-// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+// defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 /**
  * @param $options
@@ -59,7 +59,7 @@ function jobs_block_premium_show($options)
                               . $xoopsDB->prefix('jobs_listing')
                               . " AS l on c.comp_name = l.company WHERE l.valid = '1' and l.status!='0' and l.premium='1' $cat_perms");
 
-    while (list($comp_id, $comp_name, $comp_img, $lid, $title, $type, $company, $typeprice, $town, $state, $date, $view) = $xoopsDB->fetchRow($result)) {
+    while (false !== (list($comp_id, $comp_name, $comp_img, $lid, $title, $type, $company, $typeprice, $town, $state, $date, $view) = $xoopsDB->fetchRow($result))) {
         $comp_name = $myts->undoHtmlSpecialChars($comp_name);
         $title     = $myts->undoHtmlSpecialChars($title);
         $type      = $myts->htmlSpecialChars($type);

@@ -41,7 +41,7 @@ class ResTree
      */
     public function __construct($table_name, $id_name, $pid_name)
     {
-        $this->db    = XoopsDatabaseFactory::getDatabaseConnection();
+        $this->db    = \XoopsDatabaseFactory::getDatabaseConnection();
         $this->table = $table_name;
         $this->id    = $id_name;
         $this->pid   = $pid_name;
@@ -74,7 +74,7 @@ class ResTree
         if (0 == $count) {
             return $arr;
         }
-        while ($myrow = $this->db->fetchArray($result)) {
+       while (false !== ($myrow = $this->db->fetchArray($result))) {
             array_push($arr, $myrow);
         }
 
@@ -103,7 +103,7 @@ class ResTree
         if (0 == $count) {
             return $idarray;
         }
-        while (list($id) = $this->db->fetchRow($result)) {
+        while (false !== (list($id) = $this->db->fetchRow($result))) {
             array_push($idarray, $id);
         }
 
@@ -137,7 +137,7 @@ class ResTree
         if (0 == $count) {
             return $idarray;
         }
-        while (list($r_id) = $this->db->fetchRow($result)) {
+        while (false !== (list($r_id) = $this->db->fetchRow($result))) {
             array_push($idarray, $r_id);
             $idarray = $this->resume_getAllChildId($r_id, $order, $idarray);
         }
@@ -255,7 +255,7 @@ class ResTree
         if ($none) {
             echo "<option value='0'>-----</option>\n";
         }
-        while (list($catid, $name) = $this->db->fetchRow($result)) {
+        while (false !== (list($catid, $name) = $this->db->fetchRow($result))) {
             $sel = '';
             if ($catid == $preset_id) {
                 $sel = ' selected';
@@ -319,7 +319,7 @@ class ResTree
         if ($none) {
             echo "<option value='0'>" . _JOBS_SELECTCAT . "</option>\n";
         }
-        while (list($catid, $name) = $this->db->fetchRow($result)) {
+        while (false !== (list($catid, $name) = $this->db->fetchRow($result))) {
             $sel = '';
             if ($catid == $preset_id) {
                 $sel = ' selected';
@@ -383,7 +383,7 @@ class ResTree
         if ($none) {
             echo "<option value='0'>" . _AM_JOBS_SELECTCAT . "</option>\n";
         }
-        while (list($catid, $name) = $this->db->fetchRow($result)) {
+        while (false !== (list($catid, $name) = $this->db->fetchRow($result))) {
             $sel = '';
             if ($catid == $preset_id) {
                 $sel = ' selected';
@@ -449,7 +449,7 @@ class ResTree
         if ($none) {
             echo "<option value='0'>" . _JOBS_ALL_CATEGORIES . "</option>\n";
         }
-        while (list($catid, $name) = $this->db->fetchRow($result)) {
+        while (false !== (list($catid, $name) = $this->db->fetchRow($result))) {
             $sel = '';
             if ($catid == $preset_id) {
                 $sel = ' selected';
@@ -508,7 +508,7 @@ class ResTree
         if ($none) {
             echo "<option value='0'>" . _JOBS_ALL_STATES . "</option>\n";
         }
-        while (list($catid, $name) = $this->db->fetchRow($result)) {
+        while (false !== (list($catid, $name) = $this->db->fetchRow($result))) {
             $sel = '';
             if ($catid == $preset_id) {
                 $sel = ' selected';
@@ -567,7 +567,7 @@ class ResTree
         if ($none) {
             echo "<option value='0'>" . _JOBS_ALL_STATES . "</option>\n";
         }
-        while (list($catid, $name) = $this->db->fetchRow($result)) {
+        while (false !== (list($catid, $name) = $this->db->fetchRow($result))) {
             $sel = '';
             if ($catid == $preset_id) {
                 $sel = ' selected';
@@ -620,7 +620,7 @@ class ResTree
                 echo "<option value='0'>" . _JOBS_SELECT_STATE . "</option>\n";
             }
         }
-        while (list($catid, $name) = $this->db->fetchRow($result)) {
+        while (false !== (list($catid, $name) = $this->db->fetchRow($result))) {
             $sel = '';
             if ($name == $preset_name) {
                 $sel = ' selected';
@@ -673,7 +673,7 @@ class ResTree
         if ($none) {
             echo "<option value='0'>" . _AM_JOBS_SELECTCOMPANY . "</option>\n";
         }
-        while (list($catid, $name) = $this->db->fetchRow($result)) {
+        while (false !== (list($catid, $name) = $this->db->fetchRow($result))) {
             $sel = '';
             if ($catid == $preset_id) {
                 $sel = ' selected';
@@ -777,7 +777,7 @@ class ResTree
         if (0 == $count) {
             return $parray;
         }
-        while ($row = $this->db->fetchArray($result)) {
+        while (false !== ($row = $this->db->fetchArray($result))) {
             array_push($parray, $row);
             $parray = $this->resume_getAllChild($row[$this->id], $order, $parray);
         }
@@ -812,7 +812,7 @@ class ResTree
         if (0 == $count) {
             return $parray;
         }
-        while ($row = $this->db->fetchArray($result)) {
+        while (false !== ($row = $this->db->fetchArray($result))) {
             $row['prefix'] = $r_prefix . '.';
             array_push($parray, $row);
             $parray = $this->resume_getChildTreeArray($row[$this->id], $order, $parray, $row['prefix']);
@@ -842,7 +842,7 @@ class ResTree
         if (0 == $count) {
             return $parray;
         }
-        while ($row = $this->db->fetchArray($result)) {
+        while (false !== ($row = $this->db->fetchArray($result))) {
             $row['prefix'] = $r_prefix . '.';
             array_push($parray, $row);
             $parray = $this->getStateTreeArray($row[$this->id], $order, $parray, $row['prefix']);
@@ -882,7 +882,7 @@ class ResTree
             $sql .= " ORDER BY $order";
         }
         $result = $xoopsDB->query($sql);
-        while (list($catid, $name, $ordre) = $xoopsDB->fetchRow($result)) {
+        while (false !== (list($catid, $name, $ordre) = $xoopsDB->fetchRow($result))) {
             echo "<p><a href=\"category.php?op=NewResCat&amp;cid=$catid\"><img src=\""
                  . XOOPS_URL
                  . "/modules/$moduleDirName/assets/images/plus.gif\" border=0 width=10 height=10 alt=\""
@@ -941,7 +941,7 @@ class ResTree
         if (0 == $count) {
             return $parray;
         }
-        while ($row = $xoopsDB->fetchArray($result2)) {
+        while (false !== ($row = $xoopsDB->fetchArray($result2))) {
             $row['prefix'] = $r_prefix . '.';
             array_push($parray, $row);
             $parray = $this->resume_getChildTreeMapArray($row[$this->id], $order, $parray, $row['prefix']);
@@ -958,7 +958,7 @@ class ResTree
         $result = $this->db->query('SELECT cid, pid, title FROM ' . $this->table);
         $ret    = [];
         $myts   = \MyTextSanitizer::getInstance();
-        while ($myrow = $this->db->fetchArray($result)) {
+       while (false !== ($myrow = $this->db->fetchArray($result))) {
             $ret[$myrow['cid']] = ['title' => $myts->htmlspecialchars($myrow['title']), 'pid' => $myrow['pid']];
         }
 

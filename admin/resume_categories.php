@@ -34,7 +34,7 @@ switch ($op) {
         $adminObject->addItemButton(_AM_JOBS_RES_ADDSUBCAT, 'resume_categories.php?op=new_category', 'add');
         $adminObject->displayButton('left', '');
 
-        $criteria = new CriteriaCompo();
+        $criteria = new \CriteriaCompo();
         $criteria->setSort('cid');
         $criteria->setOrder('ASC');
         $numrows      = $jobsJobs_res_categoriesHandler->getCount();
@@ -74,8 +74,8 @@ switch ($op) {
                       </td>
                     </tr>";
                 $class    = ('even' == $class) ? 'odd' : 'even';
-                $criteria = new CriteriaCompo();
-                $criteria->add(new Criteria('pid', $category_arr[$i]->getVar('cid')));
+                $criteria = new \CriteriaCompo();
+                $criteria->add(new \Criteria('pid', $category_arr[$i]->getVar('cid')));
                 $criteria->setSort('title');
                 $criteria->setOrder('ASC');
                 $pid     = $jobsJobs_res_categoriesHandler->getall($criteria);
@@ -119,8 +119,8 @@ switch ($op) {
                         </td>
                     </tr>";
                     $class    = ('even' == $class) ? 'odd' : 'even';
-                    $criteria = new CriteriaCompo();
-                    $criteria->add(new Criteria('pid', $cid));
+                    $criteria = new \CriteriaCompo();
+                    $criteria->add(new \Criteria('pid', $cid));
                     $criteria->setSort('title');
                     $criteria->setOrder('ASC');
                     $pid     = $jobsJobs_res_categoriesHandler->getall($criteria);
@@ -168,7 +168,7 @@ switch ($op) {
         //Form category_img
         require_once XOOPS_ROOT_PATH . '/class/uploader.php';
         $uploaddir = XOOPS_UPLOAD_PATH . '/jobs/images/';
-        $uploader  = new XoopsMediaUploader($uploaddir, $GLOBALS['xoopsModuleConfig']['category_img_mimetypes'], $GLOBALS['xoopsModuleConfig']['category_img_size'], null, null);
+        $uploader  = new \XoopsMediaUploader($uploaddir, $GLOBALS['xoopsModuleConfig']['category_img_mimetypes'], $GLOBALS['xoopsModuleConfig']['category_img_size'], null, null);
         if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
             $uploader->setPrefix('category_img_');
             $uploader->fetchMedia($_POST['xoops_upload_file'][0]);

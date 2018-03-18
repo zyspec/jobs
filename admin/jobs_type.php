@@ -29,7 +29,7 @@ switch ($op) {
         $adminObject->displayNavigation(basename(__FILE__));
         $adminObject->addItemButton(_AM_JOBS_NEWJOBS_TYPE, 'jobs_type.php?op=new_jobs_type', 'add');
         $adminObject->displayButton('left');
-        $criteria = new CriteriaCompo();
+        $criteria = new \CriteriaCompo();
         $criteria->setSort('id_type');
         $criteria->setOrder('ASC');
         $jobsNumrows   = $jobs_typeHandler->getCount();
@@ -66,7 +66,7 @@ switch ($op) {
 
         $adminObject2->addItemButton(_AM_JOBS_NEWJOBS_PRICE, 'jobs_type.php?op=new_jobs_price', 'add');
         $adminObject2->displayButton('left');
-        $criteria = new CriteriaCompo();
+        $criteria = new \CriteriaCompo();
         $criteria->setSort('id_price');
         $criteria->setOrder('ASC');
         $priceNumrows   = $jobs_priceHandler->getCount();

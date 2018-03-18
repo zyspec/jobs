@@ -98,7 +98,7 @@ if (!empty($_POST['submit'])) {
 
     $result = $xoopsDB->query('SELECT lid, email, submitter, title, type, company, desctext, requirements, usid FROM  ' . $xoopsDB->prefix('jobs_listing') . ' WHERE lid = ' . $xoopsDB->escape($id) . '');
 
-    while (list($lid, $email, $submitter, $title, $type, $company, $desctext, $requirements, $usid) = $xoopsDB->fetchRow($result)) {
+    while (false !== (list($lid, $email, $submitter, $title, $type, $company, $desctext, $requirements, $usid) = $xoopsDB->fetchRow($result))) {
         $comp_id     = jobs_getCompIdFromName(addslashes($company));
         $extra_users = jobs_getThisCompany($comp_id, $usid);
 
@@ -317,7 +317,7 @@ if (!empty($_POST['submit'])) {
           <td class='odd'><select name=\"resume\"><option value=\"0\">" . _JOBS_JOBSELECT . '</option>';
 
             $dropdown = $xoopsDB->query('select lid, title, private, email FROM  ' . $xoopsDB->prefix('jobs_resume') . " WHERE email='$idde' AND lid=$rlid ORDER BY date DESC");
-            while (list($rlid, $title, $private, $email) = $xoopsDB->fetchRow($dropdown)) {
+            while (false !== (list($rlid, $title, $private, $email) = $xoopsDB->fetchRow($dropdown))) {
                 echo '<option value="' . XOOPS_URL . "/modules/$moduleDirName/viewresume.php?lid=$rlid&amp;unlock=$private\">" . $title . '</option>';
             }
             echo '</select></td></tr>';
@@ -326,7 +326,7 @@ if (!empty($_POST['submit'])) {
         //  if ($xoopsModuleConfig["jobs_use_captcha"] == '1') {
         //  echo "<tr><td class='head'>"._JOBS_CAPTCHA." </td><td class='even'>";
         //  $jlm_captcha = "";
-        //  $jlm_captcha = (new XoopsFormCaptcha(_JOBS_CAPTCHA, "xoopscaptcha", false));
+        //  $jlm_captcha = (new \XoopsFormCaptcha(_JOBS_CAPTCHA, "xoopscaptcha", false));
         //  echo $jlm_captcha->render();
         //  }
         //  echo "</td></tr>";

@@ -182,9 +182,9 @@ switch ($action) {
     case 'results':
         /** @var XoopsModuleHandler $moduleHandler */
         $moduleHandler = xoops_getHandler('module');
-        $criteria      = new CriteriaCompo(new Criteria('hassearch', 1));
-        $criteria->add(new Criteria('isactive', 1));
-        $criteria->add(new Criteria('mid', $xmid));
+        $criteria      = new \CriteriaCompo(new \Criteria('hassearch', 1));
+        $criteria->add(new \Criteria('isactive', 1));
+        $criteria->add(new \Criteria('mid', $xmid));
         $modules = $moduleHandler->getObjects($criteria, true);
         $mids    = isset($_REQUEST['mids']) ? $_REQUEST['mids'] : [];
         if (empty($mids) || !is_array($mids)) {

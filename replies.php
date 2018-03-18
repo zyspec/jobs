@@ -80,7 +80,7 @@ if ($trows > '0') {
         $xoopsTpl->assign('lang_cursortedby', _JOBS_CURSORTEDBY . '' . $orderby);
     }
 
-    while (list($r_lid, $lid, $title, $date, $submitter, $message, $resume, $tele, $email, $r_usid, $company) = $xoopsDB->fetchRow($result)) {
+    while (false !== (list($r_lid, $lid, $title, $date, $submitter, $message, $resume, $tele, $email, $r_usid, $company) = $xoopsDB->fetchRow($result))) {
         $useroffset = '';
         if ($xoopsUser) {
             $timezone = $xoopsUser->timezone();

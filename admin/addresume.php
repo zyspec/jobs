@@ -81,7 +81,7 @@ if (!empty($_POST['submit'])) {
         require_once XOOPS_ROOT_PATH . '/class/uploader.php';
         $updir             = $destination;
         $allowed_mimetypes = ['application/msword', 'application/pdf'];
-        $uploader          = new XoopsMediaUploader($updir, $allowed_mimetypes, $resumesize);
+        $uploader          = new \XoopsMediaUploader($updir, $allowed_mimetypes, $resumesize);
         $uploader->setTargetFileName($date . '_' . $_FILES['resume']['name']);
         $uploader->fetchMedia('resume');
         if (!$uploader->upload()) {
@@ -204,12 +204,12 @@ if (!empty($_POST['submit'])) {
         $result2 = $xoopsDB->query('SELECT rid, name FROM ' . $xoopsDB->prefix('jobs_region') . ' ORDER BY rid');
 
         ob_start();
-        $form = new XoopsThemeForm(_AM_JOBS_ADD_RESUME, 'submitform', 'addresume.php');
+        $form = new \XoopsThemeForm(_AM_JOBS_ADD_RESUME, 'submitform', 'addresume.php');
         $form->setExtra('enctype="multipart/form-data"');
 
-        $form->addElement(new XoopsFormText(_AM_JOBS_RES_PRIVATE, 'private', 10, 10, '' . $_SESSION['private'] . ''), false);
+        $form->addElement(new \XoopsFormText(_AM_JOBS_RES_PRIVATE, 'private', 10, 10, '' . $_SESSION['private'] . ''), false);
 
-        $cat_form = new XoopsFormSelect(_AM_JOBS_CAT, 'cid', $_SESSION['cid']);
+        $cat_form = new \XoopsFormSelect(_AM_JOBS_CAT, 'cid', $_SESSION['cid']);
         $cattree  = $mytree->resume_getChildTreeArray(0, 'title ASC');
         $cat_form->addOption('', _AM_JOBS_SELECTCAT);
         foreach ($cattree as $branch) {
@@ -219,59 +219,59 @@ if (!empty($_POST['submit'])) {
         }
         $form->addElement($cat_form, true);
 
-        $radio        = new XoopsFormRadio(_AM_JOBS_STATUS, 'status', '' . $_SESSION['status'] . '1');
+        $radio        = new \XoopsFormRadio(_AM_JOBS_STATUS, 'status', '' . $_SESSION['status'] . '1');
         $options['1'] = _AM_JOBS_ACTIVE;
         $options['0'] = _AM_JOBS_INACTIVE;
         $radio->addOptionArray($options);
         $form->addElement($radio, true);
 
-        $form->addElement(new XoopsFormText(_AM_JOBS_RES_NAME, 'name', 40, 50, '' . $_SESSION['name'] . ''), true);
-        $form->addElement(new XoopsFormText(_AM_JOBS_RES_HOW_LONG, 'expire', 40, 50, $resdays), true);
-        $form->addElement(new XoopsFormText(_AM_JOBS_TITLE2, 'title', 40, 50, '' . $_SESSION['title'] . ''), true);
-        $form->addElement(new XoopsFormText(_AM_JOBS_RES_EXP, 'exp', 40, 50, '' . $_SESSION['exp'] . ''), true);
-        $form->addElement(new XoopsFormText(_AM_JOBS_PRICE2, 'salary', 40, 50, '' . $_SESSION['salary'] . ''), false);
-        $sel_form = new XoopsFormSelect(_AM_JOBS_SALARYTYPE, 'typeprice', '' . $_SESSION['typeprice'] . '', '1', false);
-        while (list($nom_price) = $xoopsDB->fetchRow($result1)) {
+        $form->addElement(new \XoopsFormText(_AM_JOBS_RES_NAME, 'name', 40, 50, '' . $_SESSION['name'] . ''), true);
+        $form->addElement(new \XoopsFormText(_AM_JOBS_RES_HOW_LONG, 'expire', 40, 50, $resdays), true);
+        $form->addElement(new \XoopsFormText(_AM_JOBS_TITLE2, 'title', 40, 50, '' . $_SESSION['title'] . ''), true);
+        $form->addElement(new \XoopsFormText(_AM_JOBS_RES_EXP, 'exp', 40, 50, '' . $_SESSION['exp'] . ''), true);
+        $form->addElement(new \XoopsFormText(_AM_JOBS_PRICE2, 'salary', 40, 50, '' . $_SESSION['salary'] . ''), false);
+        $sel_form = new \XoopsFormSelect(_AM_JOBS_SALARYTYPE, 'typeprice', '' . $_SESSION['typeprice'] . '', '1', false);
+        while (false !== (list($nom_price) = $xoopsDB->fetchRow($result1))) {
             $sel_form->addOption($nom_price, $nom_price);
         }
         $form->addElement($sel_form);
 
         if ($idd) {
-            $form->addElement(new XoopsFormLabel(_AM_JOBS_RES_UNAME, $idd));
+            $form->addElement(new \XoopsFormLabel(_AM_JOBS_RES_UNAME, $idd));
         } else {
-            $form->addElement(new XoopsFormLabel(_AM_JOBS_SENDBY, $iddn));
+            $form->addElement(new \XoopsFormLabel(_AM_JOBS_SENDBY, $iddn));
         }
-        $form->addElement(new XoopsFormLabel(_AM_JOBS_EMAIL, $idde));
-        $form->addElement(new XoopsFormText(_AM_JOBS_TEL, 'tel', 40, 50, '' . $_SESSION['tel'] . ''), false);
-        $form->addElement(new XoopsFormText(_AM_JOBS_TOWN, 'town', 40, 50, '' . $_SESSION['town'] . ''), false);
+        $form->addElement(new \XoopsFormLabel(_AM_JOBS_EMAIL, $idde));
+        $form->addElement(new \XoopsFormText(_AM_JOBS_TEL, 'tel', 40, 50, '' . $_SESSION['tel'] . ''), false);
+        $form->addElement(new \XoopsFormText(_AM_JOBS_TOWN, 'town', 40, 50, '' . $_SESSION['town'] . ''), false);
 
-        $state_form = new XoopsFormSelect(_AM_JOBS_STATE, 'state', '' . $_SESSION['state'] . '', '0', false);
-        while (list($rid, $name) = $xoopsDB->fetchRow($result2)) {
+        $state_form = new \XoopsFormSelect(_AM_JOBS_STATE, 'state', '' . $_SESSION['state'] . '', '0', false);
+        while (false !== (list($rid, $name) = $xoopsDB->fetchRow($result2))) {
             $state_form->addOption('', _AM_JOBS_SELECT_STATE);
             $state_form->addOption($rid, $name);
         }
         $form->addElement($state_form, true);
 
-        $form->addElement(new XoopsFormFile(_AM_JOBS_NEWRES, 'resume', 0), false);
+        $form->addElement(new \XoopsFormFile(_AM_JOBS_NEWRES, 'resume', 0), false);
 
-        $res_radio    = new XoopsFormRadio(_AM_JOBS_Q_NO_RESUME, 'make_resume', '' . $_SESSION['make_resume'] . '');
+        $res_radio    = new \XoopsFormRadio(_AM_JOBS_Q_NO_RESUME, 'make_resume', '' . $_SESSION['make_resume'] . '');
         $options['0'] = _AM_JOBS_DONT_MAKE;
         $options['1'] = _AM_JOBS_MAKE_RESUME;
         $res_radio->addOptionArray($options);
         $form->addElement($res_radio, true);
 
         if (0 == $xoopsModuleConfig['jobs_moderate_resume']) {
-            $form->addElement(new XoopsFormHidden('valid', '1'), false);
+            $form->addElement(new \XoopsFormHidden('valid', '1'), false);
         } else {
-            $form->addElement(new XoopsFormHidden('valid', '0'), false);
+            $form->addElement(new \XoopsFormHidden('valid', '0'), false);
         }
 
-        $form->addElement(new XoopsFormHidden('usid', $iddd), false);
-        $form->addElement(new XoopsFormHidden('email', $idde), false);
-        $form->addElement(new XoopsFormHidden('submitter', $iddn), false);
+        $form->addElement(new \XoopsFormHidden('usid', $iddd), false);
+        $form->addElement(new \XoopsFormHidden('email', $idde), false);
+        $form->addElement(new \XoopsFormHidden('submitter', $iddn), false);
 
-        $form->addElement(new XoopsFormHidden('date', $time), false);
-        $form->addElement(new XoopsFormButton('', 'submit', _AM_JOBS_SUBMIT, 'submit'));
+        $form->addElement(new \XoopsFormHidden('date', $time), false);
+        $form->addElement(new \XoopsFormButton('', 'submit', _AM_JOBS_SUBMIT, 'submit'));
         $form->display();
         $submit_form = ob_get_contents();
         ob_end_clean();

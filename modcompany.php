@@ -118,7 +118,7 @@ if (!empty($_POST['submit'])) {
             foreach ($comp_users as $u) {
                 if ($u['id']) {
                     // we have user id for name entered
-                    $xu   = new XoopsUser($u['id']);
+                    $xu   = new \XoopsUser($u['id']);
                     $grps =& $xu->getGroups();
                     if (!$gpermHandler->checkRight('jobs_submit', 0, $grps, $module_id)) {
                         // no submit permission
@@ -160,7 +160,7 @@ if (!empty($_POST['submit'])) {
         require_once XOOPS_ROOT_PATH . '/class/uploader.php';
         $updir             = $destination;
         $allowed_mimetypes = ['image/gif', 'image/jpg', 'image/jpeg', 'image/pjpeg', 'image/x-png'];
-        $uploader          = new XoopsMediaUploader($updir, $allowed_mimetypes, $photomax, $maxwide, $maxhigh);
+        $uploader          = new \XoopsMediaUploader($updir, $allowed_mimetypes, $photomax, $maxwide, $maxhigh);
         $uploader->setTargetFileName($date . '_' . $_FILES['comp_img']['name']);
         $uploader->fetchMedia('comp_img');
         if (!$uploader->upload()) {
@@ -277,36 +277,36 @@ if (!empty($_POST['submit'])) {
             // END - check new entries for company users are OK - contributed by GreenFlatDog
             $result = $xoopsDB->query('SELECT rid, name FROM ' . $xoopsDB->prefix('jobs_region') . ' ORDER BY rid');
             ob_start();
-            $form = new XoopsThemeForm(_JOBS_MOD_COMPANY, 'modify_form', 'modcompany.php');
+            $form = new \XoopsThemeForm(_JOBS_MOD_COMPANY, 'modify_form', 'modcompany.php');
             $form->setExtra('enctype="multipart/form-data"');
 
             //            $GLOBALS['xoopsGTicket']->addTicketXoopsFormElement($form, __LINE__, 1800, 'token');
 
             echo "<span style='display:block; text-align:center; color:#f00;'>" . $alert_message . '</span>';
-            $form->addElement(new XoopsFormLabel(_JOBS_NUMANNN, $comp_id . ' ' . _JOBS_ADDED . ' ' . $dates));
-            $form->addElement(new XoopsFormLabel(_JOBS_SENDBY, $added_by));
-            $form->addElement(new XoopsFormLabel(_JOBS_COMPANY2, $comp_name));
-            $form->addElement(new XoopsFormHidden('comp_name', $comp_name));
-            $form->addElement(new XoopsFormText(_JOBS_COMPANY_ADDRESS, 'comp_address', 30, 100, $comp_address), false);
-            $form->addElement(new XoopsFormText(_JOBS_COMPANY_ADDRESS2, 'comp_address2', 30, 100, $comp_address2), false);
-            $form->addElement(new XoopsFormText(_JOBS_TOWN, 'comp_city', 30, 50, $comp_city), false);
+            $form->addElement(new \XoopsFormLabel(_JOBS_NUMANNN, $comp_id . ' ' . _JOBS_ADDED . ' ' . $dates));
+            $form->addElement(new \XoopsFormLabel(_JOBS_SENDBY, $added_by));
+            $form->addElement(new \XoopsFormLabel(_JOBS_COMPANY2, $comp_name));
+            $form->addElement(new \XoopsFormHidden('comp_name', $comp_name));
+            $form->addElement(new \XoopsFormText(_JOBS_COMPANY_ADDRESS, 'comp_address', 30, 100, $comp_address), false);
+            $form->addElement(new \XoopsFormText(_JOBS_COMPANY_ADDRESS2, 'comp_address2', 30, 100, $comp_address2), false);
+            $form->addElement(new \XoopsFormText(_JOBS_TOWN, 'comp_city', 30, 50, $comp_city), false);
 
             if ('1' == $xoopsModuleConfig['jobs_show_state']) {
-                $state_form = new XoopsFormSelect(_JOBS_STATE, 'comp_state', $comp_state, '0', false);
-                while (list($rid, $name) = $xoopsDB->fetchRow($result)) {
+                $state_form = new \XoopsFormSelect(_JOBS_STATE, 'comp_state', $comp_state, '0', false);
+                while (false !== (list($rid, $name) = $xoopsDB->fetchRow($result))) {
                     $state_form->addOption('', _JOBS_SELECT_STATE);
                     $state_form->addOption($rid, $name);
                 }
                 $form->addElement($state_form, true);
             } else {
-                $form->addElement(new XoopsFormHidden('comp_state', ''));
+                $form->addElement(new \XoopsFormHidden('comp_state', ''));
             }
 
-            $form->addElement(new XoopsFormText(_JOBS_COMPANY_ZIP, 'comp_zip', 30, 30, $comp_zip), false);
-            $form->addElement(new XoopsFormText(_JOBS_COMPANY_PHONE, 'comp_phone', 30, 30, $comp_phone), false);
-            $form->addElement(new XoopsFormText(_JOBS_COMPANY_FAX, 'comp_fax', 30, 30, $comp_fax), false);
-            $form->addElement(new XoopsFormText(_JOBS_COMPANY_SITEURL, 'comp_url', 30, 30, $comp_url), false);
-            $form->addElement(new XoopsFormTextArea(_JOBS_CONTACTINFO, 'comp_contact', $comp_contact, 6, 35), false);
+            $form->addElement(new \XoopsFormText(_JOBS_COMPANY_ZIP, 'comp_zip', 30, 30, $comp_zip), false);
+            $form->addElement(new \XoopsFormText(_JOBS_COMPANY_PHONE, 'comp_phone', 30, 30, $comp_phone), false);
+            $form->addElement(new \XoopsFormText(_JOBS_COMPANY_FAX, 'comp_fax', 30, 30, $comp_fax), false);
+            $form->addElement(new \XoopsFormText(_JOBS_COMPANY_SITEURL, 'comp_url', 30, 30, $comp_url), false);
+            $form->addElement(new \XoopsFormTextArea(_JOBS_CONTACTINFO, 'comp_contact', $comp_contact, 6, 35), false);
 
             if ('1' == $premium || '1' == $temp_premium) {
 
@@ -317,8 +317,8 @@ if (!empty($_POST['submit'])) {
                     $alert1 = sprintf($alert, $cuser1, $prob);
                     unset($prob);
                 }
-                $form->addElement(new XoopsFormText(_JOBS_COMPANY_USER1 . $alert1, 'comp_user1', 30, 30, $comp_username1), false);
-                $form->addElement(new XoopsFormTextArea(_JOBS_USER1_CONTACT, 'comp_user1_contact', $comp_user1_contact, 6, 35), false);
+                $form->addElement(new \XoopsFormText(_JOBS_COMPANY_USER1 . $alert1, 'comp_user1', 30, 30, $comp_username1), false);
+                $form->addElement(new \XoopsFormTextArea(_JOBS_USER1_CONTACT, 'comp_user1_contact', $comp_user1_contact, 6, 35), false);
 
                 if ($cuser2) {
                     $prob   = ('n' == $prob2) ? _JOBS_COMP_USER_NOTTHERE : _JOBS_COMP_USER_NOPERM;
@@ -326,40 +326,40 @@ if (!empty($_POST['submit'])) {
                     unset($prob);
                 }
 
-                $form->addElement(new XoopsFormText(_JOBS_COMPANY_USER2 . $alert2, 'comp_user2', 30, 30, $comp_username2), false);
-                $form->addElement(new XoopsFormTextArea(_JOBS_USER2_CONTACT, 'comp_user2_contact', $comp_user2_contact, 6, 35), false);
+                $form->addElement(new \XoopsFormText(_JOBS_COMPANY_USER2 . $alert2, 'comp_user2', 30, 30, $comp_username2), false);
+                $form->addElement(new \XoopsFormTextArea(_JOBS_USER2_CONTACT, 'comp_user2_contact', $comp_user2_contact, 6, 35), false);
 
                 // END - check new entries for company users are OK - contributed by GreenFlatDog
             } else {
-                $form->addElement(new XoopsFormHidden('comp_user1', ''));
-                $form->addElement(new XoopsFormHidden('comp_user1_contact', ''));
-                $form->addElement(new XoopsFormHidden('comp_user2', ''));
-                $form->addElement(new XoopsFormHidden('comp_user2_contact', ''));
+                $form->addElement(new \XoopsFormHidden('comp_user1', ''));
+                $form->addElement(new \XoopsFormHidden('comp_user1_contact', ''));
+                $form->addElement(new \XoopsFormHidden('comp_user2', ''));
+                $form->addElement(new \XoopsFormHidden('comp_user2_contact', ''));
             }
 
             if ($comp_img_old) {
                 $comp_logo_link = "<a href=\"javascript:CLA('display-logo.php?comp_id=" . addslashes($comp_id) . "')\">$comp_img_old</a>";
 
-                $form->addElement(new XoopsFormLabel(_JOBS_ACTUALPICT, $comp_logo_link));
+                $form->addElement(new \XoopsFormLabel(_JOBS_ACTUALPICT, $comp_logo_link));
 
-                $del_checkbox = new XoopsFormCheckBox(_JOBS_DELPICT, 'del_old', $del_old);
+                $del_checkbox = new \XoopsFormCheckBox(_JOBS_DELPICT, 'del_old', $del_old);
                 $del_checkbox->addOption(1, 'Yes');
                 $form->addElement($del_checkbox);
 
-                $form->addElement(new XoopsFormFile(_JOBS_NEWPICT, 'comp_img', $xoopsModuleConfig['jobs_maxfilesize']), false);
+                $form->addElement(new \XoopsFormFile(_JOBS_NEWPICT, 'comp_img', $xoopsModuleConfig['jobs_maxfilesize']), false);
 
-                $form->addElement(new XoopsFormHidden('comp_img_old', $comp_img_old));
+                $form->addElement(new \XoopsFormHidden('comp_img_old', $comp_img_old));
             } else {
-                $form->addElement(new XoopsFormFile(_JOBS_IMG, 'comp_img', $xoopsModuleConfig['jobs_maxfilesize']), false);
+                $form->addElement(new \XoopsFormFile(_JOBS_IMG, 'comp_img', $xoopsModuleConfig['jobs_maxfilesize']), false);
             }
 
-            $form->addElement(new XoopsFormHidden('token', $token));
-            $form->addElement(new XoopsFormHidden('submit', '1'));
-            $form->addElement(new XoopsFormHidden('comp_name', $comp_name));
-            $form->addElement(new XoopsFormHidden('comp_usid', $comp_usid));
-            $form->addElement(new XoopsFormHidden('comp_id', $comp_id));
-            $form->addElement(new XoopsFormHidden('comp_date_added', $date));
-            $form->addElement(new XoopsFormButton('', 'submit', _JOBS_SUBMIT, 'submit'));
+            $form->addElement(new \XoopsFormHidden('token', $token));
+            $form->addElement(new \XoopsFormHidden('submit', '1'));
+            $form->addElement(new \XoopsFormHidden('comp_name', $comp_name));
+            $form->addElement(new \XoopsFormHidden('comp_usid', $comp_usid));
+            $form->addElement(new \XoopsFormHidden('comp_id', $comp_id));
+            $form->addElement(new \XoopsFormHidden('comp_date_added', $date));
+            $form->addElement(new \XoopsFormButton('', 'submit', _JOBS_SUBMIT, 'submit'));
             $form->display();
             $xoopsTpl->assign('modify_form', ob_get_contents());
             ob_end_clean();

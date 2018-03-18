@@ -110,7 +110,7 @@ if ($xoopsUser) {
     $xoopsTpl->assign('jobs_submitter', $jobs_submitter); //added line
 
     $result = $xoopsDB->query('SELECT comp_id, comp_name, comp_usid, comp_user1, comp_user2  FROM ' . $xoopsDB->prefix('jobs_companies') . ' WHERE ' . $member_usid . ' IN (comp_usid,comp_user1,comp_user2)');
-    while ($myrow = $xoopsDB->fetchArray($result)) {
+    while (false !== ($myrow = $xoopsDB->fetchArray($result))) {
         $a_comp   = [];
         $istheirs = true;
         $xoopsTpl->assign('istheirs', $istheirs);
@@ -175,7 +175,7 @@ $result = $xoopsDB->query($sql);
 
 $count   = 1;
 $content = '';
-while ($myrow = $xoopsDB->fetchArray($result)) {
+while (false !== ($myrow = $xoopsDB->fetchArray($result))) {
     $title = $myts->undoHtmlSpecialChars($myrow['title']);
     $cid   = (int)$myrow['cid'];
     $xoopsTpl->assign('search_cat', $main_lang . '_BYCATEGORY');
@@ -284,7 +284,7 @@ if ('1' == $xoopsModuleConfig['jobs_new_jobs']) {
             $show_company = false;
         }
         $rank = 1;
-        while (list($lid, $title, $status, $expire, $type, $company, $price, $typeprice, $date, $town, $state, $valid, $photo, $vu) = $xoopsDB->fetchRow($result)) {
+        while (false !== (list($lid, $title, $status, $expire, $type, $company, $price, $typeprice, $date, $town, $state, $valid, $photo, $vu) = $xoopsDB->fetchRow($result))) {
             $title     = $myts->undoHtmlSpecialChars($title);
             $status    = $myts->htmlSpecialChars($status);
             $expire    = $myts->htmlSpecialChars($expire);

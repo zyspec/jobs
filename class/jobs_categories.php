@@ -16,7 +16,7 @@
  * @author      XOOPS Development Team
  */
 
-// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+// defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 /**
  * Class jobs_categories
@@ -56,44 +56,44 @@ class jobs_categories extends XoopsObject
 
         require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
-        $form = new XoopsThemeForm($title, 'form', $action, 'post', true);
+        $form = new \XoopsThemeForm($title, 'form', $action, 'post', true);
         $form->setExtra('enctype="multipart/form-data"');
 
         require_once XOOPS_ROOT_PATH . '/class/tree.php';
         $categoryHandler = xoops_getModuleHandler('jobs_categories', 'jobs');
         $arr             = $categoryHandler->getall();
-        //$mytree = new XoopsObjectTree($arr, "category_id", "category_pid");
-        $mytree = new XoopsObjectTree($arr, 'cid', 'pid');
+        //$mytree = new \XoopsObjectTree($arr, "category_id", "category_pid");
+        $mytree = new \XoopsObjectTree($arr, 'cid', 'pid');
 
-        $form->addElement(new XoopsFormLabel(_AM_JOBS_CATEGORY_PID, $mytree->makeSelBox('pid', 'title', '-', $this->getVar('pid'), true)));
-        $form->addElement(new XoopsFormText(_AM_JOBS_CATEGORY_TITLE, 'title', 50, 255, $this->getVar('title')), true);
-        //$form->addElement(new XoopsFormTextArea(_AM_TEST1_CATEGORY_DESC, "category_desc", $this->getVar("category_desc"), 4, 47), true);
+        $form->addElement(new \XoopsFormLabel(_AM_JOBS_CATEGORY_PID, $mytree->makeSelBox('pid', 'title', '-', $this->getVar('pid'), true)));
+        $form->addElement(new \XoopsFormText(_AM_JOBS_CATEGORY_TITLE, 'title', 50, 255, $this->getVar('title')), true);
+        //$form->addElement(new \XoopsFormTextArea(_AM_TEST1_CATEGORY_DESC, "category_desc", $this->getVar("category_desc"), 4, 47), true);
 
         $img                         = $this->getVar('img') ?: 'default.gif';
         $uploadirectory_category_img = '/modules/jobs/assets/images/cat';
-        $imgtray_category_img        = new XoopsFormElementTray(_AM_JOBS_IMGCAT, '<br>');
+        $imgtray_category_img        = new \XoopsFormElementTray(_AM_JOBS_IMGCAT, '<br>');
         $imgpath_category_img        = sprintf(_AM_JOBS_FORMIMAGE_PATH, $uploadirectory_category_img);
-        $imageselect_category_img    = new XoopsFormSelect($imgpath_category_img, 'img', $img);
+        $imageselect_category_img    = new \XoopsFormSelect($imgpath_category_img, 'img', $img);
         $image_array_category_img    = XoopsLists:: getImgListAsArray(XOOPS_ROOT_PATH . $uploadirectory_category_img);
         foreach ($image_array_category_img as $image_category_img) {
             $imageselect_category_img->addOption("$image_category_img", $image_category_img);
         }
         $imageselect_category_img->setExtra("onchange='showImgSelected(\"image_category_img\", \"img\", \"" . $uploadirectory_category_img . '", "", "' . XOOPS_URL . "\")'");
         $imgtray_category_img->addElement($imageselect_category_img, false);
-        $imgtray_category_img->addElement(new XoopsFormLabel('', "<br><img src='" . XOOPS_URL . '/' . $uploadirectory_category_img . '/' . $img . "' name='image_category_img' id='image_category_img' alt=''>"));
+        $imgtray_category_img->addElement(new \XoopsFormLabel('', "<br><img src='" . XOOPS_URL . '/' . $uploadirectory_category_img . '/' . $img . "' name='image_category_img' id='image_category_img' alt=''>"));
 
-        $fileseltray_category_img = new XoopsFormElementTray('', '<br>');
-        $fileseltray_category_img->addElement(new XoopsFormFile(_AM_JOBS_FORMUPLOAD, 'img', $xoopsModuleConfig['jobs_maxfilesize']), false);
-        $fileseltray_category_img->addElement(new XoopsFormLabel(''), false);
+        $fileseltray_category_img = new \XoopsFormElementTray('', '<br>');
+        $fileseltray_category_img->addElement(new \XoopsFormFile(_AM_JOBS_FORMUPLOAD, 'img', $xoopsModuleConfig['jobs_maxfilesize']), false);
+        $fileseltray_category_img->addElement(new \XoopsFormLabel(''), false);
         $imgtray_category_img->addElement($fileseltray_category_img);
         $form->addElement($imgtray_category_img);
 
-        $form->addElement(new XoopsFormText(_AM_JOBS_ORDRE, 'ordre', 50, 255, $this->getVar('ordre')), false);
-        //$form->addElement(new XoopsFormText(_AM_JOBS_PAYMENT, "affprice",  50, 255, $this->getVar("affprice")), false);
-        $form->addElement(new XoopsFormRadioYN(_AM_JOBS_PAYMENT, 'affprice', 1, _YES, _NO));
+        $form->addElement(new \XoopsFormText(_AM_JOBS_ORDRE, 'ordre', 50, 255, $this->getVar('ordre')), false);
+        //$form->addElement(new \XoopsFormText(_AM_JOBS_PAYMENT, "affprice",  50, 255, $this->getVar("affprice")), false);
+        $form->addElement(new \XoopsFormRadioYN(_AM_JOBS_PAYMENT, 'affprice', 1, _YES, _NO));
 
-        $form->addElement(new XoopsFormHidden('op', 'save_category'));
-        $form->addElement(new XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
+        $form->addElement(new \XoopsFormHidden('op', 'save_category'));
+        $form->addElement(new \XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
 
         return $form;
     }
@@ -105,9 +105,9 @@ class jobs_categories extends XoopsObject
 class jobsJobs_categoriesHandler extends XoopsPersistableObjectHandler
 {
     /**
-     * @param null|XoopsDatabase $db
+     * @param null|\XoopsDatabase $db
      */
-    public function __construct(XoopsDatabase $db)
+    public function __construct(\XoopsDatabase $db)
     {
         parent::__construct($db, 'jobs_categories', 'jobs_categories', 'cid', 'title');
     }

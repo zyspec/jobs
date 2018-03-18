@@ -56,7 +56,7 @@ function jobs_show($options)
                               . $options[0]
                               . ' DESC', $options[1], 0);
 
-    while ($myrow = $xoopsDB->fetchArray($result)) {
+    while (false !== ($myrow = $xoopsDB->fetchArray($result))) {
         $a_item = [];
 
         $cat_id    = jobs_getCompIdFromName($myrow['company']);

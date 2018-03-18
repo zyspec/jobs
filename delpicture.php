@@ -70,12 +70,12 @@ $cod_img = $_POST['cod_img'];
  * Creating the factory  and the criteria to delete the picture
  * The user must be the owner
  */
-$album_factory = new Xoopsjlm_picturesHandler($xoopsDB);
-$criteria_img  = new Criteria('cod_img', $cod_img);
+$album_factory = new \Xoopsjlm_picturesHandler($xoopsDB);
+$criteria_img  = new \Criteria('cod_img', $cod_img);
 $uid           = $xoopsUser->getVar('uid');
-$criteria_uid  = new Criteria('uid_owner', $uid);
-$criteria_lid  = new Criteria('lid', $lid);
-$criteria      = new CriteriaCompo($criteria_img);
+$criteria_uid  = new \Criteria('uid_owner', $uid);
+$criteria_lid  = new \Criteria('lid', $lid);
+$criteria      = new \CriteriaCompo($criteria_img);
 $criteria->add($criteria_uid);
 
 /**

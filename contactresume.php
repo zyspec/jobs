@@ -91,7 +91,7 @@ if (isset($_POST['submit'])) {
     //  }
     $result = $xoopsDB->query('SELECT name, email, submitter, title FROM  ' . $xoopsDB->prefix('jobs_resume') . ' WHERE lid = ' . $xoopsDB->escape($id) . '');
 
-    while (list($name, $email, $submitter, $title) = $xoopsDB->fetchRow($result)) {
+    while (false !== (list($name, $email, $submitter, $title) = $xoopsDB->fetchRow($result))) {
         $name      = $myts->addSlashes($name);
         $title     = $myts->addSlashes($title);
         $submitter = $myts->addSlashes($submitter);
@@ -235,7 +235,7 @@ if (isset($_POST['submit'])) {
       <td class='odd'><select name=\"listing\"><option value=\"0\">" . _JOBS_RES_JOBSELECT . '</option>';
 
             $dropdown = $xoopsDB->query('select lid, title, date, email FROM  ' . $xoopsDB->prefix('jobs_listing') . " WHERE email = '$idde' ORDER BY date DESC");
-            while (list($lid, $title, $date, $email) = $xoopsDB->fetchRow($dropdown)) {
+            while (false !== (list($lid, $title, $date, $email) = $xoopsDB->fetchRow($dropdown))) {
                 echo '<option value="' . XOOPS_URL . '/modules/' . $moduleDirName . "/viewjobs.php?lid=$lid\">" . $title . '</option>';
             }
             echo '</select></td></tr>';
@@ -244,7 +244,7 @@ if (isset($_POST['submit'])) {
         //  if ($xoopsModuleConfig["jobs_use_captcha"] == '1') {
         //      echo "<tr><td class='head'>"._JOBS_CAPTCHA." </td><td class='even'>";
         //  $jlm_captcha = "";
-        //  $jlm_captcha = (new XoopsFormCaptcha(_JOBS_CAPTCHA, "xoopscaptcha", false));
+        //  $jlm_captcha = (new \XoopsFormCaptcha(_JOBS_CAPTCHA, "xoopscaptcha", false));
         //  echo $jlm_captcha->render();
         //  }
         echo "</td></tr></table>

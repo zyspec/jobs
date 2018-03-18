@@ -127,7 +127,7 @@ function jobs_search($queryarray, $andor, $limit, $offset, $userid)
         $result = $xoopsDB->query($sql, $limit, $offset);
         $ret    = [];
         $i      = 0;
-        while ($myrow = $xoopsDB->fetchArray($result)) {
+        while (false !== ($myrow = $xoopsDB->fetchArray($result))) {
             $statename = jobs_getStateNameFromId($myrow['state']);
 
             $ret[$i]['image']   = 'assets/images/cat/default.gif';
@@ -207,7 +207,7 @@ function jobs_search($queryarray, $andor, $limit, $offset, $userid)
         $result = $xoopsDB->query($sql, $limit, $offset);
         $ret    = [];
         $i      = 0;
-        while ($myrow = $xoopsDB->fetchArray($result)) {
+        while (false !== ($myrow = $xoopsDB->fetchArray($result))) {
             $statename = resume_getStateNameFromId($myrow['state']);
 
             $ret[$i]['image'] = 'assets/images/cat/default.gif';

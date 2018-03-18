@@ -79,7 +79,7 @@ function SendJob($lid = 0)
     if ('1' == $xoopsModuleConfig['jobs_use_captcha']) {
         echo "<tr><td class='head'>" . _JOBS_CAPTCHA . " </td><td class='even'>";
         $jlm_captcha = '';
-        $jlm_captcha = new XoopsFormCaptcha(_JOBS_CAPTCHA, 'xoopscaptcha', false);
+        $jlm_captcha = new \XoopsFormCaptcha(_JOBS_CAPTCHA, 'xoopscaptcha', false);
         echo $jlm_captcha->render();
         echo '</td></tr>';
     }
@@ -218,7 +218,7 @@ function SendResume($lid = 0)
     if ('1' == $xoopsModuleConfig['jobs_use_captcha']) {
         echo "<tr><td class='head'>" . _JOBS_CAPTCHA . " </td><td class='even'>";
         $jlm_captcha = '';
-        $jlm_captcha = new XoopsFormCaptcha(_JOBS_CAPTCHA, 'xoopscaptcha', false);
+        $jlm_captcha = new \XoopsFormCaptcha(_JOBS_CAPTCHA, 'xoopscaptcha', false);
         echo $jlm_captcha->render();
         echo '</td></tr>';
     }

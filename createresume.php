@@ -97,13 +97,13 @@ if (!empty($_POST['submit'])) {
     $member_uname = $xoopsUser->getVar('uname', 'E');
 
     ob_start();
-    $form = new XoopsThemeForm(_JOBS_CREATE_RESUME, 'createform', 'createresume.php');
+    $form = new \XoopsThemeForm(_JOBS_CREATE_RESUME, 'createform', 'createresume.php');
     $form->setExtra('enctype="multipart/form-data"');
 
     //    $GLOBALS['xoopsGTicket']->addTicketXoopsFormElement($form, __LINE__, 1800, 'token');
     $form->addElement(resume_getEditor(_JOBS_RESUME, 'resume', '', 5, 40), true);
-    $form->addElement(new XoopsFormHidden('lid', $lid));
-    $form->addElement(new XoopsFormButton('', 'submit', _JOBS_SUBMIT, 'submit'));
+    $form->addElement(new \XoopsFormHidden('lid', $lid));
+    $form->addElement(new \XoopsFormButton('', 'submit', _JOBS_SUBMIT, 'submit'));
     $form->display();
     $xoopsTpl->assign('submit_form', ob_get_contents());
     ob_end_clean();

@@ -30,7 +30,7 @@ if (file_exists('../language/' . $xoopsConfig['language'] . '/modinfo.php')) {
 
 if (!isset($xoopsTpl) || !is_object($xoopsTpl)) {
     require_once XOOPS_ROOT_PATH . '/class/template.php';
-    $xoopsTpl = new XoopsTpl();
+    $xoopsTpl = new \XoopsTpl();
 }
 $moduleDirName = basename(dirname(__DIR__));
 

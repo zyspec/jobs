@@ -37,7 +37,7 @@ function ExpireJob()
 
     $result5 = $xoopsDB->query('SELECT lid, title, expire, type, company, desctext, requirements, contactinfo, date, email, submitter, usid, photo, view FROM ' . $xoopsDB->prefix('jobs_listing') . " WHERE valid='1'");
 
-    while (list($lids, $title, $expire, $type, $company, $desctext, $requirements, $contactinfo, $dateann, $email, $submitter, $usid, $photo, $lu) = $xoopsDB->fetchRow($result5)) {
+    while (false !== (list($lids, $title, $expire, $type, $company, $desctext, $requirements, $contactinfo, $dateann, $email, $submitter, $usid, $photo, $lu) = $xoopsDB->fetchRow($result5))) {
         $title        = $myts->addSlashes($title);
         $expire       = $myts->addSlashes($expire);
         $type         = $myts->addSlashes($type);
@@ -395,7 +395,7 @@ function jobs_getEditor($caption, $name, $value = '', $width = '99%', $height = 
     $editor_configs['editor'] = strtolower($xoopsModuleConfig['jobs_form_options']);
     if (is_readable(XOOPS_ROOT_PATH . '/class/xoopseditor/xoopseditor.php')) {
         require_once XOOPS_ROOT_PATH . '/class/xoopseditor/xoopseditor.php';
-        $editor = new XoopsFormEditor($caption, $name, $editor_configs, $nohtml, $onfailure = 'textarea');
+        $editor = new \XoopsFormEditor($caption, $name, $editor_configs, $nohtml, $onfailure = 'textarea');
 
         return $editor;
     }
@@ -462,7 +462,7 @@ function jobs_getCompany($usid = 0)
         return 0;
     }
     $company = [];
-    while ($row = $xoopsDB->fetchArray($result)) {
+    while (false !== ($row = $xoopsDB->fetchArray($result))) {
         $company = $row;
     }
 
@@ -480,7 +480,7 @@ function jobs_getPriceType()
         return 0;
     } else {
         $rows = [];
-        while ($row = $xoopsDB->fetchArray($result)) {
+        while (false !== ($row = $xoopsDB->fetchArray($result))) {
             $rows[] = $row;
         }
 
@@ -598,7 +598,7 @@ function jobs_getCompanyWithListing($usid)
         return 0;
     }
     $companies = [];
-    while ($row = $xoopsDB->fetchArray($result)) {
+    while (false !== ($row = $xoopsDB->fetchArray($result))) {
         $companies = $row;
     }
 
@@ -619,7 +619,7 @@ function jobs_getPremiumListings($cid)
         return 0;
     }
     $premium_listings = [];
-    while ($row = $xoopsDB->fetchArray($result)) {
+    while (false !== ($row = $xoopsDB->fetchArray($result))) {
         $premium_listings = $row;
     }
 
@@ -637,7 +637,7 @@ function jobs_getAllCompanies()
         return 0;
     }
     $companies = [];
-    while ($row = $xoopsDB->fetchArray($result)) {
+    while (false !== ($row = $xoopsDB->fetchArray($result))) {
         $companies = $row;
     }
 
@@ -750,7 +750,7 @@ function jobs_getCompanyUsers($comp_id = 0, $usid = 0)
         return 0;
     }
     $their_comp = [];
-    while ($row = $xoopsDB->fetchArray($result)) {
+    while (false !== ($row = $xoopsDB->fetchArray($result))) {
         $their_comp = $row;
     }
 
@@ -771,7 +771,7 @@ function jobs_getXtraUsers($comp_id = 0, $member_usid = 0)
         return 0;
     }
     $xtra_users = [];
-    while ($row = $xoopsDB->fetchArray($result)) {
+    while (false !== ($row = $xoopsDB->fetchArray($result))) {
         $xtra_users = $row;
     }
 
@@ -791,7 +791,7 @@ function jobs_getAllUserCompanies($member_usid = 0)
         return 0;
     }
     $xtra_users = [];
-    while ($row = $xoopsDB->fetchArray($result)) {
+    while (false !== ($row = $xoopsDB->fetchArray($result))) {
         $xtra_users = $row;
     }
 
@@ -816,7 +816,7 @@ function jobs_getThisCompany($comp_id, $usid = 0)
         return 0;
     }
     $thiscompany = [];
-    while ($row = $xoopsDB->fetchArray($result)) {
+    while (false !== ($row = $xoopsDB->fetchArray($result))) {
         $thiscompany = $row;
     }
 
@@ -838,7 +838,7 @@ function jobs_getACompany($comp_id = 0)
         return 0;
     }
     $company = [];
-    while ($row = $xoopsDB->fetchArray($result)) {
+    while (false !== ($row = $xoopsDB->fetchArray($result))) {
         $company = $row;
     }
 

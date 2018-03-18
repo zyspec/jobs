@@ -50,7 +50,7 @@ function resume_show($options)
                               . $options[0]
                               . ' DESC', $options[1], 0);
 
-    while ($myrow = $xoopsDB->fetchArray($result)) {
+    while (false !== ($myrow = $xoopsDB->fetchArray($result))) {
         $a_item    = [];
         $cat_name  = resume_getResCatNameFromId($myrow['cid']);
         $name      = $myts->undoHtmlSpecialChars($myrow['name']);

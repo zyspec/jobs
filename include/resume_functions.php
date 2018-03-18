@@ -37,7 +37,7 @@ function ExpireResume()
 
     $result5 = $xoopsDB->query('SELECT lid, name, title, expire, private, date, email, submitter, resume, view FROM ' . $xoopsDB->prefix('jobs_resume') . " WHERE valid='1'");
 
-    while (list($lids, $name, $title, $expire, $private, $dateann, $email, $submitter, $resume, $lu) = $xoopsDB->fetchRow($result5)) {
+    while (false !== (list($lids, $name, $title, $expire, $private, $dateann, $email, $submitter, $resume, $lu) = $xoopsDB->fetchRow($result5))) {
         $name      = $myts->htmlSpecialChars($name);
         $title     = $myts->htmlSpecialChars($title);
         $expire    = $myts->htmlSpecialChars($expire);
@@ -292,7 +292,7 @@ function resume_getEditor($caption, $name, $value = '', $width = '99%', $height 
     $editor_configs['editor'] = strtolower($xoopsModuleConfig['jobs_resume_options']);
     if (is_readable(XOOPS_ROOT_PATH . '/class/xoopseditor/xoopseditor.php')) {
         require_once XOOPS_ROOT_PATH . '/class/xoopseditor/xoopseditor.php';
-        $editor = new XoopsFormEditor($caption, $name, $editor_configs, $nohtml = false, $onfailure = 'textarea');
+        $editor = new \XoopsFormEditor($caption, $name, $editor_configs, $nohtml = false, $onfailure = 'textarea');
 
         return $editor;
     }
@@ -352,7 +352,7 @@ function resume_getResume($usid)
         return 0;
     }
     $resume = [];
-    while ($row = $xoopsDB->fetchArray($result)) {
+    while (false !== ($row = $xoopsDB->fetchArray($result))) {
         $resume = $row;
     }
 

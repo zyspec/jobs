@@ -61,7 +61,7 @@ function Region()
         $result1 = $xoopsDB->query($sql, $show, $start);
         echo '<table border=1 width=100% cellpadding=2 cellspacing=0 border=0><td><tr>';
         if ($crows > 0) {
-            $nav = new XoopsPageNav($crows, $showonpage, $start, 'start', 'op=Region');
+            $nav = new \XoopsPageNav($crows, $showonpage, $start, 'start', 'op=Region');
             //  echo "<fieldset><legend style='font-weight: bold; color: #900;'>"._AM_JOBS_MAN_REGION."</legend>";
             //  echo "<br>"._AM_JOBS_THEREIS." <b>$crows</b> "._AM_JOBS_REGIONS."<br><br>";
             //  echo "<fieldset><legend style='font-weight: bold; color:#900;'>"._AM_JOBS_ADD_REGION."</legend>";
@@ -78,7 +78,7 @@ function Region()
             echo '<br><br><table width=100% cellpadding=2 cellspacing=0 border=0>';
             $rank = 1;
         }
-        while (list($rid, $pid, $name, $abbrev) = $xoopsDB->fetchRow($result1)) {
+        while (false !== (list($rid, $pid, $name, $abbrev) = $xoopsDB->fetchRow($result1))) {
             $name = $myts->htmlSpecialChars($name);
 
             if (is_int($rank / 2)) {
@@ -130,7 +130,7 @@ function ModRegion($rid = 0)
 
     $result = $xoopsDB->query('select rid, pid, name, abbrev from ' . $xoopsDB->prefix('jobs_region') . " where rid=$rid");
 
-    while (list($rid, $pid, $name, $abbrev) = $xoopsDB->fetchRow($result)) {
+    while (false !== (list($rid, $pid, $name, $abbrev) = $xoopsDB->fetchRow($result))) {
         $name   = $myts->htmlSpecialChars($name);
         $abbrev = $myts->htmlSpecialChars($abbrev);
 

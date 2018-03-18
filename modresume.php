@@ -85,7 +85,7 @@ if (!empty($_POST['submit'])) {
         require_once XOOPS_ROOT_PATH . '/class/uploader.php';
         $updir             = $destination;
         $allowed_mimetypes = ['application/msword', 'application/pdf'];
-        $uploader          = new XoopsMediaUploader($updir, $allowed_mimetypes, $xoopsModuleConfig['jobs_resumesize']);
+        $uploader          = new \XoopsMediaUploader($updir, $allowed_mimetypes, $xoopsModuleConfig['jobs_resumesize']);
         $uploader->setTargetFileName($date . '_' . $_FILES['resume']['name']);
         $uploader->fetchMedia('resume');
         if (!$uploader->upload()) {
@@ -159,15 +159,15 @@ if (!empty($_POST['submit'])) {
             $result2 = $xoopsDB->query('SELECT rid, name FROM ' . $xoopsDB->prefix('jobs_region') . ' ORDER BY rid');
 
             ob_start();
-            $form = new XoopsThemeForm(_JOBS_MOD_LISTING, 'modify_resume', 'modresume.php');
+            $form = new \XoopsThemeForm(_JOBS_MOD_LISTING, 'modify_resume', 'modresume.php');
             $form->setExtra('enctype="multipart/form-data"');
             //            $GLOBALS['xoopsGTicket']->addTicketXoopsFormElement($form, __LINE__, 1800, 'token');
 
-            $form->addElement(new XoopsFormLabel(_JOBS_NUMANNN, $lid . ' ' . _JOBS_ADDED . ' ' . $dates));
-            $form->addElement(new XoopsFormLabel(_JOBS_SENDBY, $submitter));
-            $form->addElement(new XoopsFormText(_JOBS_RES_PCODE . ' - ' . _JOBS_RES_PSIZE, 'private', 5, 10, $private), false);
+            $form->addElement(new \XoopsFormLabel(_JOBS_NUMANNN, $lid . ' ' . _JOBS_ADDED . ' ' . $dates));
+            $form->addElement(new \XoopsFormLabel(_JOBS_SENDBY, $submitter));
+            $form->addElement(new \XoopsFormText(_JOBS_RES_PCODE . ' - ' . _JOBS_RES_PSIZE, 'private', 5, 10, $private), false);
 
-            $cat_form = new XoopsFormSelect(_JOBS_CAT, 'cid', $cid);
+            $cat_form = new \XoopsFormSelect(_JOBS_CAT, 'cid', $cid);
             $cattree  = $mytree->resume_getChildTreeArray(0, 'title ASC');
             $cat_form->addOption('', _JOBS_SELECTCAT);
             foreach ($cattree as $branch) {
@@ -177,31 +177,31 @@ if (!empty($_POST['submit'])) {
             }
             $form->addElement($cat_form, true);
 
-            $form->addElement(new XoopsFormText(_JOBS_NAME, 'name', 30, 30, $name), false);
-            $form->addElement(new XoopsFormText(_JOBS_TITLE2, 'title', 30, 30, $title), false);
-            $form->addElement(new XoopsFormText(_JOBS_RES_EXP, 'exp', 30, 30, $exp), false);
-            $form->addElement(new XoopsFormText(_JOBS_RES_HOW_LONG, 'expire', 30, 30, $expire), false);
+            $form->addElement(new \XoopsFormText(_JOBS_NAME, 'name', 30, 30, $name), false);
+            $form->addElement(new \XoopsFormText(_JOBS_TITLE2, 'title', 30, 30, $title), false);
+            $form->addElement(new \XoopsFormText(_JOBS_RES_EXP, 'exp', 30, 30, $exp), false);
+            $form->addElement(new \XoopsFormText(_JOBS_RES_HOW_LONG, 'expire', 30, 30, $expire), false);
 
-            $radio        = new XoopsFormRadio(_JOBS_STATUS, 'status', $status);
+            $radio        = new \XoopsFormRadio(_JOBS_STATUS, 'status', $status);
             $options['1'] = _JOBS_ACTIVE;
             $options['0'] = _JOBS_INACTIVE;
             $radio->addOptionArray($options);
             $form->addElement($radio, true);
 
-            $form->addElement(new XoopsFormText(_JOBS_EMAIL, 'email', 30, 30, $email), false);
-            $form->addElement(new XoopsFormText(_JOBS_TEL, 'tel', 30, 30, $tel), false);
-            $form->addElement(new XoopsFormText(_JOBS_TOWN, 'town', 30, 30, $town), false);
+            $form->addElement(new \XoopsFormText(_JOBS_EMAIL, 'email', 30, 30, $email), false);
+            $form->addElement(new \XoopsFormText(_JOBS_TEL, 'tel', 30, 30, $tel), false);
+            $form->addElement(new \XoopsFormText(_JOBS_TOWN, 'town', 30, 30, $town), false);
 
-            $state_form = new XoopsFormSelect(_JOBS_STATE, 'state', $state, '1', false);
-            while (list($rid, $name) = $xoopsDB->fetchRow($result2)) {
+            $state_form = new \XoopsFormSelect(_JOBS_STATE, 'state', $state, '1', false);
+            while (false !== (list($rid, $name) = $xoopsDB->fetchRow($result2))) {
                 $state_form->addOption('', _JOBS_SELECT_STATE);
                 $state_form->addOption($rid, $name);
             }
             $form->addElement($state_form, true);
 
-            $form->addElement(new XoopsFormText(_JOBS_PRICE2, 'salary', 40, 50, $salary), false);
-            $sel_form = new XoopsFormSelect(_JOBS_SALARYTYPE, 'typeprice', $typeprice, '1', false);
-            while (list($nom_price) = $xoopsDB->fetchRow($result1)) {
+            $form->addElement(new \XoopsFormText(_JOBS_PRICE2, 'salary', 40, 50, $salary), false);
+            $sel_form = new \XoopsFormSelect(_JOBS_SALARYTYPE, 'typeprice', $typeprice, '1', false);
+            while (false !== (list($nom_price) = $xoopsDB->fetchRow($result1))) {
                 $sel_form->addOption($nom_price, $nom_price);
             }
             $form->addElement($sel_form);
@@ -210,43 +210,43 @@ if (!empty($_POST['submit'])) {
                 if ('created' != $resume_old) {
                     $resume_link = "<a href=\"resumes/$resume_old\">$resume_old</a>";
 
-                    $form->addElement(new XoopsFormLabel(_JOBS_ACTUALRES, $resume_link));
+                    $form->addElement(new \XoopsFormLabel(_JOBS_ACTUALRES, $resume_link));
 
-                    $del_checkbox = new XoopsFormCheckBox(_JOBS_DELRES, 'del_old', '');
+                    $del_checkbox = new \XoopsFormCheckBox(_JOBS_DELRES, 'del_old', '');
                     $del_checkbox->addOption(1, 'Yes');
                     $form->addElement($del_checkbox);
-                    $form->addElement(new XoopsFormFile(_JOBS_NEWRES, 'resume', $xoopsModuleConfig['jobs_maxfilesize']), false);
-                    $form->addElement(new XoopsFormHidden('resume_old', $resume_old));
+                    $form->addElement(new \XoopsFormFile(_JOBS_NEWRES, 'resume', $xoopsModuleConfig['jobs_maxfilesize']), false);
+                    $form->addElement(new \XoopsFormHidden('resume_old', $resume_old));
                 } else {
                     $resume_link = '<a href="myresume.php?lid=' . addslashes($lid) . "\">$resume_old</a>";
-                    $form->addElement(new XoopsFormLabel(_JOBS_ACTUALRES, $resume_link));
+                    $form->addElement(new \XoopsFormLabel(_JOBS_ACTUALRES, $resume_link));
 
-                    $del_made_checkbox = new XoopsFormCheckBox(_JOBS_DELRES, 'del_made_resume', '');
+                    $del_made_checkbox = new \XoopsFormCheckBox(_JOBS_DELRES, 'del_made_resume', '');
                     $del_made_checkbox->addOption(1, 'Yes');
                     $form->addElement($del_made_checkbox);
-                    $form->addElement(new XoopsFormHidden('resume_old', $resume_old));
+                    $form->addElement(new \XoopsFormHidden('resume_old', $resume_old));
                 }
             } else {
-                $form->addElement(new XoopsFormFile(_JOBS_NEWRES, 'resume', $xoopsModuleConfig['jobs_maxfilesize']), false);
+                $form->addElement(new \XoopsFormFile(_JOBS_NEWRES, 'resume', $xoopsModuleConfig['jobs_maxfilesize']), false);
             }
 
-            $res_radio    = new XoopsFormRadio(_JOBS_Q_NO_RESUME, 'make_resume', '0');
+            $res_radio    = new \XoopsFormRadio(_JOBS_Q_NO_RESUME, 'make_resume', '0');
             $options['0'] = _JOBS_DONT_MAKE;
             $options['1'] = _JOBS_MAKE_RESUME;
             $res_radio->addOptionArray($options);
             $form->addElement($res_radio, true);
 
             if (0 == $xoopsModuleConfig['jobs_moderate_res_up']) {
-                $form->addElement(new XoopsFormHidden('valid', '1'), false);
+                $form->addElement(new \XoopsFormHidden('valid', '1'), false);
             } else {
-                $form->addElement(new XoopsFormHidden('valid', '0'), false);
+                $form->addElement(new \XoopsFormHidden('valid', '0'), false);
             }
 
-            $form->addElement(new XoopsFormHidden('lid', $lid), false);
-            $form->addElement(new XoopsFormHidden('date', $date), false);
-            $form->addElement(new XoopsFormHidden('submit', '1'), false);
-            $form->addElement(new XoopsFormHidden('submitter', $submitter), false);
-            $form->addElement(new XoopsFormButton('', 'submit', _JOBS_SUBMIT, 'submit'));
+            $form->addElement(new \XoopsFormHidden('lid', $lid), false);
+            $form->addElement(new \XoopsFormHidden('date', $date), false);
+            $form->addElement(new \XoopsFormHidden('submit', '1'), false);
+            $form->addElement(new \XoopsFormHidden('submitter', $submitter), false);
+            $form->addElement(new \XoopsFormButton('', 'submit', _JOBS_SUBMIT, 'submit'));
             $form->display();
             $xoopsTpl->assign('modify_form', ob_get_contents());
             ob_end_clean();

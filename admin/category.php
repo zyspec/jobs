@@ -231,7 +231,7 @@ function DelCat($cid, $ok = 0)
     global $xoopsDB, $xoopsConfig, $xoopsModule, $moduleDirName;
 
     if (1 == (int)$ok) {
-        $xoopsDB = XoopsDatabaseFactory::getDatabaseConnection();
+        $xoopsDB = \XoopsDatabaseFactory::getDatabaseConnection();
         $xoopsDB->queryF('delete from ' . $xoopsDB->prefix('jobs_categories') . " where cid=$cid or pid=$cid");
         $xoopsDB->queryF('delete from ' . $xoopsDB->prefix('jobs_listing') . " where cid=$cid");
         redirect_header('map.php', 3, _AM_JOBS_CATDEL);
@@ -450,7 +450,7 @@ function DelResCat($cid, $ok = 0)
     global $xoopsDB, $xoopsConfig, $xoopsModule, $moduleDirName;
 
     if (1 == (int)$ok) {
-        $xoopsDB = XoopsDatabaseFactory::getDatabaseConnection();
+        $xoopsDB = \XoopsDatabaseFactory::getDatabaseConnection();
         $xoopsDB->queryF('delete from ' . $xoopsDB->prefix('jobs_res_categories') . " where cid=$cid or pid=$cid");
         $xoopsDB->queryF('delete from ' . $xoopsDB->prefix('jobs_resume') . " where cid=$cid");
 

@@ -16,14 +16,17 @@
  * @author      XOOPS Development Team
  */
 
+use XoopsModules\Jobs;
+
 require_once __DIR__ . '/../../../include/cp_header.php';
 xoops_cp_header();
 $moduleDirName = $xoopsModule->getVar('dirname');
 require_once XOOPS_ROOT_PATH . '/modules/' . $moduleDirName . '/include/functions.php';
 
-if (!@require_once XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar('dirname') . '/language/' . $xoopsConfig['language'] . '/main.php') {
-    require_once XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar('dirname') . '/language/english/main.php';
-}
+/** @var Jobs\Helper $helper */
+$helper = Jobs\Helper::getInstance();
+$helper->loadLanguage('admin');
+
 
 $myts = \MyTextSanitizer::getInstance();
 
