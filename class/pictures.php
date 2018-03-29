@@ -196,7 +196,7 @@ class Xoopsjlm_picturesHandler extends XoopsObjectHandler
     public function insert(\XoopsObject $jlm_pictures, $force = false)
     {
         global $xoopsConfig, $lid, $moduleDirName;
-        if ('jlm_pictures' != get_class($jlm_pictures)) {
+        if (!$jlm_pictures instanceof \jlm_pictures) {
             return false;
         }
         if (!$jlm_pictures->isDirty()) {
@@ -295,7 +295,7 @@ class Xoopsjlm_picturesHandler extends XoopsObjectHandler
         if (!$result) {
             return $ret;
         }
-       while (false !== ($myrow = $this->db->fetchArray($result))) {
+        while (false !== ($myrow = $this->db->fetchArray($result))) {
             $jlm_pictures = new jlm_pictures();
             $jlm_pictures->assignVars($myrow);
             if (!$id_as_key) {

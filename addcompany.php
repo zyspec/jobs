@@ -16,6 +16,10 @@
  * @author      XOOPS Development Team
  */
 
+use XoopsModules\Jobs;
+/** @var Jobs\Helper $helper */
+$helper = Jobs\Helper::getInstance();
+
 include __DIR__ . '/header.php';
 $moduleDirName = basename(__DIR__);
 $myts          = \MyTextSanitizer::getInstance(); // MyTextSanitizer object
@@ -61,9 +65,9 @@ if (!empty($_POST['submit'])) {
     }
 
     $destination = XOOPS_ROOT_PATH . "/modules/$moduleDirName/logo_images";
-    $photomax    = $xoopsModuleConfig['jobs_maxfilesize'];
-    $maxwide     = $xoopsModuleConfig['jobs_resized_width'];
-    $maxhigh     = $xoopsModuleConfig['jobs_resized_height'];
+    $photomax    = $helper->getConfig('jobs_maxfilesize');
+    $maxwide     = $helper->getConfig('jobs_resized_width');
+    $maxhigh     = $helper->getConfig('jobs_resized_height');
     $date        = time();
 
     $comp_usid = !empty($xoopsUser) ? $xoopsUser->getVar('uid') : 0;

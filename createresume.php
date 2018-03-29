@@ -16,6 +16,10 @@
  * @author      XOOPS Development Team
  */
 
+use XoopsModules\Jobs;
+/** @var Jobs\Helper $helper */
+$helper = Jobs\Helper::getInstance();
+
 $moduleDirName = basename(__DIR__);
 include __DIR__ . '/header.php';
 //require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/gtickets.php";
@@ -68,8 +72,8 @@ if (!empty($_POST['submit'])) {
     $notify      = !empty($_POST['notify']) ? 1 : 0;
     $member_usid = $xoopsUser->getVar('uid', 'E');
 
-    if ('dhtmltextarea' === $xoopsModuleConfig['jobs_resume_options']
-        || 'dhtml' === $xoopsModuleConfig['jobs_form_options']) {
+    if ('dhtmltextarea' === $helper->getConfig('jobs_resume_options')
+        || 'dhtml' === $helper->getConfig('jobs_form_options')) {
         $made_resume = $myts->displayTarea($_POST['resume'], 0, 0, 0, 0, 0);
     } else {
         $made_resume = $myts->displayTarea($_POST['resume'], 1, 0, 1, 1, 1);

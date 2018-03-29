@@ -16,6 +16,10 @@
  * @author      XOOPS Development Team
  */
 
+use XoopsModules\Jobs;
+/** @var Jobs\Helper $helper */
+$helper = Jobs\Helper::getInstance();
+
 include __DIR__ . '/header.php';
 
 if (empty($xoopsUser)) {
@@ -50,7 +54,7 @@ $trows = $trow;
 $pagenav = '';
 
 if ($trows > '0') {
-    $xoopsTpl->assign('last_head', _JOBS_THE . ' ' . $xoopsModuleConfig['jobs_new_jobs_count'] . ' ' . _JOBS_LASTADD);
+    $xoopsTpl->assign('last_head', _JOBS_THE . ' ' . $helper->getConfig('jobs_new_jobs_count') . ' ' . _JOBS_LASTADD);
     $xoopsTpl->assign('last_head_title', _JOBS_TITLE);
     $xoopsTpl->assign('last_head_company', _JOBS_COMPANY);
     $xoopsTpl->assign('last_head_price', _JOBS_PRICE);

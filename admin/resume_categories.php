@@ -73,7 +73,7 @@ switch ($op) {
                         <a href='resume_categories.php?op=delete_category&cid=" . $category_arr[$i]->getVar('cid') . "'><img src=" . $pathIcon16 . "/delete.png alt='" . _DELETE . "' title='" . _DELETE . "'></a>
                       </td>
                     </tr>";
-                $class    = ('even' == $class) ? 'odd' : 'even';
+                $class    = ('even' === $class) ? 'odd' : 'even';
                 $criteria = new \CriteriaCompo();
                 $criteria->add(new \Criteria('pid', $category_arr[$i]->getVar('cid')));
                 $criteria->setSort('title');

@@ -119,19 +119,19 @@ if (!empty($is_resume)) {
 
 $queries = [];
 
-if ('results' == $action) {
+if ('results' === $action) {
     if ('' == $query) {
         redirect_header('search.php', 1, _SR_PLZENTER);
     }
-} elseif ('showall' == $action) {
+} elseif ('showall' === $action) {
     if ('' == $query || empty($mid)) {
         redirect_header('search.php', 1, _SR_PLZENTER);
     }
-} elseif ('showallbyuser' == $action) {
+} elseif ('showallbyuser' === $action) {
     if (empty($mid) || empty($uid)) {
         redirect_header('search.php', 1, _SR_PLZENTER);
     }
-} elseif ('showstate' == $action) {
+} elseif ('showstate' === $action) {
     if (empty($mid) || empty($uid)) {
         redirect_header('search.php', 1, _SR_PLZENTER);
     }
@@ -141,7 +141,7 @@ $groups            = is_object($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GRO
 $gpermHandler      = xoops_getHandler('groupperm');
 $available_modules = $gpermHandler->getItemIds('module_read', $groups);
 
-if ('search' == $action) {
+if ('search' === $action) {
     include XOOPS_ROOT_PATH . '/header.php';
     //  $issearch = "1";
     include __DIR__ . '/include/searchform.php';
@@ -150,13 +150,13 @@ if ('search' == $action) {
     exit();
 }
 
-if ('OR' != $andor && 'exact' != $andor && 'AND' != $andor) {
+if ('OR' !== $andor && 'exact' !== $andor && 'AND' !== $andor) {
     $andor = 'AND';
 }
 
 $myts = \MyTextSanitizer::getInstance();
-if ('showallbyuser' != $action) {
-    if ('exact' != $andor) {
+if ('showallbyuser' !== $action) {
+    if ('exact' !== $andor) {
         $ignored_queries = []; // holds kewords that are shorter than allowed minmum length
         $temp_queries    = preg_split('/[\s,]+/', $query);
         foreach ($temp_queries as $q) {
@@ -206,19 +206,19 @@ switch ($action) {
 
         echo '<h3>' . _SR_SEARCHRESULTS . "</h3>\n";
         echo _SR_KEYWORDS . ':';
-        if ('exact' != $andor) {
+        if ('exact' !== $andor) {
             foreach ($queries as $q) {
-                echo ' <b>' . htmlspecialchars(stripslashes($q)) . '</b>';
+                echo ' <b>' . htmlspecialchars(stripslashes($q), ENT_QUOTES | ENT_HTML5) . '</b>';
             }
             if (!empty($ignored_queries)) {
                 echo '<br>';
                 printf(_SR_IGNOREDWORDS, $xoopsConfigSearch['keyword_min']);
                 foreach ($ignored_queries as $q) {
-                    echo ' <b>' . htmlspecialchars(stripslashes($q)) . '</b>';
+                    echo ' <b>' . htmlspecialchars(stripslashes($q), ENT_QUOTES | ENT_HTML5) . '</b>';
                 }
             }
         } else {
-            echo ' "<b>' . htmlspecialchars(stripslashes($queries[0])) . '</b>"';
+            echo ' "<b>' . htmlspecialchars(stripslashes($queries[0]), ENT_QUOTES | ENT_HTML5) . '</b>"';
         }
         echo '<br>';
 
@@ -275,7 +275,7 @@ switch ($action) {
                     if ($count >= 5) {
                         $search_url = XOOPS_URL . '/modules/jobs/search.php?query=' . urlencode(stripslashes(implode(' ', $queries)));
                         $search_url .= "&mid=$mid&action=showall&andor=$andor&is_resume=$is_resume&by_state=$by_state&by_cat=$by_cat&issearch=1";
-                        echo '<br><a href="' . htmlspecialchars($search_url) . '">' . _SR_SHOWALLR . '</a></p>';
+                        echo '<br><a href="' . htmlspecialchars($search_url, ENT_QUOTES | ENT_HTML5) . '">' . _SR_SHOWALLR . '</a></p>';
                     }
                 }
             }
@@ -302,14 +302,14 @@ switch ($action) {
             }
 
             echo '<h4>' . _SR_SEARCHRESULTS . "</h4>\n";
-            if ('showall' == $action) {
+            if ('showall' === $action) {
                 echo _SR_KEYWORDS . ':';
-                if ('exact' != $andor) {
+                if ('exact' !== $andor) {
                     foreach ($queries as $q) {
-                        echo ' <b>' . htmlspecialchars(stripslashes($q)) . '</b>';
+                        echo ' <b>' . htmlspecialchars(stripslashes($q), ENT_QUOTES | ENT_HTML5) . '</b>';
                     }
                 } else {
-                    echo ' "<b>' . htmlspecialchars(stripslashes($queries[0])) . '</b>"';
+                    echo ' "<b>' . htmlspecialchars(stripslashes($queries[0]), ENT_QUOTES | ENT_HTML5) . '</b>"';
                 }
                 echo '<br>';
             }
@@ -348,7 +348,7 @@ switch ($action) {
             echo '<table><tr>';
             $search_url = XOOPS_URL . '/modules/jobs/search.php?query=' . urlencode(stripslashes(implode(' ', $queries)));
             $search_url .= "&mid=$mid&action=$action&andor=$andor";
-            if ('showallbyuser' == $action) {
+            if ('showallbyuser' === $action) {
                 $search_url .= "&uid=$uid";
             }
             if ($start > 0) {
@@ -356,14 +356,14 @@ switch ($action) {
                 echo '<td align="left">
             ';
                 $search_url_prev = $search_url . "&start=$prev";
-                echo '<a href="' . htmlspecialchars($search_url_prev) . '">' . _SR_PREVIOUS . '</a></td>
+                echo '<a href="' . htmlspecialchars($search_url_prev, ENT_QUOTES | ENT_HTML5) . '">' . _SR_PREVIOUS . '</a></td>
             ';
             }
             echo '<td>&nbsp;&nbsp;</td>';
             if (false != $has_next) {
                 $next            = $start + 20;
                 $search_url_next = $search_url . "&start=$next";
-                echo '<td align="right"><a href="' . htmlspecialchars($search_url_next) . '">' . _SR_NEXT . '</a></td>
+                echo '<td align="right"><a href="' . htmlspecialchars($search_url_next, ENT_QUOTES | ENT_HTML5) . '">' . _SR_NEXT . '</a></td>
             ';
             }
             echo '</tr></table>';

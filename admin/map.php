@@ -26,6 +26,10 @@
 // Licence Type   : GPL
 // ------------------------------------------------------------------------- //
 
+use XoopsModules\Jobs;
+/** @var Jobs\Helper $helper */
+$helper = Jobs\Helper::getInstance();
+
 //require_once __DIR__ . '/admin_header.php';
 require_once __DIR__ . '/../../../include/cp_header.php';
 
@@ -38,7 +42,7 @@ require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/class/restree.php";
 $mytree  = new JobTree($xoopsDB->prefix('jobs_categories'), 'cid', 'pid');
 $restree = new JobTree($xoopsDB->prefix('jobs_res_categories'), 'cid', 'pid');
 
-global $mytree, $restree, $xoopsDB, $xoopsModuleConfig, $moduleDirName;
+global $mytree, $restree, $xoopsDB,  $moduleDirName;
 
 require_once __DIR__ . '/admin_header.php';
 $myts = \MyTextSanitizer::getInstance();
@@ -53,25 +57,25 @@ $adminObject->displayButton('left', '');
 echo "<fieldset style='padding: 5px;'><legend style='font-weight: bold; color: #900;'>" . _AM_JOBS_CATEGORY . '</legend>';
 echo '<br><a href="category.php?op=NewCat&amp;cid=0"><img src="' . XOOPS_URL . "/modules/$moduleDirName/assets/images/plus.gif\" border=0 width=10 height=10  alt=\"" . _AM_JOBS_ADDSUBCAT . '"></a> ' . _AM_JOBS_ADDCATPRINC . '<br><br>';
 
-$mytree->makeJobSelBox('title', '' . $xoopsModuleConfig['jobs_cat_sortorder'] . '');
+$mytree->makeJobSelBox('title', '' . $helper->getConfig('jobs_cat_sortorder') . '');
 
 echo '<br><hr>';
 echo '<p>' . _AM_JOBS_HELP1 . ' </p>';
 
-if ('ordre' == $xoopsModuleConfig['jobs_cat_sortorder']) {
+if ('ordre' === $helper->getConfig('jobs_cat_sortorder')) {
     echo '<p>' . _AM_JOBS_HELP2 . ' </p>';
 }
 echo '<br></fieldset><br>';
 echo "<fieldset style='padding: 5px;'><legend style='font-weight: bold; color: #900;'>" . _AM_JOBS_RES_CATEGORY . '</legend>';
 echo '<br><a href="category.php?op=NewResCat&amp;cid=0"><img src="' . XOOPS_URL . "/modules/$moduleDirName/assets/images/plus.gif\" border=0 width=10 height=10  alt=\"" . _AM_JOBS_ADDSUBCAT . '"></a> ' . _AM_JOBS_ADDCATPRINC . '<br><br>';
 
-$restree->makeResSelBox('title', '' . $xoopsModuleConfig['jobs_cat_sortorder'] . '');
+$restree->makeResSelBox('title', '' . $helper->getConfig('jobs_cat_sortorder') . '');
 echo '<br></fieldset><br>';
 
 //-------------------------------------------------------
 //include XOOPS_ROOT_PATH . '/class/pagenav.php';
 
-$countresult = $xoopsDB->query('SELECT COUNT(*) FROM ' . $xoopsDB->prefix('jobs_res_categories') . '');
+$countresult = $xoopsDB->query('SELECT COUNT(*) FROM ' . $xoopsDB->prefix('jobs_res_categories') . ' ');
 
 list($crow) = $xoopsDB->fetchRow($countresult);
 $crows = $crow;
@@ -114,7 +118,7 @@ if ($crows > '0') {
         //$expire2     = formatTimestamp($expire, "s");
 
         echo "<tr class='" . $class . "'>";
-        $class = ('even' == $class) ? 'odd' : 'even';
+        $class = ('even' === $class) ? 'odd' : 'even';
         echo "<td align=\"center\">$lid</td>";
         echo '<td align="center">' . $cid . '</td>';
         echo '<td align="center">' . $pid . '</td>';
@@ -130,7 +134,7 @@ if ($crows > '0') {
         echo '</tr>';
     }
     echo '</table><br><br>';
-    //    echo "</fieldset><br>";
+//    echo "</fieldset><br>";
 } else {
     echo "<fieldset><legend style='font-weight: bold; color: #900;'>" . _AM_JOBS_MAN_COMPANY . '</legend>';
     echo '<br> ' . _AM_JOBS_NOCOMPANY . '<br><br>';

@@ -16,6 +16,10 @@
  * @author      XOOPS Development Team
  */
 
+use XoopsModules\Jobs;
+/** @var Jobs\Helper $helper */
+$helper = Jobs\Helper::getInstance();
+
 include __DIR__ . '/header.php';
 
 $moduleDirName = basename(__DIR__);
@@ -52,7 +56,7 @@ $mytree = new JobTree($xoopsDB->prefix('jobs_categories'), 'cid', 'pid');
 
 ExpireJob();
 
-$default_sort = $xoopsModuleConfig['jobs_listing_sortorder'];
+$default_sort = $helper->getConfig('jobs_listing_sortorder');
 
 $default_orderby = 'dateD';
 
@@ -66,7 +70,7 @@ include XOOPS_ROOT_PATH . '/header.php';
 
 $cid  = ($cid > 0) ? $cid : 0;
 $min  = ((int)$min > 0) ? (int)$min : 0;
-$show = ((int)$show > 0) ? (int)$show : $xoopsModuleConfig['' . $moduleDirName . '_perpage'];
+$show = ((int)$show > 0) ? (int)$show : $helper->getConfig('' . $moduleDirName . '_perpage');
 $max  = $min + $show;
 if (isset($orderby)) {
     $xoopsTpl->assign('sort_active', $orderby); // added for compact sort
@@ -88,15 +92,15 @@ $xoopsTpl->assign('add_from_sitename', $xoopsConfig['sitename']);
 $xoopsTpl->assign('add_listing', "<a href='addlisting.php?cid=" . addslashes($cid) . "'>" . _JOBS_ADDLISTING2 . '</a>');
 $banner = xoops_getbanner();
 $xoopsTpl->assign('banner', $banner);
-$index_code_place = $xoopsModuleConfig['jobs_index_code_place'];
-$use_extra_code   = $xoopsModuleConfig['jobs_use_index_code'];
-$jobs_use_banner  = $xoopsModuleConfig['jobs_use_banner'];
-$index_extra_code = $xoopsModuleConfig['jobs_index_code'];
+$index_code_place = $helper->getConfig('jobs_index_code_place');
+$use_extra_code   = $helper->getConfig('jobs_use_index_code');
+$jobs_use_banner  = $helper->getConfig('jobs_use_banner');
+$index_extra_code = $helper->getConfig('jobs_index_code');
 $xoopsTpl->assign('use_extra_code', $use_extra_code);
 $xoopsTpl->assign('jobs_use_banner', $jobs_use_banner);
 $xoopsTpl->assign('index_extra_code', $index_extra_code);
 $xoopsTpl->assign('index_code_place', $index_code_place);
-$xoopsTpl->assign('perpage', $xoopsModuleConfig['' . $moduleDirName . '_perpage']);
+$xoopsTpl->assign('perpage', $helper->getConfig('' . $moduleDirName . '_perpage'));
 
 $categories = jobs_MygetItemIds('' . $moduleDirName . '_view');
 if (is_array($categories) && count($categories) > 0) {
@@ -114,13 +118,13 @@ $xoopsTpl->assign('module_name', $xoopsModule->getVar('name'));
 $xoopsTpl->assign('category_path', $pathstring);
 $xoopsTpl->assign('category_id', $cid);
 
-if ('1' == $xoopsModuleConfig['jobs_show_company']) {
+if ('1' == $helper->getConfig('jobs_show_company')) {
     $show_company = true;
     $xoopsTpl->assign('show_company', true);
 } else {
     $show_company = false;
 }
-if ('0' == $xoopsModuleConfig['jobs_show_state']) {
+if ('0' == $helper->getConfig('jobs_show_state')) {
     $xoopsTpl->assign('show_state', '1');
 } else {
     $xoopsTpl->assign('show_state', '0');
@@ -131,7 +135,7 @@ if (is_array($categories) && count($categories) > 0) {
     $cat_perms .= ' AND cid IN (' . implode(',', $categories) . ') ';
 }
 
-$countpremium = $xoopsDB->query('select COUNT(*) FROM ' . $xoopsDB->prefix('jobs_listing') . " where  premium='1' AND valid='1' AND cid=" . $xoopsDB->escape($cid) . "$cat_perms");
+$countpremium = $xoopsDB->query('select COUNT(*) FROM ' . $xoopsDB->prefix('jobs_listing') . " where  premium='1' AND valid='1' AND cid=" . $xoopsDB->escape($cid) . $cat_perms);
 list($premrow) = $xoopsDB->fetchRow($countpremium);
 $premrows = $premrow;
 
@@ -140,7 +144,7 @@ if ('0' != $premrows) {
     $xoopsTpl->assign('sponsored', _JOBS_SPONSORED_LISTINGS);
 }
 
-$countresult = $xoopsDB->query('select COUNT(*) FROM ' . $xoopsDB->prefix('jobs_listing') . " where valid='1' AND cid=" . $xoopsDB->escape($cid) . "$cat_perms");
+$countresult = $xoopsDB->query('select COUNT(*) FROM ' . $xoopsDB->prefix('jobs_listing') . " where valid='1' AND cid=" . $xoopsDB->escape($cid) . $cat_perms);
 list($trow) = $xoopsDB->fetchRow($countresult);
 $trows = $trow;
 
@@ -164,7 +168,7 @@ if (count($arr) > 0) {
         $infercategories = '';
         foreach ($sub_arr as $sub_ele) {
             $chtitle = $myts->undoHtmlSpecialChars($sub_ele['title']);
-            if ($chcount > $xoopsModuleConfig['' . $moduleDirName . '_perpage']) {
+            if ($chcount > $helper->getConfig('' . $moduleDirName . '_perpage')) {
                 $infercategories = '...';
                 break;
             }
@@ -193,7 +197,7 @@ $pagenav = '';
 if (0 == $trows) { // the zero option added
     $xoopsTpl->assign('no_jobs_to_show', _JOBS_NOANNINCAT);
 } elseif ($trows > '0') {
-    $xoopsTpl->assign('last_head', _JOBS_THE . ' ' . $xoopsModuleConfig['jobs_new_jobs_count'] . ' ' . _JOBS_LASTADD);
+    $xoopsTpl->assign('last_head', _JOBS_THE . ' ' . $helper->getConfig('jobs_new_jobs_count') . ' ' . _JOBS_LASTADD);
     $xoopsTpl->assign('last_head_title', _JOBS_TITLE);
     $xoopsTpl->assign('last_head_company', _JOBS_COMPANY);
     $xoopsTpl->assign('last_head_price', _JOBS_PRICE);
@@ -271,7 +275,7 @@ if (0 == $trows) { // the zero option added
         }
 
         $date      = ($useroffset * 3600) + $date;
-        $startdate = (time() - (86400 * $xoopsModuleConfig['jobs_countday']));
+        $startdate = (time() - (86400 * $helper->getConfig('jobs_countday')));
         if ($startdate < $date) {
             $newitem       = '<img src="' . XOOPS_URL . "/modules/$moduleDirName/assets/images/newred.gif\">";
             $a_item['new'] = $newitem;
@@ -286,17 +290,17 @@ if (0 == $trows) { // the zero option added
         $a_item['title']   = "<a href='viewjobs.php?lid=" . addslashes($lid) . "'>$title</a>";
         $a_item['company'] = $company;
         if ($price > 0) {
-            $a_item['price'] = '' . $xoopsModuleConfig['jobs_money'] . " $price";
+            $a_item['price'] = '' . $helper->getConfig('jobs_money') . " $price";
             // Add $price_typeprice by Tom
-            $a_item['price_typeprice'] = "$typeprice";
+            $a_item['price_typeprice'] = (string)$typeprice;
         } else {
             $a_item['price']           = '';
-            $a_item['price_typeprice'] = "$typeprice";
+            $a_item['price_typeprice'] = (string)$typeprice;
         }
         $a_item['status'] = $status;
         $a_item['date']   = $date;
 
-        if ('1' == $xoopsModuleConfig['jobs_show_state']) {
+        if ('1' == $helper->getConfig('jobs_show_state')) {
             $state_name = jobs_getStateNameFromId($state);
 
             $a_item['state'] = $state_name;

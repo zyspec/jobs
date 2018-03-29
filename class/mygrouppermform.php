@@ -331,7 +331,7 @@ class XoopsGroupFormCheckBox extends XoopsFormElement
             .=
             ' >' . $option['name'] . '<input type="hidden" name="' . $this->getName() . '[parents][' . $option['id']
             . ']" value="' . implode(':', $parentIds) . '" ><input type="hidden" name="' . $this->getName()
-            . '[itemname][' . $option['id'] . ']" value="' . htmlspecialchars($option['name']) . "\" ><br >\n";
+            . '[itemname][' . $option['id'] . ']" value="' . htmlspecialchars($option['name'], ENT_QUOTES | ENT_HTML5) . "\" ><br >\n";
         if (isset($option['children'])) {
             foreach ($option['children'] as $child) {
                 array_push($parentIds, $option['id']);

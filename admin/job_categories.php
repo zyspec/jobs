@@ -16,6 +16,10 @@
  * @author      XOOPS Development Team
  */
 
+use XoopsModules\Jobs;
+/** @var Jobs\Helper $helper */
+$helper = Jobs\Helper::getInstance();
+
 require_once __DIR__ . '/admin_header.php';
 //It recovered the value of argument op in URL$
 //$op = test1_CleanVars($_REQUEST, 'op', 'list', 'string');
@@ -171,8 +175,8 @@ switch ($op) {
         //Form category_img
         require_once XOOPS_ROOT_PATH . '/class/uploader.php';
         $uploaddir         = XOOPS_UPLOAD_PATH . '/jobs/images/';
-        $maxwide           = $xoopsModuleConfig['jobs_resized_width'];
-        $maxhigh           = $xoopsModuleConfig['jobs_resized_height'];
+        $maxwide           = $helper->getConfig('jobs_resized_width');
+        $maxhigh           = $helper->getConfig('jobs_resized_height');
         $allowed_mimetypes = ['image/gif', 'image/jpg', 'image/jpeg', 'image/pjpeg', 'image/png', 'image/x-png'];
         $uploader          = new \XoopsMediaUploader($uploaddir, $allowed_mimetypes, null, $maxwide, $maxhigh);
         if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {

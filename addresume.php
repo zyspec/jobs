@@ -16,6 +16,10 @@
  * @author      XOOPS Development Team
  */
 
+use XoopsModules\Jobs;
+/** @var Jobs\Helper $helper */
+$helper = Jobs\Helper::getInstance();
+
 include __DIR__ . '/header.php';
 $moduleDirName = basename(__DIR__);
 //require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/gtickets.php";
@@ -73,8 +77,8 @@ if (!empty($_POST['submit'])) {
     //  }
     //  }
 
-    $resumesize = $xoopsModuleConfig['jobs_resumesize'];
-    $photomax   = $xoopsModuleConfig['jobs_maxfilesize'];
+    $resumesize = $helper->getConfig('jobs_resumesize');
+    $photomax   = $helper->getConfig('jobs_maxfilesize');
 
     $_SESSION['name']        = $_POST['name'];
     $_SESSION['title']       = $_POST['title'];
@@ -182,11 +186,11 @@ if (!empty($_POST['submit'])) {
 
     $member_id = $xoopsUser->getVar('uid', 'E');
 
-    $resdays     = $xoopsModuleConfig['jobs_res_days'];
-    $resumesize  = $xoopsModuleConfig['jobs_resumesize'];
-    $resumesize1 = $xoopsModuleConfig['jobs_resumesize'] / 1024;
-    $photomax    = $xoopsModuleConfig['jobs_maxfilesize'];
-    $photomax1   = $xoopsModuleConfig['jobs_maxfilesize'] / 1024;
+    $resdays     = $helper->getConfig('jobs_res_days');
+    $resumesize  = $helper->getConfig('jobs_resumesize');
+    $resumesize1 = $helper->getConfig('jobs_resumesize') / 1024;
+    $photomax    = $helper->getConfig('jobs_maxfilesize');
+    $photomax1   = $helper->getConfig('jobs_maxfilesize') / 1024;
 
     list($numrows) = $xoopsDB->fetchRow($xoopsDB->query('SELECT cid, title, affprice FROM ' . $xoopsDB->prefix('jobs_res_categories') . ''));
 
@@ -196,7 +200,7 @@ if (!empty($_POST['submit'])) {
         $xoopsTpl->assign('days', $resdays);
         $xoopsTpl->assign('res_moderate2', _JOBS_RES_MODERATE2);
 
-        if ('1' == $xoopsModuleConfig['jobs_moderate_resume']) {
+        if ('1' == $helper->getConfig('jobs_moderate_resume')) {
             $xoopsTpl->assign('res_moderate', _JOBS_RES_JOBMODERATE);
         } else {
             $xoopsTpl->assign('res_moderate', _JOBS_RES_JOBNOMODERATE);
@@ -282,11 +286,11 @@ if (!empty($_POST['submit'])) {
         $res_radio->addOptionArray($options);
         $form->addElement($res_radio, true);
 
-        //  if ($xoopsModuleConfig['jobs_use_captcha'] == '1') {
+        //  if ($helper->getConfig('jobs_use_captcha') == '1') {
         //        $form->addElement(new \XoopsFormCaptcha(_JOBS_CAPTCHA, "xoopscaptcha", false), true);
         //  }
 
-        if (0 == $xoopsModuleConfig['jobs_moderate_resume']) {
+        if (0 == $helper->getConfig('jobs_moderate_resume')) {
             $form->addElement(new \XoopsFormHidden('valid', '1'), false);
         } else {
             $form->addElement(new \XoopsFormHidden('valid', '0'), false);

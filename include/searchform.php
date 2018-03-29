@@ -15,6 +15,10 @@
  * @author      XOOPS Development Team
  */
 
+use XoopsModules\Jobs;
+/** @var Jobs\Helper $helper */
+$helper = Jobs\Helper::getInstance();
+
 // defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
@@ -54,8 +58,8 @@ if (!empty($is_resume)) {
     $search_form->addElement(new \XoopsFormLabel(_JOBS_CAT, ob_get_contents()));
     ob_end_clean();
 
-    if ('1' == $xoopsModuleConfig['jobs_show_state']) {
-        if ('1' == $xoopsModuleConfig['jobs_countries']) {
+    if ('1' == $helper->getConfig('jobs_show_state')) {
+        if ('1' == $helper->getConfig('jobs_countries')) {
             ob_start();
             $staterestree->resume_makeMyStateSelBox('name', 'rid', $by_state, '1', 'by_state');
             $search_form->addElement(new \XoopsFormLabel(_JOBS_STATE, ob_get_contents()));
@@ -75,8 +79,8 @@ if (!empty($is_resume)) {
     $search_form->addElement(new \XoopsFormLabel(_JOBS_CAT, ob_get_contents()));
     ob_end_clean();
 
-    if ('1' == $xoopsModuleConfig['jobs_show_state']) {
-        if ('1' == $xoopsModuleConfig['jobs_countries']) {
+    if ('1' == $helper->getConfig('jobs_show_state')) {
+        if ('1' == $helper->getConfig('jobs_countries')) {
             ob_start();
             $statetree->makeMyStateSelBox('name', 'rid', $by_state, '1', 'by_state');
             $search_form->addElement(new \XoopsFormLabel(_JOBS_STATE, ob_get_contents()));

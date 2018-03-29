@@ -26,6 +26,10 @@
 // Licence Type   : GPL                                                      //
 // ------------------------------------------------------------------------- //
 
+use XoopsModules\Jobs;
+/** @var Jobs\Helper $helper */
+$helper = Jobs\Helper::getInstance();
+
 if (isset($_POST['submit'])) {
     // Define Variables for register_globals Off
     $id        = !isset($_REQUEST['id']) ? null : $_REQUEST['id'];
@@ -67,7 +71,7 @@ if (isset($_POST['submit'])) {
 
 //    require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/gtickets.php";
 
-    global $xoopsConfig, $xoopsDB, $xoopsModuleConfig, $myts, $moduleDirName;
+    global $xoopsConfig, $xoopsDB,  $myts, $moduleDirName;
 
     if (!$GLOBALS['xoopsSecurity']->check(true, $_REQUEST['token'])) {
         redirect_header(XOOPS_URL . "/modules/$moduleDirName/viewresume.php?lid=" . addslashes($id) . '', 3, $GLOBALS['xoopsSecurity']->getErrors());
@@ -118,7 +122,7 @@ if (isset($_POST['submit'])) {
         $mail->send();
         echo $mail->getErrors();
 
-        if ($xoopsModuleConfig['jobs_admin_mail'] = 1) {
+        if ($helper->getConfig('jobs_admin_mail') = 1) {
             $message     .= "\n" . $_SERVER['REMOTE_ADDR'] . "\n";
             $adsubject   = $xoopsConfig['sitename'] . ' Job Reply ';
             $xoopsMailer = xoops_getMailer();

@@ -16,6 +16,8 @@
  * @author      XOOPS Development Team
  */
 
+use XoopsModules\Jobs;
+
 /**
  * Class JobTree
  */
@@ -85,7 +87,7 @@ class jobtree
         if (0 == $count) {
             return $arr;
         }
-       while (false !== ($myrow = $this->db->fetchArray($result))) {
+        while (false !== ($myrow = $this->db->fetchArray($result))) {
             array_push($arr, $myrow);
         }
 
@@ -878,7 +880,9 @@ class jobtree
      */
     public function makeJobSelBox($title, $order = '', $preset_id = 0, $none = 0, $sel_name = '', $onchange = '')
     {
-        global $xoopsModuleConfig, $xoopsDB, $moduleDirName;
+        global  $xoopsDB, $moduleDirName;
+        /** @var Jobs\Helper $helper */
+        $helper = Jobs\Helper::getInstance();
         $moduleDirName = basename(dirname(__DIR__));
 
         $myts = \MyTextSanitizer::getInstance();
@@ -901,7 +905,7 @@ class jobtree
                  . "\"></a>&nbsp;<a href=\"category.php?op=ModCat&amp;cid=$catid\" title=\""
                  . _AM_JOBS_MODIFCAT
                  . "\">$name</a> ";
-            if ('ordre' === $xoopsModuleConfig['jobs_cat_sortorder']) {
+            if ('ordre' === $helper->getConfig('jobs_cat_sortorder')) {
                 echo "($ordre)";
             }
             echo "<br>\n";
@@ -923,7 +927,7 @@ class jobtree
                                     . $myts->htmlSpecialChars($option[$title]);
                 $ordreS           = $option['ordre'];
                 echo "$catpath</a> ";
-                if ('ordre' === $xoopsModuleConfig['jobs_cat_sortorder']) {
+                if ('ordre' === $helper->getConfig('jobs_cat_sortorder')) {
                     echo "($ordreS)";
                 }
                 echo "<br>\n";
@@ -941,7 +945,10 @@ class jobtree
      */
     public function makeResSelBox($title, $order = '', $preset_id = 0, $none = 0, $sel_name = '', $onchange = '')
     {
-        global $xoopsModuleConfig, $xoopsDB, $moduleDirName;
+        global  $xoopsDB, $moduleDirName;
+        /** @var Jobs\Helper $helper */
+        $helper = Jobs\Helper::getInstance();
+
         $myts = \MyTextSanitizer::getInstance();
         // for "Duplicatable"
         $moduleDirName = basename(dirname(__DIR__));
@@ -966,7 +973,7 @@ class jobtree
                  . '">'
                  . $name
                  . '</a> ';
-            if ('ordre' === $xoopsModuleConfig['jobs_cat_sortorder']) {
+            if ('ordre' === $helper->getConfig('jobs_cat_sortorder')) {
                 echo "($ordre)";
             }
             echo "<br>\n";
@@ -988,7 +995,7 @@ class jobtree
                                     . $myts->htmlSpecialChars($option[$title]);
                 $ordreS           = $option['ordre'];
                 echo "$catpath</a> ";
-                if ('ordre' === $xoopsModuleConfig['jobs_cat_sortorder']) {
+                if ('ordre' === $helper->getConfig('jobs_cat_sortorder')) {
                     echo "($ordreS)";
                 }
                 echo "<br>\n";
@@ -1039,7 +1046,7 @@ class jobtree
         $result = $this->db->query('SELECT cid, pid, title FROM ' . $this->table);
         $ret    = [];
         $myts   = \MyTextSanitizer::getInstance();
-       while (false !== ($myrow = $this->db->fetchArray($result))) {
+        while (false !== ($myrow = $this->db->fetchArray($result))) {
             $ret[$myrow['cid']] = ['title' => $myts->htmlspecialchars($myrow['title']), 'pid' => $myrow['pid']];
         }
 

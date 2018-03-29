@@ -68,7 +68,7 @@ function jobs_search($queryarray, $andor, $limit, $offset, $userid)
             $cat_perms = ' AND cid IN (' . implode(',', $categories) . ') ';
         }
 
-        $sql = 'SELECT  lid,cid,title,type,company,desctext,requirements,tel,price,contactinfo,town,state,usid,valid,date FROM ' . $xoopsDB->prefix('jobs_listing') . " WHERE valid='1'  AND date<=" . time() . "$cat_perms";
+        $sql = 'SELECT  lid,cid,title,type,company,desctext,requirements,tel,price,contactinfo,town,state,usid,valid,date FROM ' . $xoopsDB->prefix('jobs_listing') . " WHERE valid='1'  AND date<=" . time() . $cat_perms;
 
         if (0 != $userid) {
             $sql .= ' AND usid=' . $userid . ' ';

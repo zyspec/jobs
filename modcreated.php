@@ -16,6 +16,10 @@
  * @author      XOOPS Development Team
  */
 
+use XoopsModules\Jobs;
+/** @var Jobs\Helper $helper */
+$helper = Jobs\Helper::getInstance();
+
 include __DIR__ . '/header.php';
 $moduleDirName = basename(__DIR__);
 //require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/gtickets.php";
@@ -43,8 +47,8 @@ if (!empty($_POST['submit'])) {
     if (!$GLOBALS['xoopsSecurity']->check(true, $_REQUEST['token'])) {
         redirect_header(XOOPS_URL . "/modules/$moduleDirName/index.php", 3, $GLOBALS['xoopsSecurity']->getErrors());
     }
-    if ('dhtmltextarea' == $xoopsModuleConfig['jobs_resume_options']
-        || 'dhtml' == $xoopsModuleConfig['jobs_form_options']) {
+    if ('dhtmltextarea' === $helper->getConfig('jobs_resume_options')
+        || 'dhtml' === $helper->getConfig('jobs_form_options')) {
         $made_resume = $myts->displayTarea($_POST['made_resume'], 0, 0, 0, 0, 0);
     } else {
         $made_resume = $myts->displayTarea($_POST['made_resume'], 1, 1, 1, 1, 1);
@@ -56,7 +60,7 @@ if (!empty($_POST['submit'])) {
     $xoopsDB->query('update ' . $xoopsDB->prefix('jobs_created_resumes') . " set made_resume='$made_resume' where lid=" . $xoopsDB->escape($lid) . '');
 
     redirect_header("myresume.php?lid=$lid", 3, _JOBS_RES_MOD);
-    //redirect_header("myresume.php", 3, _JOBS_RES_MOD);
+//redirect_header("myresume.php", 3, _JOBS_RES_MOD);
 } else {
     include XOOPS_ROOT_PATH . '/header.php';
     require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
@@ -71,8 +75,8 @@ if (!empty($_POST['submit'])) {
         if ($usid == $calusern) {
             echo "<fieldset><legend style='font-weight: bold; color: #900;'>" . _JOBS_EDIT_RESUME . '</legend>';
 
-            if ('dhtmltextarea' == $xoopsModuleConfig['jobs_resume_options']
-                || 'dhtml' == $xoopsModuleConfig['jobs_form_options']) {
+            if ('dhtmltextarea' === $helper->getConfig('jobs_resume_options')
+                || 'dhtml' === $helper->getConfig('jobs_form_options')) {
                 $made_resume = $myts->undoHtmlSpecialChars($myts->displayTarea($made_resume, 0, 0, 0, 0, 0));
             } else {
                 $made_resume = $myts->displayTarea($made_resume, 1, 1, 1, 1, 1);

@@ -9,8 +9,8 @@
  */
 
 include 'admin_header.php';
-include_once XOOPS_ROOT_PATH . '/class/xoopsform/grouppermform.php';
-include_once '../../../include/cp_header.php';
+require_once XOOPS_ROOT_PATH . '/class/xoopsform/grouppermform.php';
+require_once '../../../include/cp_header.php';
 xoops_cp_header();
 $indexAdmin = new ModuleAdmin();
 echo $indexAdmin->addNavigation('permissions.php');
@@ -39,4 +39,4 @@ unset($cat_form);
 echo _AM_WFD_PERM_PERMSNOTE;
 
 //xoops_cp_footer();
-include_once 'admin_footer.php';
+require_once 'admin_footer.php';

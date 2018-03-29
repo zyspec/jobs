@@ -25,6 +25,10 @@
 // Licence Type   : GPL                                                      //
 // ------------------------------------------------------------------------- //
 
+use XoopsModules\Jobs;
+/** @var Jobs\Helper $helper */
+$helper = Jobs\Helper::getInstance();
+
 //include("admin_header.php");
 require_once __DIR__ . '/../../../include/cp_header.php';
 $moduleDirName = basename(dirname(__DIR__));
@@ -38,7 +42,9 @@ $myts = \MyTextSanitizer::getInstance();
 #####################################################
 function Index()
 {
-    global $hlpfile, $xoopsDB, $xoopsConfig, $xoopsModule, $xoopsModuleConfig, $myts, $moduleDirName, $admin_lang;
+    global $hlpfile, $xoopsDB, $xoopsConfig, $xoopsModule,  $myts, $moduleDirName, $admin_lang;
+    /** @var Jobs\Helper $helper */
+    $helper = Jobs\Helper::getInstance();
 
     $mytree = new JobTree($xoopsDB->prefix('jobs_categories'), 'cid', 'pid');
 
@@ -83,7 +89,7 @@ function Index()
 
 */
 
-        //        if ($xoopsModuleConfig['jobs_moderated'] == '1' || $xoopsModuleConfig['jobs_moderate_up'] == '1') {
+        //        if ($helper->getConfig('jobs_moderated') == '1' || $helper->getConfig('jobs_moderate_up') == '1') {
         //
         //            $result  = $xoopsDB->query(
         //                "select lid, title, date from " . $xoopsDB->prefix("jobs_listing") . " WHERE valid='0' order by lid"
@@ -117,7 +123,7 @@ function Index()
         //            }
         //        }
 
-        //        if ($xoopsModuleConfig['jobs_moderate_resume'] == '1' || $xoopsModuleConfig['jobs_moderate_res_up'] == '1') {
+        //        if ($helper->getConfig('jobs_moderate_resume') == '1' || $helper->getConfig('jobs_moderate_res_up') == '1') {
         //
         //            $result1  = $xoopsDB->query(
         //                "select lid, title, date from " . $xoopsDB->prefix("jobs_resume") . " WHERE valid='0' order by lid"
@@ -203,7 +209,7 @@ function Index()
 
         // Modify Type
         echo "<fieldset><legend style='font-weight: bold; color: #900;'>" . _AM_JOBS_MODTYPE . '</font></legend>';
-        list($numrows) = $xoopsDB->fetchRow($xoopsDB->query('SELECT COUNT(*) FROM ' . $xoopsDB->prefix('jobs_type') . ''));
+        list($numrows) = $xoopsDB->fetchRow($xoopsDB->query('SELECT COUNT(*) FROM ' . $xoopsDB->prefix('jobs_type') . ' '));
         if ($numrows > 0) {
             echo '<form method="post" action="main.php"><br>';
             $result = $xoopsDB->query('SELECT id_type, nom_type FROM ' . $xoopsDB->prefix('jobs_type') . ' ORDER BY nom_type');
@@ -231,7 +237,7 @@ function Index()
 
         // Modify price
         echo "<fieldset><legend style='font-weight: bold; color: #900;'>" . _AM_JOBS_MODPRICE . '</font></legend>';
-        list($numrows) = $xoopsDB->fetchRow($xoopsDB->query('SELECT COUNT(*) FROM ' . $xoopsDB->prefix('jobs_price') . ''));
+        list($numrows) = $xoopsDB->fetchRow($xoopsDB->query('SELECT COUNT(*) FROM ' . $xoopsDB->prefix('jobs_price') . ' '));
         if ($numrows > 0) {
             echo '<form method="post" action="main.php">
             <br>';
@@ -294,7 +300,9 @@ function Index()
  */
 function IndexView($lid = 0)
 {
-    global $xoopsDB, $xoopsModule, $xoopsConfig, $xoopsModuleConfig, $myts, $moduleDirName, $admin_lang;
+    global $xoopsDB, $xoopsModule, $xoopsConfig,  $myts, $moduleDirName, $admin_lang;
+    /** @var Jobs\Helper $helper */
+    $helper = Jobs\Helper::getInstance();
 
     $mytree = new JobTree($xoopsDB->prefix('jobs_categories'), 'cid', 'pid');
 
@@ -318,14 +326,14 @@ function IndexView($lid = 0)
         $expire  = $myts->htmlSpecialChars($expire);
         $type    = $myts->htmlSpecialChars($type);
         $company = $myts->htmlSpecialChars($company);
-        if ('dhtmltextarea' == $xoopsModuleConfig['jobs_form_options']
-            || 'dhtml' == $xoopsModuleConfig['jobs_form_options']) {
+        if ('dhtmltextarea' === $helper->getConfig('jobs_form_options')
+            || 'dhtml' === $helper->getConfig('jobs_form_options')) {
             $desctext = $myts->undoHtmlSpecialChars($myts->displayTarea($desctext, 0, 0, 1, 1, 0));
         } else {
             $desctext = $myts->displayTarea($desctext, 1, 1, 1, 1, 1);
         }
-        if ('dhtmltextarea' == $xoopsModuleConfig['jobs_form_options']
-            || 'dhtml' == $xoopsModuleConfig['jobs_form_options']) {
+        if ('dhtmltextarea' === $helper->getConfig('jobs_form_options')
+            || 'dhtml' === $helper->getConfig('jobs_form_options')) {
             $requirements = $myts->undoHtmlSpecialChars($myts->displayTarea($requirements, 0, 0, 1, 1, 0));
         } else {
             $requirements = $myts->displayTarea($requirements, 1, 1, 1, 1, 1);
@@ -358,7 +366,7 @@ function IndexView($lid = 0)
             <td class=\"head\">" . _AM_JOBS_TOWN . " </td><td class=\"head\"><input type=\"text\" name=\"town\" size=\"30\" value=\"$town\"></td>
             </tr>";
 
-        if ('1' == $xoopsModuleConfig['jobs_show_state']) {
+        if ('1' == $helper->getConfig('jobs_show_state')) {
             echo '<tr>
     <td class="head">' . _AM_JOBS_STATE1 . ' </td><td class="head"><select name="state">';
             $result5 = $xoopsDB->query('SELECT rid, name FROM ' . $xoopsDB->prefix('jobs_region') . ' ORDER BY rid');
@@ -431,7 +439,7 @@ function IndexView($lid = 0)
         echo $wysiwyg_requirements_area->render();
         echo '</td></tr>';
 
-        echo '<td class="head">' . _AM_JOBS_PRICE2 . " </td><td class=\"head\"><input type=\"text\" name=\"price\" size=\"20\" value=\"$price\"> " . $xoopsModuleConfig['jobs_money'] . '';
+        echo '<td class="head">' . _AM_JOBS_PRICE2 . " </td><td class=\"head\"><input type=\"text\" name=\"price\" size=\"20\" value=\"$price\"> " . $helper->getConfig('jobs_money') . '';
 
         $result3 = $xoopsDB->query('SELECT nom_price FROM ' . $xoopsDB->prefix('jobs_price') . ' ORDER BY id_price');
         echo " <select name=\"typeprice\"><option value=\"$typeprice\">$typeprice</option>";
@@ -472,7 +480,9 @@ function IndexView($lid = 0)
  */
 function IndexResumeView($lid = 0)
 {
-    global $xoopsDB, $xoopsModule, $xoopsConfig, $xoopsModuleConfig, $myts, $moduleDirName, $admin_lang;
+    global $xoopsDB, $xoopsModule, $xoopsConfig,  $myts, $moduleDirName, $admin_lang;
+    /** @var Jobs\Helper $helper */
+    $helper = Jobs\Helper::getInstance();
 
     $mytree = new JobTree($xoopsDB->prefix('jobs_res_categories'), 'cid', 'pid');
 
@@ -515,7 +525,7 @@ function IndexResumeView($lid = 0)
             <td>" . _AM_JOBS_TOWN . " </td><td><input type=\"text\" name=\"town\" size=\"30\" value=\"$town\"></td>
             </tr>";
 
-        if ('1' == $xoopsModuleConfig['jobs_show_state']) {
+        if ('1' == $helper->getConfig('jobs_show_state')) {
             echo '<tr>
     <td>' . _AM_JOBS_STATE1 . ' </td><td><select name="state">';
             $result5 = $xoopsDB->query('SELECT rid, name FROM ' . $xoopsDB->prefix('jobs_region') . ' ORDER BY rid');
@@ -544,7 +554,7 @@ function IndexResumeView($lid = 0)
             </tr><tr>
             <td>" . _AM_JOBS_RESUME . " </td><td><input type=\"text\" name=\"resume\" size=\"30\" value=\"$resume\"></td>
             </tr><tr>";
-        echo '<td>' . _AM_JOBS_PRICE2 . " </td><td><input type=\"text\" name=\"salary\" size=\"20\" value=\"$salary\"> " . $xoopsModuleConfig['jobs_money'] . '';
+        echo '<td>' . _AM_JOBS_PRICE2 . " </td><td><input type=\"text\" name=\"salary\" size=\"20\" value=\"$salary\"> " . $helper->getConfig('jobs_money') . '';
 
         $result3 = $xoopsDB->query('SELECT nom_price FROM ' . $xoopsDB->prefix('jobs_price') . ' ORDER BY id_price');
         echo " <select name=\"typeprice\"><option value=\"$typeprice\">$typeprice</option>";
@@ -589,7 +599,9 @@ function IndexResumeView($lid = 0)
  */
 function ModJob($lid = 0)
 {
-    global $xoopsDB, $xoopsModule, $xoopsConfig, $xoopsModuleConfig, $myts, $desctext, $requirements, $moduleDirName, $admin_lang;
+    global $xoopsDB, $xoopsModule, $xoopsConfig,  $myts, $desctext, $requirements, $moduleDirName, $admin_lang;
+    /** @var Jobs\Helper $helper */
+    $helper = Jobs\Helper::getInstance();
 
     $mytree = new JobTree($xoopsDB->prefix('jobs_categories'), 'cid', 'pid');
 
@@ -613,14 +625,14 @@ function ModJob($lid = 0)
         $expire  = $myts->htmlSpecialChars($expire);
         $type    = $myts->htmlSpecialChars($type);
         $company = $myts->htmlSpecialChars($company);
-        if ('dhtmltextarea' == $xoopsModuleConfig['jobs_form_options']
-            || 'dhtml' == $xoopsModuleConfig['jobs_form_options']) {
+        if ('dhtmltextarea' === $helper->getConfig('jobs_form_options')
+            || 'dhtml' === $helper->getConfig('jobs_form_options')) {
             $desctext = $myts->undoHtmlSpecialChars($myts->displayTarea($desctext, 0, 0, 1, 1, 0));
         } else {
             $desctext = $myts->displayTarea($desctext, 1, 1, 1, 1, 1);
         }
-        if ('dhtmltextarea' == $xoopsModuleConfig['jobs_form_options']
-            || 'dhtml' == $xoopsModuleConfig['jobs_form_options']) {
+        if ('dhtmltextarea' === $helper->getConfig('jobs_form_options')
+            || 'dhtml' === $helper->getConfig('jobs_form_options')) {
             $requirements = $myts->undoHtmlSpecialChars($myts->displayTarea($requirements, 0, 0, 1, 1, 0));
         } else {
             $requirements = $myts->displayTarea($requirements, 1, 1, 1, 1, 1);
@@ -687,7 +699,7 @@ function ModJob($lid = 0)
         $wysiwyg_requirements_area = jobs_getEditor(_AM_JOBS_REQUIRE, 'requirements', $requirements, '100%', '200px', 'small');
         echo $wysiwyg_requirements_area->render();
         echo '</td></tr><tr>';
-        echo '<td class="outer">' . _AM_JOBS_PRICE2 . ' </td><td class="odd">' . $xoopsModuleConfig['jobs_money'] . "&nbsp;&nbsp;<input type=\"text\" name=\"price\" size=\"20\" value=\"$price\"> ";
+        echo '<td class="outer">' . _AM_JOBS_PRICE2 . ' </td><td class="odd">' . $helper->getConfig('jobs_money') . "&nbsp;&nbsp;<input type=\"text\" name=\"price\" size=\"20\" value=\"$price\"> ";
 
         $result = $xoopsDB->query('SELECT nom_price FROM ' . $xoopsDB->prefix('jobs_price') . ' ORDER BY nom_price');
         echo " <select name=\"id_price\"><option value=\"$typeprice\">$typeprice</option>";
@@ -702,7 +714,7 @@ function ModJob($lid = 0)
     <td class=\"outer\">" . _AM_JOBS_TOWN . " </td><td class=\"odd\"><input type=\"text\" name=\"town\" size=\"30\" value=\"$town\"></td>
     </tr>";
 
-        if ('1' == $xoopsModuleConfig['jobs_show_state']) {
+        if ('1' == $helper->getConfig('jobs_show_state')) {
             echo '<tr>
     <td class="outer">' . _AM_JOBS_STATE1 . ' </td><td class="odd"><select name="state">';
             $result5 = $xoopsDB->query('SELECT rid, name FROM ' . $xoopsDB->prefix('jobs_region') . ' ORDER BY rid');
@@ -809,21 +821,23 @@ function ModJobS(
     $valid,
     $premium
 ) {
-    global $xoopsDB, $xoopsConfig, $xoopsModuleConfig, $myts, $moduleDirName, $admin_lang;
+    global $xoopsDB, $xoopsConfig,  $myts, $moduleDirName, $admin_lang;
+    /** @var Jobs\Helper $helper */
+    $helper = Jobs\Helper::getInstance();
 
     $title   = $myts->addSlashes($title);
     $status  = $myts->addSlashes($status);
     $expire  = $myts->addSlashes($expire);
     $type    = $myts->addSlashes($type);
     $company = $myts->addSlashes($company);
-    if ('dhtmltextarea' == $xoopsModuleConfig['jobs_form_options']
-        || 'dhtml' == $xoopsModuleConfig['jobs_form_options']) {
+    if ('dhtmltextarea' === $helper->getConfig('jobs_form_options')
+        || 'dhtml' === $helper->getConfig('jobs_form_options')) {
         $desctext = $myts->displayTarea($desctext, 0, 0, 1, 1, 0);
     } else {
         $desctext = $myts->displayTarea($desctext, 1, 1, 1, 1, 1);
     }
-    if ('dhtmltextarea' == $xoopsModuleConfig['jobs_form_options']
-        || 'dhtml' == $xoopsModuleConfig['jobs_form_options']) {
+    if ('dhtmltextarea' === $helper->getConfig('jobs_form_options')
+        || 'dhtml' === $helper->getConfig('jobs_form_options')) {
         $requirements = $myts->displayTarea($requirements, 0, 0, 1, 1, 0);
     } else {
         $requirements = $myts->displayTarea($requirements, 1, 1, 1, 1, 1);
@@ -937,21 +951,23 @@ function ListingValid(
     $premium,
     $photo
 ) {
-    global $xoopsDB, $xoopsConfig, $xoopsModuleConfig, $myts, $meta, $moduleDirName, $admin_lang;
+    global $xoopsDB, $xoopsConfig,  $myts, $meta, $moduleDirName, $admin_lang;
+    /** @var Jobs\Helper $helper */
+    $helper = Jobs\Helper::getInstance();
 
     $title   = $myts->addSlashes($title);
     $status  = $myts->addSlashes($status);
     $expire  = $myts->addSlashes($expire);
     $type    = $myts->addSlashes($type);
     $company = $myts->addSlashes($company);
-    if ('dhtmltextarea' == $xoopsModuleConfig['jobs_form_options']
-        || 'dhtml' == $xoopsModuleConfig['jobs_form_options']) {
+    if ('dhtmltextarea' === $helper->getConfig('jobs_form_options')
+        || 'dhtml' === $helper->getConfig('jobs_form_options')) {
         $desctext = $myts->displayTarea($desctext, 0, 0, 1, 1, 0);
     } else {
         $desctext = $myts->displayTarea($desctext, 1, 1, 1, 1, 1);
     }
-    if ('dhtmltextarea' == $xoopsModuleConfig['jobs_form_options']
-        || 'dhtml' == $xoopsModuleConfig['jobs_form_options']) {
+    if ('dhtmltextarea' === $helper->getConfig('jobs_form_options')
+        || 'dhtml' === $helper->getConfig('jobs_form_options')) {
         $requirements = $myts->displayTarea($requirements, 0, 0, 1, 1, 0);
     } else {
         $requirements = $myts->displayTarea($requirements, 1, 1, 1, 1, 1);

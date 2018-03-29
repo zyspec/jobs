@@ -16,6 +16,10 @@
  * @author      XOOPS Development Team
  */
 
+use XoopsModules\Jobs;
+/** @var Jobs\Helper $helper */
+$helper = Jobs\Helper::getInstance();
+
 include __DIR__ . '/header.php';
 
 $moduleDirName = basename(__DIR__);
@@ -43,8 +47,8 @@ if (!empty($_POST['submit'])) {
     if (!$GLOBALS['xoopsSecurity']->check(true, $_REQUEST['token'])) {
         redirect_header(XOOPS_URL . "/modules/$moduleDirName/resumes.php", 3, $GLOBALS['xoopsSecurity']->getErrors());
     }
-    $resumesize  = $xoopsModuleConfig['jobs_resumesize'];
-    $resumesize1 = $xoopsModuleConfig['jobs_resumesize'] / 1024;
+    $resumesize  = $helper->getConfig('jobs_resumesize');
+    $resumesize1 = $helper->getConfig('jobs_resumesize') / 1024;
     $destination = XOOPS_ROOT_PATH . "/modules/$moduleDirName/resumes";
 
     $lid             = !isset($_REQUEST['lid']) ? null : $_REQUEST['lid'];
@@ -85,7 +89,7 @@ if (!empty($_POST['submit'])) {
         require_once XOOPS_ROOT_PATH . '/class/uploader.php';
         $updir             = $destination;
         $allowed_mimetypes = ['application/msword', 'application/pdf'];
-        $uploader          = new \XoopsMediaUploader($updir, $allowed_mimetypes, $xoopsModuleConfig['jobs_resumesize']);
+        $uploader          = new \XoopsMediaUploader($updir, $allowed_mimetypes, $helper->getConfig('jobs_resumesize'));
         $uploader->setTargetFileName($date . '_' . $_FILES['resume']['name']);
         $uploader->fetchMedia('resume');
         if (!$uploader->upload()) {
@@ -120,8 +124,8 @@ if (!empty($_POST['submit'])) {
 
     $lid = (int)$_GET['lid'];
 
-    $resumesize  = $xoopsModuleConfig['jobs_resumesize'];
-    $resumesize1 = $xoopsModuleConfig['jobs_resumesize'] / 1024;
+    $resumesize  = $helper->getConfig('jobs_resumesize');
+    $resumesize1 = $helper->getConfig('jobs_resumesize') / 1024;
 
     $result = $xoopsDB->query('SELECT lid, cid, name, title, status, exp, expire, private, tel, salary, typeprice, date, email, submitter, usid, town, state, valid, resume FROM ' . $xoopsDB->prefix('jobs_resume') . ' WHERE lid=' . $xoopsDB->escape($lid) . '');
     list($lid, $cid, $name, $title, $status, $exp, $expire, $private, $tel, $salary, $typeprice, $date, $email, $submitter, $usid, $town, $state, $valid, $resume_old) = $xoopsDB->fetchRow($result);
@@ -207,7 +211,7 @@ if (!empty($_POST['submit'])) {
             $form->addElement($sel_form);
 
             if ($resume_old) {
-                if ('created' != $resume_old) {
+                if ('created' !== $resume_old) {
                     $resume_link = "<a href=\"resumes/$resume_old\">$resume_old</a>";
 
                     $form->addElement(new \XoopsFormLabel(_JOBS_ACTUALRES, $resume_link));
@@ -215,7 +219,7 @@ if (!empty($_POST['submit'])) {
                     $del_checkbox = new \XoopsFormCheckBox(_JOBS_DELRES, 'del_old', '');
                     $del_checkbox->addOption(1, 'Yes');
                     $form->addElement($del_checkbox);
-                    $form->addElement(new \XoopsFormFile(_JOBS_NEWRES, 'resume', $xoopsModuleConfig['jobs_maxfilesize']), false);
+                    $form->addElement(new \XoopsFormFile(_JOBS_NEWRES, 'resume', $helper->getConfig('jobs_maxfilesize')), false);
                     $form->addElement(new \XoopsFormHidden('resume_old', $resume_old));
                 } else {
                     $resume_link = '<a href="myresume.php?lid=' . addslashes($lid) . "\">$resume_old</a>";
@@ -227,7 +231,7 @@ if (!empty($_POST['submit'])) {
                     $form->addElement(new \XoopsFormHidden('resume_old', $resume_old));
                 }
             } else {
-                $form->addElement(new \XoopsFormFile(_JOBS_NEWRES, 'resume', $xoopsModuleConfig['jobs_maxfilesize']), false);
+                $form->addElement(new \XoopsFormFile(_JOBS_NEWRES, 'resume', $helper->getConfig('jobs_maxfilesize')), false);
             }
 
             $res_radio    = new \XoopsFormRadio(_JOBS_Q_NO_RESUME, 'make_resume', '0');
@@ -236,7 +240,7 @@ if (!empty($_POST['submit'])) {
             $res_radio->addOptionArray($options);
             $form->addElement($res_radio, true);
 
-            if (0 == $xoopsModuleConfig['jobs_moderate_res_up']) {
+            if (0 == $helper->getConfig('jobs_moderate_res_up')) {
                 $form->addElement(new \XoopsFormHidden('valid', '1'), false);
             } else {
                 $form->addElement(new \XoopsFormHidden('valid', '0'), false);

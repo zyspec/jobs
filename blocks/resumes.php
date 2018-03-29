@@ -121,12 +121,12 @@ function resume_edit($options)
 
     $form = constant($block_lang . '_ORDER') . "&nbsp;<select name='options[]'>";
     $form .= "<option value='date'";
-    if ('date' == $options[0]) {
+    if ('date' === $options[0]) {
         $form .= ' selected';
     }
     $form .= '>' . constant($block_lang . '_DATE') . "</option>\n";
     $form .= "<option value='hits'";
-    if ('hits' == $options[0]) {
+    if ('hits' === $options[0]) {
         $form .= ' selected';
     }
     $form .= '>' . constant($block_lang . '_HITS') . '</option>';

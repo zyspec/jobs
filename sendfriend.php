@@ -25,6 +25,10 @@
 // Licence Type   : GPL                                                      //
 // ------------------------------------------------------------------------- //
 
+use XoopsModules\Jobs;
+/** @var Jobs\Helper $helper */
+$helper = Jobs\Helper::getInstance();
+
 include __DIR__ . '/header.php';
 
 if (empty($xoopsUser)) {
@@ -40,7 +44,9 @@ include XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/functions.php";
  */
 function SendJob($lid = 0)
 {
-    global $xoopsConfig, $xoopsDB, $xoopsUser, $xoopsModuleConfig, $xoopsTheme, $xoopsLogger;
+    global $xoopsConfig, $xoopsDB, $xoopsUser,  $xoopsTheme, $xoopsLogger;
+    /** @var Jobs\Helper $helper */
+    $helper = Jobs\Helper::getInstance();
 
     require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
@@ -76,7 +82,7 @@ function SendJob($lid = 0)
     <td class='even'><input class=\"textbox\" type=\"text\" name=\"fmail\"></td>
     </tr>";
 
-    if ('1' == $xoopsModuleConfig['jobs_use_captcha']) {
+    if ('1' == $helper->getConfig('jobs_use_captcha')) {
         echo "<tr><td class='head'>" . _JOBS_CAPTCHA . " </td><td class='even'>";
         $jlm_captcha = '';
         $jlm_captcha = new \XoopsFormCaptcha(_JOBS_CAPTCHA, 'xoopscaptcha', false);
@@ -99,9 +105,11 @@ function SendJob($lid = 0)
  */
 function MailJob($lid = 0, $yname, $ymail, $fname, $fmail)
 {
-    global $xoopsConfig, $xoopsUser, $xoopsDB, $xoopsModule, $xoopsModuleConfig, $myts, $xoopsLogger, $moduleDirName;
+    global $xoopsConfig, $xoopsUser, $xoopsDB, $xoopsModule,  $myts, $xoopsLogger, $moduleDirName;
+    /** @var Jobs\Helper $helper */
+    $helper = Jobs\Helper::getInstance();
 
-    if ('1' == $xoopsModuleConfig['jobs_use_captcha']) {
+    if ('1' == $helper->getConfig('jobs_use_captcha')) {
         $x24plus = jobs_isX24plus();
         if ($x24plus) {
             xoops_load('xoopscaptcha');
@@ -145,7 +153,7 @@ function MailJob($lid = 0, $yname, $ymail, $fname, $fmail)
     $tags['TITLE']              = $title;
     $tags['TYPE']               = $type;
     $tags['DESCTEXT']           = $desctext;
-    $tags['PRICE']              = $xoopsModuleConfig['jobs_money'] . ' ' . $price . '';
+    $tags['PRICE']              = $helper->getConfig('jobs_money') . ' ' . $price . '';
     $tags['TYPEPRICE']          = $typeprice;
     $tags['TEL']                = $tel;
     $tags['TOWN']               = $town;
@@ -179,7 +187,9 @@ function MailJob($lid = 0, $yname, $ymail, $fname, $fmail)
  */
 function SendResume($lid = 0)
 {
-    global $xoopsConfig, $xoopsDB, $xoopsUser, $xoopsModule, $xoopsModuleConfig, $xoopsTheme, $xoopsLogger;
+    global $xoopsConfig, $xoopsDB, $xoopsUser, $xoopsModule,  $xoopsTheme, $xoopsLogger;
+    /** @var Jobs\Helper $helper */
+    $helper = Jobs\Helper::getInstance();
 
     require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
@@ -215,7 +225,7 @@ function SendResume($lid = 0)
     <td class='even'><input class=\"textbox\" type=\"text\" name=\"fmail\"></td>
     </tr>";
 
-    if ('1' == $xoopsModuleConfig['jobs_use_captcha']) {
+    if ('1' == $helper->getConfig('jobs_use_captcha')) {
         echo "<tr><td class='head'>" . _JOBS_CAPTCHA . " </td><td class='even'>";
         $jlm_captcha = '';
         $jlm_captcha = new \XoopsFormCaptcha(_JOBS_CAPTCHA, 'xoopscaptcha', false);
@@ -239,9 +249,11 @@ function SendResume($lid = 0)
  */
 function MailResume($lid = 0, $yname, $ymail, $fname, $fmail)
 {
-    global $xoopsConfig, $xoopsUser, $xoopsDB, $xoopsModule, $xoopsModuleConfig, $myts, $xoopsLogger, $moduleDirName;
+    global $xoopsConfig, $xoopsUser, $xoopsDB, $xoopsModule,  $myts, $xoopsLogger, $moduleDirName;
+    /** @var Jobs\Helper $helper */
+    $helper = Jobs\Helper::getInstance();
 
-    if ('1' == $xoopsModuleConfig['jobs_use_captcha']) {
+    if ('1' == $helper->getConfig('jobs_use_captcha')) {
         $x24plus = jobs_isX24plus();
         if ($x24plus) {
             xoops_load('xoopscaptcha');
@@ -283,7 +295,7 @@ function MailResume($lid = 0, $yname, $ymail, $fname, $fmail)
     $tags['LISTING_NUMBER']     = _JOBS_LISTING_NUMBER;
     $tags['TITLE']              = $title;
     $tags['NAME']               = $name;
-    $tags['PRICE']              = $xoopsModuleConfig['jobs_money'] . ' ' . $salary . '';
+    $tags['PRICE']              = $helper->getConfig('jobs_money') . ' ' . $salary . '';
     $tags['TYPEPRICE']          = $typeprice;
     $tags['TEL']                = $tel;
     $tags['TOWN']               = $town;

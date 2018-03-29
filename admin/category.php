@@ -25,6 +25,10 @@
 // Licence Type   : GPL                                                      //
 // ------------------------------------------------------------------------- //
 
+use XoopsModules\Jobs;
+/** @var Jobs\Helper $helper */
+$helper = Jobs\Helper::getInstance();
+
 //include("admin_header.php");
 require_once __DIR__ . '/../../../include/cp_header.php';
 $moduleDirName = basename(dirname(__DIR__));
@@ -40,7 +44,9 @@ $myts = \MyTextSanitizer::getInstance();
  */
 function NewCat($cat)
 {
-    global $xoopsDB, $xoopsConfig, $xoopsModule, $xoopsModuleConfig, $myts, $moduleDirName;
+    global $xoopsDB, $xoopsConfig, $xoopsModule,  $myts, $moduleDirName;
+    /** @var Jobs\Helper $helper */
+    $helper = Jobs\Helper::getInstance();
 
     $mytree = new JobTree($xoopsDB->prefix('jobs_categories'), 'cid', 'pid');
 
@@ -87,7 +93,7 @@ function NewCat($cat)
 
     echo '<tr><td>' . _AM_JOBS_DISPLPRICE2 . ' </td><td><input type="radio" name="affprice" value="1" checked>' . _AM_JOBS_OUI . '&nbsp;&nbsp; <input type="radio" name="affprice" value="0">' . _AM_JOBS_NON . ' (' . _AM_JOBS_INTHISCAT . ')</td></tr>';
 
-    if ($xoopsModuleConfig['jobs_cat_sortorder'] = 'ordre') {
+    if ($helper->getConfig('jobs_cat_sortorder') = 'ordre') {
         echo '<tr><td>' . _AM_JOBS_ORDRE . ' </td><td><input type="text" name="ordre" size="4"></td></tr><tr><td><br><input type="submit" value="' . _AM_JOBS_ADD . '"></td></tr>';
     } else {
         echo '<tr><td><br><input type="submit" value="' . _AM_JOBS_ADD . '"></td></tr>';
@@ -105,7 +111,9 @@ function NewCat($cat)
  */
 function ModCat($cat)
 {
-    global $xoopsDB, $xoopsConfig, $xoopsModule, $xoopsModuleConfig, $myts, $moduleDirName;
+    global $xoopsDB, $xoopsConfig, $xoopsModule,  $myts, $moduleDirName;
+    /** @var Jobs\Helper $helper */
+    $helper = Jobs\Helper::getInstance();
 
     $mytree = new JobTree($xoopsDB->prefix('jobs_categories'), 'cid', 'pid');
 
@@ -161,7 +169,7 @@ function ModCat($cat)
     }
     echo '>' . _AM_JOBS_NON . ' (' . _AM_JOBS_INTHISCAT . ')</td></tr>';
 
-    if ($xoopsModuleConfig['jobs_cat_sortorder'] = 'ordre') {
+    if ($helper->getConfig('jobs_cat_sortorder') = 'ordre') {
         echo '<tr><td>' . _AM_JOBS_ORDRE . " </td><td><input type=\"text\" name=\"ordre\" size=\"4\" value=\"$ordre\"></td></tr>";
     } else {
         echo "<input type=\"hidden\" name=\"ordre\" value=\"$ordre\">";
@@ -252,7 +260,9 @@ function DelCat($cid, $ok = 0)
  */
 function NewResCat($cat)
 {
-    global $xoopsDB, $xoopsConfig, $xoopsModule, $xoopsModuleConfig, $myts, $moduleDirName;
+    global $xoopsDB, $xoopsConfig, $xoopsModule,  $myts, $moduleDirName;
+    /** @var Jobs\Helper $helper */
+    $helper = Jobs\Helper::getInstance();
 
     $mytree = new JobTree($xoopsDB->prefix('jobs_res_categories'), 'cid', 'pid');
 
@@ -298,7 +308,7 @@ function NewResCat($cat)
 
     echo '<tr><td>' . _AM_JOBS_DISPLPRICE2 . ' </td><td><input type="radio" name="affprice" value="1" checked>' . _AM_JOBS_OUI . '&nbsp;&nbsp; <input type="radio" name="affprice" value="0">' . _AM_JOBS_NON . ' (' . _AM_JOBS_INTHISCAT . ')</td></tr>';
 
-    if ($xoopsModuleConfig['jobs_cat_sortorder'] = 'ordre') {
+    if ($helper->getConfig('jobs_cat_sortorder') = 'ordre') {
         echo '<tr><td>' . _AM_JOBS_ORDRE . ' </td><td><input type="text" name="ordre" size="4"></td></tr><tr><td><br><input type="submit" value="' . _AM_JOBS_ADD . '"></td></tr>';
     } else {
         echo '<tr><td><br><input type="submit" value="' . _AM_JOBS_ADD . '"></td></tr>';
@@ -317,7 +327,9 @@ function NewResCat($cat)
  */
 function ModResCat($cat)
 {
-    global $xoopsDB, $xoopsConfig, $xoopsModule, $xoopsModuleConfig, $myts, $moduleDirName;
+    global $xoopsDB, $xoopsConfig, $xoopsModule,  $myts, $moduleDirName;
+    /** @var Jobs\Helper $helper */
+    $helper = Jobs\Helper::getInstance();
 
     $mytree = new JobTree($xoopsDB->prefix('jobs_res_categories'), 'cid', 'pid');
 
@@ -374,7 +386,7 @@ function ModResCat($cat)
     }
     echo '>' . _AM_JOBS_NON . ' (' . _AM_JOBS_INTHISCAT . ')</td></tr>';
 
-    if ($xoopsModuleConfig['jobs_cat_sortorder'] = 'ordre') {
+    if ($helper->getConfig('jobs_cat_sortorder') = 'ordre') {
         echo '<tr><td>' . _AM_JOBS_ORDRE . " </td><td><input type=\"text\" name=\"ordre\" size=\"4\" value=\"$ordre\"></td></tr>";
     } else {
         echo "<input type=\"hidden\" name=\"ordre\" value=\"$ordre\">";

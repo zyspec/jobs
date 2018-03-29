@@ -16,6 +16,8 @@
  * @author      XOOPS Development Team
  */
 
+use XoopsModules\Jobs;
+
 // defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 /**
@@ -46,7 +48,9 @@ class jobs_categories extends XoopsObject
      */
     public function getForm($action = false)
     {
-        global $xoopsDB, $xoopsModuleConfig;
+        global $xoopsDB;
+        /** @var Jobs\Helper $helper */
+        $helper = Jobs\Helper::getInstance();
 
         if (false === $action) {
             $action = $_SERVER['REQUEST_URI'];
@@ -76,14 +80,14 @@ class jobs_categories extends XoopsObject
         $imageselect_category_img    = new \XoopsFormSelect($imgpath_category_img, 'img', $img);
         $image_array_category_img    = XoopsLists:: getImgListAsArray(XOOPS_ROOT_PATH . $uploadirectory_category_img);
         foreach ($image_array_category_img as $image_category_img) {
-            $imageselect_category_img->addOption("$image_category_img", $image_category_img);
+            $imageselect_category_img->addOption((string)$image_category_img, $image_category_img);
         }
         $imageselect_category_img->setExtra("onchange='showImgSelected(\"image_category_img\", \"img\", \"" . $uploadirectory_category_img . '", "", "' . XOOPS_URL . "\")'");
         $imgtray_category_img->addElement($imageselect_category_img, false);
         $imgtray_category_img->addElement(new \XoopsFormLabel('', "<br><img src='" . XOOPS_URL . '/' . $uploadirectory_category_img . '/' . $img . "' name='image_category_img' id='image_category_img' alt=''>"));
 
         $fileseltray_category_img = new \XoopsFormElementTray('', '<br>');
-        $fileseltray_category_img->addElement(new \XoopsFormFile(_AM_JOBS_FORMUPLOAD, 'img', $xoopsModuleConfig['jobs_maxfilesize']), false);
+        $fileseltray_category_img->addElement(new \XoopsFormFile(_AM_JOBS_FORMUPLOAD, 'img', $helper->getConfig('jobs_maxfilesize')), false);
         $fileseltray_category_img->addElement(new \XoopsFormLabel(''), false);
         $imgtray_category_img->addElement($fileseltray_category_img);
         $form->addElement($imgtray_category_img);

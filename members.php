@@ -16,6 +16,10 @@
  * @author      XOOPS Development Team
  */
 
+use XoopsModules\Jobs;
+/** @var Jobs\Helper $helper */
+$helper = Jobs\Helper::getInstance();
+
 include __DIR__ . '/header.php';
 
 $moduleDirName = basename(__DIR__);
@@ -236,7 +240,7 @@ if ($trows > '0') {
             }
         }
 
-        if ('1' == $xoopsModuleConfig['jobs_show_state']) {
+        if ('1' == $helper->getConfig('jobs_show_state')) {
             $state = $myts->htmlSpecialChars($state);
         } else {
             $state = '';

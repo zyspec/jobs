@@ -16,6 +16,10 @@
  * @author      XOOPS Development Team
  */
 
+use XoopsModules\Jobs;
+/** @var Jobs\Helper $helper */
+$helper = Jobs\Helper::getInstance();
+
 include __DIR__ . '/header.php';
 $moduleDirName = basename(__DIR__);
 
@@ -70,9 +74,9 @@ if (!empty($_POST['submit'])) {
     }
 
     $destination = XOOPS_ROOT_PATH . "/modules/$moduleDirName/logo_images";
-    $photomax    = $xoopsModuleConfig['jobs_maxfilesize'];
-    $maxwide     = $xoopsModuleConfig['jobs_resized_width'];
-    $maxhigh     = $xoopsModuleConfig['jobs_resized_height'];
+    $photomax    = $helper->getConfig('jobs_maxfilesize');
+    $maxwide     = $helper->getConfig('jobs_resized_width');
+    $maxhigh     = $helper->getConfig('jobs_resized_height');
     $date        = time();
 
     if (true === $del_old) {
@@ -195,10 +199,10 @@ if (!empty($_POST['submit'])) {
 
     echo "<script language=\"javascript\">\nfunction CLA(CLA) { var MainWindow = window.open (CLA, \"_blank\",\"width=500,height=300,toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,copyhistory=no\");}\n</script>";
 
-    $photomax  = $xoopsModuleConfig['jobs_maxfilesize'];
-    $maxwide   = $xoopsModuleConfig['jobs_resized_width'];
-    $maxhigh   = $xoopsModuleConfig['jobs_resized_height'];
-    $photomax1 = $xoopsModuleConfig['jobs_maxfilesize'] / 1024;
+    $photomax  = $helper->getConfig('jobs_maxfilesize');
+    $maxwide   = $helper->getConfig('jobs_resized_width');
+    $maxhigh   = $helper->getConfig('jobs_resized_height');
+    $photomax1 = $helper->getConfig('jobs_maxfilesize') / 1024;
 
     $result = $xoopsDB->query('SELECT comp_id, comp_name, comp_address, comp_address2, comp_city, comp_state, comp_zip, comp_phone, comp_fax, comp_url, comp_img, comp_usid, comp_user1, comp_user2, comp_contact, comp_user1_contact, comp_user2_contact, comp_date_added FROM '
                               . $xoopsDB->prefix('jobs_companies')
@@ -291,7 +295,7 @@ if (!empty($_POST['submit'])) {
             $form->addElement(new \XoopsFormText(_JOBS_COMPANY_ADDRESS2, 'comp_address2', 30, 100, $comp_address2), false);
             $form->addElement(new \XoopsFormText(_JOBS_TOWN, 'comp_city', 30, 50, $comp_city), false);
 
-            if ('1' == $xoopsModuleConfig['jobs_show_state']) {
+            if ('1' == $helper->getConfig('jobs_show_state')) {
                 $state_form = new \XoopsFormSelect(_JOBS_STATE, 'comp_state', $comp_state, '0', false);
                 while (false !== (list($rid, $name) = $xoopsDB->fetchRow($result))) {
                     $state_form->addOption('', _JOBS_SELECT_STATE);
@@ -313,7 +317,7 @@ if (!empty($_POST['submit'])) {
                 // START - check new entries for company users are OK - contributed by GreenFlatDog
                 $alert = "<br><span style='color:#f00;'>%s%s</span>";
                 if ($cuser1) {
-                    $prob   = ('n' == $prob1) ? _JOBS_COMP_USER_NOTTHERE : _JOBS_COMP_USER_NOPERM;
+                    $prob   = ('n' === $prob1) ? _JOBS_COMP_USER_NOTTHERE : _JOBS_COMP_USER_NOPERM;
                     $alert1 = sprintf($alert, $cuser1, $prob);
                     unset($prob);
                 }
@@ -321,7 +325,7 @@ if (!empty($_POST['submit'])) {
                 $form->addElement(new \XoopsFormTextArea(_JOBS_USER1_CONTACT, 'comp_user1_contact', $comp_user1_contact, 6, 35), false);
 
                 if ($cuser2) {
-                    $prob   = ('n' == $prob2) ? _JOBS_COMP_USER_NOTTHERE : _JOBS_COMP_USER_NOPERM;
+                    $prob   = ('n' === $prob2) ? _JOBS_COMP_USER_NOTTHERE : _JOBS_COMP_USER_NOPERM;
                     $alert2 = sprintf($alert, $cuser2, $prob);
                     unset($prob);
                 }
@@ -329,7 +333,7 @@ if (!empty($_POST['submit'])) {
                 $form->addElement(new \XoopsFormText(_JOBS_COMPANY_USER2 . $alert2, 'comp_user2', 30, 30, $comp_username2), false);
                 $form->addElement(new \XoopsFormTextArea(_JOBS_USER2_CONTACT, 'comp_user2_contact', $comp_user2_contact, 6, 35), false);
 
-                // END - check new entries for company users are OK - contributed by GreenFlatDog
+            // END - check new entries for company users are OK - contributed by GreenFlatDog
             } else {
                 $form->addElement(new \XoopsFormHidden('comp_user1', ''));
                 $form->addElement(new \XoopsFormHidden('comp_user1_contact', ''));
@@ -346,11 +350,11 @@ if (!empty($_POST['submit'])) {
                 $del_checkbox->addOption(1, 'Yes');
                 $form->addElement($del_checkbox);
 
-                $form->addElement(new \XoopsFormFile(_JOBS_NEWPICT, 'comp_img', $xoopsModuleConfig['jobs_maxfilesize']), false);
+                $form->addElement(new \XoopsFormFile(_JOBS_NEWPICT, 'comp_img', $helper->getConfig('jobs_maxfilesize')), false);
 
                 $form->addElement(new \XoopsFormHidden('comp_img_old', $comp_img_old));
             } else {
-                $form->addElement(new \XoopsFormFile(_JOBS_IMG, 'comp_img', $xoopsModuleConfig['jobs_maxfilesize']), false);
+                $form->addElement(new \XoopsFormFile(_JOBS_IMG, 'comp_img', $helper->getConfig('jobs_maxfilesize')), false);
             }
 
             $form->addElement(new \XoopsFormHidden('token', $token));

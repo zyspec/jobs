@@ -16,6 +16,10 @@
  * @author      XOOPS Development Team
  */
 
+use XoopsModules\Jobs;
+/** @var Jobs\Helper $helper */
+$helper = Jobs\Helper::getInstance();
+
 require_once __DIR__ . '/admin_header.php';
 
 require_once __DIR__ . '/../../../include/cp_header.php';
@@ -57,7 +61,7 @@ if (!empty($_POST['submit'])) {
     //        require_once XOOPS_ROOT_PATH . "/class/uploader.php";
     //        $updir             = $destination;
     //        $allowed_mimetypes = array('application/msword', 'application/pdf');
-    //        $uploader          = new \XoopsMediaUploader($updir, $allowed_mimetypes, $xoopsModuleConfig['jobs_resumesize']);
+    //        $uploader          = new \XoopsMediaUploader($updir, $allowed_mimetypes, $helper->getConfig('jobs_resumesize'));
     //        $uploader->setTargetFileName($date . '_' . $_FILES['resume']['name']);
     //        $uploader->fetchMedia('resume');
     //        if (!$uploader->upload()) {
@@ -127,8 +131,8 @@ if (!empty($_POST['submit'])) {
 
     $lid = (int)$_GET['lid'];
 
-    //    $resumesize  = $xoopsModuleConfig['jobs_resumesize'];
-    //    $resumesize1 = $xoopsModuleConfig['jobs_resumesize'] / 1024;
+    //    $resumesize  = $helper->getConfig('jobs_resumesize');
+    //    $resumesize1 = $helper->getConfig('jobs_resumesize') / 1024;
 
     $result = $xoopsDB->query('SELECT lid, cid, title, status, expire, type, company, desctext, requirements, tel, price, typeprice, contactinfo, contactinfo1, contactinfo2, date, email, submitter, town, state, valid, premium, photo, view FROM '
                               . $xoopsDB->prefix('jobs_listing')
@@ -233,7 +237,7 @@ if (!empty($_POST['submit'])) {
             while (false !== (list($nom_price) = $xoopsDB->fetchRow($result))) {
                 $price_form->addOption($nom_price, $nom_price);
             }
-            $salary_tray->addElement(new \XoopsFormText($xoopsModuleConfig['jobs_money'], 'price', 35, 100, $price));
+            $salary_tray->addElement(new \XoopsFormText($helper->getConfig('jobs_money'), 'price', 35, 100, $price));
             $salary_tray->addElement($price_form);
             $form->addElement($salary_tray, false);
 
@@ -257,7 +261,7 @@ if (!empty($_POST['submit'])) {
             //
             //            $form->addElement($state_form, true);
 
-            if ('1' == $xoopsModuleConfig['jobs_show_state']) {
+            if ('1' == $helper->getConfig('jobs_show_state')) {
                 $result2    = $xoopsDB->query('SELECT rid, name FROM ' . $xoopsDB->prefix('jobs_region') . ' ORDER BY rid');
                 $state_form = new \XoopsFormSelect(_AM_JOBS_STATE, 'state', $state, '1', false);
                 while (false !== (list($rid, $name) = $xoopsDB->fetchRow($result2))) {
@@ -308,7 +312,7 @@ if (!empty($_POST['submit'])) {
             //                    $del_checkbox = new \XoopsFormCheckBox(_AM_JOBS_DELRES, 'del_old', $del_old);
             //                    $del_checkbox->addOption(1, "Yes");
             //                    $form->addElement($del_checkbox);
-            //                    $form->addElement(new \XoopsFormFile(_AM_JOBS_UP_NEW_RESUME, 'resume', $xoopsModuleConfig['jobs_maxfilesize']), false);
+            //                    $form->addElement(new \XoopsFormFile(_AM_JOBS_UP_NEW_RESUME, 'resume', $helper->getConfig('jobs_maxfilesize')), false);
             //                    $form->addElement(new \XoopsFormHidden('resume_old', $resume_old));
             //
             //                } else {
@@ -321,7 +325,7 @@ if (!empty($_POST['submit'])) {
             //                    $form->addElement(new \XoopsFormHidden('resume_old', $resume_old));
             //                }
             //            } else {
-            //                $form->addElement(new \XoopsFormFile(_AM_JOBS_NEWRES, 'resume', $xoopsModuleConfig['jobs_maxfilesize']), false);
+            //                $form->addElement(new \XoopsFormFile(_AM_JOBS_NEWRES, 'resume', $helper->getConfig('jobs_maxfilesize')), false);
             //            }
 
             //            $res_radio    = new \XoopsFormRadio(_AM_JOBS_Q_NO_RESUME, 'make_resume', "0");
@@ -342,7 +346,7 @@ if (!empty($_POST['submit'])) {
             $premiumRadio->addOptionArray($premiumOptions);
             $form->addElement($premiumRadio, true);
 
-            //            if ($xoopsModuleConfig['jobs_moderate_res_up'] == 0) {
+            //            if ($helper->getConfig('jobs_moderate_res_up') == 0) {
             //                $form->addElement(new \XoopsFormHidden("valid", "1"), false);
             //            } else {
             //                $form->addElement(new \XoopsFormHidden("valid", "0"), false);

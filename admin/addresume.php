@@ -16,6 +16,10 @@
  * @author      XOOPS Development Team
  */
 
+use XoopsModules\Jobs;
+/** @var Jobs\Helper $helper */
+$helper = Jobs\Helper::getInstance();
+
 require_once __DIR__ . '/admin_header.php';
 require_once __DIR__ . '/../../../include/cp_header.php';
 $moduleDirName = basename(dirname(__DIR__));
@@ -38,8 +42,8 @@ if (isset($_POST['cid'])) {
 $member_usid = $xoopsUser->getVar('uid', 'E');
 
 if (!empty($_POST['submit'])) {
-    $resumesize  = $xoopsModuleConfig['jobs_resumesize'];
-    $photomax    = $xoopsModuleConfig['jobs_maxfilesize'];
+    $resumesize  = $helper->getConfig('jobs_resumesize');
+    $photomax    = $helper->getConfig('jobs_maxfilesize');
     $destination = XOOPS_ROOT_PATH . "/modules/$moduleDirName/resumes";
 
     $_SESSION['name']        = $_POST['name'];
@@ -166,11 +170,11 @@ if (!empty($_POST['submit'])) {
 
     $member_id = $xoopsUser->getVar('uid', 'E');
 
-    $resdays     = $xoopsModuleConfig['jobs_res_days'];
-    $resumesize  = $xoopsModuleConfig['jobs_resumesize'];
-    $resumesize1 = $xoopsModuleConfig['jobs_resumesize'] / 1024;
-    $photomax    = $xoopsModuleConfig['jobs_maxfilesize'];
-    $photomax1   = $xoopsModuleConfig['jobs_maxfilesize'] / 1024;
+    $resdays     = $helper->getConfig('jobs_res_days');
+    $resumesize  = $helper->getConfig('jobs_resumesize');
+    $resumesize1 = $helper->getConfig('jobs_resumesize') / 1024;
+    $photomax    = $helper->getConfig('jobs_maxfilesize');
+    $photomax1   = $helper->getConfig('jobs_maxfilesize') / 1024;
 
     list($numrows) = $xoopsDB->fetchRow($xoopsDB->query('SELECT cid, title, affprice FROM ' . $xoopsDB->prefix('jobs_res_categories') . ''));
 
@@ -260,7 +264,7 @@ if (!empty($_POST['submit'])) {
         $res_radio->addOptionArray($options);
         $form->addElement($res_radio, true);
 
-        if (0 == $xoopsModuleConfig['jobs_moderate_resume']) {
+        if (0 == $helper->getConfig('jobs_moderate_resume')) {
             $form->addElement(new \XoopsFormHidden('valid', '1'), false);
         } else {
             $form->addElement(new \XoopsFormHidden('valid', '0'), false);

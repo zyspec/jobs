@@ -17,6 +17,10 @@
  * @author      XOOPS Development Team
  */
 
+use XoopsModules\Jobs;
+/** @var Jobs\Helper $helper */
+$helper = Jobs\Helper::getInstance();
+
 $moduleDirName = basename(__DIR__);
 $main_lang     = '_' . strtoupper($moduleDirName);
 
@@ -137,8 +141,8 @@ if (0 == $pictures_number) {
  * Show the form if it is the owner and he can still upload pictures
  */
 if (!empty($xoopsUser)) {
-    if ($isOwner && $xoopsModuleConfig['jobs_nb_pict'] > $pictures_number) {
-        $maxfilebytes = $xoopsModuleConfig['jobs_maxfilesize'];
+    if ($isOwner && $helper->getConfig('jobs_nb_pict') > $pictures_number) {
+        $maxfilebytes = $helper->getConfig('jobs_maxfilesize');
         $album_factory->renderFormSubmit($uid, $lid, $maxfilebytes, $xoopsTpl);
     }
 }
@@ -153,7 +157,7 @@ $identifier = $owner->getUnameFromId($uid);
  * Adding to the module js and css of the lightbox and new ones
  */
 
-if (1 == $xoopsModuleConfig['' . $moduleDirName . '_lightbox']) {
+if (1 == $helper->getConfig('' . $moduleDirName . '_lightbox')) {
     $header_lightbox = '<script type="text/javascript" src="assets/js/lightbox/js/prototype.js"></script>
 <script type="text/javascript" src="assets/js/lightbox/js/scriptaculous.js?load=effects"></script>
 <script type="text/javascript" src="assets/js/lightbox/js/lightbox.js"></script>
@@ -174,16 +178,16 @@ while (false !== (list($name) = $xoopsDB->fetchRow($result))) {
     $xoopsTpl->assign('lang_showcase', _JOBS_SHOWCASE);
 }
 
-$xoopsTpl->assign('lang_not_premium', sprintf(_JOBS_BMCANHAVE, $xoopsModuleConfig['jobs_not_premium']));
+$xoopsTpl->assign('lang_not_premium', sprintf(_JOBS_BMCANHAVE, $helper->getConfig('jobs_not_premium')));
 
 $xoopsTpl->assign('lang_no_prem_nb', sprintf(_JOBS_PREMYOUHAVE, $pictures_number));
 
 $upgrade = '<a href="premium.php"><b> ' . _JOBS_UPGRADE_NOW . '</b></a>';
 $xoopsTpl->assign('lang_upgrade_now', $upgrade);
-$xoopsTpl->assign('lang_max_nb_pict', sprintf(_JOBS_YOUCANHAVE, $xoopsModuleConfig['jobs_nb_pict']));
+$xoopsTpl->assign('lang_max_nb_pict', sprintf(_JOBS_YOUCANHAVE, $helper->getConfig('jobs_nb_pict')));
 $xoopsTpl->assign('lang_nb_pict', sprintf(_JOBS_YOUHAVE, $pictures_number));
 $xoopsTpl->assign('lang_albumtitle', sprintf(_JOBS_ALBUMTITLE, '<a href=' . XOOPS_URL . '/userinfo.php?uid=' . addslashes($uid) . '>' . $identifier . '</a>'));
-$xoopsTpl->assign('path_uploads', $xoopsModuleConfig['jobs_link_upload']);
+$xoopsTpl->assign('path_uploads', $helper->getConfig('jobs_link_upload'));
 $xoopsTpl->assign('xoops_pagetitle', $xoopsModule->getVar('name') . ' - ' . $identifier . "'s album");
 $xoopsTpl->assign('nome_modulo', $xoopsModule->getVar('name'));
 $xoopsTpl->assign('lang_delete', _JOBS_DELETE);

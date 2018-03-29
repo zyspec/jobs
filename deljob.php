@@ -16,6 +16,10 @@
  * @author      XOOPS Development Team
  */
 
+use XoopsModules\Jobs;
+/** @var Jobs\Helper $helper */
+$helper = Jobs\Helper::getInstance();
+
 include __DIR__ . '/header.php';
 $moduleDirName = basename(__DIR__);
 //require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/gtickets.php";
@@ -49,7 +53,7 @@ list($usid, $photo) = $xoopsDB->fetchRow($result);
 
 if ($xoopsUser) {
     $ok = !isset($_REQUEST['ok']) ? null : $_REQUEST['ok'];
-    if ('1' == $xoopsModuleConfig['jobs_show_company']) {
+    if ('1' == $helper->getConfig('jobs_show_company')) {
         $member_id = $xoopsUser->getVar('uid', 'E');
 
         $request1 = $xoopsDB->query('SELECT comp_usid, comp_user1, comp_user2 FROM ' . $xoopsDB->prefix('jobs_companies') . ' WHERE ' . $member_id . ' IN (comp_usid, comp_user1, comp_user2)');

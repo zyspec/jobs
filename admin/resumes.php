@@ -15,7 +15,11 @@
  * @author      John Mordo aka jlm69 (www.jlmzone.com )
  * @author      XOOPS Development Team
  */
-//
+
+use XoopsModules\Jobs;
+/** @var Jobs\Helper $helper */
+$helper = Jobs\Helper::getInstance();
+
 require_once __DIR__ . '/../../../include/cp_header.php';
 $moduleDirName = basename(dirname(__DIR__));
 require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/functions.php";
@@ -43,7 +47,7 @@ $crows = $crow;
 $nav = '';
 if ($crows > '0') {
     // shows number of resumes per page set in preferences
-    $showonpage = $xoopsModuleConfig['jobs_reslisting_num'];
+    $showonpage = $helper->getConfig('jobs_reslisting_num');
 
     $show = '';
     $show = ((int)$show > 0) ? (int)$show : $showonpage;
@@ -90,7 +94,7 @@ if ($crows > '0') {
         //$expire2     = formatTimestamp($expire, "s");
 
         echo "<tr class='" . $class . "'>";
-        $class = ('even' == $class) ? 'odd' : 'even';
+        $class = ('even' === $class) ? 'odd' : 'even';
         echo "<td align=\"center\">$lid</td>";
         echo '<td align="center">' . $title . '</td>';
         echo '<td align="center">' . $name . '</td>';
@@ -109,7 +113,7 @@ if ($crows > '0') {
     }
     echo '</table><br><br>';
     echo $nav->renderNav();
-    //    echo "</fieldset><br>";
+//    echo "</fieldset><br>";
 } else {
     echo "<fieldset><legend style='font-weight: bold; color: #900;'>" . _AM_JOBS_MAN_RESUME . '</legend>';
     echo '<br> ' . _AM_JOBS_NO_RESUME . '<br><br>';

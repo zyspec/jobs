@@ -81,7 +81,7 @@ if (is_object($xoopsUser) && $xoopsUser->isAdmin($xoopsModule->mid())) {
     if (!$xoopsDB->queryF($sql)) {
         $errors = $GLOBALS['xoopsDB']->error();
         redirect_header('../region.php', 3, _AM_JOBS_UPDATEFAILED . '
-    ' . _AM_JOBS_ERROR . "$errors");
+    ' . _AM_JOBS_ERROR . (string)$errors);
     } else {
         redirect_header('../region.php', 3, _AM_JOBS_US_ADDED);
     }

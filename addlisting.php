@@ -16,6 +16,10 @@
  * @author      XOOPS Development Team
  */
 
+use XoopsModules\Jobs;
+/** @var Jobs\Helper $helper */
+$helper = Jobs\Helper::getInstance();
+
 include __DIR__ . '/header.php';
 $moduleDirName = basename(__DIR__);
 $myts          = \MyTextSanitizer::getInstance(); // MyTextSanitizer object
@@ -66,7 +70,7 @@ if (empty($xoopsUser)) {
 }
 
 $member_usid = $xoopsUser->uid();
-if ('1' == $xoopsModuleConfig['jobs_show_company']) {
+if ('1' == $helper->getConfig('jobs_show_company')) {
     $all_comp = jobs_getCompany($member_usid);
     if (!$all_comp) {
         redirect_header(XOOPS_URL . "/modules/$moduleDirName/addcompany.php", 2, _JOBS_MUSTADD_COMPANY);
@@ -80,7 +84,7 @@ if ('1' == $xoopsModuleConfig['jobs_show_company']) {
     }
 }
 if (!empty($_POST['submit'])) {
-    $jobsdays = $xoopsModuleConfig['jobs_days'];
+    $jobsdays = $helper->getConfig('jobs_days');
 
     if (!$GLOBALS['xoopsSecurity']->check(true, $_REQUEST['token'])) {
         redirect_header(XOOPS_URL . '/', 3, $GLOBALS['xoopsSecurity']->getErrors());
@@ -108,14 +112,14 @@ if (!empty($_POST['submit'])) {
     $expire  = $myts->addSlashes($_POST['expire']);
     $type    = $myts->addSlashes($_POST['type']);
     $company = $myts->addSlashes($_POST['company']);
-    if ('dhtmltextarea' === $xoopsModuleConfig['jobs_form_options']
-        || 'dhtml' === $xoopsModuleConfig['jobs_form_options']) {
+    if ('dhtmltextarea' === $helper->getConfig('jobs_form_options')
+        || 'dhtml' === $helper->getConfig('jobs_form_options')) {
         $desctext = $myts->displayTarea($_POST['desctext'], 0, 0, 0, 0, 0);
     } else {
         $desctext = $myts->displayTarea($_POST['desctext'], 1, 1, 1, 1, 1);
     }
-    if ('dhtmltextarea' === $xoopsModuleConfig['jobs_form_options']
-        || 'dhtml' === $xoopsModuleConfig['jobs_form_options']) {
+    if ('dhtmltextarea' === $helper->getConfig('jobs_form_options')
+        || 'dhtml' === $helper->getConfig('jobs_form_options')) {
         $requirements = $myts->displayTarea($_POST['requirements'], 0, 0, 1, 0, 0);
     } else {
         $requirements = $myts->displayTarea($_POST['requirements'], 1, 1, 1, 1, 1);
@@ -216,7 +220,7 @@ if (!empty($_POST['submit'])) {
     //    $GLOBALS['xoopsGTicket']->addTicketXoopsFormElement($form, __LINE__, 1800, 'token');
 
     if (('1' == $premium) || ('1' == $temp_premium)) {
-        echo '' . _JOBS_PREMIUM_MEMBER . ' ' . $xoopsModuleConfig['jobs_days'] . ' ' . _JOBS_PREMIUM2 . '';
+        echo '' . _JOBS_PREMIUM_MEMBER . ' ' . $helper->getConfig('jobs_days') . ' ' . _JOBS_PREMIUM2 . '';
     } else {
         echo '';
     }
@@ -224,7 +228,7 @@ if (!empty($_POST['submit'])) {
     $form->addElement(new \XoopsFormLabel(_JOBS_SUBMITTER, $member_uname));
     $form->addElement(new \XoopsFormHidden('submitter', $member_uname));
 
-    if ('1' == $xoopsModuleConfig['jobs_show_company']) {
+    if ('1' == $helper->getConfig('jobs_show_company')) {
         $form->addElement(new \XoopsFormLabel(_JOBS_COMPANY, $thiscompany['comp_name']));
         $form->addElement(new \XoopsFormHidden('company', $thiscompany['comp_name']));
     } else {
@@ -232,12 +236,12 @@ if (!empty($_POST['submit'])) {
     }
 
     $form->addElement(new \XoopsFormText(_JOBS_EMAIL, 'email', 50, 100, $email), true);
-    if ('1' == $xoopsModuleConfig['jobs_show_company']) {
+    if ('1' == $helper->getConfig('jobs_show_company')) {
         $form->addElement(new \XoopsFormText(_JOBS_TOWN, 'town', 50, 50, $thiscompany['comp_city']), false);
     } else {
         $form->addElement(new \XoopsFormText(_JOBS_TOWN, 'town', 50, 50, ''), false);
     }
-    if ('1' == $xoopsModuleConfig['jobs_show_state']) {
+    if ('1' == $helper->getConfig('jobs_show_state')) {
         $state_form = new \XoopsFormSelect(_JOBS_STATE, 'state', $thiscompany['comp_state'], '0', false);
         while (false !== (list($rid, $name) = $xoopsDB->fetchRow($result2))) {
             $state_form->addOption('', _JOBS_SELECT_STATE);
@@ -248,7 +252,7 @@ if (!empty($_POST['submit'])) {
         $form->addElement(new \XoopsFormHidden('state', ''));
     }
 
-    if ('1' == $xoopsModuleConfig['jobs_show_company']) {
+    if ('1' == $helper->getConfig('jobs_show_company')) {
         $form->addElement(new \XoopsFormText(_JOBS_TEL, 'tel', 30, 30, $thiscompany['comp_phone']), false);
     } else {
         $form->addElement(new \XoopsFormText(_JOBS_TEL, 'tel', 30, 30, ''), false);
@@ -264,10 +268,10 @@ if (!empty($_POST['submit'])) {
     $form->addElement($cat_form, true);
 
     if (('1' == $premium) || ('1' == $temp_premium)) {
-        $form->addElement(new \XoopsFormText(_JOBS_HOW_LONG, 'expire', 3, 3, $xoopsModuleConfig['jobs_days']), true);
+        $form->addElement(new \XoopsFormText(_JOBS_HOW_LONG, 'expire', 3, 3, $helper->getConfig('jobs_days')), true);
     } else {
-        $form->addElement(new \XoopsFormLabel(_JOBS_NON_HOW_LONG, $xoopsModuleConfig['jobs_days']));
-        $form->addElement(new \XoopsFormHidden('expire', $xoopsModuleConfig['jobs_days']));
+        $form->addElement(new \XoopsFormLabel(_JOBS_NON_HOW_LONG, $helper->getConfig('jobs_days')));
+        $form->addElement(new \XoopsFormHidden('expire', $helper->getConfig('jobs_days')));
     }
 
     $type_form = new \XoopsFormSelect(_JOBS_JOB_TYPE, 'type', '', '0', false);
@@ -294,19 +298,19 @@ if (!empty($_POST['submit'])) {
         $sel_form->addOption($nom_price, $nom_price);
     }
     $form->addElement($sel_form);
-    if ('1' == $xoopsModuleConfig['jobs_show_company']) {
+    if ('1' == $helper->getConfig('jobs_show_company')) {
         $form->addElement(new \XoopsFormTextArea(_JOBS_CONTACTINFO, 'contactinfo', '' . $myts->undoHtmlSpecialChars($myts->displayTarea($thiscompany['comp_contact'], 0, 0, 0, 0, 0)) . '', 6, 40), true);
     } else {
         $form->addElement(new \XoopsFormTextArea(_JOBS_CONTACTINFO, 'contactinfo', '', 6, 40), true);
     }
 
     if (('1' == $premium) || ('1' == $temp_premium)) {
-        if (('1' == $xoopsModuleConfig['jobs_show_company']) && $thiscompany['comp_user1_contact']) {
+        if (('1' == $helper->getConfig('jobs_show_company')) && $thiscompany['comp_user1_contact']) {
             $form->addElement(new \XoopsFormTextArea(_JOBS_CONTACTINFO1, 'contactinfo1', '' . $thiscompany['comp_user1_contact'] . '', 6, 40), false);
         } else {
             $form->addElement(new \XoopsFormTextArea(_JOBS_CONTACTINFO1, 'contactinfo1', '', 6, 40), false);
         }
-        if (('1' == $xoopsModuleConfig['jobs_show_company']) && $thiscompany['comp_user2_contact']) {
+        if (('1' == $helper->getConfig('jobs_show_company')) && $thiscompany['comp_user2_contact']) {
             $form->addElement(new \XoopsFormTextArea(_JOBS_CONTACTINFO2, 'contactinfo2', '' . $thiscompany['comp_user2_contact'] . '', 6, 40), false);
         } else {
             $form->addElement(new \XoopsFormTextArea(_JOBS_CONTACTINFO2, 'contactinfo2', '', 6, 40), false);
@@ -315,15 +319,15 @@ if (!empty($_POST['submit'])) {
         $form->addElement(new \XoopsFormHidden('contactinfo1', ''));
         $form->addElement(new \XoopsFormHidden('contactinfo2', ''));
     }
-    //  if ($xoopsModuleConfig['jobs_use_captcha'] == '1') {
+    //  if ($helper->getConfig('jobs_use_captcha') == '1') {
     //        $form->addElement(new \XoopsFormCaptcha(_JOBS_CAPTCHA, "xoopscaptcha", false), true);
     //  }
-    if (0 == $xoopsModuleConfig['jobs_moderated']) {
+    if (0 == $helper->getConfig('jobs_moderated')) {
         $form->addElement(new \XoopsFormHidden('valid', '1'), false);
     } else {
         $form->addElement(new \XoopsFormHidden('valid', '0'), false);
     }
-    if ('1' == $xoopsModuleConfig['jobs_show_company']) {
+    if ('1' == $helper->getConfig('jobs_show_company')) {
         $form->addElement(new \XoopsFormHidden('comp_id', $thiscompany['comp_id']), false);
     }
     $form->addElement(new \XoopsFormButton('', 'submit', _JOBS_SUBMIT, 'submit'));

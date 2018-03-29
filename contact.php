@@ -24,6 +24,11 @@
 // Author Website : pascal.e-xoops@perso-search.com
 // Licence Type   : GPL
 // ------------------------------------------------------------------------- //
+
+use XoopsModules\Jobs;
+/** @var Jobs\Helper $helper */
+$helper = Jobs\Helper::getInstance();
+
 include __DIR__ . '/header.php';
 $moduleDirName = basename(__DIR__);
 require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/functions.php";
@@ -64,7 +69,7 @@ if (!empty($_POST['submit'])) {
     $resume    = !isset($_REQUEST['resume']) ? null : $_REQUEST['resume'];
     // end define vars
 
-    global $xoopsConfig, $xoopsModuleConfig, $xoopsDB, $myts, $meta, $moduleDirName, $private;
+    global $xoopsConfig, $xoopsDB, $myts, $meta, $moduleDirName, $private;
 
     if (!$GLOBALS['xoopsSecurity']->check(true, $_REQUEST['token'])) {
         redirect_header(XOOPS_URL . "/modules/$moduleDirName/viewjobs.php?lid=" . addslashes($id) . '', 3, $GLOBALS['xoopsSecurity']->getErrors());
@@ -132,22 +137,22 @@ if (!empty($_POST['submit'])) {
         $type    = $myts->addSlashes($type);
         $company = $myts->addSlashes($company);
 
-        if ('dhtmltextarea' === $xoopsModuleConfig['jobs_form_options']
-            || 'dhtml' === $xoopsModuleConfig['jobs_form_options']) {
+        if ('dhtmltextarea' === $helper->getConfig('jobs_form_options')
+            || 'dhtml' === $helper->getConfig('jobs_form_options')) {
             $desctext = $myts->undoHtmlSpecialChars($myts->displayTarea($desctext, 0, 0, 1, 1, 0));
         } else {
             $desctext = $myts->displayTarea($desctext, 0, 0, 1, 1, 1);
         }
 
-        if ('dhtmltextarea' === $xoopsModuleConfig['jobs_form_options']
-            || 'dhtml' === $xoopsModuleConfig['jobs_form_options']) {
+        if ('dhtmltextarea' === $helper->getConfig('jobs_form_options')
+            || 'dhtml' === $helper->getConfig('jobs_form_options')) {
             $requirements = $myts->displayTarea($requirements, 0, 0, 1, 1, 0);
         } else {
             $requirements = $myts->displayTarea($requirements, 1, 0, 1, 1, 1);
         }
 
-        if ('dhtmltextarea' === $xoopsModuleConfig['jobs_form_options']
-            || 'dhtml' === $xoopsModuleConfig['jobs_form_options']) {
+        if ('dhtmltextarea' === $helper->getConfig('jobs_form_options')
+            || 'dhtml' === $helper->getConfig('jobs_form_options')) {
             $messtext = $myts->displayTarea($messtext, 0, 0, 1, 1, 0);
         } else {
             $messtext = $myts->displayTarea($messtext, 1, 0, 1, 1, 1);
@@ -214,7 +219,7 @@ if (!empty($_POST['submit'])) {
         $mail->send();
         echo $mail->getErrors();
 
-        if ($xoopsModuleConfig['jobs_admin_mail'] = 1) {
+        if ($helper->getConfig('jobs_admin_mail') = 1) {
             $jsubject    = $xoopsConfig['sitename'] . ' Job Reply ';
             $xoopsMailer = xoops_getMailer();
             $xoopsMailer->useMail();
@@ -247,7 +252,7 @@ if (!empty($_POST['submit'])) {
     include XOOPS_ROOT_PATH . '/header.php';
     echo "<table width='100%' border='0' cellspacing='1' cellpadding='8'><tr class='bg4'><td valign='top'>\n";
     $time     = time();
-    $ipnumber = "$_SERVER[REMOTE_ADDR]";
+    $ipnumber = (string)$_SERVER[REMOTE_ADDR];
     echo '<script type="text/javascript">
           function verify()
           {

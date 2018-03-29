@@ -16,6 +16,10 @@
  * @author      XOOPS Development Team
  */
 
+use XoopsModules\Jobs;
+/** @var Jobs\Helper $helper */
+$helper = Jobs\Helper::getInstance();
+
 $moduleDirName = basename(dirname(__DIR__));
 $main_lang     = '_' . strtoupper($moduleDirName);
 $lid           = !isset($_REQUEST['lid']) ? null : $_REQUEST['lid'];
@@ -46,14 +50,14 @@ $title = $_POST['caption'];
  * Getting parameters defined in admin side
  */
 
-$path_upload   = $xoopsModuleConfig['jobs_path_upload'];
-$pictwidth     = $xoopsModuleConfig['jobs_resized_width'];
-$pictheight    = $xoopsModuleConfig['jobs_resized_height'];
-$thumbwidth    = $xoopsModuleConfig['jobs_thumb_width'];
-$thumbheight   = $xoopsModuleConfig['jobs_thumb_height'];
-$maxfilebytes  = $xoopsModuleConfig['jobs_maxfilesize'];
-$maxfileheight = $xoopsModuleConfig['jobs_max_original_height'];
-$maxfilewidth  = $xoopsModuleConfig['jobs_max_original_width'];
+$path_upload   = $helper->getConfig('jobs_path_upload');
+$pictwidth     = $helper->getConfig('jobs_resized_width');
+$pictheight    = $helper->getConfig('jobs_resized_height');
+$thumbwidth    = $helper->getConfig('jobs_thumb_width');
+$thumbheight   = $helper->getConfig('jobs_thumb_height');
+$maxfilebytes  = $helper->getConfig('jobs_maxfilesize');
+$maxfileheight = $helper->getConfig('jobs_max_original_height');
+$maxfilewidth  = $helper->getConfig('jobs_max_original_width');
 
 /**
  * If we are receiving a file

@@ -16,6 +16,10 @@
  * @author      XOOPS Development Team
  */
 
+use XoopsModules\Jobs;
+/** @var Jobs\Helper $helper */
+$helper = Jobs\Helper::getInstance();
+
 include __DIR__ . '/header.php';
 
 $moduleDirName = basename(__DIR__);
@@ -52,11 +56,11 @@ $orderby = !isset($_REQUEST['orderby']) ? null : $_REQUEST['orderby'];
 
 $GLOBALS['xoopsOption']['template_main'] = 'jobs_res_category.tpl';
 include XOOPS_ROOT_PATH . '/header.php';
-$default_sort = $xoopsModuleConfig['jobs_resume_sortorder'];
+$default_sort = $helper->getConfig('jobs_resume_sortorder');
 
 $cid  = ($cid > 0) ? $cid : 0;
 $min  = ((int)$min > 0) ? (int)$min : 0;
-$show = ((int)$show > 0) ? (int)$show : $xoopsModuleConfig['' . $moduleDirName . '_resume_perpage'];
+$show = ((int)$show > 0) ? (int)$show : $helper->getConfig('' . $moduleDirName . '_resume_perpage');
 $max  = $min + $show;
 if (isset($orderby)) {
     $xoopsTpl->assign('sort_active', $orderby); // added for compact sort
@@ -79,15 +83,15 @@ $xoopsTpl->assign('add_resume', "<a href='addresume.php?cid=" . addslashes($cid)
 
 $resume_banner = xoops_getbanner();
 $xoopsTpl->assign('resume_banner', $resume_banner);
-$index_code_place = $xoopsModuleConfig['jobs_index_code_place'];
-$use_extra_code   = $xoopsModuleConfig['jobs_resume_code'];
-$jobs_use_banner  = $xoopsModuleConfig['jobs_use_banner'];
-$index_extra_code = $xoopsModuleConfig['jobs_index_code'];
+$index_code_place = $helper->getConfig('jobs_index_code_place');
+$use_extra_code   = $helper->getConfig('jobs_resume_code');
+$jobs_use_banner  = $helper->getConfig('jobs_use_banner');
+$index_extra_code = $helper->getConfig('jobs_index_code');
 $xoopsTpl->assign('use_extra_code', $use_extra_code);
 $xoopsTpl->assign('jobs_use_banner', $jobs_use_banner);
 $xoopsTpl->assign('index_extra_code', $index_extra_code);
 $xoopsTpl->assign('index_code_place', $index_code_place);
-$xoopsTpl->assign('perpage', $xoopsModuleConfig['' . $moduleDirName . '_resume_perpage']);
+$xoopsTpl->assign('perpage', $helper->getConfig('' . $moduleDirName . '_resume_perpage'));
 
 $categories = resume_MygetItemIds('resume_view');
 if (is_array($categories) && count($categories) > 0) {
@@ -111,11 +115,11 @@ if (is_array($categories) && count($categories) > 0) {
     $cat_perms .= ' AND cid IN (' . implode(',', $categories) . ') ';
 }
 
-$countresult = $xoopsDB->query('select COUNT(*) FROM ' . $xoopsDB->prefix('jobs_resume') . " where valid='1' AND cid=" . $xoopsDB->escape($cid) . "$cat_perms");
+$countresult = $xoopsDB->query('select COUNT(*) FROM ' . $xoopsDB->prefix('jobs_resume') . " where valid='1' AND cid=" . $xoopsDB->escape($cid) . $cat_perms);
 list($trow) = $xoopsDB->fetchRow($countresult);
 $trows = $trow;
 
-$result = $xoopsDB->query('select cid, pid, title from ' . $xoopsDB->prefix('jobs_res_categories') . ' where  cid=' . $xoopsDB->escape($cid) . "$cat_perms");
+$result = $xoopsDB->query('select cid, pid, title from ' . $xoopsDB->prefix('jobs_res_categories') . ' where  cid=' . $xoopsDB->escape($cid) . $cat_perms);
 list($ccid, $pid, $title) = $xoopsDB->fetchRow($result);
 
 $xoopsTpl->assign('xoops_pagetitle', $title);
@@ -176,7 +180,7 @@ if ('0' == $trows) {
     $xoopsTpl->assign('show_nav', false);
     $xoopsTpl->assign('no_resumes_to_show', _JOBS_NOANNINCAT);
 } elseif ($trows > '0') {
-    $xoopsTpl->assign('last_res_head', _JOBS_THE . ' ' . $xoopsModuleConfig['jobs_new_jobs_count'] . ' ' . _JOBS_LASTADD);
+    $xoopsTpl->assign('last_res_head', _JOBS_THE . ' ' . $helper->getConfig('jobs_new_jobs_count') . ' ' . _JOBS_LASTADD);
     $xoopsTpl->assign('last_res_head_exp', _JOBS_RES_EXP);
     $xoopsTpl->assign('last_res_head_title', _JOBS_TITLE);
     $xoopsTpl->assign('last_res_head_salary', _JOBS_PRICE);
@@ -231,7 +235,7 @@ if ('0' == $trows) {
             }
         }
         $date      = ($useroffset * 3600) + $date;
-        $startdate = (time() - (86400 * $xoopsModuleConfig['jobs_countday']));
+        $startdate = (time() - (86400 * $helper->getConfig('jobs_countday')));
         if ($startdate < $date) {
             $newitem       = '<img src="' . XOOPS_URL . "/modules/$moduleDirName/assets/images/newred.gif\">";
             $a_item['new'] = $newitem;
@@ -249,12 +253,12 @@ if ('0' == $trows) {
         $a_item['exp']     = $exp;
         $a_item['private'] = $private;
         if ($salary > 0) {
-            $a_item['salary'] = '' . $xoopsModuleConfig['jobs_money'] . " $salary";
+            $a_item['salary'] = '' . $helper->getConfig('jobs_money') . " $salary";
             // Add $price_typeprice by Tom
-            $a_item['price_typeprice'] = "$typeprice";
+            $a_item['price_typeprice'] = (string)$typeprice;
         } else {
             $a_item['salary']          = '';
-            $a_item['price_typeprice'] = "$typeprice";
+            $a_item['price_typeprice'] = (string)$typeprice;
         }
 
         $a_item['date'] = $date;

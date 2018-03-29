@@ -16,6 +16,10 @@
  * @author      XOOPS Development Team
  */
 
+use XoopsModules\Jobs;
+/** @var Jobs\Helper $helper */
+$helper = Jobs\Helper::getInstance();
+
 include __DIR__ . '/header.php';
 
 $moduleDirName = basename(__DIR__);
@@ -28,7 +32,9 @@ include XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/resume_functions.php"
  */
 function Jprint($lid = 0)
 {
-    global $xoopsConfig, $xoopsUser, $xoopsDB, $xoopsModuleConfig, $useroffset, $myts, $xoopsLogger, $moduleDirName;
+    global $xoopsConfig, $xoopsUser, $xoopsDB, $useroffset, $myts, $xoopsLogger, $moduleDirName;
+    /** @var Jobs\Helper $helper */
+    $helper = Jobs\Helper::getInstance();
 
     $currenttheme = $xoopsConfig['theme_set'];
 
@@ -68,7 +74,7 @@ function Jprint($lid = 0)
         }
     }
     $date  = ($useroffset * 3600) + $date;
-    $date2 = $date + ($xoopsModuleConfig['jobs_days'] * 86400);
+    $date2 = $date + ($helper->getConfig('jobs_days') * 86400);
     $date  = formatTimestamp($date, 's');
     $date2 = formatTimestamp($date2, 's');
 
@@ -92,7 +98,7 @@ function Jprint($lid = 0)
     <td><br><br><b>' . _JOBS_REQUIRE . "</b><br><br><div style=\"text-align:justify;\">$requirements</div><P>";
 
     if (1 == $price) {
-        echo '<br><b>' . _JOBS_PRICE2 . '</b> ' . $xoopsModuleConfig['jobs_money'] . " $price - $typeprice<br>";
+        echo '<br><b>' . _JOBS_PRICE2 . '</b> ' . $helper->getConfig('jobs_money') . " $price - $typeprice<br>";
     }
     if ($town) {
         echo '<br><b>' . _JOBS_TOWN . "</b> $town<br>";
@@ -119,7 +125,9 @@ function Jprint($lid = 0)
  */
 function Rprint($lid = 0)
 {
-    global $xoopsConfig, $xoopsUser, $xoopsDB, $xoopsModuleConfig, $useroffset, $myts, $xoopsLogger, $moduleDirName;
+    global $xoopsConfig, $xoopsUser, $xoopsDB,  $useroffset, $myts, $xoopsLogger, $moduleDirName;
+    /** @var Jobs\Helper $helper */
+    $helper = Jobs\Helper::getInstance();
 
     $currenttheme = $xoopsConfig['theme_set'];
 
@@ -157,7 +165,7 @@ function Rprint($lid = 0)
         }
     }
     $date  = ($useroffset * 3600) + $date;
-    $date2 = $date + ($xoopsModuleConfig['jobs_res_days'] * 86400);
+    $date2 = $date + ($helper->getConfig('jobs_res_days') * 86400);
     $date  = formatTimestamp($date, 's');
     $date2 = formatTimestamp($date2, 's');
 
@@ -169,7 +177,7 @@ function Rprint($lid = 0)
     echo '</td>
     </tr><tr><td><br>';
     if (1 == $salary) {
-        echo '<br><b>' . _JOBS_PRICE2 . '</b> ' . $xoopsModuleConfig['jobs_money'] . " $salary - $typeprice<br>";
+        echo '<br><b>' . _JOBS_PRICE2 . '</b> ' . $helper->getConfig('jobs_money') . " $salary - $typeprice<br>";
     }
     if ($town) {
         echo '<br><b>' . _JOBS_TOWN . "</b> $town";

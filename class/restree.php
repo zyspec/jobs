@@ -16,6 +16,8 @@
  * @author      XOOPS Development Team
  */
 
+use XoopsModules\Jobs;
+
 $moduleDirName = basename(dirname(__DIR__));
 require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/resume_functions.php";
 
@@ -74,7 +76,7 @@ class ResTree
         if (0 == $count) {
             return $arr;
         }
-       while (false !== ($myrow = $this->db->fetchArray($result))) {
+        while (false !== ($myrow = $this->db->fetchArray($result))) {
             array_push($arr, $myrow);
         }
 
@@ -867,7 +869,9 @@ class ResTree
         $sel_name = '',
         $onchange = ''
     ) {
-        global $xoopsModuleConfig, $xoopsDB, $moduleDirName;
+        global  $xoopsDB, $moduleDirName;
+        /** @var Jobs\Helper $helper */
+        $helper = Jobs\Helper::getInstance();
         $myts = \MyTextSanitizer::getInstance();
         // for "Duplicatable"
         $moduleDirName = basename(dirname(__DIR__));
@@ -890,7 +894,7 @@ class ResTree
                  . "\"></a>&nbsp;<a href=\"category.php?op=ModResCat&amp;cid=$catid\" title=\""
                  . _AM_JOBS_MODIFCAT
                  . "\">$name</a> ";
-            if ('ordre' == $xoopsModuleConfig['jobs_cat_sortorder']) {
+            if ('ordre' === $helper->getConfig('jobs_cat_sortorder')) {
                 echo "($ordre)";
             }
             echo "<br>\n";
@@ -912,7 +916,7 @@ class ResTree
                                     . $myts->htmlSpecialChars($option[$title]);
                 $ordreS           = $option['ordre'];
                 echo "$catpath</a> ";
-                if ('ordre' == $xoopsModuleConfig['jobs_cat_sortorder']) {
+                if ('ordre' === $helper->getConfig('jobs_cat_sortorder')) {
                     echo "($ordreS)";
                 }
                 echo "<br>\n";
@@ -958,7 +962,7 @@ class ResTree
         $result = $this->db->query('SELECT cid, pid, title FROM ' . $this->table);
         $ret    = [];
         $myts   = \MyTextSanitizer::getInstance();
-       while (false !== ($myrow = $this->db->fetchArray($result))) {
+        while (false !== ($myrow = $this->db->fetchArray($result))) {
             $ret[$myrow['cid']] = ['title' => $myts->htmlspecialchars($myrow['title']), 'pid' => $myrow['pid']];
         }
 

@@ -25,13 +25,17 @@
 // Licence Type   : GPL                                                      //
 // ------------------------------------------------------------------------- //
 
+use XoopsModules\Jobs;
+
 $moduleDirName = basename(dirname(__DIR__));
 
 //require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/gtickets.php";
 
 function ExpireJob()
 {
-    global $xoopsDB, $xoopsConfig, $xoopsModuleConfig, $myts, $meta, $moduleDirName;
+    global $xoopsDB, $xoopsConfig,  $myts, $meta, $moduleDirName;
+    /** @var Jobs\Helper $helper */
+    $helper = Jobs\Helper::getInstance();
 
     $datenow = time();
 
@@ -377,9 +381,10 @@ function JobAddField($field, $table)
  */
 function jobs_getEditor($caption, $name, $value = '', $width = '99%', $height = '200px', $supplemental = '')
 {
-    global $xoopsModuleConfig;
+    /** @var Jobs\Helper $helper */
+    $helper = Jobs\Helper::getInstance();
 
-    if ('dhtmltextarea' === $xoopsModuleConfig['jobs_form_options']) {
+    if ('dhtmltextarea' === $helper->getConfig('jobs_form_options')) {
         $nohtml = '1';
     } else {
         $nohtml = '0';
@@ -392,7 +397,7 @@ function jobs_getEditor($caption, $name, $value = '', $width = '99%', $height = 
     $editor_configs['cols']   = 70;
     $editor_configs['width']  = '95%';
     $editor_configs['height'] = '12%';
-    $editor_configs['editor'] = strtolower($xoopsModuleConfig['jobs_form_options']);
+    $editor_configs['editor'] = strtolower($helper->getConfig('jobs_form_options'));
     if (is_readable(XOOPS_ROOT_PATH . '/class/xoopseditor/xoopseditor.php')) {
         require_once XOOPS_ROOT_PATH . '/class/xoopseditor/xoopseditor.php';
         $editor = new \XoopsFormEditor($caption, $name, $editor_configs, $nohtml, $onfailure = 'textarea');
@@ -651,7 +656,9 @@ function jobs_getAllCompanies()
  */
 function jobs_categorynewgraphic($cat)
 {
-    global $xoopsDB, $moduleDirName, $xoopsUser, $xoopsModuleConfig;
+    global $xoopsDB, $moduleDirName, $xoopsUser;
+    /** @var Jobs\Helper $helper */
+    $helper = Jobs\Helper::getInstance();
 
     $newresult = $xoopsDB->query('SELECT date FROM ' . $xoopsDB->prefix('jobs_listing') . ' WHERE cid=' . $xoopsDB->escape($cat) . " AND valid = '1' ORDER BY date DESC LIMIT 1");
     list($date) = $xoopsDB->fetchRow($newresult);
@@ -667,7 +674,7 @@ function jobs_categorynewgraphic($cat)
     }
     $date = ($useroffset * 3600) + $date;
 
-    $days_new  = $xoopsModuleConfig['jobs_countday'];
+    $days_new  = $helper->getConfig('jobs_countday');
     $startdate = (time() - (86400 * $days_new));
 
     if ($startdate < $date) {
@@ -702,9 +709,11 @@ function jobs_subcatnew($cid)
  */
 function jobs_listingnewgraphic($date)
 {
-    global $xoopsDB, $moduleDirName, $xoopsModuleConfig;
+    global $xoopsDB, $moduleDirName;
+    /** @var Jobs\Helper $helper */
+    $helper = Jobs\Helper::getInstance();
 
-    $days_new  = $xoopsModuleConfig['jobs_countday'];
+    $days_new  = $helper->getConfig('jobs_countday');
     $startdate = (time() - (86400 * (int)$days_new));
 
     if ($startdate < $date) {

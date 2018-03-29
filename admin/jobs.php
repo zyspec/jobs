@@ -15,7 +15,11 @@
  * @author      John Mordo
  * @author      XOOPS Development Team
  */
-//
+
+use XoopsModules\Jobs;
+/** @var Jobs\Helper $helper */
+$helper = Jobs\Helper::getInstance();
+
 require_once __DIR__ . '/../../../include/cp_header.php';
 $moduleDirName = basename(dirname(__DIR__));
 require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/functions.php";
@@ -37,14 +41,14 @@ $adminObject->displayButton('left', '');
 
 //include XOOPS_ROOT_PATH . '/class/pagenav.php';
 
-$countresult = $xoopsDB->query('SELECT COUNT(*) FROM ' . $xoopsDB->prefix('jobs_listing') . '');
+$countresult = $xoopsDB->query('SELECT COUNT(*) FROM ' . $xoopsDB->prefix('jobs_listing') . ' ');
 list($crow) = $xoopsDB->fetchRow($countresult);
 $crows = $crow;
 
 $nav = '';
 if ($crows > '0') {
     // shows number of jobs per page set in preferences
-    $showonpage = $xoopsModuleConfig['jobs_joblisting_num'];
+    $showonpage = $helper->getConfig('jobs_joblisting_num');
     $show       = '';
     $show       = ((int)$show > 0) ? (int)$show : $showonpage;
 
@@ -110,7 +114,7 @@ if ($crows > '0') {
     }
     echo '</table><br><br>';
     echo $nav->renderNav();
-    //    echo "</fieldset><br>";
+//    echo "</fieldset><br>";
 } else {
     echo "<fieldset><legend style='font-weight: bold; color: #900;'>" . _AM_JOBS_MAN_JOB . '</legend>';
     echo '<br> ' . _AM_JOBS_NO_JOB . '<br><br>';

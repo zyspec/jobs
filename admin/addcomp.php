@@ -16,6 +16,10 @@
  * @author      XOOPS Development Team
  */
 
+use XoopsModules\Jobs;
+/** @var Jobs\Helper $helper */
+$helper = Jobs\Helper::getInstance();
+
 require_once __DIR__ . '/../../../include/cp_header.php';
 $moduleDirName = basename(dirname(__DIR__));
 require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/functions.php";
@@ -28,9 +32,9 @@ $module_id = $xoopsModule->getVar('mid');
 
 if (!empty($_POST['submit'])) {
     $destination = XOOPS_ROOT_PATH . "/modules/$moduleDirName/logo_images";
-    $photomax    = $xoopsModuleConfig['jobs_maxfilesize'];
-    $maxwide     = $xoopsModuleConfig['jobs_resized_width'];
-    $maxhigh     = $xoopsModuleConfig['jobs_resized_height'];
+    $photomax    = $helper->getConfig('jobs_maxfilesize');
+    $maxwide     = $helper->getConfig('jobs_resized_width');
+    $maxhigh     = $helper->getConfig('jobs_resized_height');
     $date        = time();
 
     $_SESSION['comp_name']          = $_POST['comp_name'];
@@ -180,7 +184,7 @@ if (!empty($_POST['submit'])) {
 
     redirect_header('company.php', 3, _AM_JOBS_COMPANY_ADDED);
 } else {
-    include_once __DIR__ . '/admin_header.php';
+    require_once __DIR__ . '/admin_header.php';
     xoops_cp_header();
     //  loadModuleAdminMenu(3, "");
     $adminObject = \Xmf\Module\Admin::getInstance();

@@ -39,6 +39,7 @@ function jobs_block_premium_show($options)
 
     // Contribution by mboyden
     /** @var XoopsModuleHandler $moduleHandler */
+    /** @var \XoopsConfigHandler $configHandler */
     $moduleHandler    = xoops_getHandler('module');
     $thisModule       = $moduleHandler->getByDirname($blockdirname);
     $configHandler    = xoops_getHandler('config');

@@ -25,13 +25,17 @@
 // Licence Type   : GPL                                                      //
 // ------------------------------------------------------------------------- //
 
+use XoopsModules\Jobs;
+
 $moduleDirName = basename(dirname(__DIR__));
 
 //require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/gtickets.php";
 
 function ExpireResume()
 {
-    global $xoopsDB, $xoopsConfig, $xoopsModuleConfig, $myts, $meta, $moduleDirName;
+    global $xoopsDB, $xoopsConfig,  $myts, $meta, $moduleDirName;
+    /** @var Jobs\Helper $helper */
+    $helper = Jobs\Helper::getInstance();
 
     $datenow = time();
 
@@ -197,34 +201,34 @@ function resume_convertorderbyin($orderby)
  */
 function resume_convertorderbytrans($orderby)
 {
-    if ('view ASC' == $orderby) {
+    if ('view ASC' === $orderby) {
         $orderbyTrans = '' . _JOBS_POPULARITYLTOM . '';
     }
-    if ('view DESC' == $orderby) {
+    if ('view DESC' === $orderby) {
         $orderbyTrans = '' . _JOBS_POPULARITYMTOL . '';
     }
-    if ('title ASC' == $orderby) {
+    if ('title ASC' === $orderby) {
         $orderbyTrans = '' . _JOBS_TITLEATOZ . '';
     }
-    if ('title DESC' == $orderby) {
+    if ('title DESC' === $orderby) {
         $orderbyTrans = '' . _JOBS_TITLEZTOA . '';
     }
-    if ('date ASC' == $orderby) {
+    if ('date ASC' === $orderby) {
         $orderbyTrans = '' . _JOBS_DATEOLD . '';
     }
-    if ('date DESC' == $orderby) {
+    if ('date DESC' === $orderby) {
         $orderbyTrans = '' . _JOBS_DATENEW . '';
     }
-    if ('company ASC' == $orderby) {
+    if ('company ASC' === $orderby) {
         $orderbyTrans = '' . _JOBS_COMPANYATOZ . '';
     }
-    if ('company DESC' == $orderby) {
+    if ('company DESC' === $orderby) {
         $orderbyTrans = '' . _JOBS_COMPANYZTOA . '';
     }
-    if ('exp ASC' == $orderby) {
+    if ('exp ASC' === $orderby) {
         $orderbyTrans = '' . _JOBS_EXPLTOH . '';
     }
-    if ('exp DESC' == $orderby) {
+    if ('exp DESC' === $orderby) {
         $orderbyTrans = '' . _JOBS_EXPHTOL . '';
     }
 
@@ -236,34 +240,34 @@ function resume_convertorderbytrans($orderby)
  */
 function resume_convertorderbyout($orderby)
 {
-    if ('title ASC' == $orderby) {
+    if ('title ASC' === $orderby) {
         $orderby = 'titleA';
     }
-    if ('date ASC' == $orderby) {
+    if ('date ASC' === $orderby) {
         $orderby = 'dateA';
     }
-    if ('view ASC' == $orderby) {
+    if ('view ASC' === $orderby) {
         $orderby = 'viewA';
     }
-    if ('company ASC' == $orderby) {
+    if ('company ASC' === $orderby) {
         $orderby = 'companyA';
     }
-    if ('exp ASC' == $orderby) {
+    if ('exp ASC' === $orderby) {
         $orderby = 'expA';
     }
-    if ('title DESC' == $orderby) {
+    if ('title DESC' === $orderby) {
         $orderby = 'titleD';
     }
-    if ('date DESC' == $orderby) {
+    if ('date DESC' === $orderby) {
         $orderby = 'dateD';
     }
-    if ('view DESC' == $orderby) {
+    if ('view DESC' === $orderby) {
         $orderby = 'viewD';
     }
-    if ('company DESC' == $orderby) {
+    if ('company DESC' === $orderby) {
         $orderby = 'companyD';
     }
-    if ('exp DESC' == $orderby) {
+    if ('exp DESC' === $orderby) {
         $orderby = 'expD';
     }
 }
@@ -280,7 +284,8 @@ function resume_convertorderbyout($orderby)
  */
 function resume_getEditor($caption, $name, $value = '', $width = '99%', $height = '200px', $supplemental = '')
 {
-    global $xoopsModuleConfig;
+    /** @var Jobs\Helper $helper */
+    $helper = Jobs\Helper::getInstance();
 
     $editor_configs           = [];
     $editor_configs['name']   = $name;
@@ -289,7 +294,7 @@ function resume_getEditor($caption, $name, $value = '', $width = '99%', $height 
     $editor_configs['cols']   = 70;
     $editor_configs['width']  = '95%';
     $editor_configs['height'] = '12%';
-    $editor_configs['editor'] = strtolower($xoopsModuleConfig['jobs_resume_options']);
+    $editor_configs['editor'] = strtolower($helper->getConfig('jobs_resume_options'));
     if (is_readable(XOOPS_ROOT_PATH . '/class/xoopseditor/xoopseditor.php')) {
         require_once XOOPS_ROOT_PATH . '/class/xoopseditor/xoopseditor.php';
         $editor = new \XoopsFormEditor($caption, $name, $editor_configs, $nohtml = false, $onfailure = 'textarea');
@@ -436,7 +441,9 @@ function resume_getStateNameFromId($rid)
  */
 function resume_categorynewgraphic($cat)
 {
-    global $xoopsDB, $moduleDirName, $xoopsModuleConfig, $xoopsUser;
+    global $xoopsDB, $moduleDirName,  $xoopsUser;
+    /** @var Jobs\Helper $helper */
+    $helper = Jobs\Helper::getInstance();
 
     $newresult = $xoopsDB->query('SELECT date FROM ' . $xoopsDB->prefix('jobs_resume') . ' WHERE cid=' . $xoopsDB->escape($cat) . " AND valid = '1' ORDER BY date DESC LIMIT 1");
     list($date) = $xoopsDB->fetchRow($newresult);
@@ -452,7 +459,7 @@ function resume_categorynewgraphic($cat)
     }
     $date = ($useroffset * 3600) + $date;
 
-    $days_new  = $xoopsModuleConfig['jobs_countday'];
+    $days_new  = $helper->getConfig('jobs_countday');
     $startdate = (time() - (86400 * $days_new));
 
     if ($startdate < $date) {
@@ -467,9 +474,11 @@ function resume_categorynewgraphic($cat)
  */
 function resume_listingnewgraphic($date)
 {
-    global $xoopsDB, $moduleDirName, $xoopsModuleConfig;
+    global $xoopsDB, $moduleDirName;
+    /** @var Jobs\Helper $helper */
+    $helper = Jobs\Helper::getInstance();
 
-    $days_new  = $xoopsModuleConfig['jobs_countday'];
+    $days_new  = $helper->getConfig('jobs_countday');
     $startdate = (time() - (86400 * (int)$days_new));
 
     if ($startdate < $date) {

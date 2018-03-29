@@ -16,6 +16,10 @@
  * @author      XOOPS Development Team
  */
 
+use XoopsModules\Jobs;
+/** @var Jobs\Helper $helper */
+$helper = Jobs\Helper::getInstance();
+
 include __DIR__ . '/header.php';
 
 $moduleDirName = basename(__DIR__);
@@ -71,7 +75,7 @@ $result      = $xoopsDB->query('SELECT r.lid, r.cid, r.name, r.title, r.exp, r.e
                                . '');
 $recordexist = $xoopsDB->getRowsNum($result);
 
-$updir = $xoopsModuleConfig['jobs_link_upload'];
+$updir = $helper->getConfig('jobs_link_upload');
 $xoopsTpl->assign('add_from', _JOBS_RES_ADDFROM . ' ' . $xoopsConfig['sitename']);
 $xoopsTpl->assign('add_from_title', _JOBS_RESUME_TITLE);
 $xoopsTpl->assign('add_from_sitename', $xoopsConfig['sitename']);
@@ -110,7 +114,7 @@ if (0 != $pid) {
 $subcats   = '';
 $arrow     = '&nbsp;<img src="' . XOOPS_URL . "/modules/$moduleDirName/assets/images/arrow.gif\" alt=\"&raquo;\">";
 $backarrow = '&nbsp;<img src="' . XOOPS_URL . "/modules/$moduleDirName/assets/images/backarrow.gif\" alt=\"&laquo;\">";
-while ($x != -1) {
+while (-1 != $x) {
     $subcats .= " $arrow <a href=\"resumecat.php?cid=" . $varid[$x] . '">' . $varnom[$x] . '</a>';
     --$x;
 }
@@ -215,7 +219,7 @@ if ($recordexist) {
     $xoopsTpl->assign('title', $title);
     $xoopsTpl->assign('exp', $exp);
     $xoopsTpl->assign('res_experience_head', _JOBS_RES_EXP);
-    $xoopsTpl->assign('local_town', "$town");
+    $xoopsTpl->assign('local_town', (string)$town);
     $xoopsTpl->assign('state', $state_name);
     $xoopsTpl->assign('local_head', _JOBS_LOCAL);
     $xoopsTpl->assign('job_mustlogin', _JOBS_RES_MUSTLOGIN);
@@ -223,10 +227,10 @@ if ($recordexist) {
     $xoopsTpl->assign('xoops_pagetitle', "$title - $exp");
 
     if ($salary > 0) {
-        $xoopsTpl->assign('salary', '<b>' . _JOBS_RES_SALARY . "</b> $salary " . $xoopsModuleConfig['jobs_money'] . " - $typeprice");
+        $xoopsTpl->assign('salary', '<b>' . _JOBS_RES_SALARY . "</b> $salary " . $helper->getConfig('jobs_money') . " - $typeprice");
         $xoopsTpl->assign('price_head', _JOBS_RES_SALARY);
-        $xoopsTpl->assign('price_price', '' . $xoopsModuleConfig['jobs_money'] . " $salary");
-        $xoopsTpl->assign('price_typeprice', "$typeprice");
+        $xoopsTpl->assign('price_price', '' . $helper->getConfig('jobs_money') . " $salary");
+        $xoopsTpl->assign('price_typeprice', (string)$typeprice);
     }
 
     $xoopsTpl->assign('contact_head', _JOBS_CONTACT);
@@ -236,10 +240,10 @@ if ($recordexist) {
         if (!empty($private) && $unlock != $private) {
             $xoopsTpl->assign('resume', _JOBS_RES_IS_PRIVATE);
             $xoopsTpl->assign('show_private', _JOBS_RES_PRIVATE_DESC);
-        } elseif ('created' != $resume) {
+        } elseif ('created' !== $resume) {
             $xoopsTpl->assign('resume', "<a href=\"../$moduleDirName/resumes/$resume\">" . _JOBS_VIEWRESUME . '</a>');
         } else {
-            $xoopsTpl->assign('resume', "$created_resume");
+            $xoopsTpl->assign('resume', $created_resume);
         }
     } else {
         $xoopsTpl->assign('noresume', _JOBS_RES_NORESUME);

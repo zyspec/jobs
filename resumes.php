@@ -16,6 +16,10 @@
  * @author      XOOPS Development Team
  */
 
+use XoopsModules\Jobs;
+/** @var Jobs\Helper $helper */
+$helper = Jobs\Helper::getInstance();
+
 include __DIR__ . '/header.php';
 
 $moduleDirName = basename(__DIR__);
@@ -46,7 +50,7 @@ $statetree = new ResTree($xoopsDB->prefix('jobs_region'), 'rid', 'pid');
 
 ExpireResume();
 
-if ('1' != $xoopsModuleConfig['jobs_show_resume']) {
+if ('1' != $helper->getConfig('jobs_show_resume')) {
     redirect_header(XOOPS_URL . '/index.php', 3, _NOPERM);
 }
 
@@ -60,7 +64,7 @@ $xoopsTpl->assign('intro_resume', _JOBS_RES_INTRO);
 $xoopsTpl->assign('back_to_jobs', '<a href="index.php">' . _JOBS_RES_BACKTO . '</a>');
 $xoopsTpl->assign('employers', _JOBS_EMPLOYERS);
 
-if ('1' == $xoopsModuleConfig['jobs_resume_search']) { // added â€˜ifâ€™ block: controls search section in template
+if ('1' == $helper->getConfig('jobs_resume_search')) { // added â€˜ifâ€™ block: controls search section in template
     $xoopsTpl->assign('resume_search', true);
     $xoopsTpl->assign('search_listings', _JOBS_SEARCH_LISTINGS);
     $xoopsTpl->assign('all_words', _JOBS_ALL_WORDS);
@@ -76,7 +80,7 @@ if ('1' == $xoopsModuleConfig['jobs_resume_search']) { // added â€˜ifâ€�
     ob_end_clean();
     $xoopsTpl->assign('by_cat', $by_cat);
 
-    if ('1' == $xoopsModuleConfig['jobs_countries']) {
+    if ('1' == $helper->getConfig('jobs_countries')) {
         ob_start();
         $statetree->resume_makeMyStateSelBox('name', 'rid', '', 1, 'by_state');
         $by_state = ob_get_contents();
@@ -93,10 +97,10 @@ if ('1' == $xoopsModuleConfig['jobs_resume_search']) { // added â€˜ifâ€�
 
 $index_banner = xoops_getbanner();
 $xoopsTpl->assign('index_banner', $index_banner);
-$index_code_place = $xoopsModuleConfig['jobs_index_code_place'];
-$use_extra_code   = $xoopsModuleConfig['jobs_use_index_code'];
-$jobs_use_banner  = $xoopsModuleConfig['jobs_use_banner'];
-$index_extra_code = $xoopsModuleConfig['jobs_index_code'];
+$index_code_place = $helper->getConfig('jobs_index_code_place');
+$use_extra_code   = $helper->getConfig('jobs_use_index_code');
+$jobs_use_banner  = $helper->getConfig('jobs_use_banner');
+$index_extra_code = $helper->getConfig('jobs_index_code');
 $xoopsTpl->assign('use_extra_code', $use_extra_code);
 $xoopsTpl->assign('jobs_use_banner', $jobs_use_banner);
 $xoopsTpl->assign('index_extra_code', '<html>' . $index_extra_code . '</html>');
@@ -119,7 +123,7 @@ if ($xoopsUser) {
     }
 }
 $xoopsTpl->assign('is_resume', '1');
-if ('1' == $xoopsModuleConfig['jobs_moderated']) {
+if ('1' == $helper->getConfig('jobs_moderated')) {
     $result = $xoopsDB->query('SELECT  COUNT(*)  FROM ' . $xoopsDB->prefix('jobs_listing') . " WHERE valid='0'");
     list($propo) = $xoopsDB->fetchRow($result);
     $xoopsTpl->assign('moderated', true);
@@ -136,7 +140,7 @@ if ('1' == $xoopsModuleConfig['jobs_moderated']) {
         }
     }
 }
-if ('1' == $xoopsModuleConfig['jobs_moderate_resume']) {
+if ('1' == $helper->getConfig('jobs_moderate_resume')) {
     $result1 = $xoopsDB->query('SELECT  COUNT(*)  FROM ' . $xoopsDB->prefix('jobs_resume') . " WHERE valid='0'");
     list($res_propo) = $xoopsDB->fetchRow($result1);
     $xoopsTpl->assign('res_moderated', true);
@@ -168,7 +172,7 @@ $content = '';
 while (false !== ($myrow = $xoopsDB->fetchArray($result))) {
     $title = $myts->undoHtmlSpecialChars($myrow['title']);
 
-    if ($myrow['img'] && 'http://' != $myrow['img']) {
+    if ($myrow['img'] && 'http://' !== $myrow['img']) {
         $cat_img = $myts->htmlSpecialChars($myrow['img']);
         $img     = '<a href="resumecat.php?cid=' . $myrow['cid'] . "\"><img src='" . XOOPS_URL . "/modules/$moduleDirName/assets/images/cat/" . $cat_img . "' align='middle' alt=''></a>";
     } else {
@@ -180,15 +184,15 @@ while (false !== ($myrow = $xoopsDB->fetchArray($result))) {
     // get child category objects
     $arr = [];
     if (in_array($myrow['cid'], $categories)) {
-        $arr           = $mytree->resume_getFirstChild($myrow['cid'], '' . $xoopsModuleConfig['jobs_cat_sortorder'] . '');
+        $arr           = $mytree->resume_getFirstChild($myrow['cid'], '' . $helper->getConfig('jobs_cat_sortorder') . '');
         $space         = 0;
         $chcount       = 0;
         $subcategories = '';
-        if (1 == $xoopsModuleConfig['jobs_display_subcat']) {
+        if (1 == $helper->getConfig('jobs_display_subcat')) {
             foreach ($arr as $ele) {
                 if (in_array($ele['cid'], $categories)) {
                     $chtitle = $myts->undoHtmlSpecialChars($ele['title']);
-                    if ($chcount > $xoopsModuleConfig['jobs_subcat_num']) {
+                    if ($chcount > $helper->getConfig('jobs_subcat_num')) {
                         $subcategories .= ', ...';
                         break;
                     }
@@ -229,13 +233,13 @@ $xoopsTpl->assign('clickbelow', _JOBS_CLICKBELOW);
 $xoopsTpl->assign('add_resume', "<a href='addresume.php'>" . _JOBS_RES_ADDRESUME . '</a>');
 $xoopsTpl->assign('show_resume', "<a href='resumes.php'>" . _JOBS_RESUME2 . '</a>');
 $xoopsTpl->assign('total_listings', _JOBS_ACTUALY . " $ann " . _JOBS_RES_LISTINGS . ' ' . _JOBS_DATABASE);
-if ('1' == $xoopsModuleConfig['jobs_moderate_resume']) {
+if ('1' == $helper->getConfig('jobs_moderate_resume')) {
     $xoopsTpl->assign('total_confirm', _JOBS_AND . " $res_propo " . _JOBS_WAIT3);
 }
-if (1 == $xoopsModuleConfig['jobs_new_jobs']) {
-    $result = $xoopsDB->query('select lid, name, title, status, exp, expire, private, salary, typeprice, date, usid, town, state, valid, view FROM ' . $xoopsDB->prefix('jobs_resume') . " WHERE valid='1' $cat_perms ORDER BY date DESC LIMIT " . $xoopsModuleConfig['jobs_new_jobs_count'] . '');
+if (1 == $helper->getConfig('jobs_new_jobs')) {
+    $result = $xoopsDB->query('select lid, name, title, status, exp, expire, private, salary, typeprice, date, usid, town, state, valid, view FROM ' . $xoopsDB->prefix('jobs_resume') . " WHERE valid='1' $cat_perms ORDER BY date DESC LIMIT " . $helper->getConfig('jobs_new_jobs_count') . '');
     if ($result) {
-        $xoopsTpl->assign('last_res_head', _JOBS_THE . ' ' . $xoopsModuleConfig['jobs_new_jobs_count'] . ' ' . _JOBS_RES_LASTADD);
+        $xoopsTpl->assign('last_res_head', _JOBS_THE . ' ' . $helper->getConfig('jobs_new_jobs_count') . ' ' . _JOBS_RES_LASTADD);
         $xoopsTpl->assign('last_res_head_experience', _JOBS_RES_EXP);
         $xoopsTpl->assign('last_res_head_title', _JOBS_TITLE);
         $xoopsTpl->assign('last_res_head_salary', _JOBS_PRICE);
@@ -281,12 +285,12 @@ if (1 == $xoopsModuleConfig['jobs_new_jobs']) {
             $a_item['exp']     = $exp;
             $a_item['name']    = $name;
             if ($salary > 0) {
-                $a_item['salary'] = '' . $xoopsModuleConfig['jobs_money'] . " $salary";
+                $a_item['salary'] = '' . $helper->getConfig('jobs_money') . " $salary";
                 // Add $price_typeprice by Tom
-                $a_item['price_typeprice'] = "$typeprice";
+                $a_item['price_typeprice'] = (string)$typeprice;
             } else {
                 $a_item['salary']          = '';
-                $a_item['price_typeprice'] = "$typeprice";
+                $a_item['price_typeprice'] = (string)$typeprice;
             }
 
             $a_item['date'] = $date;

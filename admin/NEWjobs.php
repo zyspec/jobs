@@ -89,7 +89,7 @@ if ($crows > '0') {
         // $expire2     = formatTimestamp($expire, "s");
 
         echo "<tr class='" . $class . "'>";
-        $class = ('even' == $class) ? 'odd' : 'even';
+        $class = ('even' === $class) ? 'odd' : 'even';
         echo '<td align="center">' . $lid . '</td>';
         echo '<td align="center">' . $title . '</td>';
         echo '<td align="center">' . $date2 . '</td>';
@@ -107,7 +107,7 @@ if ($crows > '0') {
     }
     echo '</table><br><br>';
     echo $nav->renderNav();
-    //    echo "</fieldset><br>";
+//    echo "</fieldset><br>";
 } else {
     echo "<fieldset><legend style='font-weight: bold; color: #900;'>" . _AM_JOBS_MAN_JOB . '</legend>';
     echo '<br> ' . _AM_JOBS_NO_JOB . '<br><br>';

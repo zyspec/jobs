@@ -21,7 +21,7 @@
  * @author          John Neill <catzwolf@xoops.org>
  * @version         $Id: grouppermform.php 3988 2009-12-05 15:46:47Z trabis $
  */
-defined('XOOPS_ROOT_PATH') or die('Restricted access');
+defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 xoops_load('XoopsFormElement');
 xoops_load('XoopsFormHidden');
@@ -339,7 +339,7 @@ class XoopsGroupFormCheckBox extends XoopsFormElement
         }
         $tree .= ' >' . $option['name'] . '<input type="hidden" name="' . $ele_name . '[parents][' . $option['id']
                  . ']" value="' . implode(':', $parentIds) . '" ><input type="hidden" name="' . $ele_name
-                 . '[itemname][' . $option['id'] . ']" value="' . htmlspecialchars($option['name']) . "\" ><br >\n";
+                 . '[itemname][' . $option['id'] . ']" value="' . htmlspecialchars($option['name'], ENT_QUOTES | ENT_HTML5) . "\" ><br >\n";
         if (isset($option['children'])) {
             foreach ($option['children'] as $child) {
                 array_push($parentIds, $option['id']);

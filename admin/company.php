@@ -91,7 +91,7 @@ if ($crows > '0') {
     }
     echo '</table><br><br>';
 
-    //    echo "</fieldset><br>";
+//    echo "</fieldset><br>";
 } else {
     echo "<fieldset><legend style='font-weight: bold; color: #900;'>" . _AM_JOBS_MAN_COMPANY . '</legend>';
     echo '<br> ' . _AM_JOBS_NOCOMPANY . '<br><br>';

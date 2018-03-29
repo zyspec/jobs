@@ -16,6 +16,10 @@
  * @author      XOOPS Development Team
  */
 
+use XoopsModules\Jobs;
+/** @var Jobs\Helper $helper */
+$helper = Jobs\Helper::getInstance();
+
 $moduleDirName = basename(dirname(__DIR__));
 $main_lang     = '_' . strtoupper($moduleDirName);
 
@@ -103,7 +107,7 @@ if ($array_pict = $album_factory->getObjects($criteria)) {
     $caption = $array_pict[0]->getVar('title');
     $url     = $array_pict[0]->getVar('url');
 }
-$url = $xoopsModuleConfig['' . $moduleDirName . '_link_upload'] . '/thumbs/thumb_' . $url;
+$url = $helper->getConfig('' . $moduleDirName . '_link_upload') . '/thumbs/thumb_' . $url;
 $album_factory->renderFormEdit($caption, $cod_img, $url);
 
 /**

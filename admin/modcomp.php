@@ -15,7 +15,11 @@
  * @author      John Mordo aka jlm69 (www.jlmzone.com )
  * @author      XOOPS Development Team
  */
-//
+
+use XoopsModules\Jobs;
+/** @var Jobs\Helper $helper */
+$helper = Jobs\Helper::getInstance();
+
 require_once __DIR__ . '/admin_header.php';
 require_once __DIR__ . '/../../../include/cp_header.php';
 $moduleDirName = basename(dirname(__DIR__));
@@ -44,9 +48,9 @@ if (!empty($_POST['submit'])) {
     }
 
     $destination = XOOPS_ROOT_PATH . "/modules/$moduleDirName/logo_images";
-    $photomax    = $xoopsModuleConfig['jobs_maxfilesize'];
-    $maxwide     = $xoopsModuleConfig['jobs_resized_width'];
-    $maxhigh     = $xoopsModuleConfig['jobs_resized_height'];
+    $photomax    = $helper->getConfig('jobs_maxfilesize');
+    $maxwide     = $helper->getConfig('jobs_resized_width');
+    $maxhigh     = $helper->getConfig('jobs_resized_height');
     $date        = time();
 
     if (true === $del_old) {
@@ -168,10 +172,10 @@ if (!empty($_POST['submit'])) {
 
     echo "<script language=\"javascript\">\nfunction CLA(CLA) { var MainWindow = window.open (CLA, \"_blank\",\"width=500,height=300,toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,copyhistory=no\");}\n</script>";
 
-    $photomax  = $xoopsModuleConfig['jobs_maxfilesize'];
-    $maxwide   = $xoopsModuleConfig['jobs_resized_width'];
-    $maxhigh   = $xoopsModuleConfig['jobs_resized_height'];
-    $photomax1 = $xoopsModuleConfig['jobs_maxfilesize'] / 1024;
+    $photomax  = $helper->getConfig('jobs_maxfilesize');
+    $maxwide   = $helper->getConfig('jobs_resized_width');
+    $maxhigh   = $helper->getConfig('jobs_resized_height');
+    $photomax1 = $helper->getConfig('jobs_maxfilesize') / 1024;
 
     $result = $xoopsDB->query('SELECT comp_id, comp_name, comp_address, comp_address2, comp_city, comp_state, comp_zip, comp_phone, comp_fax, comp_url, comp_img, comp_usid, comp_user1, comp_user2, comp_contact, comp_user1_contact, comp_user2_contact, comp_date_added FROM '
                               . $xoopsDB->prefix('jobs_companies')
@@ -278,7 +282,7 @@ if (!empty($_POST['submit'])) {
             // START - check new entries for company users are OK - contributed by GreenFlatDog
             $alert = "<br><span style='color:#f00'>%s%s</span>";
             if ($cuser1) {
-                $prob   = ('n' == $prob1) ? _AM_JOBS_COMP_USER_NOTTHERE : _AM_JOBS_COMP_USER_NOPERM;
+                $prob   = ('n' === $prob1) ? _AM_JOBS_COMP_USER_NOTTHERE : _AM_JOBS_COMP_USER_NOPERM;
                 $alert1 = sprintf($alert, $cuser1, $prob);
                 unset($prob);
             }
@@ -286,7 +290,7 @@ if (!empty($_POST['submit'])) {
             $form->addElement(new \XoopsFormTextArea(_AM_JOBS_USER1_CONTACT, 'comp_user1_contact', $comp_user1_contact, 6, 35), false);
 
             if ($cuser2) {
-                $prob   = ('n' == $prob2) ? _AM_JOBS_COMP_USER_NOTTHERE : _AM_JOBS_COMP_USER_NOPERM;
+                $prob   = ('n' === $prob2) ? _AM_JOBS_COMP_USER_NOTTHERE : _AM_JOBS_COMP_USER_NOPERM;
                 $alert2 = sprintf($alert, $cuser2, $prob);
                 unset($prob);
             }
@@ -305,9 +309,9 @@ if (!empty($_POST['submit'])) {
                 $del_checkbox->addOption(1, 'Yes');
                 $form->addElement($del_checkbox);
 
-                $form->addElement(new \XoopsFormFile(_AM_JOBS_NEWPICT, 'comp_img', $xoopsModuleConfig['jobs_maxfilesize']), false);
+                $form->addElement(new \XoopsFormFile(_AM_JOBS_NEWPICT, 'comp_img', $helper->getConfig('jobs_maxfilesize')), false);
             } else {
-                $form->addElement(new \XoopsFormFile(_AM_JOBS_COMPANY_LOGO, 'comp_img', $xoopsModuleConfig['jobs_maxfilesize']), false);
+                $form->addElement(new \XoopsFormFile(_AM_JOBS_COMPANY_LOGO, 'comp_img', $helper->getConfig('jobs_maxfilesize')), false);
             }
             $form->addElement(new \XoopsFormHidden('comp_img_old', $comp_img_old));
             $form->addElement(new \XoopsFormHidden('token', $token));

@@ -178,7 +178,7 @@ $modversion['search']['func'] = 'jobs_search';
 // Config Settings
 $modversion['hasconfig'] = 1;
 
-// $xoopsModuleConfig['jobs_money']
+// $helper->getConfig('jobs_money')
 $modversion['config'][1]['name']        = '' . $moduleDirName . '_money';
 $modversion['config'][1]['title']       = $cloned_lang . '_MONEY';
 $modversion['config'][1]['description'] = '';
@@ -187,7 +187,7 @@ $modversion['config'][1]['valuetype']   = 'text';
 $modversion['config'][1]['default']     = '$';
 $modversion['config'][1]['options']     = [];
 
-//$xoopsModuleConfig['jobs_moderated']
+//$helper->getConfig('jobs_moderated')
 $modversion['config'][2]['name']        = '' . $moduleDirName . '_moderated';
 $modversion['config'][2]['title']       = $cloned_lang . '_MODERAT';
 $modversion['config'][2]['description'] = '';
@@ -196,7 +196,7 @@ $modversion['config'][2]['valuetype']   = 'int';
 $modversion['config'][2]['default']     = '0';
 $modversion['config'][2]['options']     = [];
 
-//$xoopsModuleConfig['jobs_moderate_up']
+//$helper->getConfig('jobs_moderate_up')
 $modversion['config'][3]['name']        = '' . $moduleDirName . '_moderate_up';
 $modversion['config'][3]['title']       = $cloned_lang . '_MODERAT_UP';
 $modversion['config'][3]['description'] = '';
@@ -205,7 +205,7 @@ $modversion['config'][3]['valuetype']   = 'int';
 $modversion['config'][3]['default']     = '0';
 $modversion['config'][3]['options']     = [];
 
-//$xoopsModuleConfig['jobs_show_company']
+//$helper->getConfig('jobs_show_company')
 $modversion['config'][4]['name']        = '' . $moduleDirName . '_show_company';
 $modversion['config'][4]['title']       = $cloned_lang . '_SHOW_COMPANY';
 $modversion['config'][4]['description'] = '';
@@ -214,7 +214,7 @@ $modversion['config'][4]['valuetype']   = 'int';
 $modversion['config'][4]['default']     = '1';
 $modversion['config'][4]['options']     = [];
 
-//$xoopsModuleConfig['jobs_show_state']
+//$helper->getConfig('jobs_show_state')
 $modversion['config'][5]['name']        = '' . $moduleDirName . '_show_state';
 $modversion['config'][5]['title']       = $cloned_lang . '_SHOW_STATE';
 $modversion['config'][5]['description'] = '';
@@ -223,7 +223,7 @@ $modversion['config'][5]['valuetype']   = 'int';
 $modversion['config'][5]['default']     = '1';
 $modversion['config'][5]['options']     = [];
 
-//$xoopsModuleConfig['jobs_multiple_submitters']
+//$helper->getConfig('jobs_multiple_submitters')
 $modversion['config'][6]['name']        = '' . $moduleDirName . '_multiple_submitters';
 $modversion['config'][6]['title']       = $cloned_lang . '_MULTIPLE_SUBMITTERS';
 $modversion['config'][6]['description'] = '';
@@ -232,7 +232,7 @@ $modversion['config'][6]['valuetype']   = 'int';
 $modversion['config'][6]['default']     = '1';
 $modversion['config'][6]['options']     = [];
 
-// $xoopsModuleConfig['jobs_perpage']
+// $helper->getConfig('jobs_perpage')
 $modversion['config'][7]['name']        = '' . $moduleDirName . '_perpage';
 $modversion['config'][7]['title']       = $cloned_lang . '_PERPAGE';
 $modversion['config'][7]['description'] = '';
@@ -250,7 +250,7 @@ $modversion['config'][7]['options']     = [
     '50' => 50
 ];
 
-// $xoopsModuleConfig['jobs_new_jobs']
+// $helper->getConfig('jobs_new_jobs')
 $modversion['config'][8]['name']        = '' . $moduleDirName . '_new_jobs';
 $modversion['config'][8]['title']       = $cloned_lang . '_VIEWNEWCLASS';
 $modversion['config'][8]['description'] = '';
@@ -259,7 +259,7 @@ $modversion['config'][8]['valuetype']   = 'int';
 $modversion['config'][8]['default']     = '1';
 $modversion['config'][8]['options']     = [];
 
-// $xoopsModuleConfig['jobs_new_jobs_count']
+// $helper->getConfig('jobs_new_jobs_count')
 $modversion['config'][9]['name']        = '' . $moduleDirName . '_new_jobs_count';
 $modversion['config'][9]['title']       = $cloned_lang . '_NUMNEW';
 $modversion['config'][9]['description'] = $cloned_lang . '_ONHOME';
@@ -268,7 +268,7 @@ $modversion['config'][9]['valuetype']   = 'int';
 $modversion['config'][9]['default']     = '10';
 $modversion['config'][9]['options']     = [];
 
-// $xoopsModuleConfig['jobs_countday']
+// $helper->getConfig('jobs_countday')
 $modversion['config'][10]['name']        = '' . $moduleDirName . '_countday';
 $modversion['config'][10]['title']       = $cloned_lang . '_NEWTIME';
 $modversion['config'][10]['description'] = $cloned_lang . '_INDAYS';
@@ -277,7 +277,7 @@ $modversion['config'][10]['valuetype']   = 'int';
 $modversion['config'][10]['default']     = '3';
 $modversion['config'][10]['options']     = [];
 
-// $xoopsModuleConfig['jobsdays']
+// $helper->getConfig('jobsdays')
 $modversion['config'][11]['name']        = '' . $moduleDirName . '_days';
 $modversion['config'][11]['title']       = $cloned_lang . '_DAYS';
 $modversion['config'][11]['description'] = $cloned_lang . '_INDAYS';
@@ -286,7 +286,7 @@ $modversion['config'][11]['valuetype']   = 'int';
 $modversion['config'][11]['default']     = '14';
 $modversion['config'][11]['options']     = [];
 
-// $xoopsModuleConfig['jobs_block']
+// $helper->getConfig('jobs_block')
 $modversion['config'][12]['name']        = '' . $moduleDirName . '_block';
 $modversion['config'][12]['title']       = $cloned_lang . '_TYPEBLOC';
 $modversion['config'][12]['description'] = '';
@@ -295,7 +295,7 @@ $modversion['config'][12]['valuetype']   = 'text';
 $modversion['config'][12]['default']     = '1';
 $modversion['config'][12]['options']     = ['_MI_JOBS_LASTTEN' => '1', '_MI_JOBS_JOBRAND' => '2'];
 
-// $xoopsModuleConfig['jobs_display_subcat']
+// $helper->getConfig('jobs_display_subcat')
 $modversion['config'][13]['name']        = '' . $moduleDirName . '_display_subcat';
 $modversion['config'][13]['title']       = $cloned_lang . '_DISPLSUBCAT';
 $modversion['config'][13]['description'] = '';
@@ -304,7 +304,7 @@ $modversion['config'][13]['valuetype']   = 'int';
 $modversion['config'][13]['default']     = '1';
 $modversion['config'][13]['options']     = [];
 
-// $xoopsModuleConfig['jobs_days']
+// $helper->getConfig('jobs_days')
 $modversion['config'][14]['name']        = '' . $moduleDirName . '_subcat_num';
 $modversion['config'][14]['title']       = $cloned_lang . '_NBDISPLSUBCAT';
 $modversion['config'][14]['description'] = '';
@@ -313,7 +313,7 @@ $modversion['config'][14]['valuetype']   = 'int';
 $modversion['config'][14]['default']     = '4';
 $modversion['config'][14]['options']     = [];
 
-// $xoopsModuleConfig['jobs_cat_sortorder']
+// $helper->getConfig('jobs_cat_sortorder')
 $modversion['config'][15]['name']        = '' . $moduleDirName . '_cat_sortorder';
 $modversion['config'][15]['title']       = $cloned_lang . '_CSORT_ORDER';
 $modversion['config'][15]['description'] = '';
@@ -325,7 +325,7 @@ $modversion['config'][15]['options']     = [
     $cloned_lang . '_ORDREPERSO' => 'ordre DESC'
 ];
 
-// $xoopsModuleConfig['jobs_listing_sortorder']
+// $helper->getConfig('jobs_listing_sortorder')
 $modversion['config'][16]['name']        = '' . $moduleDirName . '_listing_sortorder';
 $modversion['config'][16]['title']       = $cloned_lang . '_LSORT_ORDER';
 $modversion['config'][16]['description'] = '';
@@ -340,7 +340,7 @@ $modversion['config'][16]['options']     = [
     '_MI_JOBS_ORDER_POP'     => 'view DESC'
 ];
 
-// $xoopsModuleConfig['jobs_resume_sortorder']
+// $helper->getConfig('jobs_resume_sortorder')
 $modversion['config'][17]['name']        = '' . $moduleDirName . '_resume_sortorder';
 $modversion['config'][17]['title']       = $cloned_lang . '_RSORT_ORDER';
 $modversion['config'][17]['description'] = '';
@@ -355,7 +355,7 @@ $modversion['config'][17]['options']     = [
     '_MI_JOBS_ORDER_POP'   => 'view DESC'
 ];
 
-//$xoopsModuleConfig['jobs_show_resume']
+//$helper->getConfig('jobs_show_resume')
 $modversion['config'][18]['name']        = '' . $moduleDirName . '_show_resume';
 $modversion['config'][18]['title']       = $cloned_lang . '_RES_SHOW';
 $modversion['config'][18]['description'] = '';
@@ -364,7 +364,7 @@ $modversion['config'][18]['valuetype']   = 'int';
 $modversion['config'][18]['default']     = '1';
 $modversion['config'][18]['options']     = [];
 
-//$xoopsModuleConfig['jobs_moderate_resume']
+//$helper->getConfig('jobs_moderate_resume')
 $modversion['config'][19]['name']        = '' . $moduleDirName . '_moderate_resume';
 $modversion['config'][19]['title']       = $cloned_lang . '_RES_MODERAT';
 $modversion['config'][19]['description'] = '';
@@ -373,7 +373,7 @@ $modversion['config'][19]['valuetype']   = 'int';
 $modversion['config'][19]['default']     = '0';
 $modversion['config'][19]['options']     = [];
 
-//$xoopsModuleConfig['jobs_moderate_res_up']
+//$helper->getConfig('jobs_moderate_res_up')
 $modversion['config'][20]['name']        = '' . $moduleDirName . '_moderate_res_up';
 $modversion['config'][20]['title']       = $cloned_lang . '_RES_MODERAT_UP';
 $modversion['config'][20]['description'] = '';
@@ -382,7 +382,7 @@ $modversion['config'][20]['valuetype']   = 'int';
 $modversion['config'][20]['default']     = '0';
 $modversion['config'][20]['options']     = [];
 
-// $xoopsModuleConfig['resdays']
+// $helper->getConfig('resdays')
 $modversion['config'][21]['name']        = '' . $moduleDirName . '_res_days';
 $modversion['config'][21]['title']       = $cloned_lang . '_RES_DAYS';
 $modversion['config'][21]['description'] = $cloned_lang . '_INDAYS';
@@ -391,7 +391,7 @@ $modversion['config'][21]['valuetype']   = 'int';
 $modversion['config'][21]['default']     = '180';
 $modversion['config'][21]['options']     = [];
 
-// $xoopsModuleConfig['resume_perpage']
+// $helper->getConfig('resume_perpage')
 $modversion['config'][22]['name']        = '' . $moduleDirName . '_resume_perpage';
 $modversion['config'][22]['title']       = $cloned_lang . '_RES_PERPAGE';
 $modversion['config'][22]['description'] = '';
@@ -409,7 +409,7 @@ $modversion['config'][22]['options']     = [
     '50' => 50
 ];
 
-// $xoopsModuleConfig['resumesize']
+// $helper->getConfig('resumesize')
 $modversion['config'][23]['name']        = '' . $moduleDirName . '_resumesize';
 $modversion['config'][23]['title']       = $cloned_lang . '_RES_SIZE';
 $modversion['config'][23]['description'] = $cloned_lang . '_INBYTES';
@@ -418,7 +418,7 @@ $modversion['config'][23]['valuetype']   = 'int';
 $modversion['config'][23]['default']     = '10000';
 $modversion['config'][23]['options']     = [];
 
-// $xoopsModuleConfig['jobs_nb_pict']
+// $helper->getConfig('jobs_nb_pict')
 $modversion['config'][24]['name']        = '' . $moduleDirName . '_not_premium';
 $modversion['config'][24]['title']       = $cloned_lang . '_NOT_PREMIUM';
 $modversion['config'][24]['description'] = $cloned_lang . '_NOT_PREMIUM_DESC';
@@ -426,7 +426,7 @@ $modversion['config'][24]['formtype']    = 'textbox';
 $modversion['config'][24]['valuetype']   = 'int';
 $modversion['config'][24]['default']     = '1';
 
-// $xoopsModuleConfig['jobs_nb_pict']
+// $helper->getConfig('jobs_nb_pict')
 $modversion['config'][25]['name']        = '' . $moduleDirName . '_nb_pict';
 $modversion['config'][25]['title']       = $cloned_lang . '_NUMBPICT_TITLE';
 $modversion['config'][25]['description'] = $cloned_lang . '_NUMBPICT_DESC';
@@ -434,7 +434,7 @@ $modversion['config'][25]['formtype']    = 'textbox';
 $modversion['config'][25]['valuetype']   = 'int';
 $modversion['config'][25]['default']     = '12';
 
-// $xoopsModuleConfig['jobs_path_upload']
+// $helper->getConfig('jobs_path_upload')
 $modversion['config'][26]['name']        = '' . $moduleDirName . '_path_upload';
 $modversion['config'][26]['title']       = $cloned_lang . '_UPLOAD_TITLE';
 $modversion['config'][26]['description'] = $cloned_lang . '_UPLOAD_DESC';
@@ -442,7 +442,7 @@ $modversion['config'][26]['formtype']    = 'textbox';
 $modversion['config'][26]['valuetype']   = 'text';
 $modversion['config'][26]['default']     = XOOPS_ROOT_PATH . "/modules/$moduleDirName/photo";
 
-// $xoopsModuleConfig['jobs_link_upload']
+// $helper->getConfig('jobs_link_upload')
 $modversion['config'][27]['name']        = '' . $moduleDirName . '_link_upload';
 $modversion['config'][27]['title']       = $cloned_lang . '_LINKUPLOAD_TI';
 $modversion['config'][27]['description'] = $cloned_lang . '_LINKUPLOAD_DESC';
@@ -450,7 +450,7 @@ $modversion['config'][27]['formtype']    = 'textbox';
 $modversion['config'][27]['valuetype']   = 'text';
 $modversion['config'][27]['default']     = XOOPS_URL . "/modules/$moduleDirName/photo";
 
-// $xoopsModuleConfig['jobs_thumb_width']
+// $helper->getConfig('jobs_thumb_width')
 $modversion['config'][28]['name']        = '' . $moduleDirName . '_thumb_width';
 $modversion['config'][28]['title']       = $cloned_lang . '_THUMW_TITLE';
 $modversion['config'][28]['description'] = $cloned_lang . '_THUMBW_DESC';
@@ -458,7 +458,7 @@ $modversion['config'][28]['formtype']    = 'textbox';
 $modversion['config'][28]['valuetype']   = 'text';
 $modversion['config'][28]['default']     = '125';
 
-// $xoopsModuleConfig['jobs_thumb_height']
+// $helper->getConfig('jobs_thumb_height')
 $modversion['config'][29]['name']        = '' . $moduleDirName . '_thumb_height';
 $modversion['config'][29]['title']       = $cloned_lang . '_THUMBH_TITLE';
 $modversion['config'][29]['description'] = $cloned_lang . '_THUMBH_DESC';
@@ -466,7 +466,7 @@ $modversion['config'][29]['formtype']    = 'textbox';
 $modversion['config'][29]['valuetype']   = 'text';
 $modversion['config'][29]['default']     = '175';
 
-// $xoopsModuleConfig['jobs_resized_width']
+// $helper->getConfig('jobs_resized_width')
 $modversion['config'][30]['name']        = '' . $moduleDirName . '_resized_width';
 $modversion['config'][30]['title']       = $cloned_lang . '_RESIZEDW_TITLE';
 $modversion['config'][30]['description'] = $cloned_lang . '_RESIZEDW_DESC';
@@ -474,7 +474,7 @@ $modversion['config'][30]['formtype']    = 'textbox';
 $modversion['config'][30]['valuetype']   = 'text';
 $modversion['config'][30]['default']     = '500';
 
-// $xoopsModuleConfig['jobs_resized_height']
+// $helper->getConfig('jobs_resized_height')
 $modversion['config'][31]['name']        = '' . $moduleDirName . '_resized_height';
 $modversion['config'][31]['title']       = $cloned_lang . '_RESIZEDH_TITLE';
 $modversion['config'][31]['description'] = $cloned_lang . '_RESIZEDH_DESC';
@@ -482,7 +482,7 @@ $modversion['config'][31]['formtype']    = 'textbox';
 $modversion['config'][31]['valuetype']   = 'text';
 $modversion['config'][31]['default']     = '400';
 
-// $xoopsModuleConfig['jobs_max_original_width']
+// $helper->getConfig('jobs_max_original_width')
 $modversion['config'][32]['name']        = '' . $moduleDirName . '_max_original_width';
 $modversion['config'][32]['title']       = $cloned_lang . '_ORIGW_TITLE';
 $modversion['config'][32]['description'] = $cloned_lang . '_ORIGW_DESC';
@@ -490,7 +490,7 @@ $modversion['config'][32]['formtype']    = 'textbox';
 $modversion['config'][32]['valuetype']   = 'text';
 $modversion['config'][32]['default']     = '2048';
 
-// $xoopsModuleConfig['jobs_max_original_height']
+// $helper->getConfig('jobs_max_original_height')
 $modversion['config'][33]['name']        = '' . $moduleDirName . '_max_original_height';
 $modversion['config'][33]['title']       = $cloned_lang . '_ORIGH_TITLE';
 $modversion['config'][33]['description'] = $cloned_lang . '_ORIGH_DESC';
@@ -498,7 +498,7 @@ $modversion['config'][33]['formtype']    = 'textbox';
 $modversion['config'][33]['valuetype']   = 'text';
 $modversion['config'][33]['default']     = '1600';
 
-// $xoopsModuleConfig['jobs_maxfilesize']
+// $helper->getConfig('jobs_maxfilesize')
 $modversion['config'][34]['name']        = '' . $moduleDirName . '_maxfilesize';
 $modversion['config'][34]['title']       = $cloned_lang . '_MAXFILEBYTES_T';
 $modversion['config'][34]['description'] = $cloned_lang . '_MAXFILEBYTES_D';
@@ -528,7 +528,7 @@ xoops_load('xoopseditorhandler');
 $editorHandler                       = XoopsEditorHandler::getInstance();
 $modversion['config'][36]['options'] = array_flip($editorHandler->getList());
 
-// $xoopsModuleConfig['jobs_lightbox']
+// $helper->getConfig('jobs_lightbox')
 $modversion['config'][37]['name']        = '' . $moduleDirName . '_lightbox';
 $modversion['config'][37]['title']       = $cloned_lang . '_LIGHTBOX';
 $modversion['config'][37]['description'] = $cloned_lang . '_LIGHTBOX_DESC';
@@ -537,7 +537,7 @@ $modversion['config'][37]['valuetype']   = 'int';
 $modversion['config'][37]['default']     = '0';
 $modversion['config'][37]['options']     = [];
 
-// $xoopsModuleConfig['jobs_admin_mail']
+// $helper->getConfig('jobs_admin_mail')
 $modversion['config'][38]['name']        = '' . $moduleDirName . '_admin_mail';
 $modversion['config'][38]['title']       = $cloned_lang . '_ADMIN_MAIL';
 $modversion['config'][38]['description'] = $cloned_lang . '_ADMIN_MAIL_DESC';
@@ -546,7 +546,7 @@ $modversion['config'][38]['valuetype']   = 'int';
 $modversion['config'][38]['default']     = '0';
 $modversion['config'][38]['options']     = [];
 
-// $xoopsModuleConfig['jobs_use_captcha']
+// $helper->getConfig('jobs_use_captcha')
 $modversion['config'][39]['name']        = '' . $moduleDirName . '_use_captcha';
 $modversion['config'][39]['title']       = $cloned_lang . '_USE_CAPTCHA';
 $modversion['config'][39]['description'] = $cloned_lang . '_USE_CAPTCHA_DESC';
@@ -555,7 +555,7 @@ $modversion['config'][39]['valuetype']   = 'int';
 $modversion['config'][39]['default']     = '1';
 $modversion['config'][39]['options']     = [];
 
-// $xoopsModuleConfig['jobs_use_index_code']
+// $helper->getConfig('jobs_use_index_code')
 $modversion['config'][40]['name']        = '' . $moduleDirName . '_use_index_code';
 $modversion['config'][40]['title']       = $cloned_lang . '_USE_INDEX_CODE';
 $modversion['config'][40]['description'] = $cloned_lang . '_USE_INDEX_CODE_DESC';
@@ -564,7 +564,7 @@ $modversion['config'][40]['valuetype']   = 'int';
 $modversion['config'][40]['default']     = '1';
 $modversion['config'][40]['options']     = [];
 
-// $xoopsModuleConfig['jobs_use_banner']
+// $helper->getConfig('jobs_use_banner')
 $modversion['config'][41]['name']        = '' . $moduleDirName . '_use_banner';
 $modversion['config'][41]['title']       = $cloned_lang . '_USE_BANNER';
 $modversion['config'][41]['description'] = $cloned_lang . '_USE_BANNER_DESC';
@@ -573,7 +573,7 @@ $modversion['config'][41]['valuetype']   = 'int';
 $modversion['config'][41]['default']     = '1';
 $modversion['config'][41]['options']     = [];
 
-// $xoopsModuleConfig['jobs_index_code']
+// $helper->getConfig('jobs_index_code')
 $modversion['config'][42]['name']        = '' . $moduleDirName . '_index_code';
 $modversion['config'][42]['title']       = $cloned_lang . '_INDEX_CODE';
 $modversion['config'][42]['description'] = $cloned_lang . '_INDEX_CODE_DESC';
@@ -581,7 +581,7 @@ $modversion['config'][42]['formtype']    = 'textarea';
 $modversion['config'][42]['valuetype']   = 'text';
 $modversion['config'][42]['default']     = '';
 
-// $xoopsModuleConfig['jobs_max_original_width']
+// $helper->getConfig('jobs_max_original_width')
 $modversion['config'][43]['name']        = '' . $moduleDirName . '_index_code_place';
 $modversion['config'][43]['title']       = $cloned_lang . '_INDEX_CODE_PLACE';
 $modversion['config'][43]['description'] = $cloned_lang . '_INDEX_CODE_PLACE_DESC';
@@ -589,7 +589,7 @@ $modversion['config'][43]['formtype']    = 'textbox';
 $modversion['config'][43]['valuetype']   = 'text';
 $modversion['config'][43]['default']     = '5';
 
-// $xoopsModuleConfig['jobs_resume_code']
+// $helper->getConfig('jobs_resume_code')
 $modversion['config'][44]['name']        = '' . $moduleDirName . '_resume_code';
 $modversion['config'][44]['title']       = $cloned_lang . '_RESUME_CODE';
 $modversion['config'][44]['description'] = $cloned_lang . '_RESUME_CODE_DESC';
@@ -598,7 +598,7 @@ $modversion['config'][44]['valuetype']   = 'int';
 $modversion['config'][44]['default']     = '1';
 $modversion['config'][44]['options']     = [];
 
-// $xoopsModuleConfig['jobs_offer_search'] - added for optional search
+// $helper->getConfig('jobs_offer_search') - added for optional search
 $modversion['config'][45]['name']        = '' . $moduleDirName . '_offer_search';
 $modversion['config'][45]['title']       = $cloned_lang . '_OFFER_SEARCH';
 $modversion['config'][45]['description'] = $cloned_lang . '_OFFER_SEARCH_DESC';
@@ -607,7 +607,7 @@ $modversion['config'][45]['valuetype']   = 'int';
 $modversion['config'][45]['default']     = '1';
 $modversion['config'][45]['options']     = [];
 
-// $xoopsModuleConfig['jobs_resume_search'] - added for optional search
+// $helper->getConfig('jobs_resume_search') - added for optional search
 $modversion['config'][46]['name']        = '' . $moduleDirName . '_resume_search';
 $modversion['config'][46]['title']       = $cloned_lang . '_RESUME_SEARCH';
 $modversion['config'][46]['description'] = $cloned_lang . '_RESUME_SEARCH_DESC';
@@ -616,7 +616,7 @@ $modversion['config'][46]['valuetype']   = 'int';
 $modversion['config'][46]['default']     = '1';
 $modversion['config'][46]['options']     = [];
 
-// $xoopsModuleConfig['jobs_resume_one']
+// $helper->getConfig('jobs_resume_one')
 $modversion['config'][47]['name']        = '' . $moduleDirName . '_resume_one';
 $modversion['config'][47]['title']       = $cloned_lang . '_RESUME_ONE';
 $modversion['config'][47]['description'] = '';
@@ -625,7 +625,7 @@ $modversion['config'][47]['valuetype']   = 'int';
 $modversion['config'][47]['default']     = '0';
 $modversion['config'][47]['options']     = [];
 
-// $xoopsModuleConfig['jobs_resume_one']
+// $helper->getConfig('jobs_resume_one')
 $modversion['config'][48]['name']        = '' . $moduleDirName . '_countries';
 $modversion['config'][48]['title']       = $cloned_lang . '_COUNTRIES';
 $modversion['config'][48]['description'] = '';
@@ -634,7 +634,7 @@ $modversion['config'][48]['valuetype']   = 'int';
 $modversion['config'][48]['default']     = '0';
 $modversion['config'][48]['options']     = [];
 
-// $xoopsModuleConfig['jobs_days']
+// $helper->getConfig('jobs_days')
 $modversion['config'][49]['name']        = '' . $moduleDirName . '_joblisting_num';
 $modversion['config'][49]['title']       = $cloned_lang . '_NBJOBLISTING';
 $modversion['config'][49]['description'] = '';
@@ -643,7 +643,7 @@ $modversion['config'][49]['valuetype']   = 'int';
 $modversion['config'][49]['default']     = '15';
 $modversion['config'][49]['options']     = [];
 
-// $xoopsModuleConfig['jobs_days']
+// $helper->getConfig('jobs_days')
 $modversion['config'][50]['name']        = '' . $moduleDirName . '_reslisting_num';
 $modversion['config'][50]['title']       = $cloned_lang . '_NBRESLISTING';
 $modversion['config'][50]['description'] = '';
@@ -739,8 +739,8 @@ $modversion['notification']['event'][5]['mail_subject']  = _MI_JOBS_COMPANY_NOTI
 //new listings in all categories posted
 
 // On Update
-if (!empty($_POST['fct']) && !empty($_POST['op']) && !empty($_POST['diranme']) && 'modulesadmin' == $_POST['fct']
-    && 'update_ok' == $_POST['op']
+if (!empty($_POST['fct']) && !empty($_POST['op']) && !empty($_POST['diranme']) && 'modulesadmin' === $_POST['fct']
+    && 'update_ok' === $_POST['op']
     && $_POST['dirname'] == $modversion['dirname']) {
     include __DIR__ . '/include/onupdate.inc.php';
 }

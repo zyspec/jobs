@@ -16,6 +16,10 @@
  * @author      XOOPS Development Team
  */
 
+use XoopsModules\Jobs;
+/** @var Jobs\Helper $helper */
+$helper = Jobs\Helper::getInstance();
+
 include __DIR__ . '/header.php';
 
 $moduleDirName = basename(__DIR__);
@@ -56,12 +60,12 @@ $GLOBALS['xoopsOption']['template_main'] = 'jobs_item.tpl';
 
 include XOOPS_ROOT_PATH . '/header.php';
 
-if ('1' == $xoopsModuleConfig['jobs_show_company']) {
+if ('1' == $helper->getConfig('jobs_show_company')) {
     $xoopsTpl->assign('show_company', '1');
 } else {
     $xoopsTpl->assign('show_company', '');
 }
-if ('1' == $xoopsModuleConfig['jobs_show_state']) {
+if ('1' == $helper->getConfig('jobs_show_state')) {
     $xoopsTpl->assign('show_state', '1');
 } else {
     $xoopsTpl->assign('show_state', '');
@@ -114,7 +118,7 @@ if (0 != $pid) {
 
 $subcats = '';
 $arrow   = '&nbsp;<img src="' . XOOPS_URL . "/modules/$moduleDirName/assets/images/arrow.gif\" alt=\"&raquo;\">";
-while ($x != -1) {
+while (-1 != $x) {
     $subcats .= " $arrow <a href=\"jobscat.php?cid=" . $varid[$x] . '">' . $varnom[$x] . '</a>';
     --$x;
 }
@@ -175,7 +179,7 @@ if ($recordexist) {
         $xoopsTpl->assign('submitter', _JOBS_SUBMITTED_BY . " $submitter");
     }
 
-    if ('1' == $xoopsModuleConfig['jobs_show_company']) {
+    if ('1' == $helper->getConfig('jobs_show_company')) {
         $comp_id = jobs_getCompIdFromName(addslashes($company));
         $result4 = $xoopsDB->query('SELECT comp_id, comp_name, comp_img, comp_usid, comp_user1, comp_user2, comp_user1_contact, comp_user2_contact FROM '
                                    . $xoopsDB->prefix('jobs_companies')
@@ -201,7 +205,7 @@ if ($recordexist) {
     if ($xoopsUser) {
         $member_id = $xoopsUser->uid();
 
-        if ('1' == $xoopsModuleConfig['jobs_show_company']) {
+        if ('1' == $helper->getConfig('jobs_show_company')) {
             $comp_users = [$comp_usid, $comp_user1, $comp_user2];
             if (in_array($member_id, $comp_users)) {
                 //$xoopsTpl->assign('modify', "<a href=\"modjob.php?lid=".addslashes($lid)."\"><img src=\"assets/images/modif.gif\" border=0 alt=\""._JOBS_MODIFANN."\"></a>&nbsp;<a href=\"deljob.php?lid=".addslashes($lid)."\"><img src=\"assets/images/del.gif\" border=0 alt=\""._JOBS_DEL_JOB."\"></a>");
@@ -263,7 +267,7 @@ if ($recordexist) {
     $xoopsTpl->assign('company_head', _JOBS_COMPANY2);
     $xoopsTpl->assign('desctext_head', _JOBS_DESC2);
     $xoopsTpl->assign('requirements_head', _JOBS_REQUIRE);
-    $xoopsTpl->assign('local_town', "$town");
+    $xoopsTpl->assign('local_town', (string)$town);
     $xoopsTpl->assign('state', $state_name);
     $xoopsTpl->assign('local_head', _JOBS_LOCAL);
     $xoopsTpl->assign('state_head', _JOBS_STATE);
@@ -276,10 +280,10 @@ if ($recordexist) {
 
     if (is_numeric($price)) {
         if ($price > 0) {
-            $xoopsTpl->assign('price', '<b>' . _JOBS_PRICE2 . "</b> $price " . $xoopsModuleConfig['jobs_money'] . " - $typeprice");
+            $xoopsTpl->assign('price', '<b>' . _JOBS_PRICE2 . "</b> $price " . $helper->getConfig('jobs_money') . " - $typeprice");
             $xoopsTpl->assign('price_head', _JOBS_PRICE2);
-            $xoopsTpl->assign('price_price', '' . $xoopsModuleConfig['jobs_money'] . " $price");
-            $xoopsTpl->assign('price_typeprice', "$typeprice");
+            $xoopsTpl->assign('price_price', '' . $helper->getConfig('jobs_money') . " $price");
+            $xoopsTpl->assign('price_typeprice', (string)$typeprice);
         }
     } else {
         if ('' != $price) {
@@ -288,14 +292,14 @@ if ($recordexist) {
             $xoopsTpl->assign('price', '<b>' . _JOBS_PRICE2 . '</b>' . $price . '');
         }
     }
-    $xoopsTpl->assign('contactinfo', "$contactinfo");
+    $xoopsTpl->assign('contactinfo', (string)$contactinfo);
     $xoopsTpl->assign('contactinfo_head', _JOBS_CONTACTINFO);
     $contact = '<b>' . _JOBS_CONTACT . '</b> <a href="contact.php?lid=' . addslashes($lid) . '">' . _JOBS_BYMAIL2 . '</a>';
     $xoopsTpl->assign('contact_head', _JOBS_CONTACT);
     $xoopsTpl->assign('contact_email', '<a href="contact.php?lid=' . addslashes($lid) . '">' . _JOBS_BYMAIL2 . '</a>');
     if ($tel) {
         $xoopsTpl->assign('contact_tel_head', _JOBS_TEL);
-        $xoopsTpl->assign('contact_tel', "$tel");
+        $xoopsTpl->assign('contact_tel', (string)$tel);
     }
     $contact = '<br><b>' . _JOBS_TOWN . "</b> $town";
 
