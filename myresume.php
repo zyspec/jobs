@@ -24,7 +24,7 @@ $myts                                    = \MyTextSanitizer::getInstance(); // M
 $GLOBALS['xoopsOption']['template_main'] = 'jobs_view_created.tpl';
 include XOOPS_ROOT_PATH . '/header.php';
 
-$id  = isset($_GET['lid']) ? $_GET['lid'] : '';
+$id  = \Xmf\Request::getString('lid', '', 'GET');
 $lid = trim($id);
 
 $xoopsTpl->assign('id', $lid);

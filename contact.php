@@ -219,7 +219,7 @@ if (!empty($_POST['submit'])) {
         $mail->send();
         echo $mail->getErrors();
 
-        if ($helper->getConfig('jobs_admin_mail') = 1) {
+        if (1 == $helper->getConfig('jobs_admin_mail')) {
             $jsubject    = $xoopsConfig['sitename'] . ' Job Reply ';
             $xoopsMailer = xoops_getMailer();
             $xoopsMailer->useMail();
@@ -238,8 +238,8 @@ if (!empty($_POST['submit'])) {
     }
     redirect_header('index.php', 3, _JOBS_MESSEND);
 } else {
-    $lid     = isset($_GET['lid']) ? (int)$_GET['lid'] : '';
-    $private = isset($_GET['private']) ? (int)$_GET['private'] : '';
+    $lid     = \Xmf\Request::getInt('lid', '', 'GET');
+    $private = \Xmf\Request::getInt('private', '', 'GET');
 
     //If no access
     if (!$gpermHandler->checkRight('' . $moduleDirName . '_view', $perm_itemid, $groups, $module_id)) {

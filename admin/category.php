@@ -482,7 +482,7 @@ foreach ($_POST as $k => $v) {
     ${$k} = $v;
 }
 
-$ok = isset($_GET['ok']) ? $_GET['ok'] : '';
+$ok = \Xmf\Request::getString('ok', '', 'GET');
 
 if (!isset($_POST['cid']) && isset($_GET['cid'])) {
     $cid = $_GET['cid'];

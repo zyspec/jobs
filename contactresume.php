@@ -122,7 +122,7 @@ if (isset($_POST['submit'])) {
         $mail->send();
         echo $mail->getErrors();
 
-        if ($helper->getConfig('jobs_admin_mail') = 1) {
+        if (1 == $helper->getConfig('jobs_admin_mail')) {
             $message     .= "\n" . $_SERVER['REMOTE_ADDR'] . "\n";
             $adsubject   = $xoopsConfig['sitename'] . ' Job Reply ';
             $xoopsMailer = xoops_getMailer();
@@ -137,7 +137,7 @@ if (isset($_POST['submit'])) {
     }
     redirect_header('resumes.php', 3, _JOBS_MESSEND);
 } else {
-    $lid = isset($_GET['lid']) ? (int)$_GET['lid'] : '';
+    $lid = \Xmf\Request::getInt('lid', '', 'GET');
 
     include __DIR__ . '/header.php';
 

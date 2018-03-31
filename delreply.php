@@ -42,8 +42,8 @@ if (!$gpermHandler->checkRight('jobs_submit', $perm_itemid, $groups, $module_id)
 }
 include XOOPS_ROOT_PATH . '/header.php';
 
-$r_lid = isset($_GET['r_lid']) ? (int)$_GET['r_lid'] : 0;
-$ok    = isset($_GET['ok']) ? (int)$_GET['ok'] : 0;
+$r_lid = \Xmf\Request::getInt('r_lid', 0, 'GET');
+$ok    = \Xmf\Request::getInt('ok', 0, 'GET');
 
 $result = $xoopsDB->query('SELECT lid, r_usid FROM ' . $xoopsDB->prefix('jobs_replies') . ' WHERE r_lid=' . $xoopsDB->escape($r_lid) . '');
 list($lid, $usid) = $xoopsDB->fetchRow($result);

@@ -44,7 +44,7 @@ if (!$gpermHandler->checkRight('jobs_submit', $perm_itemid, $groups, $module_id)
     redirect_header(XOOPS_URL . "/modules/$moduleDirName/index.php", 3, _NOPERM);
 }
 
-$lid = isset($_GET['lid']) ? (int)$_GET['lid'] : '';
+$lid = \Xmf\Request::getInt('lid', '', 'GET');
 
 include XOOPS_ROOT_PATH . '/header.php';
 

@@ -108,7 +108,7 @@ class DirectoryChecker
     }
 }
 
-$op = isset($_GET['op']) ? $_GET['op'] : '';
+$op = \Xmf\Request::getString('op', '', 'GET');
 
 switch ($op) {
     case 'createdir':

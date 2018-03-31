@@ -1344,8 +1344,8 @@ foreach ($_POST as $k => $v) {
     ${$k} = $v;
 }
 
-$createres = isset($_GET['createres']) ? $_GET['createres'] : '';
-$ok        = isset($_GET['ok']) ? $_GET['ok'] : '';
+$createres = \Xmf\Request::getString('createres', '', 'GET');
+$ok        = \Xmf\Request::getString('ok', '', 'GET');
 
 if (!isset($_POST['lid']) && isset($_GET['lid'])) {
     $lid = $_GET['lid'];

@@ -15,7 +15,7 @@
  */
 
 require_once __DIR__ . '/../../../include/cp_header.php';
-$modid = isset($_POST['modid']) ? (int)$_POST['modid'] : 0;
+$modid = \Xmf\Request::getInt('modid', 0, 'POST');
 
 // we dont want system module permissions to be changed here
 if ($modid <= 1 || !is_object($xoopsUser) || !$xoopsUser->isAdmin($modid)) {

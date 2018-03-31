@@ -46,7 +46,7 @@ if ($crows > '0') {
     $show       = '';
     $show       = ((int)$show > 0) ? (int)$show : $showonpage;
 
-    $start = isset($_GET['start']) ? (int)$_GET['start'] : 0;
+    $start = \Xmf\Request::getInt('start', 0, 'GET');
     if (!isset($max)) {
         $max = $start + $show;
     }

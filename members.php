@@ -31,8 +31,8 @@ $GLOBALS['xoopsOption']['template_main'] = 'jobs_members.tpl';
 
 include XOOPS_ROOT_PATH . '/header.php';
 
-$usid    = isset($_GET['usid']) ? (int)$_GET['usid'] : 0;
-$comp_id = isset($_GET['comp_id']) ? (int)$_GET['comp_id'] : 0;
+$usid    = \Xmf\Request::getInt('usid', 0, 'GET');
+$comp_id = \Xmf\Request::getInt('comp_id', 0, 'GET');
 
 $module_id = $xoopsModule->getVar('mid');
 if (is_object($xoopsUser)) {
@@ -73,7 +73,7 @@ $xoopsTpl->assign('mydirname', $moduleDirName);
 // changes the number of listings per page on the members page  $show = ?
 $show = 10;
 
-$min = isset($_GET['min']) ? (int)$_GET['min'] : 0;
+$min = \Xmf\Request::getInt('min', 0, 'GET');
 if (!isset($max)) {
     $max = $min + $show;
 }

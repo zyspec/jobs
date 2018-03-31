@@ -55,7 +55,7 @@ if (!$gpermHandler->checkRight('jobs_premium', $perm_itemid, $groups, $module_id
 if (!empty($_POST['lid'])) {
     $lid = (int)$_POST['lid'];
 } else {
-    $lid = isset($_GET['lid']) ? (int)$_GET['lid'] : 0;
+    $lid = \Xmf\Request::getInt('lid', 0, 'GET');
 }
 
 if (!empty($_POST['submit'])) {

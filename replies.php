@@ -31,7 +31,7 @@ include XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/functions.php";
 $myts = \MyTextSanitizer::getInstance(); // MyTextSanitizer object
 require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/class/jobtree.php";
 $mytree                                  = new JobTree($xoopsDB->prefix('jobs_categories'), 'cid', 'pid');
-$lid                                     = isset($_GET['lid']) ? (int)$_GET['lid'] : 0;
+$lid                                     = \Xmf\Request::getInt('lid', 0, 'GET');
 $GLOBALS['xoopsOption']['template_main'] = 'jobs_replies.tpl';
 include XOOPS_ROOT_PATH . '/header.php';
 
@@ -39,7 +39,7 @@ $xoopsTpl->assign('nav_main', '<a href="index.php">' . _JOBS_MAIN . '</a>');
 // shows how many replies to show default is 1
 $show = 1;
 
-$min = isset($_GET['min']) ? (int)$_GET['min'] : 0;
+$min = \Xmf\Request::getInt('min', 0, 'GET');
 if (!isset($max)) {
     $max = $min + $show;
 }
