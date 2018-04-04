@@ -93,14 +93,14 @@ if (!empty($_POST['submit'])) {
     }
     if (!empty($comp_users)) {
         // we have checks to make
-        $gpermHandler = xoops_getHandler('groupperm');
+        $grouppermHandler = xoops_getHandler('groupperm');
         $errs         = '';
         foreach ($comp_users as $u) {
             if ($u['id']) {
                 // we have user id for name entered
                 $xu   = new \XoopsUser($u['id']);
                 $grps =& $xu->getGroups();
-                if (!$gpermHandler->checkRight('jobs_submit', 0, $grps, $module_id)) {
+                if (!$grouppermHandler->checkRight('jobs_submit', 0, $grps, $module_id)) {
                     // no submit permission
                     $errs .= $u['entry'] . $u['name'] . $u['prob'] . 'p';
                 }
@@ -164,7 +164,11 @@ if (!empty($_POST['submit'])) {
         $comp_user2_contact,
         $date
     );
-    $xoopsDB->query($sql) || $eh->show('0013');
+    $result      = $xoopsDB->query($sql) ; //|| $eh->show('0013');
+    if (!$result) {
+        $logger = \XoopsLogger::getInstance();
+        $logger->handleError(E_USER_WARNING, $sql, __FILE__, __LINE__);
+    }
 
     unset($_SESSION['comp_name']);
     unset($_SESSION['comp_address']);

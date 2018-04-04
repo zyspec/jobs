@@ -36,17 +36,17 @@ if (is_object($xoopsUser)) {
 } else {
     $groups = XOOPS_GROUP_ANONYMOUS;
 }
-$gpermHandler = xoops_getHandler('groupperm');
+$grouppermHandler = xoops_getHandler('groupperm');
 if (isset($_POST['item_id'])) {
     $perm_itemid = (int)$_POST['item_id'];
 } else {
     $perm_itemid = 0;
 }
-if (!$gpermHandler->checkRight('jobs_submit', $perm_itemid, $groups, $module_id)) {
+if (!$grouppermHandler->checkRight('jobs_submit', $perm_itemid, $groups, $module_id)) {
     //    redirect_header(XOOPS_URL."/user.php", 3, _NOPERM);
     redirect_header(XOOPS_URL . '/modules/jobs/resumes.php', 3, _NOPERM);
 }
-if (!$gpermHandler->checkRight('jobs_premium', $perm_itemid, $groups, $module_id)) {
+if (!$grouppermHandler->checkRight('jobs_premium', $perm_itemid, $groups, $module_id)) {
     $premium = 0;
 } else {
     $premium = 1;

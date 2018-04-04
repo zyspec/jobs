@@ -33,7 +33,7 @@ switch ($op) {
         $criteria->setSort('id_type');
         $criteria->setOrder('ASC');
         $jobsNumrows   = $jobs_typeHandler->getCount();
-        $jobs_type_arr = $jobs_typeHandler->getall($criteria);
+        $jobs_type_arr = $jobs_typeHandler->getAll($criteria);
 
         //Table view Jobs Type
         if ($jobsNumrows > 0) {
@@ -70,7 +70,7 @@ switch ($op) {
         $criteria->setSort('id_price');
         $criteria->setOrder('ASC');
         $priceNumrows   = $jobs_priceHandler->getCount();
-        $jobs_price_arr = $jobs_priceHandler->getall($criteria);
+        $jobs_price_arr = $jobs_priceHandler->getAll($criteria);
 
         //Table view
         if ($priceNumrows > 0) {

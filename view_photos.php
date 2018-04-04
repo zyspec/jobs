@@ -67,7 +67,7 @@ if (!empty($xoopsUser)) {
         $groups = XOOPS_GROUP_ANONYMOUS;
     }
 
-    $gpermHandler = xoops_getHandler('groupperm');
+    $grouppermHandler = xoops_getHandler('groupperm');
 
     if (isset($_POST['item_id'])) {
         $perm_itemid = (int)$_POST['item_id'];
@@ -76,7 +76,7 @@ if (!empty($xoopsUser)) {
     }
 
     //If no access
-    if (!$gpermHandler->checkRight('jobs_premium', $perm_itemid, $groups, $module_id)) {
+    if (!$grouppermHandler->checkRight('jobs_premium', $perm_itemid, $groups, $module_id)) {
         $permit = '0';
     } else {
         $permit = '1';

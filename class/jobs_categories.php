@@ -65,7 +65,7 @@ class jobs_categories extends XoopsObject
 
         require_once XOOPS_ROOT_PATH . '/class/tree.php';
         $categoryHandler = xoops_getModuleHandler('jobs_categories', 'jobs');
-        $arr             = $categoryHandler->getall();
+        $arr             = $categoryHandler->getAll();
         //$mytree = new \XoopsObjectTree($arr, "category_id", "category_pid");
         $mytree = new \XoopsObjectTree($arr, 'cid', 'pid');
 

@@ -510,8 +510,8 @@ function jobs_MygetItemIds($permtype)
     $moduleHandler          = xoops_getHandler('module');
     $myModule               = $moduleHandler->getByDirname('jobs');
     $groups                 = is_object($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
-    $gpermHandler           = xoops_getHandler('groupperm');
-    $categories             = $gpermHandler->getItemIds($permtype, $groups, $myModule->getVar('mid'));
+    $grouppermHandler           = xoops_getHandler('groupperm');
+    $categories             = $grouppermHandler->getItemIds($permtype, $groups, $myModule->getVar('mid'));
     $permissions[$permtype] = $categories;
 
     return $categories;

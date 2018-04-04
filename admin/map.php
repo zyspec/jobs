@@ -27,11 +27,12 @@
 // ------------------------------------------------------------------------- //
 
 use XoopsModules\Jobs;
-/** @var Jobs\Helper $helper */
-$helper = Jobs\Helper::getInstance();
 
 //require_once __DIR__ . '/admin_header.php';
 require_once __DIR__ . '/../../../include/cp_header.php';
+
+/** @var Jobs\Helper $helper */
+$helper = Jobs\Helper::getInstance();
 
 $moduleDirName = basename(dirname(__DIR__));
 

@@ -252,10 +252,10 @@ class Xoopsjlm_picturesHandler extends XoopsObjectHandler
     {
         global $moduleDirName;
 
-        if ('jlm_pictures' != get_class($jlm_pictures)) {
+        if (!$jlm_pictures instanceof \jlm_pictures) {
             return false;
         }
-        $sql = sprintf('DELETE FROM %s WHERE cod_img = %u', $this->db->prefix('jobs_pictures'), $jlm_pictures->getVar('cod_img'));
+        $sql = sprintf('DELETE FROM `%s` WHERE cod_img = %u', $this->db->prefix('jobs_pictures'), $jlm_pictures->getVar('cod_img'));
         if (false != $force) {
             $result = $this->db->queryF($sql);
         } else {
@@ -377,32 +377,15 @@ class Xoopsjlm_picturesHandler extends XoopsObjectHandler
         $field_warning = new \XoopsFormLabel(sprintf(_JOBS_YOUCANUPLOAD, $maxbytes / 1024));
         $field_lid     = new \XoopsFormHidden('lid', $lid);
         $field_uid     = new \XoopsFormHidden('uid', $uid);
-        /**
-         * Check if using Xoops or XoopsCube (by jlm69)
-         */
 
-        $xCube = false;
-        if (preg_match('/^XOOPS Cube/', XOOPS_VERSION)) { // XOOPS Cube 2.1x
-            $xCube = true;
-        }
+        $GLOBALS['xoopsSecurity']->getTokenHTML();
 
-        /**
-         * Verify Ticket (by jlm69)
-         * If your site is XoopsCube it uses $xoopsGTicket for the token.
-         * If your site is Xoops it uses xoopsSecurity for the token.
-         */
-
-        if ($xCube) {
-            $GLOBALS['xoopsGTicket']->addTicketXoopsFormElement($form, __LINE__, 1800, 'token');
-        } else {
-            $field_token = $GLOBALS['xoopsSecurity']->getTokenHTML();
-        }
         $form->addElement($field_warning);
         $form->addElement($field_url, true);
         $form->addElement($field_desc, true);
         $form->addElement($field_lid, true);
         $form->addElement($field_uid, true);
-        $form->addElement($field_token, true);
+//        $form->addElement($field_token, true);
         $form->addElement($button_send);
         if (str_replace('.', '', PHP_VERSION) > 499) {
             $form->assign($xoopsTpl);
@@ -435,30 +418,8 @@ class Xoopsjlm_picturesHandler extends XoopsObjectHandler
         $field_lid     = new \XoopsFormHidden('lid', $lid);
         $field_marker  = new \XoopsFormHidden('marker', 1);
 
-        /**
-         * Check if using Xoops or XoopsCube (by jlm69)
-         * Right now Xoops does not have a directory called preload, Xoops Cube does.
-         * If this finds a diectory called preload in the Xoops Root folder $xCube=true.
-         * This could change if Xoops adds a Directory called preload
-         */
 
-        $xCube   = false;
-        $preload = XOOPS_ROOT_PATH . '/preload';
-        if (is_dir($preload)) {
-            $xCube = true;
-        }
-
-        /**
-         * Verify Ticket (by jlm69)
-         * If your site is XoopsCube it uses $xoopsGTicket for the token.
-         * If your site is Xoops it uses xoopsSecurity for the token.
-         */
-
-        if ($xCube = true) {
-            $GLOBALS['xoopsGTicket']->addTicketXoopsFormElement($form, __LINE__, 1800, 'token');
-        } else {
-            $GLOBALS['xoopsSecurity']->getTokenHTML();
-        }
+        $GLOBALS['xoopsSecurity']->getTokenHTML();
 
         $form->addElement($field_warning);
         $form->addElement($field_desc);
@@ -547,13 +508,13 @@ class Xoopsjlm_picturesHandler extends XoopsObjectHandler
      * Resize a picture and save it to $path_upload
      *
      * @param text $img         the path to the file
-     * @param text $path_upload The path to where the files should be saved after resizing
      * @param int  $thumbwidth  the width in pixels that the thumbnail will have
      * @param int  $thumbheight the height in pixels that the thumbnail will have
      * @param int  $pictwidth   the width in pixels that the pic will have
      * @param int  $pictheight  the height in pixels that the pic will have
      *
-     * @return nothing
+     * @param text $path_upload The path to where the files should be saved after resizing
+     * @return void
      */
     public function resizeImage($img, $thumbwidth, $thumbheight, $pictwidth, $pictheight, $path_upload)
     {

@@ -17,12 +17,13 @@
  */
 
 use XoopsModules\Jobs;
-/** @var Jobs\Helper $helper */
-$helper = Jobs\Helper::getInstance();
 
 $moduleDirName = basename(dirname(__DIR__));
 $main_lang     = '_' . strtoupper($moduleDirName);
 $lid           = !isset($_REQUEST['lid']) ? null : $_REQUEST['lid'];
+
+/** @var Jobs\Helper $helper */
+$helper = Jobs\Helper::getInstance();
 
 /**
  * Xoops header ...

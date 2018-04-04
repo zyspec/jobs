@@ -27,13 +27,13 @@
 // ------------------------------------------------------------------------- //
 
 use XoopsModules\Jobs;
-/** @var Jobs\Helper $helper */
-$helper = Jobs\Helper::getInstance();
 
 //include("admin_header.php");
 require_once __DIR__ . '/../../../include/cp_header.php';
 
 $moduleDirName = basename(dirname(__DIR__));
+/** @var Jobs\Helper $helper */
+$helper = Jobs\Helper::getInstance();
 
 //require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/gtickets.php";
 require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/functions.php";

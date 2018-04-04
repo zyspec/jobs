@@ -75,6 +75,12 @@ class XoopsGroupPermForm extends XoopsForm
 
     /**
      * Constructor
+     * @param        $title
+     * @param        $modid
+     * @param        $permname
+     * @param        $permdesc
+     * @param string $url
+     * @param bool   $anonymous
      */
     public function __construct($title, $modid, $permname, $permdesc, $url = '', $anonymous = true)
     {
@@ -222,6 +228,10 @@ class XoopsGroupFormCheckBox extends XoopsFormElement
 
     /**
      * Constructor
+     * @param      $caption
+     * @param      $name
+     * @param      $groupId
+     * @param null $values
      */
     public function __construct($caption, $name, $groupId, $values = null)
     {

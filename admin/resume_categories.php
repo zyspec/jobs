@@ -38,7 +38,7 @@ switch ($op) {
         $criteria->setSort('cid');
         $criteria->setOrder('ASC');
         $numrows      = $jobsJobs_res_categoriesHandler->getCount();
-        $category_arr = $jobsJobs_res_categoriesHandler->getall($criteria);
+        $category_arr = $jobsJobs_res_categoriesHandler->getAll($criteria);
 
         //Function that allows display child categories
         /**
@@ -78,7 +78,7 @@ switch ($op) {
                 $criteria->add(new \Criteria('pid', $category_arr[$i]->getVar('cid')));
                 $criteria->setSort('title');
                 $criteria->setOrder('ASC');
-                $pid     = $jobsJobs_res_categoriesHandler->getall($criteria);
+                $pid     = $jobsJobs_res_categoriesHandler->getAll($criteria);
                 $num_pid = $jobsJobs_res_categoriesHandler->getCount();
                 if (0 != $num_pid) {
                     resumeCategoryDisplayChildren($cid, $pid, $prefix, $order, $class);
@@ -123,7 +123,7 @@ switch ($op) {
                     $criteria->add(new \Criteria('pid', $cid));
                     $criteria->setSort('title');
                     $criteria->setOrder('ASC');
-                    $pid     = $jobsJobs_res_categoriesHandler->getall($criteria);
+                    $pid     = $jobsJobs_res_categoriesHandler->getAll($criteria);
                     $num_pid = $jobsJobs_res_categoriesHandler->getCount();
 
                     if (0 != $num_pid) {

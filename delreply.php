@@ -29,7 +29,7 @@ if (is_object($xoopsUser)) {
     $groups = XOOPS_GROUP_ANONYMOUS;
 }
 
-$gpermHandler = xoops_getHandler('groupperm');
+$grouppermHandler = xoops_getHandler('groupperm');
 
 if (isset($_POST['item_id'])) {
     $perm_itemid = (int)$_POST['item_id'];
@@ -37,7 +37,7 @@ if (isset($_POST['item_id'])) {
     $perm_itemid = 0;
 }
 //If no access
-if (!$gpermHandler->checkRight('jobs_submit', $perm_itemid, $groups, $module_id)) {
+if (!$grouppermHandler->checkRight('jobs_submit', $perm_itemid, $groups, $module_id)) {
     redirect_header(XOOPS_URL . "/modules/$moduleDirName/index.php", 3, _NOPERM);
 }
 include XOOPS_ROOT_PATH . '/header.php';

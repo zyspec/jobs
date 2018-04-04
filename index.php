@@ -35,7 +35,7 @@ if (is_object($xoopsUser)) {
     $groups = XOOPS_GROUP_ANONYMOUS;
 }
 
-$gpermHandler = xoops_getHandler('groupperm');
+$grouppermHandler = xoops_getHandler('groupperm');
 
 if (isset($_GET['item_id'])) {
     $perm_itemid = (int)$_GET['item_id'];
@@ -43,11 +43,11 @@ if (isset($_GET['item_id'])) {
     $perm_itemid = 0;
 }
 //If no access
-if (!$gpermHandler->checkRight('jobs_view', $perm_itemid, $groups, $module_id)) {
+if (!$grouppermHandler->checkRight('jobs_view', $perm_itemid, $groups, $module_id)) {
     redirect_header(XOOPS_URL . '/user.php', 3, _NOPERM);
 }
 // Check submit rights â€“ added line - recommended by GreenFlatDog
-$jobs_submitter = $gpermHandler->checkRight('jobs_submit', $perm_itemid, $groups, $module_id);
+$jobs_submitter = $grouppermHandler->checkRight('jobs_submit', $perm_itemid, $groups, $module_id);
 
 include XOOPS_ROOT_PATH . "/modules/$moduleDirName/class/jobtree.php";
 include XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/functions.php";

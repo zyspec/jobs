@@ -34,14 +34,14 @@ if (is_object($xoopsUser)) {
 } else {
     $groups = XOOPS_GROUP_ANONYMOUS;
 }
-$gpermHandler = xoops_getHandler('groupperm');
+$grouppermHandler = xoops_getHandler('groupperm');
 if (isset($_POST['item_id'])) {
     $perm_itemid = (int)$_POST['item_id'];
 } else {
     $perm_itemid = 0;
 }
 //If no access
-if (!$gpermHandler->checkRight('resume_submit', $perm_itemid, $groups, $module_id)) {
+if (!$grouppermHandler->checkRight('resume_submit', $perm_itemid, $groups, $module_id)) {
     redirect_header(XOOPS_URL . "/modules/$moduleDirName/resumes.php", 3, _NOPERM);
 }
 

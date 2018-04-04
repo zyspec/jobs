@@ -39,7 +39,7 @@ if (is_object($xoopsUser)) {
 } else {
     $groups = XOOPS_GROUP_ANONYMOUS;
 }
-$gpermHandler = xoops_getHandler('groupperm');
+$grouppermHandler = xoops_getHandler('groupperm');
 
 if (isset($_POST['item_id'])) {
     $perm_itemid = (int)$_POST['item_id'];
@@ -47,7 +47,7 @@ if (isset($_POST['item_id'])) {
     $perm_itemid = 0;
 }
 //If no access
-if (!$gpermHandler->checkRight('' . $moduleDirName . '_view', $perm_itemid, $groups, $module_id)) {
+if (!$grouppermHandler->checkRight('' . $moduleDirName . '_view', $perm_itemid, $groups, $module_id)) {
     redirect_header(XOOPS_URL . '/index.php', 3, _NOPERM);
 }
 
@@ -242,7 +242,7 @@ if (!empty($_POST['submit'])) {
     $private = \Xmf\Request::getInt('private', '', 'GET');
 
     //If no access
-    if (!$gpermHandler->checkRight('' . $moduleDirName . '_view', $perm_itemid, $groups, $module_id)) {
+    if (!$grouppermHandler->checkRight('' . $moduleDirName . '_view', $perm_itemid, $groups, $module_id)) {
         redirect_header(XOOPS_URL . '/index.php', 3, _NOPERM);
     }
     require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';

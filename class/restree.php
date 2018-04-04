@@ -39,7 +39,6 @@ class ResTree
      * @param $table_name
      * @param $id_name
      * @param $pid_name
-     * @return restree
      */
     public function __construct($table_name, $id_name, $pid_name)
     {
