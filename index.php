@@ -37,11 +37,7 @@ if (is_object($xoopsUser)) {
 
 $grouppermHandler = xoops_getHandler('groupperm');
 
-if (isset($_GET['item_id'])) {
-    $perm_itemid = (int)$_GET['item_id'];
-} else {
-    $perm_itemid = 0;
-}
+$perm_itemid = \Xmf\Request::getInt('item_id', 0, 'GET');
 //If no access
 if (!$grouppermHandler->checkRight('jobs_view', $perm_itemid, $groups, $module_id)) {
     redirect_header(XOOPS_URL . '/user.php', 3, _NOPERM);

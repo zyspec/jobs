@@ -49,25 +49,25 @@ if (!empty($_GET['andor'])) {
 }
 $mid = $uid = $start = 0;
 if (!empty($_GET['mid'])) {
-    $mid = (int)$_GET['mid'];
+    $mid = \Xmf\Request::getInt('mid', 0, 'GET');
 } elseif (!empty($_POST['mid'])) {
-    $mid = (int)$_POST['mid'];
+    $mid = \Xmf\Request::getInt('mid', 0, 'POST');
 }
 if (!empty($_GET['uid'])) {
-    $uid = (int)$_GET['uid'];
+    $uid = \Xmf\Request::getInt('uid', 0, 'GET');
 } elseif (!empty($_POST['uid'])) {
-    $uid = (int)$_POST['uid'];
+    $uid = \Xmf\Request::getInt('uid', 0, 'POST');
 }
 if (!empty($_GET['start'])) {
-    $start = (int)$_GET['start'];
+    $start = \Xmf\Request::getInt('start', 0, 'GET');
 } elseif (!empty($_POST['start'])) {
-    $start = (int)$_POST['start'];
+    $start = \Xmf\Request::getInt('start', 0, 'POST');
 }
 
 if (!empty($_GET['is_resume'])) {
-    $is_resume = (int)$_GET['is_resume'];
+    $is_resume = \Xmf\Request::getInt('is_resume', 0, 'GET');
 } elseif (!empty($_POST['is_resume'])) {
-    $is_resume = (int)$_POST['is_resume'];
+    $is_resume = \Xmf\Request::getInt('is_resume', 0, 'POST');
 }
 
 if (!empty($_GET['by_state'])) {
@@ -87,10 +87,10 @@ if (!empty($_GET['by_cat'])) {
 }
 
 if (!empty($_GET['issearch'])) {
-    $issearch = (int)$_GET['issearch'];
+    $issearch = \Xmf\Request::getInt('issearch', 0, 'GET');
 } else {
     if (!empty($_POST['issearch'])) {
-        $issearch = (int)$_POST['issearch'];
+        $issearch = \Xmf\Request::getInt('issearch', 0, 'POST');
     } else {
         $issearch = '';
     }

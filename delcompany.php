@@ -28,18 +28,14 @@ if (is_object($xoopsUser)) {
     $groups = XOOPS_GROUP_ANONYMOUS;
 }
 $grouppermHandler = xoops_getHandler('groupperm');
-if (isset($_POST['item_id'])) {
-    $perm_itemid = (int)$_POST['item_id'];
-} else {
-    $perm_itemid = 0;
-}
+$perm_itemid = \Xmf\Request::getInt('item_id', 0, 'POST');
 //If no access
 if (!$grouppermHandler->checkRight('jobs_submit', $perm_itemid, $groups, $module_id)) {
     redirect_header(XOOPS_URL . "/modules/$moduleDirName/index.php", 3, _NOPERM);
 }
 require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/functions.php";
 
-$comp_id = ((int)$_GET['comp_id'] > 0) ? (int)$_GET['comp_id'] : 0;
+$comp_id = (\Xmf\Request::getInt('comp_id', 0, 'GET') > 0) ? \Xmf\Request::getInt('comp_id', 0, 'GET') : 0;
 
 include XOOPS_ROOT_PATH . '/header.php';
 

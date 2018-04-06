@@ -32,11 +32,7 @@ if (is_object($xoopsUser)) {
     $groups = XOOPS_GROUP_ANONYMOUS;
 }
 $grouppermHandler = xoops_getHandler('groupperm');
-if (isset($_POST['item_id'])) {
-    $perm_itemid = (int)$_POST['item_id'];
-} else {
-    $perm_itemid = 0;
-}
+$perm_itemid = \Xmf\Request::getInt('item_id', 0, 'POST');
 //If no access
 if (!$grouppermHandler->checkRight('jobs_submit', $perm_itemid, $groups, $module_id)) {
     redirect_header(XOOPS_URL . "/modules/$moduleDirName/index.php", 3, _NOPERM);
@@ -109,7 +105,7 @@ if (!empty($_POST['submit'])) {
     $mytree = new JobTree($xoopsDB->prefix('jobs_categories'), 'cid', 'pid');
 
     $photomax1 = $helper->getConfig('jobs_maxfilesize') / 1024;
-    $lid       = ((int)$_GET['lid']);
+    $lid       = (\Xmf\Request::getInt('lid', 0, 'GET'));
 
     $result = $xoopsDB->query('SELECT lid, cid, title, status, expire, type, company, desctext, requirements, tel, price, typeprice, contactinfo, contactinfo1, contactinfo2, date, email, submitter, usid, town, state, valid, photo FROM '
                               . $xoopsDB->prefix('jobs_listing')

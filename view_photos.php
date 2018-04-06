@@ -69,11 +69,7 @@ if (!empty($xoopsUser)) {
 
     $grouppermHandler = xoops_getHandler('groupperm');
 
-    if (isset($_POST['item_id'])) {
-        $perm_itemid = (int)$_POST['item_id'];
-    } else {
-        $perm_itemid = 0;
-    }
+    $perm_itemid = \Xmf\Request::getInt('item_id', 0, 'POST');
 
     //If no access
     if (!$grouppermHandler->checkRight('jobs_premium', $perm_itemid, $groups, $module_id)) {

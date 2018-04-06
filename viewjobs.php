@@ -37,11 +37,7 @@ if (is_object($xoopsUser)) {
 
 $grouppermHandler = xoops_getHandler('groupperm');
 
-if (isset($_GET['item_id'])) {
-    $perm_itemid = (int)$_GET['item_id'];
-} else {
-    $perm_itemid = 0;
-}
+$perm_itemid = \Xmf\Request::getInt('item_id', 0, 'GET');
 //If no access
 if (!$grouppermHandler->checkRight('jobs_view', $perm_itemid, $groups, $module_id)) {
     redirect_header(XOOPS_URL . '/modules/profile/', 3, _NOPERM);
@@ -71,7 +67,7 @@ if ('1' == $helper->getConfig('jobs_show_state')) {
     $xoopsTpl->assign('show_state', '');
 }
 
-$lid = (int)$_GET['lid'];
+$lid = \Xmf\Request::getInt('lid', 0, 'GET');
 
 $result      = $xoopsDB->query('SELECT lid, cid, title, status, expire, type, company, desctext, requirements, tel, price, typeprice, contactinfo, contactinfo1, contactinfo2, date, email, submitter, usid, town, state, valid, photo, view  FROM '
                                . $xoopsDB->prefix('jobs_listing')

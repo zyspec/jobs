@@ -36,9 +36,9 @@ $statetree    = new JobTree($xoopsDB->prefix('jobs_region'), 'rid', 'pid');
 $xmid         = $xoopsModule->getVar('mid');
 
 if (!empty($_GET['is_resume'])) {
-    $is_resume = (int)$_GET['is_resume'];
+    $is_resume = \Xmf\Request::getInt('is_resume', 0, 'GET');
 } elseif (!empty($_POST['is_resume'])) {
-    $is_resume = (int)$_POST['is_resume'];
+    $is_resume = \Xmf\Request::getInt('is_resume', 0, 'POST');
 } else {
     $is_resume = '';
 }

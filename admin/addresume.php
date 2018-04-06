@@ -31,12 +31,12 @@ $myts = \MyTextSanitizer::getInstance();
 
 $module_id = $xoopsModule->getVar('mid');
 
-if (isset($_POST['cid'])) {
-    $cid = (int)$_POST['cid'];
+if (\Xmf\Request::hasVar('cid', 'POST')) {
+ $cid =  \Xmf\Request::getInt('cid', 0, 'POST');
 } else {
-    if (isset($_GET['cid'])) {
-        $cid = (int)$_GET['cid'];
-    }
+ if (\Xmf\Request::hasVar('cid', 'GET')) {
+$cid =  \Xmf\Request::getInt('cid', 0, 'GET');
+}
 }
 
 $member_usid = $xoopsUser->getVar('uid', 'E');
@@ -158,15 +158,7 @@ if (!empty($_POST['submit'])) {
 
     $mytree = new ResTree($xoopsDB->prefix('jobs_res_categories'), 'cid', 'pid');
 
-    if (isset($_POST['cid'])) {
-        $cid = (int)$_POST['cid'];
-    } else {
-        if (isset($_GET['cid'])) {
-            $cid = (int)$_GET['cid'];
-        } else {
-            $cid = 0;
-        }
-    }
+    $cid    = \Xmf\Request::getInt('cid', 0);
 
     $member_id = $xoopsUser->getVar('uid', 'E');
 

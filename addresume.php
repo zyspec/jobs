@@ -35,21 +35,17 @@ if (is_object($xoopsUser)) {
     $groups = XOOPS_GROUP_ANONYMOUS;
 }
 $grouppermHandler = xoops_getHandler('groupperm');
-if (isset($_POST['item_id'])) {
-    $perm_itemid = (int)$_POST['item_id'];
-} else {
-    $perm_itemid = 0;
-}
+$perm_itemid = \Xmf\Request::getInt('item_id', 0, 'POST');
 //If no access
 if (!$grouppermHandler->checkRight('resume_submit', $perm_itemid, $groups, $module_id)) {
     redirect_header(XOOPS_URL . "/modules/$moduleDirName/resumes.php", 3, _NOPERM);
 }
 
-if (isset($_POST['cid'])) {
-    $cid = (int)$_POST['cid'];
+if (\Xmf\Request::hasVar('cid', 'POST')) {
+    $cid = \Xmf\Request::getInt('cid', 0, 'POST');
 } else {
-    if (isset($_GET['cid'])) {
-        $cid = (int)$_GET['cid'];
+    if (\Xmf\Request::hasVar('cid', 'GET')) {
+        $cid = \Xmf\Request::getInt('cid', 0, 'GET');
     }
 }
 
@@ -174,15 +170,7 @@ if (!empty($_POST['submit'])) {
     require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
     $mytree = new ResTree($xoopsDB->prefix('jobs_categories'), 'cid', 'pid');
 
-    if (isset($_POST['cid'])) {
-        $cid = (int)$_POST['cid'];
-    } else {
-        if (isset($_GET['cid'])) {
-            $cid = (int)$_GET['cid'];
-        } else {
-            $cid = 0;
-        }
-    }
+    $cid    = \Xmf\Request::getInt('cid', 0);
 
     $member_id = $xoopsUser->getVar('uid', 'E');
 

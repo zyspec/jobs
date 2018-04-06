@@ -37,11 +37,7 @@ if (is_object($xoopsUser)) {
     $groups = XOOPS_GROUP_ANONYMOUS;
 }
 $grouppermHandler = xoops_getHandler('groupperm');
-if (isset($_POST['item_id'])) {
-    $perm_itemid = (int)$_POST['item_id'];
-} else {
-    $perm_itemid = 0;
-}
+$perm_itemid = \Xmf\Request::getInt('item_id', 0, 'POST');
 if (!$grouppermHandler->checkRight('jobs_submit', $perm_itemid, $groups, $module_id)) {
     //    redirect_header(XOOPS_URL."/user.php", 3, _NOPERM);
     redirect_header(XOOPS_URL . '/modules/jobs/resumes.php', 3, _NOPERM);
@@ -53,7 +49,7 @@ if (!$grouppermHandler->checkRight('jobs_premium', $perm_itemid, $groups, $modul
 }
 
 if (!empty($_POST['lid'])) {
-    $lid = (int)$_POST['lid'];
+    $lid = \Xmf\Request::getInt('lid', 0, 'POST');
 } else {
     $lid = \Xmf\Request::getInt('lid', 0, 'GET');
 }

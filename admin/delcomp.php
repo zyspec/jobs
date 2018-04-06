@@ -28,9 +28,9 @@ $myts = \MyTextSanitizer::getInstance();
 xoops_cp_header();
 
 if (!empty($_POST['comp_id'])) {
-    $comp_id = (int)$_POST['comp_id'];
+    $comp_id = \Xmf\Request::getInt('comp_id', 0, 'POST');
 } elseif (!empty($_GET['comp_id'])) {
-    $comp_id = (int)$_GET['comp_id'];
+    $comp_id = \Xmf\Request::getInt('comp_id', 0, 'GET');
 } else {
     $comp_id = '';
 }

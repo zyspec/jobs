@@ -168,7 +168,7 @@ if (!empty($_POST['submit'])) {
     //  echo "<fieldset><legend style='font-weight: bold; color: #900;'>"._AM_AM_JOBS_MOD_COMPANY."</legend>";
 
     $token   = $GLOBALS['xoopsSecurity']->createToken();
-    $comp_id = ((int)$_GET['comp_id'] > 0) ? (int)$_GET['comp_id'] : 0;
+    $comp_id = (\Xmf\Request::getInt('comp_id', 0, 'GET') > 0) ? \Xmf\Request::getInt('comp_id', 0, 'GET') : 0;
 
     echo "<script language=\"javascript\">\nfunction CLA(CLA) { var MainWindow = window.open (CLA, \"_blank\",\"width=500,height=300,toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,copyhistory=no\");}\n</script>";
 

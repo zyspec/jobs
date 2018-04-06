@@ -33,11 +33,7 @@ if (is_object($xoopsUser)) {
     $groups = XOOPS_GROUP_ANONYMOUS;
 }
 $grouppermHandler = xoops_getHandler('groupperm');
-if (isset($_POST['item_id'])) {
-    $perm_itemid = (int)$_POST['item_id'];
-} else {
-    $perm_itemid = 0;
-}
+$perm_itemid = \Xmf\Request::getInt('item_id', 0, 'POST');
 //If no access
 if (!$grouppermHandler->checkRight('resume_view', $perm_itemid, $groups, $module_id)) {
     redirect_header(XOOPS_URL . '/index.php', 3, _NOPERM);
@@ -61,7 +57,7 @@ if (isset($_POST['unlock'])) {
 }
 $xoopsTpl->assign('unlocked', $unlock);
 
-$lid = (int)$_GET['lid'];
+$lid = \Xmf\Request::getInt('lid', 0, 'GET');
 $xoopsTpl->assign('id', $lid);
 
 $result      = $xoopsDB->query('SELECT r.lid, r.cid, r.name, r.title, r.exp, r.expire, r.private, r.tel, r.salary, r.typeprice, r.date, r.email, r.submitter, r.usid, r.town, r.state, r.valid, r.resume, r.rphoto, r.view, c.res_lid, c.lid, c.made_resume, c.date, c.usid, p.cod_img, p.lid, p.uid_owner, p.url FROM '

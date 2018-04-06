@@ -33,11 +33,7 @@ if (is_object($xoopsUser)) {
     $groups = XOOPS_GROUP_ANONYMOUS;
 }
 $grouppermHandler = xoops_getHandler('groupperm');
-if (isset($_POST['item_id'])) {
-    $perm_itemid = (int)$_POST['item_id'];
-} else {
-    $perm_itemid = 0;
-}
+$perm_itemid = \Xmf\Request::getInt('item_id', 0, 'POST');
 //If no access
 if (!$grouppermHandler->checkRight('resume_submit', $perm_itemid, $groups, $module_id)) {
     redirect_header(XOOPS_URL . "/modules/$moduleDirName/resumes.php", 3, _NOPERM);
@@ -122,7 +118,7 @@ if (!empty($_POST['submit'])) {
     require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/class/restree.php";
     $mytree = new ResTree($xoopsDB->prefix('jobs_res_categories'), 'cid', 'pid');
 
-    $lid = (int)$_GET['lid'];
+    $lid = \Xmf\Request::getInt('lid', 0, 'GET');
 
     $resumesize  = $helper->getConfig('jobs_resumesize');
     $resumesize1 = $helper->getConfig('jobs_resumesize') / 1024;

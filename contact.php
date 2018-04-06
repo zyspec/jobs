@@ -41,11 +41,7 @@ if (is_object($xoopsUser)) {
 }
 $grouppermHandler = xoops_getHandler('groupperm');
 
-if (isset($_POST['item_id'])) {
-    $perm_itemid = (int)$_POST['item_id'];
-} else {
-    $perm_itemid = 0;
-}
+$perm_itemid = \Xmf\Request::getInt('item_id', 0, 'POST');
 //If no access
 if (!$grouppermHandler->checkRight('' . $moduleDirName . '_view', $perm_itemid, $groups, $module_id)) {
     redirect_header(XOOPS_URL . '/index.php', 3, _NOPERM);
@@ -90,16 +86,10 @@ if (!empty($_POST['submit'])) {
     //  }
     //  }
     //  }
-    if (isset($_POST['private'])) {
-        $private = (int)$_POST['private'];
-    } else {
-        $private = '';
-    }
-    if (isset($_POST['unlock'])) {
-        $unlock = (int)$_POST['unlock'];
-    } else {
-        $unlock = '';
-    }
+
+ $private = \Xmf\Request::getInt('private', '', 'POST');
+ $unlock = \Xmf\Request::getInt('unlock', '', 'POST');
+
 
     $result = $xoopsDB->query('SELECT lid, email, submitter, title, type, company, desctext, requirements, usid FROM  ' . $xoopsDB->prefix('jobs_listing') . ' WHERE lid = ' . $xoopsDB->escape($id) . '');
 

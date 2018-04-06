@@ -59,11 +59,7 @@ if (isset($_POST['submit'])) {
         $groups = XOOPS_GROUP_ANONYMOUS;
     }
     $grouppermHandler = xoops_getHandler('groupperm');
-    if (isset($_POST['item_id'])) {
-        $perm_itemid = (int)$_POST['item_id'];
-    } else {
-        $perm_itemid = 0;
-    }
+    $perm_itemid = \Xmf\Request::getInt('item_id', 0, 'POST');
     //If no access
     if (!$grouppermHandler->checkRight('' . $moduleDirName . '_view', $perm_itemid, $groups, $module_id)) {
         redirect_header(XOOPS_URL . '/index.php', 3, _NOPERM);
@@ -149,11 +145,7 @@ if (isset($_POST['submit'])) {
         $groups = XOOPS_GROUP_ANONYMOUS;
     }
     $grouppermHandler = xoops_getHandler('groupperm');
-    if (isset($_POST['item_id'])) {
-        $perm_itemid = (int)$_POST['item_id'];
-    } else {
-        $perm_itemid = 0;
-    }
+    $perm_itemid = \Xmf\Request::getInt('item_id', 0, 'POST');
     //If no access
     if (!$grouppermHandler->checkRight('' . $moduleDirName . '_view', $perm_itemid, $groups, $module_id)) {
         redirect_header(XOOPS_URL . '/index.php', 3, _NOPERM);

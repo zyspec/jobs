@@ -37,11 +37,7 @@ if (is_object($xoopsUser)) {
     $groups = XOOPS_GROUP_ANONYMOUS;
 }
 $grouppermHandler = xoops_getHandler('groupperm');
-if (isset($_GET['item_id'])) {
-    $perm_itemid = (int)$_GET['item_id'];
-} else {
-    $perm_itemid = 0;
-}
+$perm_itemid = \Xmf\Request::getInt('item_id', 0, 'GET');
 //If no access
 if (!$grouppermHandler->checkRight('jobs_view', $perm_itemid, $groups, $module_id)) {
     redirect_header(XOOPS_URL . '/modules/profile/', 3, _NOPERM);
@@ -60,7 +56,7 @@ $default_sort = $helper->getConfig('jobs_listing_sortorder');
 
 $default_orderby = 'dateD';
 
-$cid     = (int)$_GET['cid'];
+$cid     = \Xmf\Request::getInt('cid', 0, 'GET');
 $min     = !isset($_REQUEST['min']) ? null : $_REQUEST['min'];
 $show    = !isset($_REQUEST['show']) ? null : $_REQUEST['show'];
 $orderby = !isset($_REQUEST['orderby']) ? $default_orderby : $_REQUEST['orderby'];
@@ -315,7 +311,7 @@ if (0 == $trows) { // the zero option added
         $xoopsTpl->append('items', $a_item);
     }
 
-    $cid = (int)$_GET['cid'];
+    $cid = \Xmf\Request::getInt('cid', 0, 'GET');
 
     $orderby = jobs_convertorderby($orderby);
 

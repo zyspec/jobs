@@ -34,11 +34,7 @@ if (is_object($xoopsUser)) {
     $groups = XOOPS_GROUP_ANONYMOUS;
 }
 $grouppermHandler = xoops_getHandler('groupperm');
-if (isset($_POST['item_id'])) {
-    $perm_itemid = (int)$_POST['item_id'];
-} else {
-    $perm_itemid = 0;
-}
+$perm_itemid = \Xmf\Request::getInt('item_id', 0, 'POST');
 if (!$grouppermHandler->checkRight('jobs_submit', $perm_itemid, $groups, $module_id)) {
     redirect_header(XOOPS_URL . '/index.php', 3, _NOPERM);
 }
@@ -50,18 +46,19 @@ if (!$grouppermHandler->checkRight('jobs_premium', $perm_itemid, $groups, $modul
 
 $mytree = new JobTree($xoopsDB->prefix('jobs_categories'), 'cid', 'pid');
 
-if (isset($_POST['cid'])) {
-    $cid = (int)$_POST['cid'];
+if (\Xmf\Request::hasVar('cid', 'POST')) {
+    $cid = \Xmf\Request::getInt('cid', 0, 'POST');
 } else {
-    if (isset($_GET['cid'])) {
-        $cid = (int)$_GET['cid'];
+    if (\Xmf\Request::hasVar('cid', 'GET')) {
+        $cid = \Xmf\Request::getInt('cid', 0, 'GET');
     }
 }
-if (isset($_POST['comp_id'])) {
-    $comp_id = (int)$_POST['comp_id'];
+
+if (\Xmf\Request::hasVar('comp_id', 'POST')) {
+    $comp_id = \Xmf\Request::getInt('comp_id', 0, 'POST');
 } else {
-    if (isset($_GET['comp_id'])) {
-        $comp_id = (int)$_GET['comp_id'];
+    if (\Xmf\Request::hasVar('comp_id', 'GET')) {
+        $comp_id = \Xmf\Request::getInt('comp_id', 0, 'GET');
     }
 }
 
@@ -183,15 +180,7 @@ if (!empty($_POST['submit'])) {
 
     require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
-    if (isset($_POST['cid'])) {
-        $cid = (int)$_POST['cid'];
-    } else {
-        if (isset($_GET['cid'])) {
-            $cid = (int)$_GET['cid'];
-        } else {
-            $cid = 0;
-        }
-    }
+    $cid    = \Xmf\Request::getInt('cid', 0);
 
     $member_usid  = $xoopsUser->uid();
     $member_email = $xoopsUser->getVar('email', 'E');

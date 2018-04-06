@@ -132,7 +132,7 @@ if ($trows > '0') {
         ]);
     }
 
-    $lid = (int)$_GET['lid'];
+    $lid = \Xmf\Request::getInt('lid', 0, 'GET');
     //Calculates how many pages exist.  Which page one should be on, etc...
     $linkpages = ceil($trows / $show);
     //Page Numbering

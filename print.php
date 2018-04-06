@@ -204,9 +204,9 @@ function Rprint($lid = 0)
 ##############################################################
 
 if (!isset($_POST['lid']) && isset($_GET['lid'])) {
-    $lid = (int)$_GET['lid'];
+    $lid = \Xmf\Request::getInt('lid', 0, 'GET');
 } else {
-    $lid = (int)$_POST['lid'];
+    $lid = \Xmf\Request::getInt('lid', 0, 'POST');
 }
 
 $op = '';

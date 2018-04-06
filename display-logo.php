@@ -9,8 +9,8 @@
 // Licence Type   : GPL
 // ------------------------------------------------------------------------- //
 include __DIR__ . '/header.php';
-if (isset($_GET['comp_id'])) {
-    $comp_id = (int)$_GET['comp_id'];
+if (\Xmf\Request::hasVar('comp_id', 'GET')) {
+ $comp_id = \Xmf\Request::getInt('comp_id', 0, 'GET');
 } else {
     redirect_header('index.php', 3, _JOBS_VALIDATE_FAILED);
 }

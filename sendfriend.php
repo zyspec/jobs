@@ -331,9 +331,9 @@ $fname = !empty($_POST['fname']) ? $myts->addSlashes($_POST['fname']) : '';
 $fmail = !empty($_POST['fmail']) ? $myts->addSlashes($_POST['fmail']) : '';
 
 if (!isset($_POST['lid']) && isset($_GET['lid'])) {
-    $lid = (int)$_GET['lid'];
+    $lid = \Xmf\Request::getInt('lid', 0, 'GET');
 } else {
-    $lid = (int)$_POST['lid'];
+    $lid = \Xmf\Request::getInt('lid', 0, 'POST');
 }
 
 $op = '';

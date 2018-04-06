@@ -112,7 +112,7 @@ if (!empty($_POST['submit'])) {
 
     $GLOBALS['xoopsSecurity']->getTokenHTML();
 
-    $lid = (int)$_GET['lid'];
+    $lid = \Xmf\Request::getInt('lid', 0, 'GET');
 
     $resumesize  = $helper->getConfig('jobs_resumesize');
     $resumesize1 = $helper->getConfig('jobs_resumesize') / 1024;
