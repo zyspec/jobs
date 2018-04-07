@@ -26,16 +26,14 @@
 // ------------------------------------------------------------------------- //
 
 use XoopsModules\Jobs;
-/** @var Jobs\Helper $helper */
-$helper = Jobs\Helper::getInstance();
 
 //include("admin_header.php");
 require_once __DIR__ . '/../../../include/cp_header.php';
 $moduleDirName = basename(dirname(__DIR__));
-
+/** @var Jobs\Helper $helper */
+$helper = Jobs\Helper::getInstance();
 //require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/gtickets.php";
 require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/functions.php";
-require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/class/jobtree.php";
 $myts = \MyTextSanitizer::getInstance();
 #  function NewCat
 #####################################################
@@ -48,7 +46,7 @@ function NewCat($cat)
     /** @var Jobs\Helper $helper */
     $helper = Jobs\Helper::getInstance();
 
-    $mytree = new JobTree($xoopsDB->prefix('jobs_categories'), 'cid', 'pid');
+    $mytree = new Jobs\JobTree($xoopsDB->prefix('jobs_categories'), 'cid', 'pid');
 
     require_once __DIR__ . '/admin_header.php';
     xoops_cp_header();
@@ -93,7 +91,7 @@ function NewCat($cat)
 
     echo '<tr><td>' . _AM_JOBS_DISPLPRICE2 . ' </td><td><input type="radio" name="affprice" value="1" checked>' . _AM_JOBS_OUI . '&nbsp;&nbsp; <input type="radio" name="affprice" value="0">' . _AM_JOBS_NON . ' (' . _AM_JOBS_INTHISCAT . ')</td></tr>';
 
-    if ($helper->getConfig('jobs_cat_sortorder') = 'ordre') {
+    if ('ordre' == $helper->getConfig('jobs_cat_sortorder')) {
         echo '<tr><td>' . _AM_JOBS_ORDRE . ' </td><td><input type="text" name="ordre" size="4"></td></tr><tr><td><br><input type="submit" value="' . _AM_JOBS_ADD . '"></td></tr>';
     } else {
         echo '<tr><td><br><input type="submit" value="' . _AM_JOBS_ADD . '"></td></tr>';
@@ -115,7 +113,7 @@ function ModCat($cat)
     /** @var Jobs\Helper $helper */
     $helper = Jobs\Helper::getInstance();
 
-    $mytree = new JobTree($xoopsDB->prefix('jobs_categories'), 'cid', 'pid');
+    $mytree = new Jobs\JobTree($xoopsDB->prefix('jobs_categories'), 'cid', 'pid');
 
     require_once __DIR__ . '/admin_header.php';
     xoops_cp_header();
@@ -169,7 +167,7 @@ function ModCat($cat)
     }
     echo '>' . _AM_JOBS_NON . ' (' . _AM_JOBS_INTHISCAT . ')</td></tr>';
 
-    if ($helper->getConfig('jobs_cat_sortorder') = 'ordre') {
+    if ('ordre' == $helper->getConfig('jobs_cat_sortorder')) {
         echo '<tr><td>' . _AM_JOBS_ORDRE . " </td><td><input type=\"text\" name=\"ordre\" size=\"4\" value=\"$ordre\"></td></tr>";
     } else {
         echo "<input type=\"hidden\" name=\"ordre\" value=\"$ordre\">";
@@ -264,7 +262,7 @@ function NewResCat($cat)
     /** @var Jobs\Helper $helper */
     $helper = Jobs\Helper::getInstance();
 
-    $mytree = new JobTree($xoopsDB->prefix('jobs_res_categories'), 'cid', 'pid');
+    $mytree = new Jobs\JobTree($xoopsDB->prefix('jobs_res_categories'), 'cid', 'pid');
 
     require_once __DIR__ . '/admin_header.php';
     xoops_cp_header();
@@ -308,7 +306,7 @@ function NewResCat($cat)
 
     echo '<tr><td>' . _AM_JOBS_DISPLPRICE2 . ' </td><td><input type="radio" name="affprice" value="1" checked>' . _AM_JOBS_OUI . '&nbsp;&nbsp; <input type="radio" name="affprice" value="0">' . _AM_JOBS_NON . ' (' . _AM_JOBS_INTHISCAT . ')</td></tr>';
 
-    if ($helper->getConfig('jobs_cat_sortorder') = 'ordre') {
+    if ('ordre' == $helper->getConfig('jobs_cat_sortorder')) {
         echo '<tr><td>' . _AM_JOBS_ORDRE . ' </td><td><input type="text" name="ordre" size="4"></td></tr><tr><td><br><input type="submit" value="' . _AM_JOBS_ADD . '"></td></tr>';
     } else {
         echo '<tr><td><br><input type="submit" value="' . _AM_JOBS_ADD . '"></td></tr>';
@@ -331,7 +329,7 @@ function ModResCat($cat)
     /** @var Jobs\Helper $helper */
     $helper = Jobs\Helper::getInstance();
 
-    $mytree = new JobTree($xoopsDB->prefix('jobs_res_categories'), 'cid', 'pid');
+    $mytree = new Jobs\JobTree($xoopsDB->prefix('jobs_res_categories'), 'cid', 'pid');
 
     require_once __DIR__ . '/admin_header.php';
     xoops_cp_header();
@@ -386,7 +384,7 @@ function ModResCat($cat)
     }
     echo '>' . _AM_JOBS_NON . ' (' . _AM_JOBS_INTHISCAT . ')</td></tr>';
 
-    if ($helper->getConfig('jobs_cat_sortorder') = 'ordre') {
+    if ('ordre' == $helper->getConfig('jobs_cat_sortorder')) {
         echo '<tr><td>' . _AM_JOBS_ORDRE . " </td><td><input type=\"text\" name=\"ordre\" size=\"4\" value=\"$ordre\"></td></tr>";
     } else {
         echo "<input type=\"hidden\" name=\"ordre\" value=\"$ordre\">";

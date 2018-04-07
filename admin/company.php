@@ -22,8 +22,6 @@ require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/functions.php";
 
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
-require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/class/jobtree.php";
-
 $myts = \MyTextSanitizer::getInstance();
 
 require_once __DIR__ . '/admin_header.php';

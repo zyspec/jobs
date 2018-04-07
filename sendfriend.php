@@ -26,10 +26,11 @@
 // ------------------------------------------------------------------------- //
 
 use XoopsModules\Jobs;
-/** @var Jobs\Helper $helper */
-$helper = Jobs\Helper::getInstance();
 
 include __DIR__ . '/header.php';
+
+/** @var Jobs\Helper $helper */
+$helper = Jobs\Helper::getInstance();
 
 if (empty($xoopsUser)) {
     redirect_header(XOOPS_URL . '/user.php', 2, _NOPERM);

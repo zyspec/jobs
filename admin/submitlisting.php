@@ -17,12 +17,13 @@
  */
 
 use XoopsModules\Jobs;
-/** @var Jobs\Helper $helper */
-$helper = Jobs\Helper::getInstance();
+
 
 require_once __DIR__ . '/admin_header.php';
 $moduleDirName = basename(dirname(__DIR__));
 $myts          = \MyTextSanitizer::getInstance(); // MyTextSanitizer object
+/** @var Jobs\Helper $helper */
+$helper = Jobs\Helper::getInstance();
 
 require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/functions.php";
 
@@ -42,9 +43,8 @@ if (!$grouppermHandler->checkRight('jobs_premium', $perm_itemid, $groups, $modul
 } else {
     $premium = '1';
 }
-require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/class/jobtree.php";
-$mytree      = new JobTree($xoopsDB->prefix('jobs_categories'), 'cid', 'pid');
-$companytree = new JobTree($xoopsDB->prefix('jobs_companies'), 'comp_id', 'comp_pid');
+$mytree      = new Jobs\JobTree($xoopsDB->prefix('jobs_categories'), 'cid', 'pid');
+$companytree = new Jobs\JobTree($xoopsDB->prefix('jobs_companies'), 'comp_id', 'comp_pid');
 
 $cid    = \Xmf\Request::getInt('cid', 0);
 $comp_id    = \Xmf\Request::getInt('comp_id', '');
@@ -163,7 +163,7 @@ if (!empty($_POST['submit'])) {
 
     require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
-    $mytree = new JobTree($xoopsDB->prefix('jobs_categories'), 'cid', 'pid');
+    $mytree = new Jobs\JobTree($xoopsDB->prefix('jobs_categories'), 'cid', 'pid');
 
     $cid    = \Xmf\Request::getInt('cid', 0, 'POST');
 

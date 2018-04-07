@@ -17,12 +17,12 @@
  */
 
 use XoopsModules\Jobs;
-/** @var Jobs\Helper $helper */
-$helper = Jobs\Helper::getInstance();
+
 
 include __DIR__ . '/header.php';
 $moduleDirName = basename(__DIR__);
-
+/** @var Jobs\Helper $helper */
+$helper = Jobs\Helper::getInstance();
 $myts      = \MyTextSanitizer::getInstance();
 $module_id = $xoopsModule->getVar('mid');
 if (is_object($xoopsUser)) {
@@ -63,11 +63,9 @@ if (!empty($_POST['submit'])) {
     if (!$GLOBALS['xoopsSecurity']->check(true, $_REQUEST['token'])) {
         redirect_header(XOOPS_URL . "/modules/$moduleDirName/index.php", 3, implode('<br>', $GLOBALS['xoopsSecurity']->getErrors()));
     }
-    if (!empty($_POST['comp_img_old'])) {
-        $comp_img_old = $_POST['comp_img_old'];
-    } else {
-        $comp_img_old = '';
-    }
+
+    $comp_img_old = \Xmf\Request::getString('comp_img_old', '' , 'POST');
+
 
     $destination = XOOPS_ROOT_PATH . "/modules/$moduleDirName/logo_images";
     $photomax    = $helper->getConfig('jobs_maxfilesize');
@@ -187,8 +185,7 @@ if (!empty($_POST['submit'])) {
     $GLOBALS['xoopsOption']['template_main'] = 'jobs_modcompany.tpl';
     include XOOPS_ROOT_PATH . '/header.php';
     require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-    require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/class/jobtree.php";
-    $mytree = new JobTree($xoopsDB->prefix('jobs_categories'), 'cid', 'pid');
+    $mytree = new Jobs\JobTree($xoopsDB->prefix('jobs_categories'), 'cid', 'pid');
 
     $token   = $GLOBALS['xoopsSecurity']->createToken();
     $comp_id = (\Xmf\Request::getInt('comp_id', 0, 'GET') > 0) ? \Xmf\Request::getInt('comp_id', 0, 'GET') : 0;

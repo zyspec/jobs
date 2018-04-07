@@ -22,14 +22,12 @@ use XoopsModules\Jobs;
 require_once __DIR__ . '/../../../include/cp_header.php';
 require_once $GLOBALS['xoops']->path('www/class/xoopsformloader.php');
 require_once __DIR__ . '/../include/functions.php';
+require_once __DIR__ . '/../include/common.php';
 
 $moduleDirName = basename(dirname(__DIR__));
-$helper = Jobs\Helper::getInstance();
-$adminObject = \Xmf\Module\Admin::getInstance();
-
-$pathIcon16    = \Xmf\Module\Admin::iconUrl('', 16);
-$pathIcon32    = \Xmf\Module\Admin::iconUrl('', 32);
-$pathModIcon32 = $helper->getModule()->getInfo('modicons32');
+/** @var Jobs\Helper $helper */
+$helper        = Jobs\Helper::getInstance();
+$adminObject   = \Xmf\Module\Admin::getInstance();
 
 // Load language files
 $helper->loadLanguage('admin');
@@ -44,7 +42,7 @@ if (!isset($GLOBALS['xoopsTpl']) || !($GLOBALS['xoopsTpl'] instanceof XoopsTpl))
 }
 
 //load handlers
-$jobs_priceHandler              = xoops_getModuleHandler('jobs_jobs_price', $moduleDirName);
-$jobs_typeHandler               = xoops_getModuleHandler('jobs_jobs_type', $moduleDirName);
-$jobsJobs_categoriesHandler     = xoops_getModuleHandler('jobs_categories', $moduleDirName);
-$jobsJobs_res_categoriesHandler = xoops_getModuleHandler('jobs_res_categories', $moduleDirName);
+$priceHandler          = Jobs\Helper::getInstance()->getHandler('Price');
+$typeHandler           = Jobs\Helper::getInstance()->getHandler('JobType');
+$categoriesHandler     = Jobs\Helper::getInstance()->getHandler('JobCategory');
+$resumeCategoryHandler = Jobs\Helper::getInstance()->getHandler('ResumeCategory');

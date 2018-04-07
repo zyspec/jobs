@@ -17,11 +17,10 @@
  */
 
 use XoopsModules\Jobs;
-/** @var Jobs\Helper $helper */
-$helper = Jobs\Helper::getInstance();
 
 include __DIR__ . '/header.php';
-
+/** @var Jobs\Helper $helper */
+$helper = Jobs\Helper::getInstance();
 $moduleDirName = basename(__DIR__);
 //require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/gtickets.php";
 include XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/functions.php";

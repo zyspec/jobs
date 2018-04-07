@@ -16,6 +16,8 @@
  * @author      XOOPS Development Team
  */
 
+use XoopsModules\Jobs;
+
 require_once __DIR__ . '/admin_header.php';
 //It recovered the value of argument op in URL$
 //$op = test1_CleanVars($_REQUEST, 'op', 'list', 'string');
@@ -37,8 +39,8 @@ switch ($op) {
         $criteria = new \CriteriaCompo();
         $criteria->setSort('cid');
         $criteria->setOrder('ASC');
-        $numrows      = $jobsJobs_res_categoriesHandler->getCount();
-        $category_arr = $jobsJobs_res_categoriesHandler->getAll($criteria);
+        $numrows      = $resumeCategoryHandler->getCount();
+        $category_arr = $resumeCategoryHandler->getAll($criteria);
 
         //Function that allows display child categories
         /**
@@ -51,7 +53,7 @@ switch ($op) {
         function resumeCategoryDisplayChildren($cid = 0, $category_arr, $prefix = '', $order = '', &$class)
         {
             global $pathIcon16;
-            $jobsJobs_res_categoriesHandler = xoops_getModuleHandler('Jobs_res_categories', 'jobs');
+            $resumeCategoryHandler =  Jobs\Helper::getInstance()->getHandler('ResumeCategory');
             $prefix                         = $prefix . "&nbsp;<img src='" . XOOPS_URL . "/modules/jobs/assets/images/arrow.gif'>";
             foreach (array_keys($category_arr) as $i) {
                 $cid   = $category_arr[$i]->getVar('cid');
@@ -78,8 +80,8 @@ switch ($op) {
                 $criteria->add(new \Criteria('pid', $category_arr[$i]->getVar('cid')));
                 $criteria->setSort('title');
                 $criteria->setOrder('ASC');
-                $pid     = $jobsJobs_res_categoriesHandler->getAll($criteria);
-                $num_pid = $jobsJobs_res_categoriesHandler->getCount();
+                $pid     = $resumeCategoryHandler->getAll($criteria);
+                $num_pid = $resumeCategoryHandler->getCount();
                 if (0 != $num_pid) {
                     resumeCategoryDisplayChildren($cid, $pid, $prefix, $order, $class);
                 }
@@ -123,8 +125,8 @@ switch ($op) {
                     $criteria->add(new \Criteria('pid', $cid));
                     $criteria->setSort('title');
                     $criteria->setOrder('ASC');
-                    $pid     = $jobsJobs_res_categoriesHandler->getAll($criteria);
-                    $num_pid = $jobsJobs_res_categoriesHandler->getCount();
+                    $pid     = $resumeCategoryHandler->getAll($criteria);
+                    $num_pid = $resumeCategoryHandler->getCount();
 
                     if (0 != $num_pid) {
                         resumeCategoryDisplayChildren($cid, $pid, $prefix, 'title', $class);
@@ -144,7 +146,7 @@ switch ($op) {
         $adminObject->addItemButton(_AM_JOBS_RES_CATEGORYLIST, 'resumes.php', 'list');
         $adminObject->displayButton('left', '');
 
-        $obj  = $jobsJobs_res_categoriesHandler->create();
+        $obj  = $resumeCategoryHandler->create();
         $form = $obj->getForm();
         $form->display();
         break;
@@ -154,9 +156,9 @@ switch ($op) {
             redirect_header('resumes.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
         }
         if (isset($_REQUEST['cid'])) {
-            $obj = $jobsJobs_res_categoriesHandler->get($_REQUEST['cid']);
+            $obj = $resumeCategoryHandler->get($_REQUEST['cid']);
         } else {
-            $obj = $jobsJobs_res_categoriesHandler->create();
+            $obj = $resumeCategoryHandler->create();
         }
 
         //Form category_pid
@@ -186,7 +188,7 @@ switch ($op) {
         //Form category_color
         $obj->setVar('affprice', $_REQUEST['affprice']);
 
-        if ($jobsJobs_res_categoriesHandler->insert($obj)) {
+        if ($resumeCategoryHandler->insert($obj)) {
             redirect_header('resumes.php', 2, _AM_JOBS_FORMOK);
         }
 
@@ -202,19 +204,19 @@ switch ($op) {
         //$adminObject->addItemButton(_AM_JOBS_NEWCATEGORY, 'resume_categories.php?op=new_category', 'add');
         $adminObject->addItemButton(_AM_JOBS_CATEGORYLIST, 'resumes.php', 'list');
         $adminObject->displayButton('left', '');
-        $obj  = $jobsJobs_res_categoriesHandler->get($_REQUEST['cid']);
+        $obj  = $resumeCategoryHandler->get($_REQUEST['cid']);
         $form = $obj->getForm();
         $form->display();
         break;
 
     case 'delete_category':
         xoops_cp_header();
-        $obj = $jobsJobs_res_categoriesHandler->get($_REQUEST['cid']);
+        $obj = $resumeCategoryHandler->get($_REQUEST['cid']);
         if (isset($_REQUEST['ok']) && 1 == $_REQUEST['ok']) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 redirect_header('resumes.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
             }
-            if ($jobsJobs_res_categoriesHandler->delete($obj)) {
+            if ($resumeCategoryHandler->delete($obj)) {
                 redirect_header('resumes.php', 3, _AM_JOBS_FORMDELOK);
             } else {
                 echo $obj->getHtmlErrors();

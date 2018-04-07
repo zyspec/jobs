@@ -16,6 +16,8 @@
  * @author      XOOPS Development Team
  */
 
+use XoopsModules\Jobs;
+
 require_once __DIR__ . '/../../../include/cp_header.php';
 $moduleDirName = basename(dirname(__DIR__));
 require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/functions.php";
@@ -61,7 +63,7 @@ function Region()
         $result1 = $xoopsDB->query($sql, $show, $start);
         echo '<table border=1 width=100% cellpadding=2 cellspacing=0 border=0><td><tr>';
         if ($crows > 0) {
-            $nav = new \XoopsPageNav($crows, $showonpage, $start, 'start', 'op=Region');
+            $nav = new Jobs\PageNav($crows, $showonpage, $start, 'start', 'op=Region');
             //  echo "<fieldset><legend style='font-weight: bold; color: #900;'>"._AM_JOBS_MAN_REGION."</legend>";
             //  echo "<br>"._AM_JOBS_THEREIS." <b>$crows</b> "._AM_JOBS_REGIONS."<br><br>";
             //  echo "<fieldset><legend style='font-weight: bold; color:#900;'>"._AM_JOBS_ADD_REGION."</legend>";

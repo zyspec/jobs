@@ -17,11 +17,10 @@
  */
 
 use XoopsModules\Jobs;
-/** @var Jobs\Helper $helper */
-$helper = Jobs\Helper::getInstance();
 
 include __DIR__ . '/header.php';
-
+/** @var Jobs\Helper $helper */
+$helper = Jobs\Helper::getInstance();
 if (empty($xoopsUser)) {
     redirect_header(XOOPS_URL . '/user.php', 2, _NOPERM);
 }
@@ -29,8 +28,7 @@ if (empty($xoopsUser)) {
 $moduleDirName = basename(__DIR__);
 include XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/functions.php";
 $myts = \MyTextSanitizer::getInstance(); // MyTextSanitizer object
-require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/class/jobtree.php";
-$mytree                                  = new JobTree($xoopsDB->prefix('jobs_categories'), 'cid', 'pid');
+$mytree                                  = new Jobs\JobTree($xoopsDB->prefix('jobs_categories'), 'cid', 'pid');
 $lid                                     = \Xmf\Request::getInt('lid', 0, 'GET');
 $GLOBALS['xoopsOption']['template_main'] = 'jobs_replies.tpl';
 include XOOPS_ROOT_PATH . '/header.php';

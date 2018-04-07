@@ -22,8 +22,6 @@ require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/functions.php";
 
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
-require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/class/jobtree.php";
-
 $myts = \MyTextSanitizer::getInstance();
 
 require_once __DIR__ . '/admin_header.php';
@@ -58,7 +56,7 @@ if ($crows > '0') {
     echo '<table border=1 width=100% cellpadding=2 cellspacing=0 border=0><td><tr>';
 
     if ($crows > 0) {
-        $nav = new \XoopsPageNav($crows, $showonpage, $start, 'start', 'op=Region');
+        $nav = new Jobs\PageNav($crows, $showonpage, $start, 'start', 'op=Region');
         echo '<br>' . _AM_JOBS_THEREIS . " <b>$crows</b> " . _AM_JOBS_JOBLISTINGS . '<br><br>';
         echo $nav->renderNav();
 

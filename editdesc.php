@@ -17,8 +17,7 @@
  */
 
 use XoopsModules\Jobs;
-/** @var Jobs\Helper $helper */
-$helper = Jobs\Helper::getInstance();
+
 
 $moduleDirName = basename(dirname(__DIR__));
 $main_lang     = '_' . strtoupper($moduleDirName);
@@ -29,7 +28,8 @@ $main_lang     = '_' . strtoupper($moduleDirName);
 include __DIR__ . '/../../mainfile.php';
 require_once XOOPS_ROOT_PATH . '/header.php';
 require_once XOOPS_ROOT_PATH . '/class/criteria.php';
-
+/** @var Jobs\Helper $helper */
+$helper = Jobs\Helper::getInstance();
 /**
  * Include modules classes
  */
@@ -70,7 +70,7 @@ if (1 == $marker) {
     /**
      * Creating the factory  loading the picture changing its caption
      */
-    $picture_factory = new \Xoopsjlm_picturesHandler($xoopsDB);
+    $picture_factory = new Jobs\PicturesHandler($xoopsDB);
     $picture         = $picture_factory->create(false);
     $picture->load($_POST['cod_img']);
     $picture->setVar('title', $_POST['caption']);
@@ -92,7 +92,7 @@ if (1 == $marker) {
  * Creating the factory  and the criteria to edit the desc of the picture
  * The user must be the owner
  */
-$album_factory = new \Xoopsjlm_picturesHandler($xoopsDB);
+$album_factory = new Jobs\PicturesHandler($xoopsDB);
 $criteria_img  = new \Criteria('cod_img', $cod_img);
 $uid           = $xoopsUser->getVar('uid');
 $criteria_uid  = new \Criteria('uid_owner', $uid);

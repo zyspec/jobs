@@ -17,13 +17,15 @@
  */
 
 use XoopsModules\Jobs;
-/** @var Jobs\Helper $helper */
-$helper = Jobs\Helper::getInstance();
 
 require_once __DIR__ . '/admin_header.php';
 //It recovered the value of argument op in URL$
 //$op = test1_CleanVars($_REQUEST, 'op', 'list', 'string');
 //xoops_cp_header();
+
+/** @var Jobs\Helper $helper */
+$helper = Jobs\Helper::getInstance();
+
 if (isset($_REQUEST['op'])) {
     $op = $_REQUEST['op'];
 } else {
@@ -42,8 +44,8 @@ switch ($op) {
         $criteria = new \CriteriaCompo();
         $criteria->setSort('cid');
         $criteria->setOrder('ASC');
-        $numrows      = $jobsJobs_categoriesHandler->getCount();
-        $category_arr = $jobsJobs_categoriesHandler->getAll($criteria);
+        $numrows      = $categoriesHandler->getCount();
+        $category_arr = $categoriesHandler->getAll($criteria);
 
         //Function that allows display child categories
         /**
@@ -56,7 +58,7 @@ switch ($op) {
         function jobsCategoryDisplayChildren($cid = 0, $category_arr, $prefix = '', $order = '', &$class)
         {
             global $pathIcon16;
-            $jobsJobs_categoriesHandler = xoops_getModuleHandler('Jobs_categories', 'jobs');
+            $categoriesHandler =  Jobs\Helper::getInstance()->getHandler('JobCategory');
             $prefix                     = $prefix . "&nbsp;<img src='" . XOOPS_URL . "/modules/jobs/assets/images/arrow.gif'>";
             foreach (array_keys($category_arr) as $i) {
                 $cid   = $category_arr[$i]->getVar('cid');
@@ -85,8 +87,8 @@ switch ($op) {
                 $criteria->add(new \Criteria('pid', $category_arr[$i]->getVar('cid')));
                 $criteria->setSort('title');
                 $criteria->setOrder('ASC');
-                $pid     = $jobsJobs_categoriesHandler->getAll($criteria);
-                $num_pid = $jobsJobs_categoriesHandler->getCount();
+                $pid     = $categoriesHandler->getAll($criteria);
+                $num_pid = $categoriesHandler->getCount();
                 if (0 != $num_pid) {
                     jobsCategoryDisplayChildren($cid, $pid, $prefix, $order, $class);
                 }
@@ -130,8 +132,8 @@ switch ($op) {
                     $criteria->add(new \Criteria('pid', $cid));
                     $criteria->setSort('title');
                     $criteria->setOrder('ASC');
-                    $pid     = $jobsJobs_categoriesHandler->getAll($criteria);
-                    $num_pid = $jobsJobs_categoriesHandler->getCount();
+                    $pid     = $categoriesHandler->getAll($criteria);
+                    $num_pid = $categoriesHandler->getCount();
 
                     if (0 != $num_pid) {
                         jobsCategoryDisplayChildren($cid, $pid, $prefix, 'title', $class);
@@ -151,7 +153,7 @@ switch ($op) {
         $adminObject->addItemButton(_AM_JOBS_CATEGORYLIST, 'jobs.php', 'list');
         $adminObject->displayButton('left', '');
 
-        $obj  = $jobsJobs_categoriesHandler->create();
+        $obj  = $categoriesHandler->create();
         $form = $obj->getForm();
         $form->display();
         break;
@@ -161,9 +163,9 @@ switch ($op) {
             redirect_header('jobs.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
         }
         if (isset($_REQUEST['cid'])) {
-            $obj = $jobsJobs_categoriesHandler->get($_REQUEST['cid']);
+            $obj = $categoriesHandler->get($_REQUEST['cid']);
         } else {
-            $obj = $jobsJobs_categoriesHandler->create();
+            $obj = $categoriesHandler->create();
         }
 
         //Form category_pid
@@ -197,7 +199,7 @@ switch ($op) {
         //Form category_color
         $obj->setVar('affprice', $_REQUEST['affprice']);
 
-        if ($jobsJobs_categoriesHandler->insert($obj)) {
+        if ($categoriesHandler->insert($obj)) {
             redirect_header('jobs.php', 2, _AM_JOBS_FORMOK);
         }
 
@@ -213,19 +215,19 @@ switch ($op) {
         //    $adminObject->addItemButton(_AM_JOBS_NEWCATEGORY, 'job_categories.php?op=new_category', 'add');
         $adminObject->addItemButton(_AM_JOBS_CATEGORYLIST, 'jobs.php', 'list');
         $adminObject->displayButton('left', '');
-        $obj  = $jobsJobs_categoriesHandler->get($_REQUEST['cid']);
+        $obj  = $categoriesHandler->get($_REQUEST['cid']);
         $form = $obj->getForm();
         $form->display();
         break;
 
     case 'delete_category':
         xoops_cp_header();
-        $obj = $jobsJobs_categoriesHandler->get($_REQUEST['cid']);
+        $obj = $categoriesHandler->get($_REQUEST['cid']);
         if (isset($_REQUEST['ok']) && 1 == $_REQUEST['ok']) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 redirect_header('jobs.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
             }
-            if ($jobsJobs_categoriesHandler->delete($obj)) {
+            if ($categoriesHandler->delete($obj)) {
                 redirect_header('jobs.php', 3, _AM_JOBS_FORMDELOK);
             } else {
                 echo $obj->getHtmlErrors();

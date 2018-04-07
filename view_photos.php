@@ -18,8 +18,6 @@
  */
 
 use XoopsModules\Jobs;
-/** @var Jobs\Helper $helper */
-$helper = Jobs\Helper::getInstance();
 
 $moduleDirName = basename(__DIR__);
 $main_lang     = '_' . strtoupper($moduleDirName);
@@ -30,6 +28,9 @@ $main_lang     = '_' . strtoupper($moduleDirName);
 include __DIR__ . '/../../mainfile.php';
 $GLOBALS['xoopsOption']['template_main'] = 'jobs_view_photos.tpl';
 require_once XOOPS_ROOT_PATH . '/header.php';
+
+/** @var Jobs\Helper $helper */
+$helper = Jobs\Helper::getInstance();
 
 /**
  * Module classes
@@ -98,7 +99,7 @@ $criteria_uid = new \Criteria('uid', $uid);
 /**
  * Creating a factory of pictures
  */
-$album_factory = new \Xoopsjlm_picturesHandler($xoopsDB);
+$album_factory = new Jobs\PicturesHandler($xoopsDB);
 
 /**
  * Fetch pictures from the factory

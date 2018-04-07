@@ -17,11 +17,11 @@
  */
 
 use XoopsModules\Jobs;
-/** @var Jobs\Helper $helper */
-$helper = Jobs\Helper::getInstance();
 
 include __DIR__ . '/header.php';
 
+/** @var Jobs\Helper $helper */
+$helper = Jobs\Helper::getInstance();
 $moduleDirName = basename(__DIR__);
 
 $myts      = \MyTextSanitizer::getInstance();
@@ -40,8 +40,7 @@ if (!$grouppermHandler->checkRight('resume_view', $perm_itemid, $groups, $module
 }
 
 include XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/resume_functions.php";
-require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/class/jobtree.php";
-$mytree = new JobTree($xoopsDB->prefix('jobs_res_categories'), 'cid', 'pid');
+$mytree = new Jobs\JobTree($xoopsDB->prefix('jobs_res_categories'), 'cid', 'pid');
 
 ExpireResume();
 

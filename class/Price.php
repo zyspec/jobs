@@ -1,4 +1,5 @@
-<?php
+<?php namespace XoopsModules\Jobs;
+
 /**
  * Jobs for XOOPS
  *
@@ -19,9 +20,9 @@
 // defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 /**
- * Class jobs_jobs_price
+ * Class Price
  */
-class jobs_jobs_price extends XoopsObject
+class Price extends \XoopsObject
 {
     //Constructor
     /**
@@ -37,7 +38,7 @@ class jobs_jobs_price extends XoopsObject
     /**
      * @param bool $action
      *
-     * @return XoopsThemeForm
+     * @return \XoopsThemeForm
      */
     public function getForm($action = false)
     {
@@ -70,19 +71,5 @@ class jobs_jobs_price extends XoopsObject
         $form->addElement($button_tray);
 
         return $form;
-    }
-}
-
-/**
- * Class jobsjobs_jobs_priceHandler
- */
-class jobsjobs_jobs_priceHandler extends XoopsPersistableObjectHandler
-{
-    /**
-     * @param null|\XoopsDatabase $db
-     */
-    public function __construct(\XoopsDatabase $db)
-    {
-        parent::__construct($db, 'jobs_price', 'jobs_jobs_price', 'id_price', 'nom_price');
     }
 }

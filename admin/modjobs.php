@@ -17,8 +17,6 @@
  */
 
 use XoopsModules\Jobs;
-/** @var Jobs\Helper $helper */
-$helper = Jobs\Helper::getInstance();
 
 require_once __DIR__ . '/admin_header.php';
 
@@ -28,6 +26,8 @@ require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/functions.php";
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 $myts      = \MyTextSanitizer::getInstance();
 $module_id = $xoopsModule->getVar('mid');
+/** @var Jobs\Helper $helper */
+$helper = Jobs\Helper::getInstance();
 
 if (!empty($_POST['submit'])) {
     $lid = !isset($_REQUEST['lid']) ? null : $_REQUEST['lid'];
@@ -124,8 +124,7 @@ if (!empty($_POST['submit'])) {
 
     require_once XOOPS_ROOT_PATH . '/modules/jobs/include/functions.php';
     require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-    require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/class/jobtree.php";
-    $mytree = new JobTree($xoopsDB->prefix('jobs_categories'), 'cid', 'pid');
+    $mytree = new Jobs\JobTree($xoopsDB->prefix('jobs_categories'), 'cid', 'pid');
 
     $GLOBALS['xoopsSecurity']->getTokenHTML();
 

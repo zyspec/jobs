@@ -16,23 +16,22 @@
  */
 
 use XoopsModules\Jobs;
-/** @var Jobs\Helper $helper */
-$helper = Jobs\Helper::getInstance();
 
 // defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
 //  jlm69
-require_once XOOPS_ROOT_PATH . '/modules/jobs/class/jobtree.php';
-require_once XOOPS_ROOT_PATH . '/modules/jobs/class/restree.php';
 require_once XOOPS_ROOT_PATH . '/modules/jobs/include/functions.php';
 require_once XOOPS_ROOT_PATH . '/modules/jobs/include/resume_functions.php';
 
-$mytree       = new JobTree($xoopsDB->prefix('jobs_categories'), 'cid', 'pid');
-$restree      = new ResTree($xoopsDB->prefix('jobs_res_categories'), 'cid', 'pid');
-$staterestree = new ResTree($xoopsDB->prefix('jobs_region'), 'rid', 'pid');
-$statetree    = new JobTree($xoopsDB->prefix('jobs_region'), 'rid', 'pid');
+/** @var Jobs\Helper $helper */
+$helper = Jobs\Helper::getInstance();
+
+$mytree       = new Jobs\JobTree($xoopsDB->prefix('jobs_categories'), 'cid', 'pid');
+$restree      = new ResumeTree($xoopsDB->prefix('jobs_res_categories'), 'cid', 'pid');
+$staterestree = new ResumeTree($xoopsDB->prefix('jobs_region'), 'rid', 'pid');
+$statetree    = new Jobs\JobTree($xoopsDB->prefix('jobs_region'), 'rid', 'pid');
 $xmid         = $xoopsModule->getVar('mid');
 
 if (!empty($_GET['is_resume'])) {

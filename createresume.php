@@ -17,18 +17,17 @@
  */
 
 use XoopsModules\Jobs;
-/** @var Jobs\Helper $helper */
-$helper = Jobs\Helper::getInstance();
 
 $moduleDirName = basename(__DIR__);
 include __DIR__ . '/header.php';
 //require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/gtickets.php";
 $myts = \MyTextSanitizer::getInstance(); // MyTextSanitizer object
-require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/class/jobtree.php";
 //require_once XOOPS_ROOT_PATH . "/class/module.errorhandler.php";
 require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/resume_functions.php";
 //$erh    = new ErrorHandler;
-$mytree = new JobTree($xoopsDB->prefix('xdir_cat'), 'cid', 'pid');
+$mytree = new Jobs\JobTree($xoopsDB->prefix('xdir_cat'), 'cid', 'pid');
+/** @var Jobs\Helper $helper */
+$helper = Jobs\Helper::getInstance();
 
 $module_id = $xoopsModule->getVar('mid');
 if (is_object($xoopsUser)) {
@@ -89,8 +88,7 @@ if (!empty($_POST['submit'])) {
     $GLOBALS['xoopsOption']['template_main'] = 'jobs_create_resume.tpl';
     include XOOPS_ROOT_PATH . '/header.php';
     require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-    require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/class/jobtree.php";
-    $mytree = new JobTree($xoopsDB->prefix('jobs_categories'), 'cid', 'pid');
+    $mytree = new Jobs\JobTree($xoopsDB->prefix('jobs_categories'), 'cid', 'pid');
 
     $member_usid  = $xoopsUser->getVar('uid', 'E');
     $member_email = $xoopsUser->getVar('email', 'E');

@@ -22,15 +22,15 @@ $moduleDirName = basename(dirname(__DIR__));
 $main_lang     = '_' . strtoupper($moduleDirName);
 $lid           = !isset($_REQUEST['lid']) ? null : $_REQUEST['lid'];
 
-/** @var Jobs\Helper $helper */
-$helper = Jobs\Helper::getInstance();
-
 /**
  * Xoops header ...
  */
 include __DIR__ . '/../../mainfile.php';
 $GLOBALS['xoopsOption']['template_main'] = 'jobs_view_photos.tpl';
 require_once XOOPS_ROOT_PATH . '/header.php';
+
+/** @var Jobs\Helper $helper */
+$helper = Jobs\Helper::getInstance();
 
 /**
  * Modules class includes
@@ -40,7 +40,7 @@ include __DIR__ . '/class/pictures.php';
 /**
  * Factory of pictures created
  */
-$album_factory = new \Xoopsjlm_picturesHandler($xoopsDB);
+$album_factory = new Jobs\PicturesHandler($xoopsDB);
 
 /**
  * Getting the title

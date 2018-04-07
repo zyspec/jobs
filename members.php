@@ -17,16 +17,16 @@
  */
 
 use XoopsModules\Jobs;
-/** @var Jobs\Helper $helper */
-$helper = Jobs\Helper::getInstance();
+
 
 include __DIR__ . '/header.php';
+/** @var Jobs\Helper $helper */
+$helper = Jobs\Helper::getInstance();
 
 $moduleDirName = basename(__DIR__);
 include XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/functions.php";
 $myts = \MyTextSanitizer::getInstance(); // MyTextSanitizer object
-require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/class/jobtree.php";
-$mytree                                  = new JobTree($xoopsDB->prefix('jobs_categories'), 'cid', 'pid');
+$mytree                                  = new Jobs\JobTree($xoopsDB->prefix('jobs_categories'), 'cid', 'pid');
 $GLOBALS['xoopsOption']['template_main'] = 'jobs_members.tpl';
 
 include XOOPS_ROOT_PATH . '/header.php';

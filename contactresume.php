@@ -27,8 +27,6 @@
 // ------------------------------------------------------------------------- //
 
 use XoopsModules\Jobs;
-/** @var Jobs\Helper $helper */
-$helper = Jobs\Helper::getInstance();
 
 if (isset($_POST['submit'])) {
     // Define Variables for register_globals Off
@@ -49,7 +47,8 @@ if (isset($_POST['submit'])) {
     // end define vars
 
     include __DIR__ . '/header.php';
-
+    /** @var Jobs\Helper $helper */
+    $helper = Jobs\Helper::getInstance();
     $moduleDirName = basename(__DIR__);
 
     $module_id = $xoopsModule->getVar('mid');

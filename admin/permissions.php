@@ -8,6 +8,8 @@
  * Licence: GNU
  */
 
+use XoopsModules\Jobs;
+
 include 'admin_header.php';
 require_once XOOPS_ROOT_PATH . '/class/xoopsform/grouppermform.php';
 require_once '../../../include/cp_header.php';
@@ -21,9 +23,9 @@ echo $indexAdmin->addNavigation('permissions.php');
 		<fieldset><legend style='font-weight: bold; color: #900;'>" . _AM_WFD_PERM_CPERMISSIONS . "</legend>\n
 		<div style='padding: 2px;'>\n";
 
-$cat_form = new \XoopsGroupPermForm('', $xoopsModule->getVar('mid'), 'jobs_category', _AM_WFD_PERM_CSELECTPERMISSIONS, 'admin/permissions.php');
+$cat_form = new Jobs\GroupPermForm('', $xoopsModule->getVar('mid'), 'jobs_category', _AM_WFD_PERM_CSELECTPERMISSIONS, 'admin/permissions.php');
 
-$category_handler = xoops_getModuleHandler('jobs_categories');
+$category_handler =  Jobs\Helper::getInstance()->getHandler('JobCategory');
 $categories = $category_handler->getObjects();
 if (count($categories) > 0) {
     foreach (array_keys($categories) as $i) {

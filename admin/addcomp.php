@@ -17,15 +17,14 @@
  */
 
 use XoopsModules\Jobs;
-/** @var Jobs\Helper $helper */
-$helper = Jobs\Helper::getInstance();
 
 require_once __DIR__ . '/../../../include/cp_header.php';
 $moduleDirName = basename(dirname(__DIR__));
 require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/functions.php";
 
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-
+/** @var Jobs\Helper $helper */
+$helper = Jobs\Helper::getInstance();
 $myts = \MyTextSanitizer::getInstance();
 
 $module_id = $xoopsModule->getVar('mid');

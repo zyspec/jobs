@@ -32,20 +32,19 @@ use XoopsModules\Jobs;
 require_once __DIR__ . '/../../../include/cp_header.php';
 
 $moduleDirName = basename(dirname(__DIR__));
-/** @var Jobs\Helper $helper */
-$helper = Jobs\Helper::getInstance();
-
 //require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/gtickets.php";
 require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/functions.php";
-require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/class/jobtree.php";
-require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/class/restree.php";
-$mytree  = new JobTree($xoopsDB->prefix('jobs_categories'), 'cid', 'pid');
-$restree = new JobTree($xoopsDB->prefix('jobs_res_categories'), 'cid', 'pid');
+$mytree  = new Jobs\JobTree($xoopsDB->prefix('jobs_categories'), 'cid', 'pid');
+$restree = new Jobs\JobTree($xoopsDB->prefix('jobs_res_categories'), 'cid', 'pid');
 
 global $mytree, $restree, $xoopsDB,  $moduleDirName;
 
 require_once __DIR__ . '/admin_header.php';
 xoops_cp_header();
+
+/** @var Jobs\Helper $helper */
+$helper = Jobs\Helper::getInstance();
+
 //    loadModuleAdminMenu(1, "");
 $adminObject = \Xmf\Module\Admin::getInstance();
 $adminObject->displayNavigation(basename(__FILE__));

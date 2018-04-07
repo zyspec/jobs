@@ -17,8 +17,6 @@
  */
 
 use XoopsModules\Jobs;
-/** @var Jobs\Helper $helper */
-$helper = Jobs\Helper::getInstance();
 
 require_once __DIR__ . '/admin_header.php';
 require_once __DIR__ . '/../../../include/cp_header.php';
@@ -26,6 +24,8 @@ $moduleDirName = basename(dirname(__DIR__));
 require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/functions.php";
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
+/** @var Jobs\Helper $helper */
+$helper = Jobs\Helper::getInstance();
 $myts = \MyTextSanitizer::getInstance();
 
 $comp_id     = !isset($_REQUEST['comp_id']) ? null : $_REQUEST['comp_id'];
@@ -41,7 +41,7 @@ if (!empty($_POST['submit'])) {
     if (!$GLOBALS['xoopsSecurity']->check(true, $_REQUEST['token'])) {
         redirect_header(XOOPS_URL . "/modules/$moduleDirName/index.php", 3, implode('<br>', $GLOBALS['xoopsSecurity']->getErrors()));
     }
-    if (!empty($_POST['comp_img_old'])) {
+   if (\Xmf\Request::hasVar('comp_img_old', 'POST')) {
         $comp_img_old = $_POST['comp_img_old'];
     } else {
         $comp_img_old = '';

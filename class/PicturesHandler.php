@@ -1,4 +1,5 @@
-<?php
+<?php namespace XoopsModules\Jobs;
+
 /**
  * Jobs for XOOPS
  *
@@ -16,6 +17,9 @@
  * @author      XOOPS Development Team
  */
 
+
+use XoopsModules\Jobs;
+
 /**
  * Protection against inclusion outside the site
  */
@@ -30,104 +34,6 @@ require_once XOOPS_ROOT_PATH . '/kernel/object.php';
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/functions.php";
 
-/**
- * jlm_pictures class.
- * $this class is responsible for providing data access mechanisms to the data source
- * of XOOPS user class objects.
- */
-class jlm_pictures extends XoopsObject
-{
-    public $db;
-
-    // constructor
-
-    /**
-     * @param null $id
-     * @param null $lid
-     */
-    public function __construct($id = null, $lid = null)
-    {
-        $this->db = \XoopsDatabaseFactory::getDatabaseConnection();
-        $this->initVar('cod_img', XOBJ_DTYPE_INT, null, false, 10);
-        $this->initVar('title', XOBJ_DTYPE_TXTBOX, null, false);
-        $this->initVar('date_added', XOBJ_DTYPE_TXTBOX, null, false);
-        $this->initVar('date_modified', XOBJ_DTYPE_TXTBOX, null, false);
-        $this->initVar('lid', XOBJ_DTYPE_INT, null, false, 10);
-        $this->initVar('uid_owner', XOBJ_DTYPE_TXTBOX, null, false);
-        $this->initVar('url', XOBJ_DTYPE_TXTBOX, null, false);
-        if (!empty($lid)) {
-            if (is_array($lid)) {
-                $this->assignVars($lid);
-            } else {
-                $this->load((int)$lid);
-            }
-        } else {
-            $this->setNew();
-        }
-    }
-
-    /**
-     * @param $id
-     */
-    public function load($id)
-    {
-        global $moduleDirName;
-        $sql   = 'SELECT * FROM ' . $this->db->prefix('jobs_pictures') . ' WHERE cod_img=' . $id . '';
-        $myrow = $this->db->fetchArray($this->db->query($sql));
-        $this->assignVars($myrow);
-        if (!$myrow) {
-            $this->setNew();
-        }
-    }
-
-    /**
-     * @param array  $criteria
-     * @param bool   $asobject
-     * @param string $sort
-     * @param string $order
-     * @param int    $limit
-     * @param int    $start
-     *
-     * @return array
-     */
-    public function getAll_pictures(
-        $criteria = [],
-        $asobject = false,
-        $sort = 'cod_img',
-        $order = 'ASC',
-        $limit = 0,
-        $start = 0
-    ) {
-        global $moduleDirName;
-        $db          = \XoopsDatabaseFactory::getDatabaseConnection();
-        $ret         = [];
-        $where_query = '';
-        if (is_array($criteria) && count($criteria) > 0) {
-            $where_query = ' WHERE';
-            foreach ($criteria as $c) {
-                $where_query .= " $c AND";
-            }
-            $where_query = substr($where_query, 0, -4);
-        } elseif (!is_array($criteria) && $criteria) {
-            $where_query = ' WHERE ' . $criteria;
-        }
-        if (!$asobject) {
-            $sql    = 'SELECT cod_img FROM ' . $db->prefix('jobs_pictures') . "$where_query ORDER BY $sort $order";
-            $result = $db->query($sql, $limit, $start);
-            while (false !== ($myrow = $db->fetchArray($result))) {
-                $ret[] = $myrow['jlm_pictures_id'];
-            }
-        } else {
-            $sql    = 'SELECT * FROM ' . $db->prefix('jobs_pictures') . "$where_query ORDER BY $sort $order";
-            $result = $db->query($sql, $limit, $start);
-            while (false !== ($myrow = $db->fetchArray($result))) {
-                $ret[] = new jlm_pictures($myrow);
-            }
-        }
-
-        return $ret;
-    }
-}
 
 // -------------------------------------------------------------------------
 // ------------------jlm_pictures user handler class -------------------
@@ -137,10 +43,10 @@ class jlm_pictures extends XoopsObject
  * jlm_pictureshandler class.
  * This class provides simple mechanism for jlm_pictures object and generate forms for inclusion etc
  */
-class Xoopsjlm_picturesHandler extends XoopsObjectHandler
+class PicturesHandler extends \XoopsObjectHandler
 {
     /**
-     * create a new jlm_pictures
+     * create a new Jobs\Pictures
      *
      * @param bool $isNew flag the new objects as "new"?
      *
@@ -148,7 +54,7 @@ class Xoopsjlm_picturesHandler extends XoopsObjectHandler
      */
     public function create($isNew = true)
     {
-        $jlm_pictures = new jlm_pictures();
+        $jlm_pictures = new Jobs\Pictures();
         if ($isNew) {
             $jlm_pictures->setNew();
         } else {
@@ -176,7 +82,7 @@ class Xoopsjlm_picturesHandler extends XoopsObjectHandler
         }
         $numrows = $this->db->getRowsNum($result);
         if (1 == $numrows) {
-            $jlm_pictures = new jlm_pictures();
+            $jlm_pictures = new Jobs\Pictures();
             $jlm_pictures->assignVars($this->db->fetchArray($result));
 
             return $jlm_pictures;
@@ -186,7 +92,7 @@ class Xoopsjlm_picturesHandler extends XoopsObjectHandler
     }
 
     /**
-     * insert a new jlm_pictures in the database
+     * insert a new Jobs\Pictures in the database
      *
      * @param XoopsObject $jlm_pictures        reference to the {@link jlm_pictures}
      *                                         object
@@ -211,7 +117,7 @@ class Xoopsjlm_picturesHandler extends XoopsObjectHandler
         $now = time();
         if ($jlm_pictures->isNew()) {
             // ajout/modification d'un jlm_pictures
-            $jlm_pictures = new jlm_pictures();
+            $jlm_pictures = new Jobs\Pictures();
 
             $format = 'INSERT INTO %s (cod_img, title, date_added, date_modified, lid, uid_owner, url)';
             $format .= 'VALUES (%u, %s, %s, %s, %s, %s, %s)';
@@ -296,7 +202,7 @@ class Xoopsjlm_picturesHandler extends XoopsObjectHandler
             return $ret;
         }
         while (false !== ($myrow = $this->db->fetchArray($result))) {
-            $jlm_pictures = new jlm_pictures();
+            $jlm_pictures = new Jobs\Pictures();
             $jlm_pictures->assignVars($myrow);
             if (!$id_as_key) {
                 $ret[] = $jlm_pictures;

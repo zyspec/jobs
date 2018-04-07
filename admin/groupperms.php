@@ -16,10 +16,11 @@
  * @author      XOOPS Development Team
  */
 
+use XoopsModules\Jobs;
+
 $moduleDirName = basename(dirname(__DIR__));
 $cloned_lang   = '_MI_' . strtoupper($moduleDirName);
 require_once __DIR__ . '/../../../include/cp_header.php';
-require_once XOOPS_ROOT_PATH . "/modules/{$moduleDirName}/class/jobtree.php";
 //require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/class/grouppermform.php";
 require_once XOOPS_ROOT_PATH . '/class/xoopsform/grouppermform.php';
 // xoops_cp_header();
@@ -59,8 +60,8 @@ if ('0' == $cat_rows) {
             $perm_name     = '' . $moduleDirName . '_view';
             $perm_desc     = constant($cloned_lang . '_VIEWFORM_DESC');
             $anonymous     = true;
-            $permform      = new \XoopsGroupPermForm($title_of_form, $module_id, $perm_name, $perm_desc, 'admin/groupperms.php', $anonymous);
-            $cattree       = new JobTree($xoopsDB->prefix('jobs_categories'), 'cid', 'pid');
+            $permform      = new Jobs\GroupPermForm($title_of_form, $module_id, $perm_name, $perm_desc, 'admin/groupperms.php', $anonymous);
+            $cattree       = new Jobs\JobTree($xoopsDB->prefix('jobs_categories'), 'cid', 'pid');
             $allcats       = $cattree->getCategoryList();
 
             break;
@@ -69,8 +70,8 @@ if ('0' == $cat_rows) {
             $perm_name     = '' . $moduleDirName . '_submit';
             $perm_desc     = constant($cloned_lang . '_SUBMITFORM_DESC');
             $anonymous     = false;
-            $permform      = new \XoopsGroupPermForm($title_of_form, $module_id, $perm_name, $perm_desc, 'admin/groupperms.php', $anonymous);
-            $cattree       = new JobTree($xoopsDB->prefix('jobs_categories'), 'cid', 'pid');
+            $permform      = new Jobs\GroupPermForm($title_of_form, $module_id, $perm_name, $perm_desc, 'admin/groupperms.php', $anonymous);
+            $cattree       = new Jobs\JobTree($xoopsDB->prefix('jobs_categories'), 'cid', 'pid');
             $allcats       = $cattree->getCategoryList();
 
             break;
@@ -79,8 +80,8 @@ if ('0' == $cat_rows) {
             $perm_name     = 'resume_view';
             $perm_desc     = constant($cloned_lang . '_VIEW_RESUMEFORM_DESC');
             $anonymous     = true;
-            $permform      = new \XoopsGroupPermForm($title_of_form, $module_id, $perm_name, $perm_desc, 'admin/groupperms.php', $anonymous);
-            $cattree       = new JobTree($xoopsDB->prefix('jobs_res_categories'), 'cid', 'pid');
+            $permform      = new Jobs\GroupPermForm($title_of_form, $module_id, $perm_name, $perm_desc, 'admin/groupperms.php', $anonymous);
+            $cattree       = new Jobs\JobTree($xoopsDB->prefix('jobs_res_categories'), 'cid', 'pid');
             $allcats       = $cattree->getCategoryList();
 
             break;
@@ -89,8 +90,8 @@ if ('0' == $cat_rows) {
             $perm_name     = 'resume_submit';
             $perm_desc     = constant($cloned_lang . '_RESUMEFORM_DESC');
             $anonymous     = false;
-            $permform      = new \XoopsGroupPermForm($title_of_form, $module_id, $perm_name, $perm_desc, 'admin/groupperms.php', $anonymous);
-            $cattree       = new JobTree($xoopsDB->prefix('jobs_res_categories'), 'cid', 'pid');
+            $permform      = new Jobs\GroupPermForm($title_of_form, $module_id, $perm_name, $perm_desc, 'admin/groupperms.php', $anonymous);
+            $cattree       = new Jobs\JobTree($xoopsDB->prefix('jobs_res_categories'), 'cid', 'pid');
             $allcats       = $cattree->getCategoryList();
 
             break;
@@ -99,8 +100,8 @@ if ('0' == $cat_rows) {
             $perm_name     = '' . $moduleDirName . '_premium';
             $perm_desc     = constant($cloned_lang . '_PREMIUM_DESC');
             $anonymous     = false;
-            $permform      = new \XoopsGroupPermForm($title_of_form, $module_id, $perm_name, $perm_desc, 'admin/groupperms.php', $anonymous);
-            $cattree       = new JobTree($xoopsDB->prefix('jobs_categories'), 'cid', 'pid');
+            $permform      = new Jobs\GroupPermForm($title_of_form, $module_id, $perm_name, $perm_desc, 'admin/groupperms.php', $anonymous);
+            $cattree       = new Jobs\JobTree($xoopsDB->prefix('jobs_categories'), 'cid', 'pid');
             $allcats       = $cattree->getCategoryList();
 
             break;

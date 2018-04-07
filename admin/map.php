@@ -38,10 +38,8 @@ $moduleDirName = basename(dirname(__DIR__));
 
 //require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/gtickets.php";
 require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/functions.php";
-require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/class/jobtree.php";
-require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/class/restree.php";
-$mytree  = new JobTree($xoopsDB->prefix('jobs_categories'), 'cid', 'pid');
-$restree = new JobTree($xoopsDB->prefix('jobs_res_categories'), 'cid', 'pid');
+$mytree  = new Jobs\JobTree($xoopsDB->prefix('jobs_categories'), 'cid', 'pid');
+$restree = new Jobs\JobTree($xoopsDB->prefix('jobs_res_categories'), 'cid', 'pid');
 
 global $mytree, $restree, $xoopsDB,  $moduleDirName;
 

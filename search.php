@@ -89,7 +89,7 @@ if (!empty($_GET['by_cat'])) {
 if (!empty($_GET['issearch'])) {
     $issearch = \Xmf\Request::getInt('issearch', 0, 'GET');
 } else {
-    if (!empty($_POST['issearch'])) {
+   if (\Xmf\Request::hasVar('issearch', 'POST')) {
         $issearch = \Xmf\Request::getInt('issearch', 0, 'POST');
     } else {
         $issearch = '';

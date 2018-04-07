@@ -1,4 +1,5 @@
-<?php
+<?php namespace XoopsModules\Jobs;
+
 // $Id: pagenav.php 2 2005-11-02 18:23:29Z skalpa $
 //  ------------------------------------------------------------------------ //
 //                XOOPS - PHP Content Management System                      //
@@ -38,7 +39,7 @@
  * @author         Kazumi Ono     <onokazu@xoops.org>
  * @copyright      (c) 2000-2003 The Xoops Project - www.xoops.org
  */
-class XoopsPageNav
+class PageNav
 {
     /**#@+
      * @access    private

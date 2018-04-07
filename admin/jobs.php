@@ -17,8 +17,6 @@
  */
 
 use XoopsModules\Jobs;
-/** @var Jobs\Helper $helper */
-$helper = Jobs\Helper::getInstance();
 
 require_once __DIR__ . '/../../../include/cp_header.php';
 $moduleDirName = basename(dirname(__DIR__));
@@ -27,7 +25,8 @@ require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/functions.php";
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 xoops_load('XoopsPageNav');
 
-require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/class/jobtree.php";
+/** @var Jobs\Helper $helper */
+$helper = Jobs\Helper::getInstance();
 
 $myts = \MyTextSanitizer::getInstance();
 
@@ -63,7 +62,7 @@ if ($crows > '0') {
     echo '<table border=1 width=100% cellpadding=2 cellspacing=0 border=0><td><tr>';
 
     if ($crows > 0) {
-        $nav = new \XoopsPageNav($crows, $showonpage, $start, 'start', '');
+        $nav = new Jobs\PageNav($crows, $showonpage, $start, 'start', '');
         echo '<br>' . _AM_JOBS_THEREIS . " <b>$crows</b> " . _AM_JOBS_JOBLISTINGS . '<br><br>';
         echo $nav->renderNav();
 

@@ -17,10 +17,12 @@
  */
 
 use XoopsModules\Jobs;
+
+include __DIR__ . '/header.php';
+
 /** @var Jobs\Helper $helper */
 $helper = Jobs\Helper::getInstance();
 
-include __DIR__ . '/header.php';
 $moduleDirName = basename(__DIR__);
 //require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/gtickets.php";
 $myts      = \MyTextSanitizer::getInstance();
@@ -101,8 +103,7 @@ if (!empty($_POST['submit'])) {
     $GLOBALS['xoopsOption']['template_main'] = 'jobs_modify.tpl';
     include XOOPS_ROOT_PATH . '/header.php';
     require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-    require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/class/jobtree.php";
-    $mytree = new JobTree($xoopsDB->prefix('jobs_categories'), 'cid', 'pid');
+    $mytree = new Jobs\JobTree($xoopsDB->prefix('jobs_categories'), 'cid', 'pid');
 
     $photomax1 = $helper->getConfig('jobs_maxfilesize') / 1024;
     $lid       = (\Xmf\Request::getInt('lid', 0, 'GET'));

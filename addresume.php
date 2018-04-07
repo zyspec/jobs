@@ -17,15 +17,13 @@
  */
 
 use XoopsModules\Jobs;
-/** @var Jobs\Helper $helper */
-$helper = Jobs\Helper::getInstance();
 
 include __DIR__ . '/header.php';
 $moduleDirName = basename(__DIR__);
 //require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/gtickets.php";
 require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/resume_functions.php";
-require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/class/restree.php";
-
+/** @var Jobs\Helper $helper */
+$helper = Jobs\Helper::getInstance();
 $myts = \MyTextSanitizer::getInstance();
 
 $module_id = $xoopsModule->getVar('mid');
@@ -168,7 +166,7 @@ if (!empty($_POST['submit'])) {
     $GLOBALS['xoopsOption']['template_main'] = 'jobs_addresume.tpl';
     include XOOPS_ROOT_PATH . '/header.php';
     require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-    $mytree = new ResTree($xoopsDB->prefix('jobs_categories'), 'cid', 'pid');
+    $mytree = new ResumeTree($xoopsDB->prefix('jobs_categories'), 'cid', 'pid');
 
     $cid    = \Xmf\Request::getInt('cid', 0);
 

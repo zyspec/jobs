@@ -34,7 +34,6 @@ $admin_lang    = '_AM_' . strtoupper($moduleDirName);
 //require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/gtickets.php";
 require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/functions.php";
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/class/jobtree.php";
 
 /** @var Jobs\Helper $helper */
 $helper = Jobs\Helper::getInstance();
@@ -48,7 +47,7 @@ function Index()
     /** @var Jobs\Helper $helper */
     $helper = Jobs\Helper::getInstance();
 
-    $mytree = new JobTree($xoopsDB->prefix('jobs_categories'), 'cid', 'pid');
+    $mytree = new Jobs\JobTree($xoopsDB->prefix('jobs_categories'), 'cid', 'pid');
 
     require_once __DIR__ . '/admin_header.php';
     xoops_cp_header();
@@ -306,7 +305,7 @@ function IndexView($lid = 0)
     /** @var Jobs\Helper $helper */
     $helper = Jobs\Helper::getInstance();
 
-    $mytree = new JobTree($xoopsDB->prefix('jobs_categories'), 'cid', 'pid');
+    $mytree = new Jobs\JobTree($xoopsDB->prefix('jobs_categories'), 'cid', 'pid');
 
     require_once __DIR__ . '/admin_header.php';
     xoops_cp_header();
@@ -484,7 +483,7 @@ function IndexResumeView($lid = 0)
 {
     global $xoopsDB, $xoopsModule, $xoopsConfig,  $myts, $moduleDirName, $admin_lang;
 
-    $mytree = new JobTree($xoopsDB->prefix('jobs_res_categories'), 'cid', 'pid');
+    $mytree = new Jobs\JobTree($xoopsDB->prefix('jobs_res_categories'), 'cid', 'pid');
 
     require_once __DIR__ . '/admin_header.php';
     xoops_cp_header();
@@ -606,7 +605,7 @@ function ModJob($lid = 0)
     /** @var Jobs\Helper $helper */
     $helper = Jobs\Helper::getInstance();
 
-    $mytree = new JobTree($xoopsDB->prefix('jobs_categories'), 'cid', 'pid');
+    $mytree = new Jobs\JobTree($xoopsDB->prefix('jobs_categories'), 'cid', 'pid');
 
     require_once __DIR__ . '/admin_header.php';
     xoops_cp_header();

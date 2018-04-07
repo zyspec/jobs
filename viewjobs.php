@@ -17,10 +17,10 @@
  */
 
 use XoopsModules\Jobs;
-/** @var Jobs\Helper $helper */
-$helper = Jobs\Helper::getInstance();
 
 include __DIR__ . '/header.php';
+/** @var Jobs\Helper $helper */
+$helper = Jobs\Helper::getInstance();
 
 $moduleDirName = basename(__DIR__);
 
@@ -45,10 +45,9 @@ if (!$grouppermHandler->checkRight('jobs_view', $perm_itemid, $groups, $module_i
 // Check submit rights – added line - recommended by GreenFlatDog
 $jobs_submitter = $grouppermHandler->checkRight('jobs_submit', $perm_itemid, $groups, $module_id);
 
-include XOOPS_ROOT_PATH . "/modules/$moduleDirName/class/jobtree.php";
 include XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/functions.php";
 
-$mytree = new JobTree($xoopsDB->prefix('jobs_categories'), 'cid', 'pid');
+$mytree = new Jobs\JobTree($xoopsDB->prefix('jobs_categories'), 'cid', 'pid');
 
 ExpireJob();
 

@@ -26,14 +26,14 @@
 // ------------------------------------------------------------------------- //
 
 use XoopsModules\Jobs;
-/** @var Jobs\Helper $helper */
-$helper = Jobs\Helper::getInstance();
 
 include __DIR__ . '/header.php';
 $moduleDirName = basename(__DIR__);
 require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/functions.php";
 $moduleDirName = basename(__DIR__);
 $module_id     = $xoopsModule->getVar('mid');
+/** @var Jobs\Helper $helper */
+$helper = Jobs\Helper::getInstance();
 if (is_object($xoopsUser)) {
     $groups =& $xoopsUser->getGroups();
 } else {

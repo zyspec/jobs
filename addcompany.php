@@ -17,8 +17,6 @@
  */
 
 use XoopsModules\Jobs;
-/** @var Jobs\Helper $helper */
-$helper = Jobs\Helper::getInstance();
 
 include __DIR__ . '/header.php';
 $moduleDirName = basename(__DIR__);
@@ -27,6 +25,9 @@ require_once XOOPS_ROOT_PATH . '/class/module.errorhandler.php';
 include XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/functions.php";
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 $erh = new ErrorHandler; //ErrorHandler object
+
+/** @var Jobs\Helper $helper */
+$helper = Jobs\Helper::getInstance();
 
 if (empty($xoopsUser)) {
     redirect_header(XOOPS_URL . '/modules/profile/', 3, _JOBS_MUSTREGFIRST);
@@ -230,7 +231,6 @@ if (!empty($_POST['submit'])) {
 } else {
     $GLOBALS['xoopsOption']['template_main'] = 'jobs_add_company.tpl';
     include XOOPS_ROOT_PATH . '/header.php';
-    require_once XOOPS_ROOT_PATH . '/modules/jobs/class/jobtree.php';
 
     $token = $GLOBALS['xoopsSecurity']->createToken();
 

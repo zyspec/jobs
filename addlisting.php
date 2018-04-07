@@ -17,15 +17,13 @@
  */
 
 use XoopsModules\Jobs;
-/** @var Jobs\Helper $helper */
-$helper = Jobs\Helper::getInstance();
 
 include __DIR__ . '/header.php';
 $moduleDirName = basename(__DIR__);
 $myts          = \MyTextSanitizer::getInstance(); // MyTextSanitizer object
-//require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/gtickets.php";
-require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/class/jobtree.php";
 require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/functions.php";
+/** @var Jobs\Helper $helper */
+$helper = Jobs\Helper::getInstance();
 
 $module_id = $xoopsModule->getVar('mid');
 if (is_object($xoopsUser)) {
@@ -44,7 +42,7 @@ if (!$grouppermHandler->checkRight('jobs_premium', $perm_itemid, $groups, $modul
     $premium = 1;
 }
 
-$mytree = new JobTree($xoopsDB->prefix('jobs_categories'), 'cid', 'pid');
+$mytree = new Jobs\JobTree($xoopsDB->prefix('jobs_categories'), 'cid', 'pid');
 
 if (\Xmf\Request::hasVar('cid', 'POST')) {
     $cid = \Xmf\Request::getInt('cid', 0, 'POST');

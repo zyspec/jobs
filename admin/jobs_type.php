@@ -32,8 +32,8 @@ switch ($op) {
         $criteria = new \CriteriaCompo();
         $criteria->setSort('id_type');
         $criteria->setOrder('ASC');
-        $jobsNumrows   = $jobs_typeHandler->getCount();
-        $jobs_type_arr = $jobs_typeHandler->getAll($criteria);
+        $jobsNumrows   = $typeHandler->getCount();
+        $jobs_type_arr = $typeHandler->getAll($criteria);
 
         //Table view Jobs Type
         if ($jobsNumrows > 0) {
@@ -69,8 +69,8 @@ switch ($op) {
         $criteria = new \CriteriaCompo();
         $criteria->setSort('id_price');
         $criteria->setOrder('ASC');
-        $priceNumrows   = $jobs_priceHandler->getCount();
-        $jobs_price_arr = $jobs_priceHandler->getAll($criteria);
+        $priceNumrows   = $priceHandler->getCount();
+        $jobs_price_arr = $priceHandler->getAll($criteria);
 
         //Table view
         if ($priceNumrows > 0) {
@@ -106,7 +106,7 @@ switch ($op) {
         $adminObject->addItemButton(_AM_JOBS_JOBS_TYPELIST, 'jobs_type.php?op=list', 'list');
         $adminObject->displayButton('left');
 
-        $obj  = $jobs_typeHandler->create();
+        $obj  = $typeHandler->create();
         $form = $obj->getForm();
         $form->display();
         break;
@@ -116,15 +116,15 @@ switch ($op) {
             redirect_header('jobs_type.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
         }
         if (isset($_REQUEST['id_type'])) {
-            $obj = $jobs_typeHandler->get($_REQUEST['id_type']);
+            $obj = $typeHandler->get($_REQUEST['id_type']);
         } else {
-            $obj = $jobs_typeHandler->create();
+            $obj = $typeHandler->create();
         }
 
         //Form nom_type
         $obj->setVar('nom_type', $_REQUEST['nom_type']);
 
-        if ($jobs_typeHandler->insert($obj)) {
+        if ($typeHandler->insert($obj)) {
             redirect_header('jobs_type.php?op=list', 2, _AM_JOBS_FORMOK);
         }
 
@@ -138,18 +138,18 @@ switch ($op) {
         $adminObject->addItemButton(_AM_JOBS_NEWJOBS_TYPE, 'jobs_type.php?op=new_jobs_type', 'add');
         $adminObject->addItemButton(_AM_JOBS_JOBS_TYPELIST, 'jobs_type.php?op=list', 'list');
         $adminObject->displayButton('left');
-        $obj  = $jobs_typeHandler->get($_REQUEST['id_type']);
+        $obj  = $typeHandler->get($_REQUEST['id_type']);
         $form = $obj->getForm();
         $form->display();
         break;
 
     case 'delete_jobs_type':
-        $obj = $jobs_typeHandler->get($_REQUEST['id_type']);
+        $obj = $typeHandler->get($_REQUEST['id_type']);
         if (isset($_REQUEST['ok']) && 1 == $_REQUEST['ok']) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 redirect_header('jobs_type.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
             }
-            if ($jobs_typeHandler->delete($obj)) {
+            if ($typeHandler->delete($obj)) {
                 redirect_header('jobs_type.php', 3, _AM_JOBS_FORMDELOK);
             } else {
                 echo $obj->getHtmlErrors();
@@ -164,7 +164,7 @@ switch ($op) {
         $adminObject2->addItemButton(_AM_JOBS_JOBS_PRICELIST, 'jobs_type.php?op=list', 'list');
         $adminObject2->displayButton('left');
 
-        $obj  = $jobs_priceHandler->create();
+        $obj  = $priceHandler->create();
         $form = $obj->getForm();
         $form->display();
         break;
@@ -174,15 +174,15 @@ switch ($op) {
             redirect_header('jobs_type.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
         }
         if (isset($_REQUEST['id_price'])) {
-            $obj = $jobs_priceHandler->get($_REQUEST['id_price']);
+            $obj = $priceHandler->get($_REQUEST['id_price']);
         } else {
-            $obj = $jobs_priceHandler->create();
+            $obj = $priceHandler->create();
         }
 
         //Form nom_price
         $obj->setVar('nom_price', $_REQUEST['nom_price']);
 
-        if ($jobs_priceHandler->insert($obj)) {
+        if ($priceHandler->insert($obj)) {
             redirect_header('jobs_type.php?op=list', 2, _AM_JOBS_FORMOK);
         }
 
@@ -196,18 +196,18 @@ switch ($op) {
         $adminObject2->addItemButton(_AM_JOBS_NEWJOBS_PRICE, 'jobs_type.php?op=new_jobs_price', 'add');
         $adminObject2->addItemButton(_AM_JOBS_JOBS_PRICELIST, 'jobs_type.php?op=list', 'list');
         $adminObject2->displayButton('left');
-        $obj  = $jobs_priceHandler->get($_REQUEST['id_price']);
+        $obj  = $priceHandler->get($_REQUEST['id_price']);
         $form = $obj->getForm();
         $form->display();
         break;
 
     case 'delete_jobs_price':
-        $obj = $jobs_priceHandler->get($_REQUEST['id_price']);
+        $obj = $priceHandler->get($_REQUEST['id_price']);
         if (isset($_REQUEST['ok']) && 1 == $_REQUEST['ok']) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 redirect_header('jobs_type.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
             }
-            if ($jobs_priceHandler->delete($obj)) {
+            if ($priceHandler->delete($obj)) {
                 redirect_header('jobs_type.php', 3, _AM_JOBS_FORMDELOK);
             } else {
                 echo $obj->getHtmlErrors();

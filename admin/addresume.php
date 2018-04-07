@@ -17,16 +17,15 @@
  */
 
 use XoopsModules\Jobs;
-/** @var Jobs\Helper $helper */
-$helper = Jobs\Helper::getInstance();
 
 require_once __DIR__ . '/admin_header.php';
 require_once __DIR__ . '/../../../include/cp_header.php';
 $moduleDirName = basename(dirname(__DIR__));
 require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/resume_functions.php";
-require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/class/restree.php";
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
+/** @var Jobs\Helper $helper */
+$helper = Jobs\Helper::getInstance();
 $myts = \MyTextSanitizer::getInstance();
 
 $module_id = $xoopsModule->getVar('mid');
@@ -156,7 +155,7 @@ if (!empty($_POST['submit'])) {
     $adminObject->addItemButton(_AM_JOBS_MAN_RESUME, 'resumes.php', 'list');
     $adminObject->displayButton('left', '');
 
-    $mytree = new ResTree($xoopsDB->prefix('jobs_res_categories'), 'cid', 'pid');
+    $mytree = new Jobs\ResumeTree($xoopsDB->prefix('jobs_res_categories'), 'cid', 'pid');
 
     $cid    = \Xmf\Request::getInt('cid', 0);
 

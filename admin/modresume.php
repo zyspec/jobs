@@ -17,8 +17,6 @@
  */
 
 use XoopsModules\Jobs;
-/** @var Jobs\Helper $helper */
-$helper = Jobs\Helper::getInstance();
 
 require_once __DIR__ . '/admin_header.php';
 require_once __DIR__ . '/../../../include/cp_header.php';
@@ -27,6 +25,8 @@ require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/resume_functions
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 $myts      = \MyTextSanitizer::getInstance();
 $module_id = $xoopsModule->getVar('mid');
+/** @var Jobs\Helper $helper */
+$helper = Jobs\Helper::getInstance();
 
 if (!empty($_POST['submit'])) {
     $resumesize  = $helper->getConfig('jobs_resumesize');
@@ -107,8 +107,7 @@ if (!empty($_POST['submit'])) {
 
     require_once XOOPS_ROOT_PATH . '/modules/jobs/include/resume_functions.php';
     require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-    require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/class/restree.php";
-    $mytree = new ResTree($xoopsDB->prefix('jobs_res_categories'), 'cid', 'pid');
+      $mytree = new ResumeTree($xoopsDB->prefix('jobs_res_categories'), 'cid', 'pid');
 
     $GLOBALS['xoopsSecurity']->getTokenHTML();
 

@@ -1,4 +1,5 @@
-<?php
+<?php namespace XoopsModules\Jobs;
+
 /**
  * Jobs for XOOPS
  *
@@ -21,9 +22,9 @@ use XoopsModules\Jobs;
 // defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 /**
- * Class jobs_categories
+ * Class ResumeCategory
  */
-class jobs_categories extends XoopsObject
+class ResumeCategory extends \XoopsObject
 {
     //Constructor
     /**
@@ -64,7 +65,7 @@ class jobs_categories extends XoopsObject
         $form->setExtra('enctype="multipart/form-data"');
 
         require_once XOOPS_ROOT_PATH . '/class/tree.php';
-        $categoryHandler = xoops_getModuleHandler('jobs_categories', 'jobs');
+        $categoryHandler =  Jobs\Helper::getInstance()->getHandler('ResumeCategory');
         $arr             = $categoryHandler->getAll();
         //$mytree = new \XoopsObjectTree($arr, "category_id", "category_pid");
         $mytree = new \XoopsObjectTree($arr, 'cid', 'pid');
@@ -100,19 +101,5 @@ class jobs_categories extends XoopsObject
         $form->addElement(new \XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
 
         return $form;
-    }
-}
-
-/**
- * Class jobsJobs_categoriesHandler
- */
-class jobsJobs_categoriesHandler extends XoopsPersistableObjectHandler
-{
-    /**
-     * @param null|\XoopsDatabase $db
-     */
-    public function __construct(\XoopsDatabase $db)
-    {
-        parent::__construct($db, 'jobs_categories', 'jobs_categories', 'cid', 'title');
     }
 }
