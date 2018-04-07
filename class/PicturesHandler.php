@@ -119,12 +119,12 @@ class PicturesHandler extends \XoopsObjectHandler
             // ajout/modification d'un jlm_pictures
             $jlm_pictures = new Jobs\Pictures();
 
-            $format = 'INSERT INTO %s (cod_img, title, date_added, date_modified, lid, uid_owner, url)';
+            $format = 'INSERT INTO `%s` (cod_img, title, date_added, date_modified, lid, uid_owner, url)';
             $format .= 'VALUES (%u, %s, %s, %s, %s, %s, %s)';
             $sql    = sprintf($format, $this->db->prefix('jobs_pictures'), $cod_img, $this->db->quoteString($title), $now, $now, $this->db->quoteString($lid), $this->db->quoteString($uid_owner), $this->db->quoteString($url));
             $force  = true;
         } else {
-            $format = 'UPDATE %s SET ';
+            $format = 'UPDATE `%s` SET ';
             $format .= 'cod_img=%u, title=%s, date_added=%s, date_modified=%s, lid=%s, uid_owner=%s, url=%s';
             $format .= ' WHERE cod_img = %u';
             $sql    = sprintf($format, $this->db->prefix('jobs_pictures'), $cod_img, $this->db->quoteString($title), $now, $now, $this->db->quoteString($lid), $this->db->quoteString($uid_owner), $this->db->quoteString($url), $cod_img);

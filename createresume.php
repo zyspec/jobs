@@ -79,7 +79,7 @@ if (!empty($_POST['submit'])) {
 
     $newid = $xoopsDB->genId($xoopsDB->prefix('jobs_created_resumes') . '_res_lid_seq');
 
-    $sql = sprintf("INSERT INTO %s (res_lid, lid, made_resume, DATE, usid) VALUES (%u, '%s', '%s', '%s', '%s')", $xoopsDB->prefix('jobs_created_resumes'), $newid, $lid, $made_resume, $date, $member_usid);
+    $sql = sprintf("INSERT INTO `%s` (res_lid, lid, made_resume, DATE, usid) VALUES (%u, '%s', '%s', '%s', '%s')", $xoopsDB->prefix('jobs_created_resumes'), $newid, $lid, $made_resume, $date, $member_usid);
     $xoopsDB->query($sql);
 
     $sql2 = 'UPDATE ' . $xoopsDB->prefix('jobs_resume') . " SET resume='created' where lid=" . $_POST['lid'] . '';

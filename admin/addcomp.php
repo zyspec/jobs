@@ -143,7 +143,7 @@ if (!empty($_POST['submit'])) {
     $newid = $xoopsDB->genId($xoopsDB->prefix('jobs_companies') . '_comp_id_seq');
 
     $sql = sprintf(
-        "INSERT INTO %s (comp_id, comp_name, comp_address, comp_address2, comp_city, comp_state, comp_zip, comp_phone, comp_fax, comp_url, comp_img, comp_usid, comp_user1, comp_user2, comp_contact, comp_user1_contact, comp_user2_contact, comp_date_added) VALUES (%u, '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%u', '%s', '%s', '%s', '%s', '%s', '%s')",
+        "INSERT INTO `%s` (comp_id, comp_name, comp_address, comp_address2, comp_city, comp_state, comp_zip, comp_phone, comp_fax, comp_url, comp_img, comp_usid, comp_user1, comp_user2, comp_contact, comp_user1_contact, comp_user2_contact, comp_date_added) VALUES (%u, '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%u', '%s', '%s', '%s', '%s', '%s', '%s')",
                    $xoopsDB->prefix('jobs_companies'),
         $newid,
         $comp_name,
