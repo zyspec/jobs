@@ -29,8 +29,8 @@ require_once XOOPS_ROOT_PATH . '/modules/jobs/include/resume_functions.php';
 $helper = Jobs\Helper::getInstance();
 
 $mytree       = new Jobs\JobTree($xoopsDB->prefix('jobs_categories'), 'cid', 'pid');
-$restree      = new ResumeTree($xoopsDB->prefix('jobs_res_categories'), 'cid', 'pid');
-$staterestree = new ResumeTree($xoopsDB->prefix('jobs_region'), 'rid', 'pid');
+$restree      = new Jobs\ResumeTree($xoopsDB->prefix('jobs_res_categories'), 'cid', 'pid');
+$staterestree = new Jobs\ResumeTree($xoopsDB->prefix('jobs_region'), 'rid', 'pid');
 $statetree    = new Jobs\JobTree($xoopsDB->prefix('jobs_region'), 'rid', 'pid');
 $xmid         = $xoopsModule->getVar('mid');
 

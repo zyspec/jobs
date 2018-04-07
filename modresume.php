@@ -32,6 +32,7 @@ if (is_object($xoopsUser)) {
 } else {
     $groups = XOOPS_GROUP_ANONYMOUS;
 }
+/** @var \XoopsGroupPermHandler $grouppermHandler */
 $grouppermHandler = xoops_getHandler('groupperm');
 $perm_itemid = \Xmf\Request::getInt('item_id', 0, 'POST');
 //If no access
@@ -115,7 +116,7 @@ if (!empty($_POST['submit'])) {
     include XOOPS_ROOT_PATH . '/header.php';
     require_once XOOPS_ROOT_PATH . '/modules/jobs/include/resume_functions.php';
     require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-    $mytree = new ResumeTree($xoopsDB->prefix('jobs_res_categories'), 'cid', 'pid');
+    $mytree = new Jobs\ResumeTree($xoopsDB->prefix('jobs_res_categories'), 'cid', 'pid');
 
     $lid = \Xmf\Request::getInt('lid', 0, 'GET');
 

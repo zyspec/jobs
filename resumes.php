@@ -31,6 +31,7 @@ if (is_object($xoopsUser)) {
 } else {
     $groups = XOOPS_GROUP_ANONYMOUS;
 }
+/** @var \XoopsGroupPermHandler $grouppermHandler */
 $grouppermHandler = xoops_getHandler('groupperm');
 $perm_itemid = \Xmf\Request::getInt('item_id', 0, 'POST');
 //If no access
@@ -39,8 +40,8 @@ if (!$grouppermHandler->checkRight('resume_view', $perm_itemid, $groups, $module
 }
 
 include XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/resume_functions.php";
-$mytree    = new ResumeTree($xoopsDB->prefix('jobs_res_categories'), 'cid', 'pid');
-$statetree = new ResumeTree($xoopsDB->prefix('jobs_region'), 'rid', 'pid');
+$mytree    = new Jobs\ResumeTree($xoopsDB->prefix('jobs_res_categories'), 'cid', 'pid');
+$statetree = new Jobs\ResumeTree($xoopsDB->prefix('jobs_region'), 'rid', 'pid');
 
 ExpireResume();
 

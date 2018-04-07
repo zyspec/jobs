@@ -90,6 +90,7 @@ if (!empty($_POST['submit'])) {
     }
     if (!empty($comp_users)) {
         // we have checks to make
+        /** @var \XoopsGroupPermHandler $grouppermHandler */
         $grouppermHandler = xoops_getHandler('groupperm');
         $errs         = '';
         foreach ($comp_users as $u) {

@@ -60,7 +60,7 @@ if (is_object($xoopsUser) && $xoopsUser->isAdmin($xoopsModule->mid())) {
         redirect_header('../region.php', 3, _AM_JOBS_FRANCE_ADDED);
     }
 } else {
-    redirect_header('../../index.php', 3, _NO_PERM);
+    redirect_header('../../index.php', 3, _AM_JOBS_NO_PERM);
 }
 
 xoops_cp_footer();

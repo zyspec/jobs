@@ -32,6 +32,8 @@ if (is_object($xoopsUser)) {
 } else {
     $groups = XOOPS_GROUP_ANONYMOUS;
 }
+
+/** @var \XoopsGroupPermHandler $grouppermHandler */
 $grouppermHandler = xoops_getHandler('groupperm');
 $perm_itemid = \Xmf\Request::getInt('item_id', 0, 'POST');
 //If no access
@@ -151,7 +153,8 @@ if (!empty($_POST['submit'])) {
         $row                      = $xoopsDB->fetchArray($result);
         $tags['CATEGORY_TITLE']   = $row['title'];
         $tags['CATEGORY_URL']     = XOOPS_URL . '/modules/' . $moduleDirName . '/index.php?pa=viewResume&cid="' . addslashes($cid);
-        $notificationHandler      = xoops_getHandler('notification');
+        /** @var \XoopsNotificationHandler $notificationHandler */
+        $notificationHandler = xoops_getHandler('notification');
         $notificationHandler->triggerEvent('res_global', 0, 'new_resume', $tags);
         $notificationHandler->triggerEvent('resume_category', $cid, 'new_resume_cat', $tags);
         $notificationHandler->triggerEvent('resume_listing', $lid, 'new_resume', $tags);
@@ -166,7 +169,7 @@ if (!empty($_POST['submit'])) {
     $GLOBALS['xoopsOption']['template_main'] = 'jobs_addresume.tpl';
     include XOOPS_ROOT_PATH . '/header.php';
     require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-    $mytree = new ResumeTree($xoopsDB->prefix('jobs_categories'), 'cid', 'pid');
+    $mytree = new Jobs\ResumeTree($xoopsDB->prefix('jobs_categories'), 'cid', 'pid');
 
     $cid    = \Xmf\Request::getInt('cid', 0);
 

@@ -68,6 +68,7 @@ if (!empty($xoopsUser)) {
         $groups = XOOPS_GROUP_ANONYMOUS;
     }
 
+    /** @var \XoopsGroupPermHandler $grouppermHandler */
     $grouppermHandler = xoops_getHandler('groupperm');
 
     $perm_itemid = \Xmf\Request::getInt('item_id', 0, 'POST');

@@ -25,7 +25,7 @@ $cloned_lang   = '_MI_' . strtoupper($moduleDirName);
 
 $modversion['version']       = '4.4';
 $modversion['module_status'] = 'RC 4';
-$modversion['release_date']  = '2017/06/23';
+$modversion['release_date']  = '2018/04/05';
 $modversion['name']          = _MI_JOBS_NAME;
 $modversion['description']   = _MI_JOBS_DESC;
 $modversion['credits']       = 'Jobs Module for Xoops by John Mordo Created from Myads jp 2.04';

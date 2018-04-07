@@ -107,7 +107,7 @@ if (!empty($_POST['submit'])) {
 
     require_once XOOPS_ROOT_PATH . '/modules/jobs/include/resume_functions.php';
     require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-      $mytree = new ResumeTree($xoopsDB->prefix('jobs_res_categories'), 'cid', 'pid');
+      $mytree = new Jobs\ResumeTree($xoopsDB->prefix('jobs_res_categories'), 'cid', 'pid');
 
     $GLOBALS['xoopsSecurity']->getTokenHTML();
 

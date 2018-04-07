@@ -71,6 +71,7 @@ function xoops_module_install_jobs(\XoopsModule $module)
     global $xoopsModule;
     $moduleId     = $xoopsModule->getVar('mid');
     $moduleId2    = $helper->getModule()->mid();
+    /** @var \XoopsGroupPermHandler $grouppermHandler */
     $grouppermHandler = xoops_getHandler('groupperm');
     // access rights ------------------------------------------
     $grouppermHandler->addRight($moduleDirName . '_approve', 1, XOOPS_GROUP_ADMIN, $moduleId);
