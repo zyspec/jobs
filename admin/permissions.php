@@ -10,12 +10,12 @@
 
 use XoopsModules\Jobs;
 
-include 'admin_header.php';
+include __DIR__ . '/admin_header.php';
 require_once XOOPS_ROOT_PATH . '/class/xoopsform/grouppermform.php';
-require_once '../../../include/cp_header.php';
+require_once __DIR__ . '/../../../include/cp_header.php';
 xoops_cp_header();
-$indexAdmin = new ModuleAdmin();
-echo $indexAdmin->addNavigation('permissions.php');
+$indexAdmin = \Xmf\Module\Admin::getInstance();
+$indexAdmin->displayNavigation('permissions.php');
 
 //wfdownloads_adminMenu(9, _AM_WFD_PERM_MANAGEMENT);
 
@@ -25,8 +25,8 @@ echo $indexAdmin->addNavigation('permissions.php');
 
 $cat_form = new Jobs\GroupPermForm('', $xoopsModule->getVar('mid'), 'jobs_category', _AM_WFD_PERM_CSELECTPERMISSIONS, 'admin/permissions.php');
 
-$category_handler =  Jobs\Helper::getInstance()->getHandler('JobCategory');
-$categories = $category_handler->getObjects();
+$jobCategoryHandler =  Jobs\Helper::getInstance()->getHandler('JobCategory');
+$categories = $jobCategoryHandler->getObjects();
 if (count($categories) > 0) {
     foreach (array_keys($categories) as $i) {
         $cat_form->addItem($categories[$i]->getVar('cid'), $categories[$i]->getVar('title'), $categories[$i]->getVar('pid'));
@@ -41,4 +41,4 @@ unset($cat_form);
 echo _AM_WFD_PERM_PERMSNOTE;
 
 //xoops_cp_footer();
-require_once 'admin_footer.php';
+require_once __DIR__ . '/admin_footer.php';

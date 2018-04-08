@@ -168,7 +168,7 @@ class XoopsGroupFormCheckBox extends \XoopsFormElement
         foreach ($parentIds as $pid) {
             $parent_ele = $ele_name . '[groups][' . $this->_groupId . '][' . $pid . ']';
             $tree .= "var ele = xoopsGetElementById('" . $parent_ele
-                . "'); if(ele.checked != true) {ele.checked = this.checked;}";
+                . "'); if(ele.checked !== true) {ele.checked = this.checked;}";
         }
         // If there are child elements, add javascript that will
         // make them unchecked when this element is unchecked to make
@@ -178,11 +178,11 @@ class XoopsGroupFormCheckBox extends \XoopsFormElement
             $child_ele = $ele_name . '[groups][' . $this->_groupId . '][' . $cid . ']';
             $tree
                 .=
-                "var ele = xoopsGetElementById('" . $child_ele . "'); if(this.checked != true) {ele.checked = false;}";
+                "var ele = xoopsGetElementById('" . $child_ele . "'); if(this.checked !== true) {ele.checked = false;}";
         }
         $tree .= '" value="1"';
         if (in_array($option['id'], $this->_value)) {
-            $tree .= ' checked="checked"';
+            $tree .= ' checked';
         }
         $tree .= ' >' . $option['name'] . '<input type="hidden" name="' . $ele_name . '[parents][' . $option['id']
                  . ']" value="' . implode(':', $parentIds) . '" ><input type="hidden" name="' . $ele_name

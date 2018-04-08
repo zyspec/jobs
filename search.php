@@ -360,7 +360,7 @@ switch ($action) {
             ';
             }
             echo '<td>&nbsp;&nbsp;</td>';
-            if (false != $has_next) {
+            if (false !== $has_next) {
                 $next            = $start + 20;
                 $search_url_next = $search_url . "&start=$next";
                 echo '<td align="right"><a href="' . htmlspecialchars($search_url_next, ENT_QUOTES | ENT_HTML5) . '">' . _SR_NEXT . '</a></td>

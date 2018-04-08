@@ -16,6 +16,8 @@
  * @author      XOOPS Development Team
  */
 
+use Xmf\Request;
+
 /**
  * Xoops Header
  */
@@ -27,8 +29,6 @@ require_once XOOPS_ROOT_PATH . '/class/criteria.php';
 /**
  * Module classes
  */
-
-require_once __DIR__ . '/class/pictures.php';
 
 /**
  * Check if using Xoops or XoopsCube (by jlm69)
@@ -49,7 +49,7 @@ if (preg_match('/^XOOPS Cube/', XOOPS_VERSION)) { // XOOPS Cube 2.1x
 
 if ($xCube) {
     if (!$GLOBALS['xoopsSecurity']->check(true, $_REQUEST['token'])) {
-        redirect_header($_SERVER['HTTP_REFERER'], 3, $GLOBALS['xoopsSecurity']->getErrors());
+        redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, $GLOBALS['xoopsSecurity']->getErrors());
     }
 } else {
     /**
@@ -57,7 +57,7 @@ if ($xCube) {
      * If your site is Xoops it uses xoopsSecurity for the token.
      */
     if (!$GLOBALS['xoopsSecurity']->check()) {
-        redirect_header($_SERVER['HTTP_REFERER'], 3, constant($main_lang . '_TOKENEXPIRED'));
+        redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, constant($main_lang . '_TOKENEXPIRED'));
     }
 }
 

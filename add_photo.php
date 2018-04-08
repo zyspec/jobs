@@ -16,6 +16,7 @@
  * @author      XOOPS Development Team
  */
 
+use Xmf\Request;
 use XoopsModules\Jobs;
 
 $moduleDirName = basename(dirname(__DIR__));
@@ -79,7 +80,7 @@ if ('sel_photo' === $_POST['xoops_upload_file'][0]) {
         }
     } else {
         if (!$GLOBALS['xoopsSecurity']->check()) {
-            redirect_header($_SERVER['HTTP_REFERER'], 3, constant($main_lang . '_TOKENEXPIRED'));
+            redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, constant($main_lang . '_TOKENEXPIRED'));
         }
     }
     /**

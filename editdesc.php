@@ -16,6 +16,7 @@
  * @author      XOOPS Development Team
  */
 
+use Xmf\Request;
 use XoopsModules\Jobs;
 
 
@@ -30,10 +31,7 @@ require_once XOOPS_ROOT_PATH . '/header.php';
 require_once XOOPS_ROOT_PATH . '/class/criteria.php';
 /** @var Jobs\Helper $helper */
 $helper = Jobs\Helper::getInstance();
-/**
- * Include modules classes
- */
-require_once __DIR__ . '/class/pictures.php';
+
 
 // Check if using XoopsCube (by jlm69)
 // Needed because of a difference in the way Xoops and XoopsCube handle tokens
@@ -48,14 +46,14 @@ if (preg_match('/^XOOPS Cube/', XOOPS_VERSION)) { // XOOPS Cube 2.1x
 
 if ($xCube) {
     if (!$GLOBALS['xoopsSecurity']->check(true, $_REQUEST['token'])) {
-        redirect_header($_SERVER['HTTP_REFERER'], 3, $GLOBALS['xoopsSecurity']->getErrors());
+        redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, $GLOBALS['xoopsSecurity']->getErrors());
     }
 } else {
     // Verify TOKEN for Xoops
     // If your site is Xoops it uses xoopsSecurity for the token.
 
     if (!$GLOBALS['xoopsSecurity']->check()) {
-        redirect_header($_SERVER['HTTP_REFERER'], 3, constant($main_lang . '_TOKENEXPIRED'));
+        redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, constant($main_lang . '_TOKENEXPIRED'));
     }
 }
 
