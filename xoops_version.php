@@ -9,11 +9,13 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
+ * @package     \XoopsModules\Jobs
  * @copyright   {@link https://xoops.org/ XOOPS Project}
- * @license     {@link http://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
- * @package     jobs
+ * @license     {@link https://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
  * @author      John Mordo aka jlm69 (www.jlmzone.com )
  * @author      XOOPS Development Team
+ * @link        https://github.com/XoopsModules25x/jobs
+ *
  */
 
 // defined('XOOPS_ROOT_PATH') || die('Restricted access');
@@ -24,8 +26,8 @@ $moduleDirName = basename(__DIR__);
 $cloned_lang   = '_MI_' . strtoupper($moduleDirName);
 
 $modversion['version']       = '4.4';
-$modversion['module_status'] = 'RC 4';
-$modversion['release_date']  = '2018/04/05';
+$modversion['module_status'] = 'RC 5';
+$modversion['release_date']  = '2020/03/05';
 $modversion['name']          = _MI_JOBS_NAME;
 $modversion['description']   = _MI_JOBS_DESC;
 $modversion['credits']       = 'Jobs Module for Xoops by John Mordo Created from Myads jp 2.04';
@@ -150,16 +152,16 @@ $modversion['sqlfile']['mysql'] = 'sql/mysql.sql';
 // Tables created by sql file (without prefix!)
 $modversion['tables'] = [
     $moduleDirName . '_' . 'categories',
-    $moduleDirName . '_' . 'jobs_companies',
-    $moduleDirName . '_' . 'jobs_created_resumes',
-    $moduleDirName . '_' . 'jobs_listing',
+    $moduleDirName . '_' . 'companies',
+    $moduleDirName . '_' . 'created_resumes',
+    $moduleDirName . '_' . 'listing',
     $moduleDirName . '_' . 'jobs_price',
     $moduleDirName . '_' . 'jobs_region',
-    $moduleDirName . '_' . 'jobs_resume',
-    $moduleDirName . '_' . 'jobs_res_categories',
-    $moduleDirName . '_' . 'jobs_replies',
-    $moduleDirName . '_' . 'jobs_type',
-    $moduleDirName . '_' . 'jobs_pictures'
+    $moduleDirName . '_' . 'resume',
+    $moduleDirName . '_' . 'res_categories',
+    $moduleDirName . '_' . 'replies',
+    $moduleDirName . '_' . 'type',
+    $moduleDirName . '_' . 'pictures'
 ];
 
 // ------------------- Help files ------------------- //
