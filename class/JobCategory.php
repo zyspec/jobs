@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Jobs;
+<?php
+
+namespace XoopsModules\Jobs;
 
 /**
  * Jobs for XOOPS
@@ -10,16 +12,17 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
+ * @package     \XoopsModules\Jobs
  * @copyright   {@link https://xoops.org/ XOOPS Project}
- * @license     {@link http://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
- * @package     jobs
+ * @license     {@link https://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
  * @author      John Mordo aka jlm69 (www.jlmzone.com )
  * @author      XOOPS Development Team
+ * @link        https://github.com/XoopsModules25x/jobs
  */
 
 use XoopsModules\Jobs;
 
-// defined('XOOPS_ROOT_PATH') || die('Restricted access');
+ defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 /**
  * Class JobCategory
@@ -45,7 +48,7 @@ class JobCategory extends \XoopsObject
     /**
      * @param bool $action
      *
-     * @return XoopsThemeForm
+     * @return \XoopsThemeForm
      */
     public function getForm($action = false)
     {
@@ -69,8 +72,8 @@ class JobCategory extends \XoopsObject
         $arr             = $categoryHandler->getAll();
         //$mytree = new \XoopsObjectTree($arr, "category_id", "category_pid");
         $mytree = new \XoopsObjectTree($arr, 'cid', 'pid');
-
-        $form->addElement(new \XoopsFormLabel(_AM_JOBS_CATEGORY_PID, $mytree->makeSelBox('pid', 'title', '-', $this->getVar('pid'), true)));
+        $form->addElement($mytree->makeSelectElement('pid', 'title', '-', $this->getVar('pid'), true, 0, '', _AM_JOBS_CATEGORY_PID));
+        //$form->addElement(new \XoopsFormLabel(_AM_JOBS_CATEGORY_PID, $mytree->makeSelBox('pid', 'title', '-', $this->getVar('pid'), true)));
         $form->addElement(new \XoopsFormText(_AM_JOBS_CATEGORY_TITLE, 'title', 50, 255, $this->getVar('title')), true);
         //$form->addElement(new \XoopsFormTextArea(_AM_TEST1_CATEGORY_DESC, "category_desc", $this->getVar("category_desc"), 4, 47), true);
 
@@ -79,7 +82,7 @@ class JobCategory extends \XoopsObject
         $imgtray_category_img        = new \XoopsFormElementTray(_AM_JOBS_IMGCAT, '<br>');
         $imgpath_category_img        = sprintf(_AM_JOBS_FORMIMAGE_PATH, $uploadirectory_category_img);
         $imageselect_category_img    = new \XoopsFormSelect($imgpath_category_img, 'img', $img);
-        $image_array_category_img    = XoopsLists:: getImgListAsArray(XOOPS_ROOT_PATH . $uploadirectory_category_img);
+        $image_array_category_img    = \XoopsLists:: getImgListAsArray(XOOPS_ROOT_PATH . $uploadirectory_category_img);
         foreach ($image_array_category_img as $image_category_img) {
             $imageselect_category_img->addOption((string)$image_category_img, $image_category_img);
         }
