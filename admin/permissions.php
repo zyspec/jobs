@@ -23,7 +23,7 @@ $indexAdmin->displayNavigation('permissions.php');
 		<fieldset><legend style='font-weight: bold; color: #900;'>" . _AM_WFD_PERM_CPERMISSIONS . "</legend>\n
 		<div style='padding: 2px;'>\n";
 
-$cat_form = new Jobs\GroupPermForm('', $xoopsModule->getVar('mid'), 'jobs_category', _AM_WFD_PERM_CSELECTPERMISSIONS, 'admin/permissions.php');
+$cat_form = new \XoopsGroupPermForm('', $helper->getModule()->mid(), 'jobs_category', _AM_WFD_PERM_CSELECTPERMISSIONS, 'admin/permissions.php');
 
 $jobCategoryHandler =  Jobs\Helper::getInstance()->getHandler('JobCategory');
 $categories = $jobCategoryHandler->getObjects();
