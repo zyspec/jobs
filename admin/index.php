@@ -10,11 +10,11 @@
  */
 
 /**
+ * @package      \XoopsModules\Jobs
  * @copyright    XOOPS Project (https://xoops.org)
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
- * @package
- * @since
+ * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author       XOOPS Development Team
+ * @link         https://github.com/XoopsModules25x/jobs
  */
 
 use XoopsModules\Jobs\DirectoryChecker;
@@ -22,8 +22,12 @@ use XoopsModules\Jobs\DirectoryChecker;
 require_once __DIR__ . '/admin_header.php';
 xoops_cp_header();
 
-/** @var \Xmf\Module\Admin $adminObject */
-$adminObject = \Xmf\Module\Admin::getInstance();
+/**
+ * Vars defined through inclusion of ./admin_header.php
+ *
+ * @var \Xmf\Module\Admin $adminObject
+ * @var \XoopsModules\Jobs\Helper $helper
+ */
 
 //-----------------------
 /*
@@ -64,16 +68,9 @@ $adminObject->addInfoBoxLine(sprintf(_AM_JOBS_RESUME_CAT_TOTAL, $summary['resume
 //$adminObject->addInfoBoxLine(  "</br>  "."<b>"._AM_JOBS_COMPANY_TOTCAP ."</b>  ". sprintf(_AM_JOBS_WAITVA_RESUME,$summary['waitResumeValidation']),  'Green');
 $adminObject->addInfoBoxLine('</br>  ' . sprintf(_AM_JOBS_COMPANY_TOT, $summary['companies']), 'Green');
 
-$photodir      = XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar('dirname') . '/photo';
-$photothumbdir = XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar('dirname') . '/photo/thumbs';
-$photohighdir  = XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar('dirname') . '/photo/midsize';
-$cachedir      = XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar('dirname') . '/resumes';
-$tmpdir        = XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar('dirname') . '/rphoto';
-
 //------ check directories ---------------
 
 $adminObject->addConfigBoxLine('');
-$redirectFile = $_SERVER['PHP_SELF'];
 
 $languageConstants = [
     _AM_JOBS_AVAILABLE,
@@ -87,29 +84,49 @@ $languageConstants = [
     _AM_JOBS_PERMNOTSET
 ];
 
-$path = $photodir;
-$adminObject->addConfigBoxLine(DirectoryChecker::getDirectoryStatus($path, 0777, $languageConstants, $redirectFile));
+$pathArray = [
+    [
+        'dir'    => $helper->path('photo'),
+        'perm'   => 0755,
+        'action' => $_SERVER['SCRIPT_NAME']
+    ],
 
-$path = $photothumbdir;
-$adminObject->addConfigBoxLine(DirectoryChecker::getDirectoryStatus($path, 0777, $languageConstants, $redirectFile));
+    [
+        'dir'    => $helper->path('photo/thumbs'),
+        'perm'   => 0755,
+        'action' => $_SERVER['SCRIPT_NAME']
+    ],
 
-$path = $photohighdir;
-$adminObject->addConfigBoxLine(DirectoryChecker::getDirectoryStatus($path, 0777, $languageConstants, $redirectFile));
+    [
+        'dir'    => $helper->path('photo/midsize'),
+        'perm'   => 0755,
+        'action' => $_SERVER['SCRIPT_NAME']
+    ],
 
-$path = $cachedir;
-$adminObject->addConfigBoxLine(DirectoryChecker::getDirectoryStatus($path, 0777, $languageConstants, $redirectFile));
+    [
+        'dir'    => $helper->path('resumes'),
+        'perm'   => 0755,
+        'action' => $_SERVER['SCRIPT_NAME']
+    ],
 
-$path = $tmpdir;
-$adminObject->addConfigBoxLine(DirectoryChecker::getDirectoryStatus($path, 0777, $languageConstants, $redirectFile));
+    [
+        'dir'    => $helper->path('rphoto'),
+        'perm'   => 0755,
+        'action' => $_SERVER['SCRIPT_NAME']
+    ]
+];
+
+foreach ($pathArray as $path) {
+    $adminObject->addConfigBoxLine(DirectoryChecker::getDirectoryStatus($path['dir'], $path['perm'], $languageConstants, $path['action']));
+}
+
 //---------------------------
 
-$adminObject->displayNavigation(basename(__FILE__));
-
 xoops_loadLanguage('admin/modulesadmin', 'system');
-require_once __DIR__ . '/../testdata/index.php';
-$adminObject->addItemButton(_AM_SYSTEM_MODULES_INSTALL_TESTDATA, '__DIR__ . /../../testdata/index.php?op=load', 'add');
-$adminObject->displayButton('left', '');
 
+$adminObject->displayNavigation(basename(__FILE__));
+$adminObject->addItemButton(_AM_SYSTEM_MODULES_INSTALL_TESTDATA, '__DIR__ . /../../testdata/index.php?op=load', 'add');
+$adminObject->displayButton('left');
 $adminObject->displayIndex();
 
 jobs_filechecks();
