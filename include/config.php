@@ -66,6 +66,7 @@ function getConfig()
             '/include/constants.php',
             '/include/functions.php',
             '/ajaxrating.txt',
+            '/include/directorychecker.php',
         ],
         'oldFolders'      => [
             '/images',
@@ -73,6 +74,7 @@ function getConfig()
             '/js',
             '/tcpdf',
             '/images',
+            '/admin/include',
         ],
         'modCopyright'    => "<a href='https://xoops.org' title='XOOPS Project' target='_blank'>
                      <img src='" . constant($moduleDirNameUpper . '_AUTHOR_LOGOIMG') . '\' alt=\'XOOPS Project\' /></a>',

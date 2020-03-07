@@ -17,12 +17,12 @@
  * @author       XOOPS Development Team
  */
 
-require_once __DIR__ . '/../../../include/cp_header.php';
-require_once __DIR__ . '/admin_header.php';
-require_once __DIR__ . '/../include/directorychecker.php';
+use XoopsModules\Jobs\DirectoryChecker;
 
+require_once __DIR__ . '/admin_header.php';
 xoops_cp_header();
 
+/** @var \Xmf\Module\Admin $adminObject */
 $adminObject = \Xmf\Module\Admin::getInstance();
 
 //-----------------------

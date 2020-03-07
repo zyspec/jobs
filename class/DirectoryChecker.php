@@ -1,4 +1,7 @@
 <?php
+
+namespace XoopsModules\Jobs;
+
 /**
  * Jobs for XOOPS
  *
@@ -17,7 +20,7 @@
 
 //// defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
-require_once __DIR__ . '/../../../include/cp_header.php';
+require_once dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
 
 /**
  * Class DirectoryChecker
@@ -35,7 +38,7 @@ class DirectoryChecker
      */
     public static function getDirectoryStatus($path, $mode = 0777, $languageConstants = [], $redirectFile)
     {
-        global $pathIcon16;
+        //global $pathIcon16;
 
         $languageConstants1 = [$languageConstants[5], $languageConstants[6]];
         $languageConstants2 = [$languageConstants[7], $languageConstants[8]];
@@ -47,14 +50,13 @@ class DirectoryChecker
             return false;
         }
         if (!@is_dir($path)) {
-            $path_status = "<img src='" . $pathIcon16 . "/0.png'   >" . $path . ' ( ' . $languageConstants[1] . ' ) ' . '<a href=' . $_SERVER['PHP_SELF'] . "?op=createdir&amp;path=$path&amp;redirect=$redirectFile&amp;languageConstants=$myWords1>" . $languageConstants[2] . '</a>';
+            $path_status = "<img src='" . \Xmf\Module\Admin::iconUrl('0.png', '16') . "'>" . $path . ' ( ' . $languageConstants[1] . ' ) ' . '<a href=' . $_SERVER['PHP_SELF'] . "?op=createdir&amp;path=$path&amp;redirect=$redirectFile&amp;languageConstants=$myWords1>" . $languageConstants[2] . '</a>';
         } elseif (@is_writable($path)) {
-            $path_status = "<img src='" . $pathIcon16 . "/1.png'   >" . $path . ' ( ' . $languageConstants[0] . ' ) ';
+            $path_status = "<img src='" . \Xmf\Module\Admin::iconUrl('1.png', '16') . "'>" . $path . ' ( ' . $languageConstants[0] . ' ) ';
             $currentMode = substr(decoct(fileperms($path)), 2);
             if ($currentMode != decoct($mode)) {
                 $path_status = "<img src='"
-                               . $pathIcon16
-                               . "/0.png'   >"
+                               . \Xmf\Module\Admin::iconUrl('0.png', '16') . "'> "
                                . $path
                                . sprintf($languageConstants[3], decoct($mode), $currentMode)
                                . '<a href='
@@ -66,8 +68,7 @@ class DirectoryChecker
         } else {
             $currentMode = substr(decoct(fileperms($path)), 2);
             $path_status = "<img src='"
-                           . $pathIcon16
-                           . "/0.png'   >"
+                           . \Xmf\Module\Admin::iconUrl('0.png', '16') . "'> "
                            . $path
                            . sprintf($languageConstants[3], decoct($mode), $currentMode)
                            . '<a href='
