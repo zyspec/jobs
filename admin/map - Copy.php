@@ -48,7 +48,7 @@ $helper = Jobs\Helper::getInstance();
 //    loadModuleAdminMenu(1, "");
 $adminObject = \Xmf\Module\Admin::getInstance();
 $adminObject->displayNavigation(basename(__FILE__));
-$adminObject->addItemButton(_AM_JOBS_ADDSUBCAT, 'addregion.php', 'add', '');
+$adminObject->addItemButton(_AM_JOBS_ADDSUBCAT, 'region.php?op=RegionAdd', 'add', '');
 $adminObject->addItemButton(_AM_JOBS_ADDCATPRINC, 'lists.php', 'list', '');
 $adminObject->displayButton('left', '');
 
