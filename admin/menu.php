@@ -1,5 +1,5 @@
 <?php
-/**
+/*
  * Jobs for XOOPS
  *
  * You may not change or alter any portion of this comment or credits
@@ -8,79 +8,74 @@
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- *
+ */
+/**
+ * @package     \XoopsModules\Jobs
  * @copyright   {@link https://xoops.org/ XOOPS Project}
- * @license     {@link http://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
- * @package     jobs
+ * @license     {@link https://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
  * @author      John Mordo aka jlm69 (www.jlmzone.com )
  * @author      XOOPS Development Team
+ * @link        https://github.com/XoopsModules25x/jobs
  */
 
-use XoopsModules\Jobs;
+$adminmenu = [
+    [
+        'title' => _MI_JOBS_HOME,
+        'link'  => 'admin/index.php',
+        'icon'  => \Xmf\Module\Admin::menuIconPath('home.png')
+    ],
+/*
+    [
+        'title' =>  _MI_JOBS_ADMENU2,
+        'link'  =>  "admin/map.php",
+        'icon'  => \Xmf\Module\Admin::menuIconPath('category.png')
+    ],
+*/
+    [
+        'title' => _MI_JOBS_ADMENU6,
+        'link'  => 'admin/company.php',
+        'icon'  => \Xmf\Module\Admin::menuIconPath('addlink.png')
+    ],
 
-// require_once __DIR__ . '/../class/Helper.php';
-//require_once __DIR__ . '/../include/common.php';
-$helper = Jobs\Helper::getInstance();
+    [
+        'title' => _MI_JOBS_ADMENU8,
+        'link'  => 'admin/jobs.php',
+        'icon'  => \Xmf\Module\Admin::menuIconPath('cash_stack.png')
+    ],
 
-$pathIcon32 = \Xmf\Module\Admin::menuIconPath('');
-$pathModIcon32 = $helper->getModule()->getInfo('modicons32');
+    [
+        'title' => _MI_JOBS_ADMENU9,
+        'link'  => 'admin/resumes.php',
+        'icon'  => \Xmf\Module\Admin::menuIconPath('identity.png')
+    ],
+/*
+    [
+        'title' =>  _MI_JOBS_ADMENU1,
+        'link'  =>  "admin/main.php",
+        'icon'  => \Xmf\Module\Admin::menuIconPath('manage.png')
+    ],
+*/
+    [
+        'title' => _MI_JOBS_ADMENU1,
+        'link'  => 'admin/jobs_type.php',
+        'icon'  => \Xmf\Module\Admin::menuIconPath('manage.png')
+    ],
 
-$adminmenu[] = [
-    'title' => _MI_JOBS_HOME,
-    'link'  => 'admin/index.php',
-    'icon'  => $pathIcon32 . '/home.png',
-];
+    [
+        'title' => _MI_JOBS_ADMENU3,
+        'link'  => 'admin/groupperms.php',
+        'icon'  => \Xmf\Module\Admin::menuIconPath('permissions.png')
+    ],
 
-//$adminmenu[] = [
-//'title' =>  _MI_JOBS_ADMENU2,
-//'link' =>  "admin/map.php",
-//$adminmenu[$i]["icon"]  = $pathIcon32 . '/category.png';
-//];
+    [
+        'title' => _MI_JOBS_ADMENU7,
+        'link'  => 'admin/region.php',
+        'icon'  => \Xmf\Module\Admin::menuIconPath('languages.png')
+    ],
 
-$adminmenu[] = [
-    'title' => _MI_JOBS_ADMENU6,
-    'link'  => 'admin/company.php',
-    'icon'  => $pathIcon32 . '/addlink.png',
-];
-
-$adminmenu[] = [
-    'title' => _MI_JOBS_ADMENU8,
-    'link'  => 'admin/jobs.php',
-    'icon'  => $pathIcon32 . '/cash_stack.png',
-];
-
-$adminmenu[] = [
-    'title' => _MI_JOBS_ADMENU9,
-    'link'  => 'admin/resumes.php',
-    'icon'  => $pathIcon32 . '/identity.png',
-];
-
-//$adminmenu[] = [
-//'title' =>  _MI_JOBS_ADMENU1,
-//'link' =>  "admin/main.php",
-//$adminmenu[$i]["icon"]  = $pathIcon32 . '/manage.png';
-//];
-
-$adminmenu[] = [
-    'title' => _MI_JOBS_ADMENU1,
-    'link'  => 'admin/jobs_type.php',
-    'icon'  => $pathIcon32 . '/manage.png',
-];
-
-$adminmenu[] = [
-    'title' => _MI_JOBS_ADMENU3,
-    'link'  => 'admin/groupperms.php',
-    'icon'  => $pathIcon32 . '/permissions.png',
-];
-
-$adminmenu[] = [
-    'title' => _MI_JOBS_ADMENU7,
-    'link'  => 'admin/region.php',
-    'icon'  => $pathIcon32 . '/languages.png',
-];
-
-$adminmenu[] = [
-    'title' => _MI_JOBS_ABOUT,
-    'link'  => 'admin/about.php',
-    'icon'  => $pathIcon32 . '/about.png',
+    [
+        'title' => _MI_JOBS_ABOUT,
+        'link'  => 'admin/about.php',
+        'icon'  => \Xmf\Module\Admin::menuIconPath('about.png')
+    ]
 ];
