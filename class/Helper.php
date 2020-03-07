@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Jobs;
+<?php
+
+namespace XoopsModules\Jobs;
 
 /*
  * You may not change or alter any portion of this comment or credits
@@ -11,11 +13,11 @@
  */
 
 /**
- * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
- * @package
- * @since
+ * @package    \XoopsModules\Jobs
+ * @copyright  XOOPS Project https://xoops.org/
+ * @license    GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @author     XOOPS Development Team
+ * @link       https://github.com/XoopsModules25x/jobs
  */
 
 defined('XOOPS_ROOT_PATH') || die('Restricted access');
@@ -25,30 +27,34 @@ defined('XOOPS_ROOT_PATH') || die('Restricted access');
  */
 class Helper extends \Xmf\Module\Helper
 {
-    public $debug;
+    /**
+     * @param bool $debug true, debug on | false, debug off
+     */
+    public $debug = false;
 
     /**
      * @param bool $debug
      */
-    public function __construct($debug = false)
+    public function __construct($dirname = null)
     {
-        $this->debug   = $debug;
-       $moduleDirName = basename(dirname(__DIR__));
-       parent::__construct($moduleDirName);
+        if (null === $dirname) {
+            $dirname = basename(dirname(__DIR__));
+            $this->dirname = $dirname;
+        }
+        parent::__construct($dirname);
     }
 
     /**
-     * @param bool $debug
+     * @param string $dirname module directory name
      *
-     * @return \Xmf\Module\Helper
+     * @return \XoopsModules\Jobs\Helper
      */
-    public static function getInstance($debug = false)
+    public static function getInstance($dirname = null)
     {
         static $instance;
         if (null === $instance) {
-            $instance = new static($debug);
+            $instance = new static($dirname);
         }
-
         return $instance;
     }
 
@@ -69,10 +75,8 @@ class Helper extends \Xmf\Module\Helper
      */
     public function getHandler($name)
     {
-        $ret   = false;
         $db    = \XoopsDatabaseFactory::getDatabaseConnection();
-        $class = '\\XoopsModules\\' . ucfirst(strtolower(basename(dirname(__DIR__)))) . '\\' . $name . 'Handler';
-        $ret   = new $class($db);
-        return $ret;
+        $class = __NAMESPACE__ . '\\' . ucfirst($name) . 'Handler';
+        return new $class($db);
     }
 }
