@@ -1,0 +1,95 @@
+- 
+  rid: 90
+  pid: 0
+  name: '---ITALY---'
+  abbrev: 'IT'
+- 
+  rid: 91
+  pid: 90
+  name: 'Abruzzo'
+  abbrev: 'Abruzzo'
+- 
+  rid: 92
+  pid: 90
+  name: 'Lombardy'
+  abbrev: 'Lombardy'
+- 
+  rid: 93
+  pid: 90
+  name: 'Amalfi Coast'
+  abbrev: 'Amalfi Coast'
+- 
+  rid: 94
+  pid: 90
+  name: 'Marche'
+  abbrev: 'Marche'
+- 
+  rid: 95
+  pid: 90
+  name: 'Aosta'
+  abbrev: 'Aosta'
+- 
+  rid: 96
+  pid: 90
+  name: 'Molise'
+  abbrev: 'Molise'
+- 
+  rid: 97
+  pid: 90
+  name: 'Basilicata'
+  abbrev: 'Basilicata'
+- 
+  rid: 98
+  pid: 90
+  name: 'Piemonte'
+  abbrev: 'Piemonte'
+- 
+  rid: 99
+  pid: 90
+  name: 'Calabria'
+  abbrev: 'Calabria'
+- 
+  rid: 100
+  pid: 90
+  name: 'Puglia - Apulia'
+  abbrev: 'Puglia - Apulia'
+- 
+  rid: 101
+  pid: 90
+  name: 'Campania'
+  abbrev: 'Campania'
+- 
+  rid: 102
+  pid: 90
+  name: 'Trentino - Alto Adige'
+  abbrev: 'Trentino - Alto Adige'
+- 
+  rid: 103
+  pid: 90
+  name: 'Emilia Romagna'
+  abbrev: 'Emilia Romagna'
+- 
+  rid: 104
+  pid: 90
+  name: 'Tuscany'
+  abbrev: 'Tuscany'
+- 
+  rid: 105
+  pid: 90
+  name: 'Umbria'
+  abbrev: 'Umbria'
+- 
+  rid: 106
+  pid: 90
+  name: 'Lazio'
+  abbrev: 'Lazio'
+- 
+  rid: 107
+  pid: 90
+  name: 'Veneto'
+  abbrev: 'Veneto'
+- 
+  rid: 108
+  pid: 90
+  name: 'Liguria'
+  abbrev: 'Liguria'

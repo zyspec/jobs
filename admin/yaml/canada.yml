@@ -1,0 +1,70 @@
+- 
+  abbrev: CA
+  name: "---CANADA---"
+  pid: 0
+  rid: 53
+- 
+  abbrev: AB
+  name: Alberta
+  pid: 53
+  rid: 54
+- 
+  abbrev: BC
+  name: "British Columbia"
+  pid: 53
+  rid: 55
+- 
+  abbrev: MB
+  name: Manitoba
+  pid: 53
+  rid: 56
+- 
+  abbrev: NB
+  name: "New Brunswick"
+  pid: 53
+  rid: 57
+- 
+  abbrev: NL
+  name: "Newfoundland and Labrador"
+  pid: 53
+  rid: 58
+- 
+  abbrev: NT
+  name: "Northwest Territories"
+  pid: 53
+  rid: 59
+- 
+  abbrev: NS
+  name: "Nova Scotia"
+  pid: 53
+  rid: 60
+- 
+  abbrev: NU
+  name: Nunavut
+  pid: 53
+  rid: 61
+- 
+  abbrev: "ON"
+  name: Ontario
+  pid: 53
+  rid: 62
+- 
+  abbrev: PE
+  name: "Prince Edward Island"
+  pid: 53
+  rid: 63
+- 
+  abbrev: QC
+  name: Qu�bec
+  pid: 53
+  rid: 64
+- 
+  abbrev: SK
+  name: Saskatchewan
+  pid: 53
+  rid: 65
+- 
+  abbrev: YT
+  name: Yukon
+  pid: 53
+  rid: 66

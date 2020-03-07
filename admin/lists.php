@@ -16,21 +16,71 @@
  * @author      XOOPS Development Team
  */
 //
-require_once __DIR__ . '/../../../include/cp_header.php';
-$moduleDirName = basename(dirname(__DIR__));
-require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/functions.php";
 
-require_once XOOPS_ROOT_PATH . '/modules/jobs/admin/header.php';
+use Xmf\Database;
+use \Xmf\Request;
+use \Xmf\Yaml;
+
+require_once __DIR__ . '/admin_header.php';
+//$thisFile = basename(__FILE__);
+
 xoops_cp_header();
-//    loadModuleAdminMenu(3, "");
+/**
+ * @var \XoopsModules\Jobs\Helper $helper
+ * @var \Xmf\Module\Admin $adminObject
+ */
+$adminObject->displayNavigation();
+$adminObject->addItemButton(_AM_JOBS_ADD_REGION, $helper->url('admin/region.php?op=RegionAdd'), 'add', '');
+$adminObject->displayButton('left', '');
 
 echo "<fieldset><legend style='font-weight: bold; color:#900;'>" . _AM_JOBS_LISTS . '</legend>';
-echo '<br> ' . _AM_JOBS_INSTALL_NOW . '<br><br>';
-echo '<a href="include/usstates.php">' . _AM_JOBS_US_STATES . '</a><br>';
-echo '<a href="include/canada.php">' . _AM_JOBS_CANADA_STATES . '</a><br>';
-echo '<a href="include/france.php">' . _AM_JOBS_FRANCE . '</a><br>';
-echo '<a href="include/italy.php">' . _AM_JOBS_ITALY . '</a><br>';
-echo '<a href="include/england.php">' . _AM_JOBS_ENGLAND . '</a><br>';
-echo '</fieldset>';
+// get list of files in .yml directory
+$ymlPath = $helper->path('admin/yaml/');
 
+/** @var \XoopsFile $ymlFileObj */
+$xoopsFileObj       = new \XoopsFile($ymlPath);
+$xoopsFolderHandler = $xoopsFileObj->getHandler('folder', $ymlPath);
+
+//$fileList = $xoopsFolderHandler->find('.*\.yml', true); //returns sorted array of .yml files
+$fileList = $xoopsFolderHandler->find('.*\.ya?ml', true); //returns sorted array of .y[a]ml files
+if (0 === count($fileList)) {
+    $helper->redirect('admin/index.php', 3, 'Could not find any Regions/States to import');
+}
+// now read each file and get the region name (pid = 0)
+$regionOptionArray = [];
+foreach ($fileList as $ymlFileName){
+    if (false !== $regionArray = Yaml::read($ymlPath . $ymlFileName)){
+        foreach($regionArray as $region) {
+            if (0 !== $region['pid']) {
+                continue;
+            }
+            $regionOptionArray[$ymlFileName] = $region['name'];
+        }
+    } else {
+        $helper->redirect('admin/index.php', 3, 'INVALID YAML DATA READ');
+    }
+}
+$regionInp = Request::getString('region', '');
+if ('' === $regionInp) {
+    $form = new \XoopsThemeForm(_AM_JOBS_ADD_REGION, 'region_form', $helper->url('admin/lists.php', 'post', true));
+    $formSelect = new \XoopsFormSelect(_AM_JOBS_SELECT_REGION, 'region');
+    $formSelect->addOptionArray($regionOptionArray);
+    $form->addElement($formSelect);
+    $form->addElement(new \XoopsFormButtonTray('submit', _SUBMIT));
+    $form->display();
+} else {
+    $ok = Request::getInt('ok', 0, 'POST');
+    if (1 === $ok) {
+        //check XoopsSecurity token
+        if (!$GLOBALS['xoopsSecurity']->check()) {
+            $helper->redirect('admin/index.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
+        }
+        $insertCount = Database\TableLoad::loadTableFromYamlFile('jobs_region', $ymlPath . $regionInp);
+        $msg = (0 === $insertCount) ? _AM_JOBS_UPDATEFAILED : _AM_JOBS_REGION_ADDED;
+        $helper->redirect('admin/region.php', 3, $msg);
+    } else {
+        xoops_confirm(['region' => $regionInp, 'ok' => 1], $helper->url('admin/lists.php'), _AM_JOBS_SUREADDREGIONS, _OK);
+    }
+}
+echo '</fieldset>';
 xoops_cp_footer();

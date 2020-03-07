@@ -8,37 +8,43 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
-
 /**
+ * @package      \XoopsModules\Jobs
  * @copyright    XOOPS Project (https://xoops.org)
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
- * @package
- * @since
+ * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author       XOOPS Development Team
+ * @link         https://github.com/XoopsModules25x/jobs
  */
 
 use XoopsModules\Jobs;
 
-require_once __DIR__ . '/../../../include/cp_header.php';
+require_once dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
 require_once $GLOBALS['xoops']->path('www/class/xoopsformloader.php');
-require_once __DIR__ . '/../include/functions.php';
-require_once __DIR__ . '/../include/common.php';
+require_once dirname(__DIR__) . '/include/functions.php';
+require_once dirname(__DIR__) . '/include/common.php';
 
 $moduleDirName = basename(dirname(__DIR__));
-/** @var Jobs\Helper $helper */
-$helper        = Jobs\Helper::getInstance();
-$adminObject   = \Xmf\Module\Admin::getInstance();
+/**
+ * @var \XoopsModules\Jobs\Helper $helper
+ * @var \Xmf\Module\Admin $adminObject
+ */
+$helper      = Jobs\Helper::getInstance();
+$adminObject = \Xmf\Module\Admin::getInstance();
 
 // Load language files
 $helper->loadLanguage('admin');
 $helper->loadLanguage('modinfo');
 $helper->loadLanguage('main');
 
+if (!$helper->isUserAdmin()) {
+    redirect_header(XOOPS_URL . '/', 3, _NOPERM);
+}
+
 $myts = \MyTextSanitizer::getInstance();
 
-if (!isset($GLOBALS['xoopsTpl']) || !($GLOBALS['xoopsTpl'] instanceof XoopsTpl)) {
+if (!$GLOBALS['xoopsTpl'] instanceof \XoopsTpl) {
     require_once $GLOBALS['xoops']->path('class/template.php');
-    $xoopsTpl = new \XoopsTpl();
+    $GLOBALS['xoopsTpl'] = new \XoopsTpl();
 }
 
 //load handlers

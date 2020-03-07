@@ -1,0 +1,260 @@
+- 
+  rid: 1
+  pid: 0
+  name: '---UNITED STATES---'
+  abbrev: 'US'
+- 
+  rid: 2
+  pid: 1
+  name: 'Alabama'
+  abbrev: 'AL'
+- 
+  rid: 3
+  pid: 1
+  name: 'Alaska'
+  abbrev: 'AK'
+- 
+  rid: 4
+  pid: 1
+  name: 'Arizona'
+  abbrev: 'AZ'
+- 
+  rid: 5
+  pid: 1
+  name: 'Arkansas'
+  abbrev: 'AR'
+- 
+  rid: 6
+  pid: 1
+  name: 'California'
+  abbrev: 'CA'
+- 
+  rid: 7
+  pid: 1
+  name: 'Colorado'
+  abbrev: 'CO'
+- 
+  rid: 8
+  pid: 1
+  name: 'Connecticut'
+  abbrev: 'CT'
+- 
+  rid: 9
+  pid: 1
+  name: 'Delaware'
+  abbrev: 'DE'
+- 
+  rid: 10
+  pid: 1
+  name: 'District of Columbia'
+  abbrev: 'DC'
+- 
+  rid: 11
+  pid: 1
+  name: 'Florida'
+  abbrev: 'FL'
+- 
+  rid: 12
+  pid: 1
+  name: 'Georgia'
+  abbrev: 'GA'
+- 
+  rid: 13
+  pid: 1
+  name: 'Hawaii'
+  abbrev: 'HI'
+- 
+  rid: 14
+  pid: 1
+  name: 'Idaho'
+  abbrev: 'ID'
+- 
+  rid: 15
+  pid: 1
+  name: 'Illinois'
+  abbrev: 'IL'
+- 
+  rid: 16
+  pid: 1
+  name: 'Indiana'
+  abbrev: 'IN'
+- 
+  rid: 17
+  pid: 1
+  name: 'Iowa'
+  abbrev: 'IA'
+- 
+  rid: 18
+  pid: 1
+  name: 'Kansas'
+  abbrev: 'KS'
+- 
+  rid: 19
+  pid: 1
+  name: 'Kentucky'
+  abbrev: 'KY'
+- 
+  rid: 20
+  pid: 1
+  name: 'Louisiana'
+  abbrev: 'LA'
+- 
+  rid: 21
+  pid: 1
+  name: 'Maine'
+  abbrev: 'ME'
+- 
+  rid: 22
+  pid: 1
+  name: 'Maryland'
+  abbrev: 'MD'
+- 
+  rid: 23
+  pid: 1
+  name: 'Massachusetts'
+  abbrev: 'MA'
+- 
+  rid: 24
+  pid: 1
+  name: 'Michigan'
+  abbrev: 'MI'
+- 
+  rid: 25
+  pid: 1
+  name: 'Minnesota'
+  abbrev: 'MN'
+- 
+  rid: 26
+  pid: 1
+  name: 'Mississippi'
+  abbrev: 'MS'
+- 
+  rid: 27
+  pid: 1
+  name: 'Missouri'
+  abbrev: 'MO'
+- 
+  rid: 28
+  pid: 1
+  name: 'Montana'
+  abbrev: 'MT'
+- 
+  rid: 29
+  pid: 1
+  name: 'Nebraska'
+  abbrev: 'NE'
+- 
+  rid: 30
+  pid: 1
+  name: 'Nevada'
+  abbrev: 'NV'
+- 
+  rid: 31
+  pid: 1
+  name: 'New Hampshire'
+  abbrev: 'NH'
+- 
+  rid: 32
+  pid: 1
+  name: 'New Jersey'
+  abbrev: 'NJ'
+- 
+  rid: 33
+  pid: 1
+  name: 'New Mexico'
+  abbrev: 'NM'
+- 
+  rid: 34
+  pid: 1
+  name: 'New York'
+  abbrev: 'NY'
+- 
+  rid: 35
+  pid: 1
+  name: 'North Carolina'
+  abbrev: 'NC'
+- 
+  rid: 36
+  pid: 1
+  name: 'North Dakota'
+  abbrev: 'ND'
+- 
+  rid: 37
+  pid: 1
+  name: 'Ohio'
+  abbrev: 'OH'
+- 
+  rid: 38
+  pid: 1
+  name: 'Oklahoma'
+  abbrev: 'OK'
+- 
+  rid: 39
+  pid: 1
+  name: 'Oregon'
+  abbrev: 'OR'
+- 
+  rid: 40
+  pid: 1
+  name: 'Pennsylvania'
+  abbrev: 'PA'
+- 
+  rid: 41
+  pid: 1
+  name: 'Rhode Island'
+  abbrev: 'RI'
+- 
+  rid: 42
+  pid: 1
+  name: 'South Carolina'
+  abbrev: 'SC'
+- 
+  rid: 43
+  pid: 1
+  name: 'South Dakota'
+  abbrev: 'SD'
+- 
+  rid: 44
+  pid: 1
+  name: 'Tennessee'
+  abbrev: 'TN'
+- 
+  rid: 45
+  pid: 1
+  name: 'Texas'
+  abbrev: 'TX'
+- 
+  rid: 46
+  pid: 1
+  name: 'Utah'
+  abbrev: 'UT'
+- 
+  rid: 47
+  pid: 1
+  name: 'Vermont'
+  abbrev: 'VT'
+- 
+  rid: 48
+  pid: 1
+  name: 'Virginia'
+  abbrev: 'VA'
+- 
+  rid: 49
+  pid: 1
+  name: 'Washington'
+  abbrev: 'WA'
+- 
+  rid: 50
+  pid: 1
+  name: 'West Virginia'
+  abbrev: 'WV'
+- 
+  rid: 51
+  pid: 1
+  name: 'Wisconsin'
+  abbrev: 'WI'
+- 
+  rid: 52
+  pid: 1
+  name: 'Wyoming'
+  abbrev: 'WY'

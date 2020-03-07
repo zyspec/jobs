@@ -300,7 +300,7 @@ define('_AM_JOBS_MAN_REGION', 'Manage States/Regions');
 define('_AM_JOBS_REGIONS', 'State/Region');
 define('_AM_JOBS_ADD_REGION', 'Add States/Regions');
 define('_AM_JOBS_ADDREGION', 'Add State/Region');
-define('_AM_JOBS_DEL_REGION', 'Delete This State/Region');
+define('_AM_JOBS_DEL_REGION', 'Delete this State/Region');
 define('_AM_JOBS_REGION_NUMBER', 'State/Region ID');
 define('_AM_JOBS_MOD_REGION', 'Modify States/Regions');
 define('_AM_JOBS_REGION_ADDED', 'State/Region has been Added');
@@ -327,7 +327,7 @@ define('_AM_JOBS_COMP_USER_NOTTHERE', ' is not a valid username - check spelling
 define('_AM_JOBS_COMP_USER_NOPERM', ' does not have permission to submit listings - contact administrator');
 define('_AM_JOBS_PLS_CORRECT', '*** There was a problem with your modifications - please correct ***');
 //  END
-define('_AM_JOBS_COMPANY_ADDED', 'Your Company Information has been Added');
+define('_AM_JOBS_COMPANY_ADDED', 'Your Company Information has been added');
 
 // DDED for 4.3RC2
 
@@ -340,7 +340,7 @@ define('_AM_JOBS_RES_ADD_LINK', 'Add a Resume listing');
 define('_AM_JOBS_MOD_LISTING', 'Modify a Resume listing as Admin');
 
 define('_AM_JOBS_ADDED_TO_RES_CAT', 'A new Resume Listing has been added to the category ');
-define('_AM_JOBS_RES_ADDED_PLUS', 'Your Resume Listing has been added and<br>You will be directed to create your Resume');
+define('_AM_JOBS_RES_ADDED_PLUS', 'Your Resume Listing has been added and<br>you will be directed to create your Resume');
 
 define('_AM_JOBS_RES_PCODE', '<b>Privacy Code</b>');
 define('_AM_JOBS_RES_PSIZE', 'This resume will be public if left blank.');
@@ -378,7 +378,7 @@ define('_AM_JOBS_CATEGORY_EDIT', 'Edit Category');
 
 define('_AM_JOBS_FORMOK', 'Added successfully');
 define('_AM_JOBS_FORMDELOK', 'Deleted successfully');
-define('_AM_JOBS_FORMSUREDEL', 'Are you sure to delete it?');
+define('_AM_JOBS_FORMSUREDEL', 'Are you sure you want to delete it?');
 define('_AM_JOBS_FORMUPLOAD', 'Upload Image');
 define('_AM_JOBS_FORMIMAGE_PATH', 'Select Image');
 
@@ -472,3 +472,9 @@ define('_AM_JOBS_ERROR_TAG_REMOVAL', 'Could not remove tags from Tag Module');
 define('_AM_JOBS_NO_PERM', 'You do not have the permission for this action');
 
 
+// ADDED for 4.4 RC5
+define('_AM_JOBS_PARENT_NUMBER', 'Parent ID');
+define('_AM_JOBS_REGION_INVALID', 'You have entered an invalid region, please try again');
+define('_AM_JOBS_SELECT_REGION', 'Select Region');
+define('_AM_JOBS_DOES_NOT_EXIST', 'does not exist!');
+define('_AM_JOBS_SUREADDREGIONS', "Are you sure you want to load the States/Regions into the database?");

@@ -1,0 +1,115 @@
+- 
+  abbrev: 'FR'
+  name: '---FRANCE---'
+  pid: 0
+  rid: 67
+- 
+  abbrev: 'Alsace'
+  name: 'Alsace'
+  pid: 67
+  rid: 68
+- 
+  abbrev: 'Aquitaine'
+  name: 'Aquitaine'
+  pid: 67
+  rid: 69
+- 
+  abbrev: 'Auvergne'
+  name: 'Auvergne'
+  pid: 67
+  rid: 70
+- 
+  abbrev: 'Bretagne'
+  name: 'Bretagne'
+  pid: 67
+  rid: 71
+- 
+  abbrev: 'Bourgogne'
+  name: 'Bourgogne'
+  pid: 67
+  rid: 72
+- 
+  abbrev: 'Centre'
+  name: 'Centre'
+  pid: 67
+  rid: 73
+- 
+  abbrev: 'Champagne-Ardenne'
+  name: 'Champagne-Ardenne'
+  pid: 67
+  rid: 74
+- 
+  abbrev: 'Corse'
+  name: 'Corse'
+  pid: 67
+  rid: 75
+- 
+  abbrev: 'Franche-Comté'
+  name: 'Franche-Comté'
+  pid: 67
+  rid: 76
+- 
+  abbrev: 'Languedoc-Roussillon'
+  name: 'Languedoc-Roussillon'
+  pid: 67
+  rid: 77
+- 
+  abbrev: 'Limousin'
+  name: 'Limousin'
+  pid: 67
+  rid: 78
+- 
+  abbrev: 'Lorraine'
+  name: 'Lorraine'
+  pid: 67
+  rid: 79
+- 
+  abbrev: 'Basse-Normandie'
+  name: 'Basse-Normandie'
+  pid: 67
+  rid: 80
+- 
+  abbrev: 'Midi-Pyrénées'
+  name: 'Midi-Pyrénées'
+  pid: 67
+  rid: 81
+- 
+  abbrev: 'Nord-Pas-de-Calais'
+  name: 'Nord-Pas-de-Calais'
+  pid: 67
+  rid: 82
+- 
+  abbrev: 'Île-de-France'
+  name: 'Île-de-France'
+  pid: 67
+  rid: 83
+- 
+  abbrev: 'Pays-de-la-Loire'
+  name: 'Pays-de-la-Loire'
+  pid: 67
+  rid: 84
+- 
+  abbrev: 'Picardie'
+  name: 'Picardie'
+  pid: 67
+  rid: 85
+- 
+  abbrev: 'Poitou-Charentes'
+  name: 'Poitou-Charentes'
+  pid: 67
+  rid: 86
+- 
+  abbrev: 'Provence-Alpes-Côte d''Azur'
+  name: 'Provence-Alpes-Côte d''Azur'
+  pid: 67
+  rid: 87
+- 
+  abbrev: 'Rhône-Alpes'
+  name: 'Rhône-Alpes'
+  pid: 67
+  rid: 88
+- 
+  abbrev: 'Haute-Normandie'
+  name: 'Haute-Normandie'
+  pid: 67
+  rid: 89
