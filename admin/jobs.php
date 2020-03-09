@@ -1,5 +1,5 @@
 <?php
-/**
+/*
  * Jobs for XOOPS
  *
  * You may not change or alter any portion of this comment or credits
@@ -8,132 +8,110 @@
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- *
+ */
+/**
+ * @package     \XoopsModules\Jobs
  * @copyright   {@link https://xoops.org/ XOOPS Project}
- * @license     {@link http://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
- * @package     jobs
+ * @license     {@link https://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
  * @author      John Mordo
  * @author      XOOPS Development Team
+ * @link        https://github.com/XoopsModules25x/jobs
  */
 
+use Xmf\Request;
 use XoopsModules\Jobs;
 
-require_once __DIR__ . '/../../../include/cp_header.php';
-$moduleDirName = basename(dirname(__DIR__));
-require_once XOOPS_ROOT_PATH . "/modules/$moduleDirName/include/functions.php";
+require_once __DIR__ . '/admin_header.php';
 
-require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 xoops_load('XoopsPageNav');
 
-/** @var Jobs\Helper $helper */
+/**
+ * @var \XoopsModules\Jobs\Helper $helper
+ * @var \MyTextSanitizer $myts
+ * @var \Xmf\Module\Admin $adminObject
+ */
 $helper = Jobs\Helper::getInstance();
 
-$myts = \MyTextSanitizer::getInstance();
-
-require_once __DIR__ . '/admin_header.php';
 xoops_cp_header();
-$adminObject = \Xmf\Module\Admin::getInstance();
 $adminObject->displayNavigation(basename(__FILE__));
-$adminObject->addItemButton(_AM_JOBS_ADD_LINK, 'submitlisting.php', 'add', '');
-$adminObject->displayButton('left', '');
-//loadModuleAdminMenu(3, "");
+$adminObject->addItemButton(_AM_JOBS_ADD_LINK, 'submitlisting.php', 'add');
+$adminObject->displayButton('left');
 
+$listing_handler = $helper->getHandler('Listing');
 //include XOOPS_ROOT_PATH . '/class/pagenav.php';
 
-$countresult = $xoopsDB->query('SELECT COUNT(*) FROM ' . $xoopsDB->prefix('jobs_listing') . ' ');
-list($crow) = $xoopsDB->fetchRow($countresult);
-$crows = $crow;
+$listing_count = $listing_handler->getCount();
 
 $nav = '';
-if ($crows > '0') {
+if (0 < $listing_count) {
     // shows number of jobs per page set in preferences
     $showonpage = $helper->getConfig('jobs_joblisting_num');
-    $show       = '';
-    $show       = ((int)$show > 0) ? (int)$show : $showonpage;
+    $show       = Request::getInt('show', $showonpage);
+    $start      = Request::getInt('start', 0);
+    $max        = Request::getInt('max', $start + $show);
 
-    $start = \Xmf\Request::getInt('start', 0, 'GET');
-    if (!isset($max)) {
-        $max = $start + $show;
+    echo "<table class='width100 pad2 bnone' cellspacing='0'>\n"
+       . "  <tr><td>\n";
+
+    $criteria = new \CriteriaCompo();
+    $criteria->setSort('valid ASC, lid');  // trick criteria to allow 2 sort criteria
+    $criteria->order = 'ASC';
+    $criteria->setLimit($show);
+    $criteria->setStart($start);
+    $listing_object_array = $listing_handler->getAll($criteria);
+    $listing_count = count($listing_object_array);
+    if (0 < $listing_count) {
+        $nav = new \XoopsPageNav($listing_count, $showonpage, $start, 'start');
+        echo "    <br>\n"
+           . "    " . _AM_JOBS_THEREIS . " <b>{$listing_count}</b> " . _AM_JOBS_JOBLISTINGS . "<br><br>" . $nav->renderNav() . "\n"
+           . "    <br><br>\n";
     }
 
-    $sql = 'SELECT lid, title, date, status, expire, submitter, valid, premium FROM ' . $xoopsDB->prefix('jobs_listing') . ' ORDER BY valid,lid';
+    echo "      <table class='width100 outer' cellspacing='1'>\n"
+       . "        <thead>\n"
+       . "        <tr>\n"
+       . "          <th class='center'>" . _AM_JOBS_NUMANN . "</th>\n"
+       . "          <th class='center'>" . _AM_JOBS_TITLE2 . "</th>\n"
+       . "          <th class='center'>" . _AM_JOBS_SUBMITTED_ON . "</th>\n"
+       . "          <th class='center'>" . _AM_JOBS_ACTIVE . "</th>\n"
+       . "          <th class='center'>" . _AM_JOBS_EXPIRES . "</th>\n"
+       . "          <th class='center'>" . _AM_JOBS_SENDBY . "</th>\n"
+       . "          <th class='center'>" . _AM_JOBS_PUBLISHEDCAP . "</th>\n"
+       . "          <th class='center'>" . _AM_JOBS_PREMIUM . "</th>\n"
+       . "          <th class='center width10'>" . _AM_JOBS_ACTIONS . "</th>\n"
+       . "        </tr>\n"
+       . "        </thead>\n"
+       . "        <tbody>\n";
 
-    $result1 = $xoopsDB->query($sql, $show, $start);
-    echo '<table border=1 width=100% cellpadding=2 cellspacing=0 border=0><td><tr>';
+    $class   = 'even';
 
-    if ($crows > 0) {
-        $nav = new Jobs\PageNav($crows, $showonpage, $start, 'start', '');
-        echo '<br>' . _AM_JOBS_THEREIS . " <b>$crows</b> " . _AM_JOBS_JOBLISTINGS . '<br><br>';
-        echo $nav->renderNav();
+    foreach ($listing_object_array as $lid => $listing_object) {
+        $class   = ('even' === $class) ? 'odd' : 'even';
+        $date2   = formatTimestamp($listing_object->getVar('date', 's'));
+        //$expire2 = formatTimestamp($Listing_object->getVar('expire'), "s");
 
-        echo '<br><br><table width=100% cellpadding=2 cellspacing=0 border=0>';
-        $rank = 1;
+        echo "        <tr class='{$class}'>"
+           . "          <td class='center'>{$lid}</td>\n"
+           . "          <td class='center'>" . $listing_object->getVar('title') . "</td>\n"
+           . "          <td class='center'>{$date2}</td>\n"
+           . "          <td class='center'>" . $listing_object->getVar('status') . "</td>\n"
+           . "          <td class='center'>" . $listing_object->getVar('expire') . "</td>\n"
+           . "          <td class='center'>" . $listing_object->getVar('submitter') . "</td>\n"
+           . "          <td class='center'>" . $listing_object->getVar('valid') . "</td>\n"
+           . "          <td class='center'>" . $listing_object->getVar('premium') . "</td>\n"
+           . "          <td class='center width10'>\n"
+           . "            <a href='modjobs.php?lid={$lid}'><img src='" . \Xmf\Module\Admin::iconUrl('edit.png', '16') . "' alt='" . _EDIT . "' title='" . _EDIT . "'></a>\n"
+           . "            <a href='../deljob.php?lid={$lid}'><img src='" . \Xmf\Module\Admin::iconUrl('delete.png', '16') . "' alt='" . _DELETE . "' title='" . _DELETE . "'></a>\n"
+           . "          </td>\n"
+           . "        </tr>\n";
     }
-
-    echo "<table width='100%' cellspacing='1' class='outer'>
-                 <tr>
-                     <th align=\"center\">" . _AM_JOBS_NUMANN . '</th>
-                     <th align="center">' . _AM_JOBS_TITLE2 . '</th>
-                         <th align="center">' . _AM_JOBS_SUBMITTED_ON . '</th>
-                         <th align="center">' . _AM_JOBS_ACTIVE . '</th>
-                         <th align="center">' . _AM_JOBS_EXPIRES . '</th>
-                         <th align="center">' . _AM_JOBS_SENDBY . '</th>
-                         <th align="center">' . _AM_JOBS_PUBLISHEDCAP . '</th>
-                         <th align="center">' . _AM_JOBS_PREMIUM . "</th>
-
-                     <th align='center' width='10%'>" . _AM_JOBS_ACTIONS . '</th>
-                 </tr>';
-
-    $class   = 'odd';
-    $result1 = $xoopsDB->query($sql, $show, $start);
-
-    while (false !== (list($lid, $title, $date, $status, $expire, $submitter, $valid, $premium) = $xoopsDB->fetchRow($result1))) {
-        $title = $myts->htmlSpecialChars($title);
-        $date2 = formatTimestamp($date, 's');
-        // $expire2     = formatTimestamp($expire, "s");
-
-        echo "<tr class='" . $class . "'>";
-
-        $class = ('even' === $class) ? 'odd' : 'even';
-
-        echo '<td align="center">' . $lid . '</td>';
-        echo '<td align="center">' . $title . '</td>';
-        echo '<td align="center">' . $date2 . '</td>';
-        echo '<td align="center">' . $status . '</td>';
-        echo '<td align="center">' . $expire . '</td>';
-        echo '<td align="center">' . $submitter . '</td>';
-        echo '<td align="center">' . $valid . '</td>';
-        echo '<td align="center">' . $premium . '</td>';
-
-        echo "<td align='center' width='10%'>
-                         <a href='modjobs.php?lid=" . $lid . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
-                         <a href='../deljob.php?lid=" . $lid . "'><img src=" . $pathIcon16 . "/delete.png alt='" . _DELETE . "' title='" . _DELETE . "'></a>
-                         </td>";
-        echo '</tr>';
-    }
-    echo '</table><br><br>';
-    echo $nav->renderNav();
-//    echo "</fieldset><br>";
+    echo "        </tbody>\n"
+       . "      </table>\n<br><br>\n" . $nav->renderNav() . "\n";
 } else {
-    echo "<fieldset><legend style='font-weight: bold; color: #900;'>" . _AM_JOBS_MAN_JOB . '</legend>';
-    echo '<br> ' . _AM_JOBS_NO_JOB . '<br><br>';
-    echo '</fieldset>';
-
-    //  echo "<fieldset><legend style='font-weight: bold; color:#900;'>" . _AM_JOBS_ADD_COMPANY . "</legend>";
-    //    echo "<a href=\"addcomp.php\">" . _AM_JOBS_ADD_COMPANY . "</a></fieldset>
-    //  </table<br>";
+    echo "<fieldset>\n"
+       . "  <legend class='bold' style='color: #900;'>" . _AM_JOBS_MAN_JOB . "</legend>\n"
+       . "  <br>\n " . _AM_JOBS_NO_JOB . "<br><br>\n"
+       . "</fieldset>\n";
 }
 
-//require_once __DIR__ . '/category3.php';
-//$action='';
-//if ($action === false) {
-//  $action = $_SERVER["REQUEST_URI"];
-//}
-//$title='stnihsathsthsths';
-//$form = new myTableForm($title, "form", $action, "post", true);
-//$form->addElement(new \XoopsFormButton("", "submit", _SUBMIT, "submit"));
-//$form->display();
-
 require_once __DIR__ . '/job_categories.php';
-
-//require_once __DIR__ . '/admin_footer.php';
