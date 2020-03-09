@@ -8,22 +8,20 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
-
 /**
+ * @package      \XoopsModules\Jobs
  * @copyright    XOOPS Project (https://xoops.org)
  * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
- * @package
- * @since
  * @author       XOOPS Development Team
+ * @link         https://github.com/XoopsModules25x/jobs
  */
 
 require_once __DIR__ . '/admin_header.php';
-
 xoops_cp_header();
 
-$aboutAdmin = \Xmf\Module\Admin::getInstance();
-
+/** @var \Xmf\Module\Admin $adminObject */
 $adminObject->displayNavigation(basename(__FILE__));
-$adminObject->displayAbout('xoopsfoundation@gmail.com', false);
+$adminObject->setPaypal('xoopsfoundation@gmail.com');
+$adminObject->displayAbout(false);
 
 require_once __DIR__ . '/admin_footer.php';
