@@ -294,3 +294,7 @@ define('_MI_JOBS_SUPPORT', 'Support');
 
 define('_MI_JOBS_HOME', 'Home');
 define('_MI_JOBS_ABOUT', 'About');
+
+// 4.4RC5
+define('_MI_JOBS_MUST_ADD_CAT', 'You must add a category');
+define('_MI_JOBS_HELP', 'Help');
