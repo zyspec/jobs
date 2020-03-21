@@ -26,17 +26,27 @@ use Xmf\Request;
 require_once __DIR__ . '/admin_header.php';
 xoops_load('XoopsPageNav');
 
+/**
+ * Vars defined through inclusion of ./admin_header.php
+ *
+ * @var \Xmf\Module\Admin $adminObject
+ * @var \XoopsModules\Jobs\Helper $helper
+ *
+ * @var \XoopsModules\Jobs\PriceHandler $price_handler
+ * @var \XoopsModules\Jobs\JobTypeHandler $type_handler
+ * @var \XoopsModules\Jobs\JobCategoryHandler $category_handler
+ * @var \XoopsModules\Jobs\ResumeCategoryHandler $resume_cat_handler
+ *
+ * @var \MyTextSanitizer $myts
+ * @var string $moduleDirName
+ */
+
 $rid = Request::getInt('rid', Request::getInt('rid', 0, 'GET'), 'POST');
 $ok  = Request::getInt('ok', Request::getInt('ok', 0, 'GET'), 'POST');
 $op  = Request::getCmd('op', Request::getCmd('op', '', 'GET'), 'POST');
 
-/**
- * @var \MyTextSanitizer $myts
- * @var \Xmf\Module\Helper $helper
- * @var \XoopsModules\Jobs\RegionHandler $regionHandler
- */
-$helper        = Jobs\Helper::getInstance();
-$regionHandler = $helper->getHandler('Region');
+/** @var \XoopsModules\Jobs\RegionHandler $region_handler */
+$region_handler = $helper->getHandler('Region');
 
 switch ($op) {
     case 'modregion':
@@ -44,67 +54,65 @@ switch ($op) {
         xoops_cp_header();
 
         if (0 === $rid) {
-            $criteria = null;
-        } else {
-            $criteria = new \Criteria('rid', $rid);
+            $helper->redirect('admin/region.php', 3, 'Invalid Region Id');
         }
-        $regionObjArray = $regionHandler->getAll($criteria);
+        /** @var \XoopsModules\Jobs\Region $region_obj */
+        $region_obj = $region_handler->get($rid);
 
-        echo "<fieldset><legend class='bold' style='color: #900;'>" . _AM_JOBS_MOD_REGION . "</legend>\n";
-
-        /** @var \XoopsModules\Jobs\Region $regionObj */
-        foreach($regionObjArray as $regionObj) {
-            echo "<form action='" . $helper->url('admin/region.php') . "' method='post'>\n"
-               . $GLOBALS['xoopsSecurity']->getTokenHTML() . "\n"
-               . "<table class='outer border'>\n"
-               . "  <tr>\n"
-                   . "    <td class='head'>" . _AM_JOBS_PARENT_NUMBER . " </td><td class='head'>" . $regionObj->getVar('pid') . "</td>\n"
-               . "  </tr><tr>\n"
-               . "  <tr>\n"
-               . "    <td class='head'>" . _AM_JOBS_REGION_NUMBER . " </td><td class='head'>{$rid}</td>\n"
-               . "  </tr><tr>\n"
-               . "    <td class='head'>" . _AM_JOBS_REGION_NAME . " </td><td class='head'><input type='text' name='name' size='30' value='" . $regionObj->getVar('name') . "'></td>\n"
-               . "  </tr><tr>\n"
-               . "    <td class='head'>" . _AM_JOBS_REGION_ABBREV . " </td><td class='head'><input type='text' name='abbrev' size='30' value='" . $regionObj->getVar('abbrev') . "'></td>\n"
-               . "  </tr><tr>\n"
-               . "    <td>&nbsp;</td><td>\n"
-               . "      <select name='op'>\n"
-               . "        <option value='ModRegionS'> " . _AM_JOBS_MODIF . "</option>\n"
-               . "        <option value='RegionDel'> " . _AM_JOBS_DEL . "</option>\n"
-               . "      </select>\n"
-               . "      <input type='submit' value='" . _AM_JOBS_GO . "'>\n"
-               . "    </td>\n"
-               . "  </tr>\n"
-               . "</table>\n"
-               . "<input type='hidden' name='pid' value='0'>\n"
-               . "<input type='hidden' name='rid' value='{$rid}'>\n"
-               . "</form><br>\n";
-        }
-        echo "</fieldset><br>\n";
+        echo "\n<fieldset>\n"
+           . "<legend class='bold' style='color: #900;'>" . _AM_JOBS_MOD_REGION . "</legend>\n"
+           . "<form action='" . $helper->url('admin/region.php') . "' method='post'>\n"
+           . $GLOBALS['xoopsSecurity']->getTokenHTML() . "\n"
+           . "<table class='outer border'>\n"
+           . "  <tr>\n"
+               . "    <td class='head'>" . _AM_JOBS_PARENT_NUMBER . " </td><td class='head'>" . $region_obj->getVar('pid') . "</td>\n"
+           . "  </tr><tr>\n"
+           . "  <tr>\n"
+           . "    <td class='head'>" . _AM_JOBS_REGION_NUMBER . " </td><td class='head'>{$rid}</td>\n"
+           . "  </tr><tr>\n"
+           . "    <td class='head'>" . _AM_JOBS_REGION_NAME . " </td><td class='head'><input type='text' name='name' size='30' value='" . $region_obj->getVar('name') . "'></td>\n"
+           . "  </tr><tr>\n"
+           . "    <td class='head'>" . _AM_JOBS_REGION_ABBREV . " </td><td class='head'><input type='text' name='abbrev' size='30' value='" . $region_obj->getVar('abbrev') . "'></td>\n"
+           . "  </tr><tr>\n"
+           . "    <td>&nbsp;</td><td>\n"
+           . "      <select name='op'>\n"
+           . "        <option value='ModRegionS'> " . _AM_JOBS_MODIF . "</option>\n"
+           . "        <option value='RegionDel'> " . _AM_JOBS_DEL . "</option>\n"
+           . "      </select>\n"
+           . "      <input type='submit' value='" . _AM_JOBS_GO . "'>\n"
+           . "    </td>\n"
+           . "  </tr>\n"
+           . "</table>\n"
+           . "<input type='hidden' name='pid' value='0'>\n"
+           . "<input type='hidden' name='rid' value='{$rid}'>\n"
+           . "</form><br>\n"
+           . "</fieldset><br>\n";
         break;
 
     case 'modregions':
         // test XoopsSecurity token
         if (!$GLOBALS['xoopsSecurity']->check()) {
-            $helper->redirect($_SERVER['SCRIPT_NAME'], 3, implode('<br>', $GLOBALS['xoopsSecurity']->getErrors()));
+            $helper->redirect('admin/region.php', 3, implode('<br>', $GLOBALS['xoopsSecurity']->getErrors()));
         }
 
         $name   = Request::getString('name', '', 'POST');
         $abbrev = Request::getString('abbrev', '', 'POST');
-        $pid    = Request::getInt('pid', 0, 'POST');
+        //$pid    = Request::getInt('pid', 0, 'POST');
 
-        /** @var \XoopsModules\Jobs\Region $regionObj */
-        $regionObj = $regionHandler->get($rid);
-        if ($regionObj instanceof \XoopsModules\Jobs\Region) {
-            $regionObj->setVars([
-                'pid'    => $pid,
+        /** @var \XoopsModules\Jobs\Region $region_obj */
+        $region_obj = $region_handler->get($rid);
+        $msg = _AM_JOBS_REGION_INVALID;
+        if ($region_obj instanceof \XoopsModules\Jobs\Region) {
+            $region_obj->setVars([
+                //'pid'    => $pid,
                 'name'   => $myts->htmlSpecialChars($name),
                 'abbrev' => $myts->htmlSpecialChars($abbrev)
             ]);
+            $region_handler->insert($region_obj);
             $msg = _AM_JOBS_REGION_MODIFIED;
-        } else {
-            // invalid region id entered so just return
-            $msg = _AM_JOBS_REGION_INVALID;
+            if (!empty($region_obj->getErrors())) {
+                    $msg = _AM_JOBS_REGION_INVALID . '<br>' . $region_obj->getHtmlErrors();
+            }
         }
         $helper->redirect('admin/region.php', 3, $msg);
         break;
@@ -113,13 +121,13 @@ switch ($op) {
         if (1 === $ok) {
             // test XoopsSecurity token
             if (!$GLOBALS['xoopsSecurity']->check()) {
-                $helper->redirect($_SERVER['SCRIPT_NAME'], 3, implode('<br>', $GLOBALS['xoopsSecurity']->getErrors()));
+                $helper->redirect('admin/region.php', 3, implode('<br>', $GLOBALS['xoopsSecurity']->getErrors()));
             }
-            $regionHandler = $helper->getHandler('Region');
-            $regionObj     = $regionHandler->get($rid);
-            if ($regionObj instanceof \XoopsModules\Jobs\Region) {
+            $region_handler = $helper->getHandler('Region');
+            $region_obj     = $region_handler->get($rid);
+            if ($region_obj instanceof \XoopsModules\Jobs\Region) {
                 // object exists so now we can delete it
-                $regionHandler->delete($regionObj);
+                $region_handler->delete($region_obj);
                 $msg = _AM_JOBS_REGION_DEL;
             } else {
                 // invalid region id - could not delete
@@ -135,27 +143,31 @@ switch ($op) {
         if (!empty($_POST['submit'])) {
             // test XoopsSecurity token
             if (!$GLOBALS['xoopsSecurity']->check()) {
-                $helper->redirect($_SERVER['SCRIPT_NAME'], 3, implode('<br>', $GLOBALS['xoopsSecurity']->getErrors()));
+                $helper->redirect('admin/region.php', 3, implode('<br>', $GLOBALS['xoopsSecurity']->getErrors()));
             }
 
             $name   = Request::getString('name', '', 'POST');
             $pid    = Request::getInt('pid', 0, 'POST');
             $abbrev = Request::getString('abbrev', '', 'POST');
 
-            /** @var \XoopsModules\Jobs\Region $regionObj */
-            $regionObj = $regionHandler->create();
-            $regionObj->setVars([
+            /** @var \XoopsModules\Jobs\Region $region_obj */
+            $region_obj = $region_handler->create();
+            $region_obj->setVars([
                 'pid'  => $pid,
                 'name' => $name,
                 'abbrev' => $abbrev
             ]);
-            $regionHandler->insert($regionObj);
-            $helper->redirect('admin/region.php', 3, _AM_JOBS_REGION_ADDED);
+            $region_handler->insert($region_obj);
+            $msg = _AM_JOBS_REGIONS . _AM_JOBS_CANNOT_DEL;
+            if (false !== $success) {
+                $msg = _AM_JOBS_REGION_ADDED;
+            }
+            $helper->redirect('admin/region.php', 3, $msg);
         } else {
             xoops_cp_header();
             $adminObject = \Xmf\Module\Admin::getInstance();
             $adminObject->displayNavigation(__FILE__);
-            $form = new \XoopsThemeForm(_AM_JOBS_ADD_REGION, 'regionform', 'region.php');
+            $form = new \XoopsThemeForm(_AM_JOBS_ADD_REGION, 'regionform', basename(__FILE__), 'post', true);
             $form->setExtra('enctype="multipart/form-data"');
             $form->addElement(new \XoopsFormHidden('op', 'RegionAdd'));
             $form->addElement(new \XoopsFormHidden('pid', '0'));
@@ -177,7 +189,7 @@ switch ($op) {
         $adminObject->addItemButton(_AM_JOBS_LISTS, 'lists.php', 'list');
         $adminObject->displayButton('left');
 
-        $regionCount = $regionHandler->getCount();
+        $regionCount = $region_handler->getCount();
         $nav         = '';
         if (0 < $regionCount) {
             // shows number of companies per page default = 15
@@ -195,7 +207,7 @@ switch ($op) {
             $criteria->order = 'ASC';
             $criteria->setLimit($show);
             $criteria->setStart($start);
-            $regionObjArray = $regionHandler->getAll($criteria);
+            $region_obj_array = $region_handler->getAll($criteria);
 
             echo "<table class='width100 bnone pad2' cellspacing='0'><td><tr>\n";
             $nav = new \XoopsPageNav($regionCount, $showonpage, $start, 'start', 'op=Region');
@@ -211,10 +223,10 @@ switch ($op) {
             echo $nav->renderNav();
             echo "<br><br><table class='width100 bnone pad2' cellspacing='0'>\n";
             $color = 'even';
-            foreach($regionObjArray as $regionObj) {
+            foreach($region_obj_array as $region_obj) {
                 $color = ('even' == $color) ? 'odd' : 'even';
                 echo "  <tr class='{$color}'>\n"
-                   . "    <td><a href='" . $helper->url("admin/region.php?op=ModRegion&amp;rid=" . $regionObj->getVar('rid')) . "'>" . $regionObj->getVar('name') . "</a></td>\n"
+                   . "    <td><a href='" . $helper->url("admin/region.php?op=ModRegion&amp;rid=" . $region_obj->getVar('rid')) . "'>" . $region_obj->getVar('name') . "</a></td>\n"
                    . "  </tr>\n";
             }
             echo "</table><br>\n"

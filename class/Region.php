@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Jobs;
+<?php
+
+namespace XoopsModules\Jobs;
 
 /**
  * Jobs for XOOPS
@@ -20,20 +22,29 @@
 // defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 /**
- * Class Region
+ * Region Class
  */
 class Region extends \XoopsObject
 {
     //Constructor
     /**
-     *
+     * Class constructor
      */
     public function __construct()
     {
         parent::__construct();
-        $this->initVar('rid', XOBJ_DTYPE_INT, null, false, 11);
-        $this->initVar('pid', XOBJ_DTYPE_INT, 0, false, 5);
+        $this->initVar('rid', XOBJ_DTYPE_INT, null, false);
+        $this->initVar('pid', XOBJ_DTYPE_INT, 0, false);
         $this->initVar('name', XOBJ_DTYPE_TXTBOX, null, true, 40);
         $this->initVar('abbrev', XOBJ_DTYPE_TXTBOX, null, true, 2);
+    }
+
+    /**
+     * Magic function to return object title
+     *
+     * @return string
+     */
+    public function __toString() {
+        return $this->getVar('name');
     }
 }

@@ -295,7 +295,6 @@ define('_AM_JOBS_REGION_NAME', 'Name');
 define('_AM_JOBS_REGION_ABBREV', 'Short Name');
 define('_AM_JOBS_SURDELREGION', 'WARNING: Are you sure you want to remove this State/Region.');
 define('_AM_JOBS_REGION_MODIFIED', 'This State/Region has been Modified');
-define('_AM_JOBS_REGIONDEL', 'This State/Region has been Deleted');
 define('_AM_JOBS_MAN_REGION', 'Manage States/Regions');
 define('_AM_JOBS_REGIONS', 'State/Region');
 define('_AM_JOBS_ADD_REGION', 'Add States/Regions');
@@ -478,3 +477,7 @@ define('_AM_JOBS_REGION_INVALID', 'You have entered an invalid region, please tr
 define('_AM_JOBS_SELECT_REGION', 'Select Region');
 define('_AM_JOBS_DOES_NOT_EXIST', 'does not exist!');
 define('_AM_JOBS_SUREADDREGIONS', "Are you sure you want to load the States/Regions into the database?");
+define('_AM_JOBS_CANNOT_ADD', ' could not be added');
+define('_AM_JOBS_CANNOT_DEL', ' could not be deleted');
+define('_AM_JOBS_CANNOT_UPDATE', ' could not be updated');
+define('_AM_JOBS_RES_UNAME', 'Resume User:');

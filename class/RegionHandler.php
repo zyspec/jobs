@@ -23,7 +23,7 @@ namespace XoopsModules\Jobs;
 
 
 /**
- * Class RegionHandler
+ * Region Handler Class
  */
 class RegionHandler extends \XoopsPersistableObjectHandler
 {
