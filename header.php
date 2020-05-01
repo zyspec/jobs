@@ -1,5 +1,5 @@
 <?php
-/**
+/*
  * Jobs for XOOPS
  *
  * You may not change or alter any portion of this comment or credits
@@ -8,15 +8,22 @@
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- *
+ */
+/**
+ * @package     \XoopsModules\Jobs
  * @copyright   {@link https://xoops.org/ XOOPS Project}
- * @license     {@link http://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
- * @package     jobs
+ * @license     {@link https://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
  * @author      John Mordo
  * @author      XOOPS Development Team
+ * @link        https://github.com/XoopsModules25x/jobs
  */
 
-include __DIR__ . '/../../mainfile.php';
+use XoopsModules\Jobs;
+
+include dirname(dirname(__DIR__)) . '/mainfile.php';
 $myts = \MyTextSanitizer::getInstance();
-global $xoopsModule;
-$pathIcon16 = \Xmf\Module\Admin::iconUrl('', 16);
+
+$moduleDirName = basename(dirname(__DIR__));
+$pathIcon16    = \Xmf\Module\Admin::iconUrl('', 16);
+
+$helper = Jobs\Helper::getInstance();
